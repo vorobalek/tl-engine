@@ -1,14 +1,14 @@
 ﻿using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using TL.Account.Data.Entities.Secutiry;
+using TL.Engine.Data.Entities.System;
 
-namespace TL.Account.Data.EntityFramework.Security.Roles
+namespace TL.Engine.Data.EntityFramework.System
 {
-    public class RoleRegistrar : IEntityRegistrar
+    public class StringVariableRegistrar : IEntityRegistrar
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
-            modelbuilder.Entity<Role>(etb =>
+            modelbuilder.Entity<StringVariable>(etb =>
             {
                 etb.HasKey(e => e.Id);
                 etb.Property(e => e.Id);
@@ -16,7 +16,9 @@ namespace TL.Account.Data.EntityFramework.Security.Roles
                 etb.HasIndex(e => e.Name).IsUnique();
                 etb.Property(e => e.Name);
 
-                etb.ToTable($"{EF_REGISTRATIONS.PREFIX}Roles");
+                etb.Property(e => e.Value);
+
+                etb.ToTable($"{EF_REGISTRATIONS.PREFIX}StringVariables");
             });
         }
     }

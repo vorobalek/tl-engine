@@ -18,7 +18,7 @@ namespace TL.Account.Data.EntityFramework.Security.Users
 
                 etb.Property(e => e.PasswordHash);
 
-                etb.ToTable("Users");
+                etb.ToTable($"{EF_REGISTRATIONS.PREFIX}Users");
             });
         }
     }
