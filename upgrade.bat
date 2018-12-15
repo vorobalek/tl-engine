@@ -12,6 +12,6 @@ for /F %%F in (.last_migration_version) do (
 	version_inc.exe .last_migration_version
 )
 
-call copy_all.dat
+call copy_all.bat
 
 pause
