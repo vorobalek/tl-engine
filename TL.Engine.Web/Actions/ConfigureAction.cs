@@ -12,7 +12,7 @@ namespace TL.Engine.Web.Actions
 
         public void Execute(IApplicationBuilder applicationBuilder, IServiceProvider serviceProvider)
         {
-            applicationBuilder.UseStatusCodePagesWithReExecute("/Error/{0}");
+            //applicationBuilder.UseStatusCodePagesWithReExecute("/Error/{0}");
         }
     }
 }

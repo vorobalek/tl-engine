@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TL.Account.Data.Entities.Secutiry;
 
-namespace TL.Account.Data.EntityFramework.Sqlite.Security.Roles
+namespace TL.Account.Data.EntityFramework.Security.Roles
 {
     public class RoleRegistrar : IEntityRegistrar
     {

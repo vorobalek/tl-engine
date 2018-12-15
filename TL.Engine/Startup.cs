@@ -34,7 +34,7 @@ namespace TL.Engine
             services
                .Configure<StorageContextOptions>(options =>
                {
-                   options.ConnectionString = Configuration.GetConnectionString("Sqlite");
+                   options.ConnectionString = Configuration.GetConnectionString("SqlServer");
                    options.MigrationsAssembly = typeof(DesignTimeStorageContextFactory).GetTypeInfo().Assembly.FullName;
                });
             DesignTimeStorageContextFactory.Initialize(services.BuildServiceProvider());
@@ -46,7 +46,7 @@ namespace TL.Engine
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
             app.UseRequestTimestamp();
             app.UseExtCore();
         }

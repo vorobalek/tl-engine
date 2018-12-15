@@ -5,7 +5,7 @@ using System.Linq;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Secutiry;
 
-namespace TL.Account.Data.EntityFramework.Sqlite.Security.Roles
+namespace TL.Account.Data.EntityFramework.Security.Roles
 {
     public class RoleRepository : RepositoryBase<Role>, IRoleRepository
     {
