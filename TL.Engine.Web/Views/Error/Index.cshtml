@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Ошибка!";
+}
+@model int
+@{
+    var statusCode = Model;
+    var statusmessage = "";
+    switch (statusCode)
+    {
+        case 400:
+            statusmessage = "Неверный запрос: запрос не может быть выполнен из-за неправильного синтаксиса";
+            break;
+        case 403:
+            statusmessage = "Запрещено";
+            break;
+        case 404:
+            statusmessage = "Страницы не существует";
+            break;
+        case 408:
+            statusmessage = "Вышло время ожидания запроса";
+            break;
+        case 500:
+            statusmessage = "Внутренняя ошибка сервера - серверу не удалось завершить обработку запроса";
+            break;
+        default:
+            statusmessage = "Это странно... Произошло то, чего мы не ожидали";
+            break;
+    }
+}
+<div class="jumbotron row">
+    <div class="col-2">
+        <img src="~/Styles/images/crying_cat.png" alt="Простите:(" width="100%" />
+    </div>
+    <div class="col-10">
+        <h1>Ошибка @Model</h1>
+        <h3>@statusmessage</h3>
+    </div>
+</div>

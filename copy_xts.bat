@@ -1,0 +1,1 @@
+xcopy .\TL.Engine\Extensions ..\TLEngine\netcoreapp2.1\Extensions /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_extensions
