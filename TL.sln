@@ -19,15 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.Data.EntityFrame
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.Data", "TL.Extensions\TL.Account.Data\TL.Account.Data.csproj", "{153661B5-5F66-4688-8520-6A221C86EFF9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Engine.Web", "TL.Engine.Web\TL.Engine.Web.csproj", "{8E78EBF9-9C6B-42A4-8098-003898C86005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Engine.Web", "TL.Extensions\TL.Engine.Web\TL.Engine.Web.csproj", "{8E78EBF9-9C6B-42A4-8098-003898C86005}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Engine.Data", "TL.Engine.Data\TL.Engine.Data.csproj", "{8066AA03-CDF7-4C65-98E2-F9302A4212E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Engine.Data", "TL.Extensions\TL.Engine.Data\TL.Engine.Data.csproj", "{8066AA03-CDF7-4C65-98E2-F9302A4212E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Engine.Data.Entities", "TL.Engine.Data.Entities\TL.Engine.Data.Entities.csproj", "{8B10F36C-71A9-4469-A4B0-CB6091B1EE9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Engine.Data.Entities", "TL.Extensions\TL.Engine.Data.Entities\TL.Engine.Data.Entities.csproj", "{8B10F36C-71A9-4469-A4B0-CB6091B1EE9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Engine.Data.Abstractions", "TL.Engine.Data.Abstractions\TL.Engine.Data.Abstractions.csproj", "{97E6C6FB-9090-436E-AD38-38CC9EA89220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Engine.Data.Abstractions", "TL.Extensions\TL.Engine.Data.Abstractions\TL.Engine.Data.Abstractions.csproj", "{97E6C6FB-9090-436E-AD38-38CC9EA89220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Engine.Data.EntityFramework", "TL.Engine.Data.EntityFramework\TL.Engine.Data.EntityFramework.csproj", "{E940C038-59D5-4172-8919-C3E0C1CB526C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Engine.Data.EntityFramework", "TL.Extensions\TL.Engine.Data.EntityFramework\TL.Engine.Data.EntityFramework.csproj", "{E940C038-59D5-4172-8919-C3E0C1CB526C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

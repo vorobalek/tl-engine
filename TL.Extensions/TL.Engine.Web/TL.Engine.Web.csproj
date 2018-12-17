@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\TL.Engine\Extensions</OutputPath>
+    <OutputPath>..\..\TL.Engine\Extensions</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\TL.Engine\Extensions</OutputPath>
+    <OutputPath>..\..\TL.Engine\Extensions</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
