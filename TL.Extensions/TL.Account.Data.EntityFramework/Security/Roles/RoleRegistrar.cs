@@ -1,5 +1,6 @@
 ﻿using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using System;
 using TL.Account.Data.Entities.Secutiry;
 
 namespace TL.Account.Data.EntityFramework.Security.Roles
@@ -18,6 +19,8 @@ namespace TL.Account.Data.EntityFramework.Security.Roles
 
                 etb.ToTable($"{EF_REGISTRATIONS.PREFIX}Roles");
             });
+
+            modelbuilder.Entity<Role>().HasData(Role.SA);
         }
     }
 }

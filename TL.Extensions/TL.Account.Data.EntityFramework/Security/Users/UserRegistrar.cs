@@ -1,5 +1,6 @@
 ﻿using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using System;
 using TL.Account.Data.Entities.Secutiry;
 
 namespace TL.Account.Data.EntityFramework.Security.Users
@@ -20,6 +21,8 @@ namespace TL.Account.Data.EntityFramework.Security.Users
 
                 etb.ToTable($"{EF_REGISTRATIONS.PREFIX}Users");
             });
+
+            modelbuilder.Entity<User>().HasData(User.SA);
         }
     }
 }

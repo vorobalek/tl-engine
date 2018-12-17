@@ -16,5 +16,12 @@ namespace TL.Account.Data.Entities.Secutiry
         {
             Users = new List<User>();
         }
+
+        public static Role SA => 
+            new Role()
+            {
+                Id = Guid.Parse("2e8036a5-95d2-4137-996e-a72d559d09a4"),
+                Name = "SA",
+            };
     }
 }
