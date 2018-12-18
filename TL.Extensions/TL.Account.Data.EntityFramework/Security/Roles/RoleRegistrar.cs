@@ -9,18 +9,22 @@ namespace TL.Account.Data.EntityFramework.Security.Roles
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
-            modelbuilder.Entity<Role>(etb =>
-            {
-                etb.HasKey(e => e.Id);
-                etb.Property(e => e.Id);
+            modelbuilder.Entity<Role>()
+                .HasKey(e => e.Id);
 
-                etb.HasIndex(e => e.Name).IsUnique();
-                etb.Property(e => e.Name);
+            modelbuilder.Entity<Role>()
+                .HasIndex(e => e.Name)
+                .IsUnique();
 
-                etb.ToTable($"{EF_REGISTRATIONS.PREFIX}Roles");
-            });
+            modelbuilder.Entity<Role>()
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}Roles");
 
-            modelbuilder.Entity<Role>().HasData(Role.SA);
+            modelbuilder.Entity<Role>()
+                .HasData(new[]
+                {
+                    Role.Sa,
+                    Role.User
+                });
         }
     }
 }

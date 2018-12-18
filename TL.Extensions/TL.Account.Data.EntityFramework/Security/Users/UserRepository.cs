@@ -24,6 +24,11 @@ namespace TL.Account.Data.EntityFramework.Security.Users
             return dbSet.FirstOrDefault(obj => obj.Id == id);
         }
 
+        public ICollection<User> GetByRoleId(Guid id)
+        {
+            return dbSet.Where(obj => obj.RoleId == id).ToList();
+        }
+
         public User GetByUsername(string username)
         {
             return dbSet.FirstOrDefault(obj => obj.Username == username);

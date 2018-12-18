@@ -1,9 +1,11 @@
 ﻿using ExtCore.Data.Abstractions;
+using ExtCore.Data.EntityFramework;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -18,7 +20,11 @@ namespace TL.Account.Web.Areas.Account.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var user = Storage.GetRepository<IUserRepository>().GetByUsername(HttpContext.User.Identity.Name);
+            user.Role = Storage.GetRepository<IRoleRepository>().GetById(user.RoleId ?? Guid.Empty);
+            user.Role.Users = Storage.GetRepository<IUserRepository>().GetByRoleId(user.Role.Id);
+
+            return View(user);
         }
 
         IStorage Storage { get; }
@@ -53,8 +59,8 @@ namespace TL.Account.Web.Areas.Account.Controllers
                             return View(model);
                         }
 
-                        var passwordHasher = new PasswordHasher<string>();
-                        var result = passwordHasher.VerifyHashedPassword(user.Username, user.PasswordHash, model.Password);
+                        var passwordHasher = new PasswordHasher<User>();
+                        var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
 
                         if (result == PasswordVerificationResult.Failed)
                         {
@@ -87,11 +93,12 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 User user = Storage.GetRepository<IUserRepository>().GetByUsername(model.Username);
                 if (user == null)
                 {
-                    var passwordHasher = new PasswordHasher<string>();
+                    var passwordHasher = new PasswordHasher<User>();
                     user = new User()
                     {
                         Username = model.Username,
-                        PasswordHash = passwordHasher.HashPassword(model.Username, model.Password)
+                        PasswordHash = passwordHasher.HashPassword(user, model.Password),
+                        Role = Storage.GetRepository<IRoleRepository>().GetById(Role.User.Id)
                     };
                     Storage.GetRepository<IUserRepository>().Add(user);
                     Storage.Save();

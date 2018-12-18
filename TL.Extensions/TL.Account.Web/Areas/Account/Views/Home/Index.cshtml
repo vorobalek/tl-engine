@@ -1,2 +1,26 @@
-﻿<h1>Hello from Account area</h1>
+﻿@model TL.Account.Data.Entities.Secutiry.User
+
+<h1>Hello, @User.Identity.Name</h1>
+<div class="col-9">
+    @if (Model.Role == null)
+    {
+        <p>
+            Вы пока не состоите ни в одной группе.
+        </p>
+    }
+    else
+    {
+        <ul>
+            <li>
+                Ваша группа: @Model.Role.Name
+                <ul>
+                    @foreach (var user in Model.Role.Users)
+                    {
+                        <li>@user.Username</li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    }
+</div>
 <a class="btn btn-primary btn-lg" href="~/Account/Home/Logout" role="button">Logout</a>

@@ -9,20 +9,21 @@ namespace TL.Account.Data.EntityFramework.Security.Users
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
-            modelbuilder.Entity<User>(etb =>
-            {
-                etb.HasKey(e => e.Id);
-                etb.Property(e => e.Id);
+            modelbuilder.Entity<User>()
+                .HasKey(e => e.Id);
 
-                etb.HasIndex(e => e.Username).IsUnique();
-                etb.Property(e => e.Username);
+            modelbuilder.Entity<User>()
+                .HasIndex(e => e.Username)
+                .IsUnique();
 
-                etb.Property(e => e.PasswordHash);
+            modelbuilder.Entity<User>()
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}Users");
 
-                etb.ToTable($"{EF_REGISTRATIONS.PREFIX}Users");
-            });
-
-            modelbuilder.Entity<User>().HasData(User.SA);
+            modelbuilder.Entity<User>()
+                .HasData(new[]
+                {
+                    User.Sa
+                });
         }
     }
 }

@@ -10,18 +10,25 @@ namespace TL.Account.Data.Entities.Secutiry
 
         public string Name { get; set; }
 
-        public List<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
 
         public Role()
         {
-            Users = new List<User>();
+            Users = new HashSet<User>();
         }
 
-        public static Role SA => 
+        public static Role Sa => 
             new Role()
             {
-                Id = Guid.Parse("2e8036a5-95d2-4137-996e-a72d559d09a4"),
-                Name = "SA",
+                Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
+                Name = "sa",
             };
+
+        public static Role User =>
+           new Role()
+           {
+               Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+               Name = "user",
+           };
     }
 }

@@ -14,5 +14,7 @@ namespace TL.Account.Data.Abstractions.Security
         User GetByUsername(string username);
 
         void Add(User user);
+
+        ICollection<User> GetByRoleId(Guid id);
     }
 }
