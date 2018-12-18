@@ -1,4 +1,4 @@
-xcopy ..\TLEngine\netcoreapp2.1\Data .\TL.Engine\Data /I /H /Y /C /R /S
+xcopy ..\TLEngine\netcoreapp2.2\Data .\TL.Engine\Data /I /H /Y /C /R /S
 rd /s /q ..\TLEngine
 rd /s /q TL.Engine\Extensions
 

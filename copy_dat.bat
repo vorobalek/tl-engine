@@ -1,1 +1,1 @@
-xcopy .\TL.Engine\Data ..\TLEngine\netcoreapp2.1\Data /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_databases
+xcopy .\TL.Engine\Data ..\TLEngine\netcoreapp2.2\Data /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_databases
