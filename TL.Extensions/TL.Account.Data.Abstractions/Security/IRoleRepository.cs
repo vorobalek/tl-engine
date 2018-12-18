@@ -1,7 +1,7 @@
 ﻿using ExtCore.Data.Abstractions;
 using System;
 using System.Collections.Generic;
-using TL.Account.Data.Entities.Secutiry;
+using TL.Account.Data.Entities.Security;
 
 namespace TL.Account.Data.Abstractions.Security
 {

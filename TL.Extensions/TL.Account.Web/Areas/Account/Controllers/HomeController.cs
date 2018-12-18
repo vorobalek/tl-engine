@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
-using TL.Account.Data.Entities.Secutiry;
+using TL.Account.Data.Entities.Security;
 using TL.Account.Web.Areas.Account.Models;
 
 namespace TL.Account.Web.Areas.Account.Controllers
@@ -21,8 +21,18 @@ namespace TL.Account.Web.Areas.Account.Controllers
         public IActionResult Index()
         {
             var user = Storage.GetRepository<IUserRepository>().GetByUsername(HttpContext.User.Identity.Name);
-            user.Role = Storage.GetRepository<IRoleRepository>().GetById(user.RoleId ?? Guid.Empty);
-            user.Role.Users = Storage.GetRepository<IUserRepository>().GetByRoleId(user.Role.Id);
+            user.UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByUserId(user.Id) as ICollection<UserRole>;
+
+            foreach (var role in user.UserRoles)
+            {
+                role.Role = Storage.GetRepository<IRoleRepository>().GetById(role.RoleId);
+                role.Role.UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByRoleId(role.Role.Id) as ICollection<UserRole>;
+
+                foreach (var roleUser in role.Role.UserRoles)
+                {
+                    roleUser.User = Storage.GetRepository<IUserRepository>().GetById(roleUser.UserId);
+                }
+            }
 
             return View(user);
         }
@@ -94,11 +104,20 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 if (user == null)
                 {
                     var passwordHasher = new PasswordHasher<User>();
+                    var user_id = Guid.NewGuid();
                     user = new User()
                     {
+                        Id = user_id,
                         Username = model.Username,
                         PasswordHash = passwordHasher.HashPassword(user, model.Password),
-                        Role = Storage.GetRepository<IRoleRepository>().GetById(Role.User.Id)
+                        UserRoles = new HashSet<UserRole>(new[]
+                        {
+                            new UserRole()
+                            {
+                                UserId = user_id,
+                                RoleId = Role.User.Id
+                            }
+                        })
                     };
                     Storage.GetRepository<IUserRepository>().Add(user);
                     Storage.Save();

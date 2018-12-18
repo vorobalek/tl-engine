@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TL.Account.Data.Entities.Secutiry
+namespace TL.Account.Data.Entities.Security
 {
     public class Role : IEntity
     {
@@ -10,11 +10,11 @@ namespace TL.Account.Data.Entities.Secutiry
 
         public string Name { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
 
         public Role()
         {
-            Users = new HashSet<User>();
+            UserRoles = new HashSet<UserRole>();
         }
 
         public static Role Sa => 

@@ -1,7 +1,7 @@
 ﻿using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using System;
-using TL.Account.Data.Entities.Secutiry;
+using TL.Account.Data.Entities.Security;
 
 namespace TL.Account.Data.EntityFramework.Security.Roles
 {

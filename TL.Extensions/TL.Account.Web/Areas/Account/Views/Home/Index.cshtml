@@ -1,8 +1,8 @@
-﻿@model TL.Account.Data.Entities.Secutiry.User
+﻿@model TL.Account.Data.Entities.Security.User
 
 <h1>Hello, @User.Identity.Name</h1>
 <div class="col-9">
-    @if (Model.Role == null)
+    @if (Model.UserRoles == null)
     {
         <p>
             Вы пока не состоите ни в одной группе.
@@ -10,16 +10,20 @@
     }
     else
     {
+        <h4>Ваши группы: </h4>
         <ul>
-            <li>
-                Ваша группа: @Model.Role.Name
-                <ul>
-                    @foreach (var user in Model.Role.Users)
-                    {
-                        <li>@user.Username</li>
-                    }
-                </ul>
-            </li>
+            @foreach (var role in Model.UserRoles)
+            {
+                <li>
+                    @role.Role?.Name
+                    <ul>
+                        @foreach (var deepUserRole in role.Role?.UserRoles)
+                        {
+                            <li>@deepUserRole.User?.Username</li>
+                        }
+                    </ul>
+                </li>
+            }
         </ul>
     }
 </div>

@@ -1,7 +1,8 @@
 ﻿using ExtCore.Data.Entities.Abstractions;
 using System;
+using System.Collections.Generic;
 
-namespace TL.Account.Data.Entities.Secutiry
+namespace TL.Account.Data.Entities.Security
 {
     public class User : IEntity
     {
@@ -13,16 +14,18 @@ namespace TL.Account.Data.Entities.Secutiry
 
         public string PasswordHash { get; set; }
 
-        public Guid? RoleId { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
 
-        public virtual Role Role { get; set; }
+        public User()
+        {
+            UserRoles = new HashSet<UserRole>();
+        }
 
         public static User Sa => 
             new User()
             {
                 Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                Username = "sa",
-                RoleId = Role.Sa.Id
+                Username = "sa"
             };
     }
 }

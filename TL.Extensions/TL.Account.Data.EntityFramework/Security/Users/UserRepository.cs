@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Account.Data.Abstractions.Security;
-using TL.Account.Data.Entities.Secutiry;
+using TL.Account.Data.Entities.Security;
 
 namespace TL.Account.Data.EntityFramework.Security.Users
 {
@@ -22,11 +22,6 @@ namespace TL.Account.Data.EntityFramework.Security.Users
         public User GetById(Guid id)
         {
             return dbSet.FirstOrDefault(obj => obj.Id == id);
-        }
-
-        public ICollection<User> GetByRoleId(Guid id)
-        {
-            return dbSet.Where(obj => obj.RoleId == id).ToList();
         }
 
         public User GetByUsername(string username)

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Account.Data.Abstractions.Security;
-using TL.Account.Data.Entities.Secutiry;
+using TL.Account.Data.Entities.Security;
 
 namespace TL.Account.Data.EntityFramework.Security.Roles
 {
