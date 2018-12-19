@@ -10,7 +10,7 @@ namespace TL.Account.Data.Entities.Security
 
         public string Name { get; set; }
 
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual IEnumerable<UserRole> UserRoles { get; set; }
 
         public Role()
         {

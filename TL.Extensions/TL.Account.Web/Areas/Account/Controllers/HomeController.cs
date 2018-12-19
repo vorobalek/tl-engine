@@ -1,5 +1,4 @@
 ﻿using ExtCore.Data.Abstractions;
-using ExtCore.Data.EntityFramework;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
@@ -32,6 +32,8 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 {
                     roleUser.User = Storage.GetRepository<IUserRepository>().GetById(roleUser.UserId);
                 }
+
+                role.Role.UserRoles = role.Role.UserRoles.OrderBy(p => p.User.Username);
             }
 
             return View(user);

@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExtCore.Data" Version="3.3.0" />
+    <PackageReference Include="ExtCore.Data" Version="4.0.0-alpha3" />
   </ItemGroup>
 
   <ItemGroup>

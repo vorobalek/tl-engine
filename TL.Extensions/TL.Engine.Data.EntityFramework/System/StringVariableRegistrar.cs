@@ -8,18 +8,7 @@ namespace TL.Engine.Data.EntityFramework.System
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
-            modelbuilder.Entity<StringVariable>(etb =>
-            {
-                etb.HasKey(e => e.Id);
-                etb.Property(e => e.Id);
-
-                etb.HasIndex(e => e.Name).IsUnique();
-                etb.Property(e => e.Name);
-
-                etb.Property(e => e.Value);
-
-                etb.ToTable($"{EF_REGISTRATIONS.PREFIX}StringVariables");
-            });
+            modelbuilder.ApplyConfiguration(new StringVariableConfig());
         }
     }
 }
