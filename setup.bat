@@ -7,7 +7,7 @@ rd /s /q "TL.Engine\Migrations"
 
 dotnet build -c Release
 
-xcopy ".\TL.Clean" ".\TL.Engine" /I /H /Y /C /R /S /EXCLUDE:".\.list_no_copy_clean"
+xcopy ".\TL.Clean" ".\TL.Engine" /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_clean
 
 @echo off
 (echo.0)>.last_migration_version
