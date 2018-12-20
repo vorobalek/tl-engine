@@ -1,6 +1,7 @@
 dotnet dev-certs https --trust
 
 rd /s /q "..\TL Engine Developer"
+rd /s /q "TL.Engine\bin"
 rd /s /q "TL.Engine\Data"
 rd /s /q "TL.Engine\Extensions"
 rd /s /q "TL.Engine\Migrations"
