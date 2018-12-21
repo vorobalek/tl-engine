@@ -1,19 +1,17 @@
-﻿@model TL.Account.Web.Areas.Account.Models.SetPasswordModel
+﻿@model TL.Account.Web.Areas.Account.Models.SetPasswordComponentModel
 <form asp-action="SetPassword" asp-controller="Home" asp-anti-forgery="true">
     <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div class="form-group">
-            <label asp-for="@Model.Password">Введите пароль</label><br />
-            <input asp-for="@Model.Password" /><br />
-            <span asp-validation-for="@Model.Password" />
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.ConfirmPassword">Повторите пароль</label><br />
-            <input asp-for="@Model.ConfirmPassword" /><br />
-            <span asp-validation-for="@Model.ConfirmPassword" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Сохранить" class="btn btn-danger" />
-        </div>
+    <div class="form-group">
+        <label asp-for="@Model.Password">Введите пароль</label>
+        <input asp-for="@Model.Password" class="form-control" />
+        <span asp-validation-for="@Model.Password" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ConfirmPassword">Повторите пароль</label>
+        <input asp-for="@Model.ConfirmPassword" class="form-control" />
+        <span asp-validation-for="@Model.ConfirmPassword" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-danger" />
     </div>
 </form>

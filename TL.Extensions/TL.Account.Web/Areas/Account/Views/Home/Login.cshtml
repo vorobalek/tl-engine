@@ -1,27 +1,30 @@
-﻿@model TL.Account.Web.Areas.Account.Models.LoginModel
+﻿@model TL.Account.Web.Areas.Account.Models.LoginViewModel
 @{
     ViewData["Title"] = "Вход";
 }
 
 <h2>Вход на сайт</h2>
+<div class="row">
+    <div class="col-auto">
+        <form asp-action="Login" asp-controller="Home" asp-anti-forgery="true">
+            <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+            <div>
+                <div class="form-group">
+                    <label asp-for="@Model.Username">Введите логин</label>
+                    <input type="text" asp-for="@Model.Username" class="form-control" />
+                    <span asp-validation-for="@Model.Username" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Password">Введите пароль</label>
+                    <input asp-for="@Model.Password" class="form-control" />
+                    <span asp-validation-for="@Model.Password" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Войти" class="btn" />
+                </div>
+            </div>
+        </form>
 
-<form asp-action="Login" asp-controller="Home" asp-anti-forgery="true">
-    <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div class="form-group">
-            <label asp-for="@Model.Username">Введите логин</label><br />
-            <input type="text" asp-for="@Model.Username" />
-            <span asp-validation-for="@Model.Username" />
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Password">Введите пароль</label><br />
-            <input asp-for="@Model.Password" />
-            <span asp-validation-for="@Model.Password" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Войти" class="btn" />
-        </div>
+        <a asp-action="Register" asp-controller="Home">Регистрация</a>
     </div>
-</form>
-
-<a asp-action="Register" asp-controller="Home">Регистрация</a>
+</div>

@@ -2,7 +2,7 @@
 
 namespace TL.Account.Web.Areas.Account.Models
 {
-    public class LoginModel
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "Не указан логин")]
         public string Username { get; set; }

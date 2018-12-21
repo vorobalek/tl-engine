@@ -2,11 +2,8 @@
 
 namespace TL.Account.Web.Areas.Account.Models
 {
-    public class RegisterModel
+    public class SetPasswordComponentModel
     {
-        [Required(ErrorMessage = "Не указан логин")]
-        public string Username { get; set; }
-
         [Required(ErrorMessage = "Не указан пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

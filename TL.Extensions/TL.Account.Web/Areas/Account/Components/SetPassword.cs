@@ -12,7 +12,7 @@ namespace TL.Account.Web.Areas.Account.Components
 {
     public class SetPassword : ViewComponent
     {
-        public IViewComponentResult Invoke(SetPasswordModel model)
+        public IViewComponentResult Invoke(SetPasswordComponentModel model)
         {
             return View(model);
         }

@@ -1,30 +1,32 @@
-﻿@model TL.Account.Web.Areas.Account.Models.RegisterModel
+﻿@model TL.Account.Web.Areas.Account.Models.RegisterViewModel
 @{
     ViewData["Title"] = "Регистрация";
 }
 
 <h2>Регистрация</h2>
 
-<form asp-action="Register" asp-controller="Home" asp-anti-forgery="true">
-    <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div class="form-group">
-            <label asp-for="@Model.Username">Введите логин</label><br />
-            <input type="text" asp-for="@Model.Username" /><br />
-            <span asp-validation-for="@Model.Username" />
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Password">Введите пароль</label><br />
-            <input asp-for="@Model.Password" /><br />
-            <span asp-validation-for="@Model.Password" />
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.ConfirmPassword">Повторите пароль</label><br />
-            <input asp-for="@Model.ConfirmPassword" /><br />
-            <span asp-validation-for="@Model.ConfirmPassword" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Регистрация" class="btn" />
-        </div>
+<div class="row">
+    <div class="col-auto">
+        <form asp-action="Register" asp-controller="Home" asp-anti-forgery="true">
+            <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Username">Введите логин</label>
+                <input type="text" asp-for="@Model.Username" class="form-control" />
+                <span asp-validation-for="@Model.Username" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Password">Введите пароль</label>
+                <input asp-for="@Model.Password" class="form-control" />
+                <span asp-validation-for="@Model.Password" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ConfirmPassword">Повторите пароль</label>
+                <input asp-for="@Model.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="@Model.ConfirmPassword" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Регистрация" class="btn" />
+            </div>
+        </form>
     </div>
-</form>
+</div>
