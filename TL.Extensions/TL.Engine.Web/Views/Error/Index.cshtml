@@ -1,9 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Ошибка!";
 }
-@model int
+@model TL.Engine.Web.Models.ErrorViewModel
 @{
-    var statusCode = Model;
+    var statusCode = Model.StatusCode;
     var statusmessage = "";
     switch (statusCode)
     {
@@ -32,7 +32,16 @@
         <img src="~/Styles/images/crying_cat.png" alt="Простите:(" width="100%" />
     </div>
     <div class="col-10">
-        <h1>Ошибка @Model</h1>
+        @if (Model.ShowRequestId)
+        {
+            <p>
+                <strong>Request ID:</strong>
+            </p>
+            <h5>
+                <code>@Model.RequestId</code>
+            </h5>
+        }
+        <h1>Ошибка @Model.StatusCode</h1>
         <h3>@statusmessage</h3>
     </div>
 </div>

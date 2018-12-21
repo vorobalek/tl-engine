@@ -46,7 +46,7 @@ namespace TL.Engine
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            
             app.UseRequestTimestamp();
             app.UseExtCore();
         }

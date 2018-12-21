@@ -10,6 +10,7 @@ namespace TL.Engine.Web.Controllers
     {
         public IActionResult Index()
         {
+            throw new Exception("From ENGINE WEB");
             return View();
         }
     }
