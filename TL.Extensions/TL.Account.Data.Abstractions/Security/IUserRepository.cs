@@ -14,5 +14,7 @@ namespace TL.Account.Data.Abstractions.Security
         User GetByUsername(string username);
 
         void Add(User user);
+
+        void Update(User user);
     }
 }

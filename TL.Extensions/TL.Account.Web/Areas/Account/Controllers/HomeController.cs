@@ -21,22 +21,23 @@ namespace TL.Account.Web.Areas.Account.Controllers
         public IActionResult Index()
         {
             var user = Storage.GetRepository<IUserRepository>().GetByUsername(HttpContext.User.Identity.Name);
-            user.UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByUserId(user.Id) as ICollection<UserRole>;
-
-            foreach (var role in user.UserRoles)
-            {
-                role.Role = Storage.GetRepository<IRoleRepository>().GetById(role.RoleId);
-                role.Role.UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByRoleId(role.Role.Id) as ICollection<UserRole>;
-
-                foreach (var roleUser in role.Role.UserRoles)
-                {
-                    roleUser.User = Storage.GetRepository<IUserRepository>().GetById(roleUser.UserId);
-                }
-
-                role.Role.UserRoles = role.Role.UserRoles.OrderBy(p => p.User.Username);
-            }
-
             return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SetPassword(SetPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var passwordHasher = new PasswordHasher<User>();
+                var user = Storage.GetRepository<IUserRepository>().GetByUsername(HttpContext.User.Identity.Name);
+                user.PasswordHash = passwordHasher.HashPassword(user, model.Password);
+                Storage.GetRepository<IUserRepository>().Update(user);
+                Storage.Save();
+                return RedirectToAction("Index", "Home");
+            }
+            return ViewComponent("SetPassword", model);
         }
 
         IStorage Storage { get; }

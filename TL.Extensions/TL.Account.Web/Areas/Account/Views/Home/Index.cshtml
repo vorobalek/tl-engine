@@ -1,30 +1,18 @@
 ﻿@model TL.Account.Data.Entities.Security.User
 
 <h1>Hello, @User.Identity.Name</h1>
-<div class="col-9">
-    @if (Model.UserRoles == null)
+<div class="row">
+    <div class="col-8">
+        @await Component.InvokeAsync("RoleList", Model)
+    </div>
+    @if (!Model.HasPassword)
     {
-        <p>
-            Вы пока не состоите ни в одной группе.
-        </p>
-    }
-    else
-    {
-        <h4>Ваши группы: </h4>
-        <ul>
-            @foreach (var role in Model.UserRoles)
-            {
-                <li>
-                    @role.Role?.Name
-                    <ul>
-                        @foreach (var deepUserRole in role.Role?.UserRoles)
-                        {
-                            <li>@deepUserRole.User?.Username</li>
-                        }
-                    </ul>
-                </li>
-            }
-        </ul>
+        <div class="col-4 alert alert-danger" role="alert">
+            <p>
+                Для вашей учетной записи не указан пароль, установите его ради вашей безопаности!
+            </p>
+            @await Component.InvokeAsync("SetPassword", new TL.Account.Web.Areas.Account.Models.SetPasswordModel())
+        </div>
     }
 </div>
 <a class="btn btn-primary btn-lg" href="~/Account/Home/Logout" role="button">Logout</a>

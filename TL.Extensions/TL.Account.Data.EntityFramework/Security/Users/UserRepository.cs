@@ -28,5 +28,10 @@ namespace TL.Account.Data.EntityFramework.Security.Users
         {
             return dbSet.FirstOrDefault(obj => obj.Username == username);
         }
+
+        public void Update(User user)
+        {
+            dbSet.Update(user);
+        }
     }
 }

@@ -28,6 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Areas\Account\Views\Home\Components\SetPassword\Default.cshtml" />
+    <None Remove="Areas\Account\Views\Home\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
   </ItemGroup>
   

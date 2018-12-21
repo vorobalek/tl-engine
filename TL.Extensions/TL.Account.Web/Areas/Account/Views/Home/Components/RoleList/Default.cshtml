@@ -1,0 +1,25 @@
+﻿@model TL.Account.Data.Entities.Security.User
+@if (Model.UserRoles == null)
+{
+    <p>
+        Вы пока не состоите ни в одной группе.
+    </p>
+}
+else
+{
+    <h4>Ваши группы: </h4>
+    <ul>
+        @foreach (var role in Model.UserRoles)
+        {
+            <li>
+                @role.Role?.Name
+                <ul>
+                    @foreach (var deepUserRole in role.Role?.UserRoles)
+                    {
+                        <li>@deepUserRole.User?.Username</li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}
