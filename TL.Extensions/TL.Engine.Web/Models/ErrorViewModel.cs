@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,6 @@ namespace TL.Engine.Web.Models
 
         public int StatusCode { get; set; }
 
-        public string StackTrace { get; set; }
+        public IExceptionHandlerFeature Exception { get; set; }
     }
 }

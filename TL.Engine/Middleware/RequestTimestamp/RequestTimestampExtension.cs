@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace TL.Engine.Middleware.Extenions
+namespace TL.Engine.Middleware
 {
-    public static class RequestTimestampMiddlewareExtension
+    public static class RequestTimestampExtension
     {
         public static IApplicationBuilder UseRequestTimestamp(this IApplicationBuilder builder)
         {

@@ -27,21 +27,22 @@
             break;
     }
 }
-<div class="jumbotron row">
+<div class="row">
     <div class="col-2">
         <img src="~/Styles/images/crying_cat.png" alt="Простите:(" width="100%" />
     </div>
     <div class="col-10">
-        @if (Model.ShowRequestId)
-        {
-            <p>
-                <strong>Request ID:</strong>
-            </p>
-            <h5>
-                <code>@Model.RequestId</code>
-            </h5>
-        }
         <h1>Ошибка @Model.StatusCode</h1>
         <h3>@statusmessage</h3>
+        @if (Model.ShowRequestId)
+        {
+        <p>
+            Request ID: @Model.RequestId
+        </p>
+        }
+        <p>
+            <code>@Model.Exception?.Error?.Message</code>
+            <pre>@Model.Exception?.Error</pre>
+        </p>
     </div>
 </div>

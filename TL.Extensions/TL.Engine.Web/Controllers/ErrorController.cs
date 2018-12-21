@@ -27,6 +27,7 @@ namespace TL.Engine.Web.Controllers
             return View(new ErrorViewModel
             {
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                Exception = HttpContext.Features.Get<IExceptionHandlerFeature>(),
                 StatusCode = 500
             });
         }
@@ -40,6 +41,7 @@ namespace TL.Engine.Web.Controllers
             return View(new ErrorViewModel
             {
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                Exception = HttpContext.Features.Get<IExceptionHandlerFeature>(),
                 StatusCode = code
             });
         }
