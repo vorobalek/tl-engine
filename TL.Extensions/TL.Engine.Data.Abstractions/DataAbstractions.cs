@@ -1,10 +1,11 @@
-﻿using System.Reflection;
-using TL.Engine.SDK.Extensions;
+﻿using TL.Engine.SDK.Modules;
 
 namespace TL.Engine.Data.Abstractions
 {
-    public class DataAbstractions : TLExtensionBase
+    public class DataAbstractions : ModuleBase
     {
-        public override string Name => Assembly.GetExecutingAssembly().GetName().Name;
+        public override string Name => "TL.Engine.Data.Abstractions";
+
+        public override string Owner => "TL.Engine";
     }
 }

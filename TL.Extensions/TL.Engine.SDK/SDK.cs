@@ -1,9 +1,9 @@
-﻿using TL.Engine.SDK.Extensions;
+﻿using TL.Engine.SDK.Modules;
 
 namespace TL.Engine.SDK
 {
-    public class SDK : TLExtensionBase
+    public class SDK : ModuleBase
     {
-        public override string Name => System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        public override string Name => "TL.Engine.SDK";
     }
 }

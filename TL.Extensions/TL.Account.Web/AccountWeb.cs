@@ -1,9 +1,11 @@
-﻿using TL.Engine.SDK.Extensions;
+﻿using TL.Engine.SDK.Modules;
 
 namespace TL.Account.Web
 {
-    public class AccountWeb : TLExtensionBase
+    public class AccountWeb : ModuleBase
     {
-        public override string Name => System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        public override string Name => "TL.Account.Web";
+
+        public override string Owner => "TL.Account";
     }
 }

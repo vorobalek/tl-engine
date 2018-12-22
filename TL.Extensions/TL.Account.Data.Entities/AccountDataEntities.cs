@@ -1,9 +1,11 @@
-﻿using TL.Engine.SDK.Extensions;
+﻿using TL.Engine.SDK.Modules;
 
 namespace TL.Account.Data.Entities
 {
-    public class AccountDataEntities : TLExtensionBase
+    public class AccountDataEntities : ModuleBase
     {
-        public override string Name => System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        public override string Name => "TL.Account.Data.Entities";
+
+        public override string Owner => "TL.Account";
     }
 }

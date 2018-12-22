@@ -1,9 +1,11 @@
-﻿using TL.Engine.SDK.Extensions;
+﻿using TL.Engine.SDK.Modules;
 
 namespace TL.Account.Data
 {
-    public class AccountData : TLExtensionBase
+    public class AccountData : ModuleBase
     {
-        public override string Name => System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        public override string Name => "TL.Account.Data";
+
+        public override string Owner => "TL.Account";
     }
 }

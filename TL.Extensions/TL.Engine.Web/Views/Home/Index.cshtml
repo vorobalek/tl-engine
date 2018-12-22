@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExtCore.Infrastructure.IExtension>
+﻿@model IEnumerable<TL.Engine.SDK.Modules.ModuleBase>
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,9 +10,17 @@
     <p>
         Список доступный модулей TL Engine:
         <ul>
-            @foreach(var item in Model)
+            @foreach (var module in Model)
             {
-                <li>@item.Name (@item.Description) - version @item.Version by @item.Authors @item.Url</li>
+                <li>
+                    @module.Name (@module.Description) - version @module.Version by @module.Authors @module.Url
+                    <ul>
+                        @foreach (var submodule in module.SubModules)
+                        {
+                            <li>@submodule.Name (@submodule.Description) - version @submodule.Version by @submodule.Authors @submodule.Url</li>
+                        }
+                    </ul>
+                </li>
             }
         </ul>
     </p>
