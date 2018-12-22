@@ -1,8 +1,8 @@
 ﻿using TL.Engine.SDK.Extensions;
 
-namespace TL.Web
+namespace TL.Account.Data
 {
-    public class Web : TLExtensionBase
+    public class AccountData : TLExtensionBase
     {
         public override string Name => System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
     }

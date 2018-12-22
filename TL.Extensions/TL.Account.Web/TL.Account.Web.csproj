@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
+    <ProjectReference Include="..\TL.Engine.SDK\TL.Engine.SDK.csproj" />
   </ItemGroup>
   
 </Project>

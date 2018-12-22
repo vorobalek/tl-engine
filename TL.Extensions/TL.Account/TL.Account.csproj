@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-	  <UseRazorBuildServer>false</UseRazorBuildServer>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -14,19 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0-alpha3" />
+    <PackageReference Include="ExtCore.Infrastructure" Version="4.0.0-alpha3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Views\**;Styles\**;Scripts\**" />
+    <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Views\**;Styles\**;Scripts\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TL.Engine.Data\TL.Engine.Data.csproj" />
-  </ItemGroup>
-  
 </Project>

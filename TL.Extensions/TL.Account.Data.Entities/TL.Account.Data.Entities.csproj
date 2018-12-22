@@ -14,6 +14,11 @@
 
   <ItemGroup>
     <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="4.0.0-alpha3" />
+    <PackageReference Include="ExtCore.Infrastructure" Version="4.0.0-alpha3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TL.Engine.SDK\TL.Engine.SDK.csproj" />
   </ItemGroup>
 
 </Project>
