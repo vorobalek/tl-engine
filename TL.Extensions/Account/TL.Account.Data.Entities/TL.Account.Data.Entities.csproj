@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TL.Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
+    <ProjectReference Include="..\..\Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
   </ItemGroup>
 
 </Project>
