@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TL.Extensions\TL.Engine.SDK\TL.Engine.SDK.csproj" />
+    <ProjectReference Include="..\TL.Extensions\TL.Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
   </ItemGroup>
 
   <ItemGroup>

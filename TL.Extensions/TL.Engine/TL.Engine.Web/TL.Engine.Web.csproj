@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+	  <UseRazorBuildServer>false</UseRazorBuildServer>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0-alpha3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\**;Styles\**;Scripts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Views\**;Styles\**;Scripts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TL.Engine.Data\TL.Engine.Data.csproj" />
+  </ItemGroup>
+  
+</Project>
