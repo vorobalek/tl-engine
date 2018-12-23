@@ -13,12 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExtCore.Data.EntityFramework" Version="4.0.0-alpha3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.0" />
+    <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="4.0.0-alpha3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TL.Account.Data.Abstractions\TL.Account.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,9 +8,9 @@ namespace TL.Engine.SDK.Modules
     {
         public virtual string Name => "TL.NonameModule";
 
-        public virtual string Description => "None";
+        public virtual string Description => "";
 
-        public virtual string Url => "http://example.com";
+        public virtual string Url => "";
 
         public virtual string Version => "1.0.0.0";
 

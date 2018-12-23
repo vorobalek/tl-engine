@@ -1,0 +1,1 @@
+xcopy ".\TL.Engine\Tools" "..\TL Engine Developer\netcoreapp2.2\Tools" /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_tools

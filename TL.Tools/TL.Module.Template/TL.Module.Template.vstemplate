@@ -1,0 +1,42 @@
+<VSTemplate Version="3.0.0" Type="ProjectGroup" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>Модуль системы TL Engine</Name>
+    <Description>Шаблон проектов, составляющих модуль системы TL Engine: Модуль, Data, Entities, Abstractions, EntityFramework, Web</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Module</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+  <ProjectCollection>
+    <ProjectTemplateLink ProjectName="TL.$projectname$.Data.Entities">
+        TL.Module.Data.Entities\MyTemplate.vstemplate
+    </ProjectTemplateLink>
+    <ProjectTemplateLink ProjectName="TL.$projectname$.Data.Abstractions">
+        TL.Module.Data.Abstractions\MyTemplate.vstemplate
+    </ProjectTemplateLink>
+    <ProjectTemplateLink ProjectName="TL.$projectname$.Data.EntityFramework">
+        TL.Module.Data.EntityFramework\MyTemplate.vstemplate
+    </ProjectTemplateLink>
+    <ProjectTemplateLink ProjectName="TL.$projectname$.Data">
+        TL.Module.Data\MyTemplate.vstemplate
+    </ProjectTemplateLink>
+    <ProjectTemplateLink ProjectName="TL.$projectname$.Web">
+        TL.Module.Web\MyTemplate.vstemplate
+    </ProjectTemplateLink>
+    <ProjectTemplateLink ProjectName="TL.$projectname$">
+        TL.Module\MyTemplate.vstemplate
+    </ProjectTemplateLink>
+  </ProjectCollection>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>TL.Module.Template.Wizards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
+    <FullClassName>TL.Module.Template.Wizards.RootWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

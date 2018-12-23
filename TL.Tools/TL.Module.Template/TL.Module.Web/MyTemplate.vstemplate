@@ -1,0 +1,45 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>TL.Module.Web</Name>
+    <Description>&lt;Нет описания&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>TL.$saferootprojectname$.Web</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="TL.$saferootprojectname$.Web.csproj" File="TL.Module.Web.csproj" ReplaceParameters="true">
+      <Folder Name="Actions" TargetFolderName="Actions">
+        <ProjectItem ReplaceParameters="true" TargetFileName="UseMvcAction.cs">UseMvcAction.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Areas" TargetFolderName="Areas">
+        <Folder Name="Module" TargetFolderName="$saferootprojectname$">
+          <Folder Name="Controllers" TargetFolderName="Controllers">
+            <ProjectItem ReplaceParameters="true" TargetFileName="__$saferootprojectname$Controller__.cs">__BaseController__.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="HomeController.cs">HomeController.cs</ProjectItem>
+          </Folder>
+          <Folder Name="Models" TargetFolderName="Models" />
+          <Folder Name="Views" TargetFolderName="Views">
+            <Folder Name="Home" TargetFolderName="Home">
+              <ProjectItem ReplaceParameters="true" TargetFileName="Index.cshtml">Index.cshtml</ProjectItem>
+            </Folder>
+            <ProjectItem ReplaceParameters="true" TargetFileName="_ViewImports.cshtml">_ViewImports.cshtml</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="_ViewStart.cshtml">_ViewStart.cshtml</ProjectItem>
+          </Folder>
+        </Folder>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Details.cs">Details.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>TL.Module.Template.Wizards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
+    <FullClassName>TL.Module.Template.Wizards.ChildWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

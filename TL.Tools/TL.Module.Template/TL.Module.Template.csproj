@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{CC0469D6-F51C-4A19-94D4-F05162A144AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TL.Module.Template</RootNamespace>
+    <AssemblyName>TL.Module.Template</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <GeneratePkgDefFile>false</GeneratePkgDefFile>
+    <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CreateVsixContainer>false</CreateVsixContainer>
+    <DeployExtension>false</DeployExtension>
+    <DeployVSTemplates>false</DeployVSTemplates>
+    <CopyVsixManifestToOutput>false</CopyVsixManifestToOutput>
+    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\TL.Engine\Tools\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\TL.Engine\Tools\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.CoreUtility">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="__TemplateIcon.ico" />
+    <Content Include="TL.Module\Details.cs" />
+    <Content Include="TL.Module\MyTemplate.vstemplate" />
+    <Content Include="TL.Module\TL.Module.csproj" />
+    <Content Include="TL.Module\__TemplateIcon.ico" />
+    <Content Include="TL.Module.Data\Details.cs" />
+    <Content Include="TL.Module.Data\MyTemplate.vstemplate" />
+    <Content Include="TL.Module.Data\TL.Module.Data.csproj" />
+    <Content Include="TL.Module.Data\__TemplateIcon.ico" />
+    <Content Include="TL.Module.Data.Entities\Details.cs" />
+    <Content Include="TL.Module.Data.Entities\MyTemplate.vstemplate" />
+    <Content Include="TL.Module.Data.Entities\TL.Module.Data.Entities.csproj" />
+    <Content Include="TL.Module.Data.Entities\__TemplateIcon.ico" />
+    <Content Include="TL.Module.Data.EntityFramework\Details.cs" />
+    <Content Include="TL.Module.Data.EntityFramework\EF_REGISTRATIONS.cs" />
+    <Content Include="TL.Module.Data.EntityFramework\MyTemplate.vstemplate" />
+    <Content Include="TL.Module.Data.EntityFramework\TL.Module.Data.EntityFramework.csproj" />
+    <Content Include="TL.Module.Data.EntityFramework\__TemplateIcon.ico" />
+    <Content Include="TL.Module.Data.Abstractions\Details.cs" />
+    <Content Include="TL.Module.Data.Abstractions\MyTemplate.vstemplate" />
+    <Content Include="TL.Module.Data.Abstractions\TL.Module.Data.Abstractions.csproj" />
+    <Content Include="TL.Module.Data.Abstractions\__TemplateIcon.ico" />
+    <Content Include="TL.Module.Web\Details.cs" />
+    <Content Include="TL.Module.Web\MyTemplate.vstemplate" />
+    <Content Include="TL.Module.Web\TL.Module.Web.csproj" />
+    <Content Include="TL.Module.Web\__TemplateIcon.ico" />
+	<Content Include="TL.Module.Web\Actions\*" />
+	<Content Include="TL.Module.Web\Areas\Module\Controllers\*" />
+	<Content Include="TL.Module.Web\Areas\Module\Views\*" />
+	<Content Include="TL.Module.Web\Areas\Module\Views\Shared\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TL.Module.Template.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <VSTemplate Include="TL.Module.Template.vstemplate">
+      <SubType>Designer</SubType>
+    </VSTemplate>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TL.Module.Template.Wizards\TL.Module.Template.Wizards.csproj">
+      <Project>{6a660e41-7668-4299-8b7b-3aac6c22687c}</Project>
+      <Name>TL.Module.Template.Wizards</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

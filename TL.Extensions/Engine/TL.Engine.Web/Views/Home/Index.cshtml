@@ -1,6 +1,23 @@
 ﻿@model IEnumerable<TL.Engine.SDK.Modules.ModuleBase>
 @{
     ViewData["Title"] = "Index";
+
+    string f(TL.Engine.SDK.Modules.ModuleBase module)
+    {
+        var r = string.IsNullOrWhiteSpace(module.Url) 
+            ? module.Name 
+            : $"<a class=\"btn btn btn-outline-success btn-sm\" href=\"{module.Url}\" role=\"button\">{module.Name}</a>";
+        if (module.SubModules.Any())
+        {
+            r += "<ul>";
+            foreach (var sumodule in module.SubModules)
+            {
+                r += $"<li>{f(sumodule)}</li>";
+            }
+            r += "</ul>";
+        }
+        return r;
+    }
 }
 
 <div class="jumbotron">
@@ -8,19 +25,11 @@
     <p class="lead">Поздравляем с запуском TL Engine Enterprise!</p>
     <hr class="my-4">
     <p>
-        Список доступный модулей TL Engine:
+        Список доступных модулей TL Engine:
         <ul>
             @foreach (var module in Model)
             {
-                <li>
-                    @module.Name (@module.Description) - version @module.Version by @module.Authors @module.Url
-                    <ul>
-                        @foreach (var submodule in module.SubModules)
-                        {
-                            <li>@submodule.Name (@submodule.Description) - version @submodule.Version by @submodule.Authors @submodule.Url</li>
-                        }
-                    </ul>
-                </li>
+                <li>@Html.Raw(f(module))</li>
             }
         </ul>
     </p>
