@@ -18,20 +18,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Areas\Account\Views\**;Areas\Account\Styles\**;Areas\Account\Scripts\**" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <EmbeddedResource Include="Areas\Account\Views\**;Areas\Account\Styles\**;Areas\Account\Scripts\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Areas\Account\Views\Home\Components\SetPassword\Default.cshtml" />
-    <None Remove="Areas\Account\Views\Home\Index.cshtml" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
   </ItemGroup>

@@ -8,7 +8,7 @@ namespace TL.Engine.SDK.Modules
     {
         public virtual string Name => "TL.NonameModule";
 
-        public virtual string Description => "";
+        public virtual string Description => $"Модуль системы TL Engine. Размещен по адресу {{Рабочий каталог TL Engine}}\\netcoreapp2.2\\Extensions\\{Name}.dll";
 
         public virtual string Url => "";
 
@@ -17,6 +17,8 @@ namespace TL.Engine.SDK.Modules
         public virtual string Authors => "vorobalek";
 
         public virtual string Owner => "";
+
+        public virtual string Icon => "/Styles/images/package.png";
 
         public virtual IEnumerable<ModuleBase> SubModules => 
             ExtensionManager.GetInstances<ModuleBase>()

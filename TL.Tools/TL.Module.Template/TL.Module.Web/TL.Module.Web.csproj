@@ -21,17 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Areas\$saferootprojectname$\Views\Home\Index.cshtml" />
-    <None Remove="Areas\$saferootprojectname$\Views\_ViewImports.cshtml" />
-    <None Remove="Areas\$saferootprojectname$\Views\_ViewStart.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TL.$saferootprojectname$.Data\TL.$saferootprojectname$.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\$saferootprojectname$\Models\" />
   </ItemGroup>
 
 </Project>

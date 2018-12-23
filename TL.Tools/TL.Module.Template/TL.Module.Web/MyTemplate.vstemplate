@@ -25,6 +25,11 @@
             <ProjectItem ReplaceParameters="true" TargetFileName="__$saferootprojectname$Controller__.cs">__BaseController__.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="HomeController.cs">HomeController.cs</ProjectItem>
           </Folder>
+          <Folder Name="Styles" TargetFolderName="Styles">
+            <Folder Name="images" TargetFolderName="images">
+              <ProjectItem ReplaceParameters="true" TargetFileName="package.png">package.png</ProjectItem>
+            </Folder>
+          </Folder>
           <Folder Name="Models" TargetFolderName="Models" />
           <Folder Name="Views" TargetFolderName="Views">
             <Folder Name="Home" TargetFolderName="Home">

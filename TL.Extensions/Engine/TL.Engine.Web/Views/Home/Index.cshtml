@@ -4,17 +4,29 @@
 
     string f(TL.Engine.SDK.Modules.ModuleBase module)
     {
-        var r = string.IsNullOrWhiteSpace(module.Url) 
-            ? module.Name 
-            : $"<a class=\"btn btn btn-outline-success btn-sm\" href=\"{module.Url}\" role=\"button\">{module.Name}</a>";
+        var r = "";
+        if (!string.IsNullOrWhiteSpace(module.Url))
+        {
+            r += $"<a class=\"btn btn-outline-secondary\"href=\"{module.Url}\" role=\"button\" " +
+                        $"data-toggle=\"tooltip\" data-placement=\"right\" title=\"Доступна веб-часть\">{module.Name}</a>";
+        }
+        else
+        {
+            r += $"<button class=\"btn btn-outline-secondary\" disabled>{module.Name}</button>";
+        }
+        r += $"<p>{module.Description}</p>";
+        r += $"<p>{module.Authors}</p>";
+        r += $"<p>version {module.Version}</p>";
+        r += $"<hr />";
         if (module.SubModules.Any())
         {
-            r += "<ul>";
             foreach (var sumodule in module.SubModules)
             {
-                r += $"<li>{f(sumodule)}</li>";
+                r += "<div class=\"media mt-3\">";
+                r += $"<img src=\"{sumodule.Icon}\" alt=\"Logo\">";
+                r += $"<div class=\"media-body\">{f(sumodule)}</div>";
+                r += "</div>";
             }
-            r += "</ul>";
         }
         return r;
     }
@@ -26,14 +38,14 @@
     <hr class="my-4">
     <p>
         Список доступных модулей TL Engine:
-        <ul>
-            @foreach (var module in Model)
-            {
-                <li>@Html.Raw(f(module))</li>
-            }
-        </ul>
     </p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="~/Account" role="button">Go to Account</a>
-    </p>
+    @foreach (var module in Model)
+    {
+        <div class="media">
+            <img class="mr-3" src="@module.Icon" alt="Logo">
+            <div class="media-body">
+                @Html.Raw(f(module))
+            </div>
+        </div>
+    }
 </div>
