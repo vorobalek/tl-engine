@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TL.$saferootprojectname$.Data\TL.$saferootprojectname$.Data.csproj" />
-    <ProjectReference Include="..\TL.$saferootprojectname$.Web\TL.$saferootprojectname$.Web.csproj" />
+    <ProjectReference Include="..\TL.Devenv.Data\TL.Devenv.Data.csproj" />
+    <ProjectReference Include="..\TL.Devenv.Web\TL.Devenv.Web.csproj" />
   </ItemGroup>
 
 </Project>

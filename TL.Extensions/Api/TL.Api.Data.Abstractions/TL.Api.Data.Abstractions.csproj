@@ -13,8 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TL.$saferootprojectname$.Data\TL.$saferootprojectname$.Data.csproj" />
-    <ProjectReference Include="..\TL.$saferootprojectname$.Web\TL.$saferootprojectname$.Web.csproj" />
+    <PackageReference Include="ExtCore.Data.Abstractions" Version="4.0.0-alpha3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TL.Api.Data.Entities\TL.Api.Data.Entities.csproj" />
   </ItemGroup>
 
 </Project>

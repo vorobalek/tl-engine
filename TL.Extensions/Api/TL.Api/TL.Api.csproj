@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TL.$saferootprojectname$.Data\TL.$saferootprojectname$.Data.csproj" />
-    <ProjectReference Include="..\TL.$saferootprojectname$.Web\TL.$saferootprojectname$.Web.csproj" />
+    <ProjectReference Include="..\TL.Api.Data\TL.Api.Data.csproj" />
+    <ProjectReference Include="..\TL.Api.Web\TL.Api.Web.csproj" />
   </ItemGroup>
 
 </Project>

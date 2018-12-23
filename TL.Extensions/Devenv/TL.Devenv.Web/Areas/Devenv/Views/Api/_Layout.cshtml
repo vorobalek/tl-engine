@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "~/Areas/Devenv/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            <nav class="nav">
+                <a class="nav-link" href="/Devenv/Api">Введение</a>
+                <a class="nav-link" href="/Devenv/Api/Methods">Методы</a>
+                <a class="nav-link" href="/Devenv/Api/Objects">Возвращаемые объекты</a>
+            </nav>
+        </div>
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>API</h1>
+                <nav id="methods" class="nav flex-column"></nav>
+            </div>
+            <div class="col-md-12">
+                <h1>Obj</h1>
+                <nav id="objects" class="nav flex-column"></nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+    <script>
+        var getHelpUri = '/api/test.Help';
+        var alertMessage = 'В данный момент мы испытываем неполадки в работе системы API, данные на стрнице могут отображаться некорректно!';
+
+        $(document).ready(function () {
+            $.getJSON(getHelpUri)
+                .done(function (data) {
+                    if (data.ok) {
+                        $.each(data.result.methods, function (key, item) {
+                            debugger;
+                            $('<a class="nav-link" href="/Devenv/Api/Methods#' + getId(item) + '">' + item.command + '</a>')
+                                .appendTo($('#methods'));
+                        });
+                        $.each(data.result.objects, function (key, item) {
+                            $('<a class="nav-link" href="/Devenv/Api/Objects#' + item.name + '">' + item.name + '</a>')
+                                .appendTo($('#objects'));
+                        });
+                    }
+                })
+                .fail(function () {
+                    alert(err + '! ' + alertMessage);
+                    $('#methods').text(alertMessage);
+                });
+        });
+
+        function getId(method) {
+            return (method.command.split('.').join(""));
+        }
+
+        window.onload = function () {
+            $('html, body').animate({
+                scrollTop: $(window.location.hash).offset().top
+            }, 500);
+        }
+    </script>
+}

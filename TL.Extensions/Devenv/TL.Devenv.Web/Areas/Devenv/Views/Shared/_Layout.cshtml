@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Для разработчиков</h2>
+<h4>Мы развиваемся и будем рады, если вы примите в этом активное участие!</h4>
+
+<div>
+    <div class="row">
+        <nav class="nav h3 alert-info">
+            <a class="nav-link" href="/Devenv">Главная</a>
+            <a class="nav-link" href="/Devenv/Api/">API</a>
+            <a class="nav-link" href="/Devenv/Health">Состояние системы</a>
+        </nav>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
