@@ -40,7 +40,6 @@
                 .done(function (data) {
                     if (data.ok) {
                         $.each(data.result.methods, function (key, item) {
-                            debugger;
                             $('<a class="nav-link" href="/Devenv/Api/Methods#' + getId(item) + '">' + item.command + '</a>')
                                 .appendTo($('#methods'));
                         });
