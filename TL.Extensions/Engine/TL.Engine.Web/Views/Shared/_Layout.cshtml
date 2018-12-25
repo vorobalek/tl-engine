@@ -1,143 +1,29 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-        @(string.IsNullOrWhiteSpace(ViewData["Title"] as string) ? "" : $"{ViewData["Title"]} -") TL
-    </title>
-
-    <environment include="Development">
-        <link rel="stylesheet" href="~/Styles/css/bootstrap.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/Styles/css/site.css" asp-append-version="true" />
-    </environment>
-
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-              crossorigin="anonymous"
-              asp-fallback-href="~/Styles/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/Styles/css/site.min.css" asp-append-version="true" />
-    </environment>
-
-    <link rel="icon" type="image/x-icon" href="~/Styles/images/logo.ico">
-</head>
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="position:absolute">
-        <div class="container">
-            <div class="">
-            </div>
-            <a class="navbar-brand brandlabel" href="~/">TL</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="~/Account">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <span>
-                                    Привет, @User.Identity.Name
-                                </span>
-                            }
-                            else
-                            {
-                                <span>
-                                    Войти?
-                                </span>
-                            }
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-    <br />
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy;@(DateTime.Now.Year > 2017 ? $"2017 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
-        </footer>
+﻿@{ 
+    Layout = "~/Views/Shared/_SafeLayout.cshtml";
+}
+<partial name="NavbarPartial" />
+<br />
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy;@(DateTime.Now.Year > 2017 ? $"2017 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
+    </footer>
+</div>
+@{
+    var linePageGenerationTime = "Страница сгенерирована за";
+    var lineMs = "мс";
+    var line = $"";
+    var Start = Context.Items.ContainsKey("RequestStartedOn") ? Context.Items["RequestStartedOn"] as DateTime? : DateTime.MinValue;
+    var Finish = DateTime.Now;
+    <div class="text-center">
+        <p class="help-block" style="font-size: 80%">
+            UTC @Finish.ToUniversalTime()
+            <br />
+            LTC @Finish.ToLocalTime()
+            <br />
+            @linePageGenerationTime
+            <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
+        </p>
     </div>
-    @{
-        var linePageGenerationTime = "Страница сгенерирована за";
-        var lineMs = "мс";
-        var line = $"";
-        var Start = Context.Items.ContainsKey("RequestStartedOn") ? Context.Items["RequestStartedOn"] as DateTime? : DateTime.MinValue;
-        var Finish = DateTime.Now;
-        <div class="text-center">
-            <p class="help-block" style="font-size: 80%">
-                UTC @Finish.ToUniversalTime()
-                <br />
-                LTC @Finish.ToLocalTime()
-                <br />
-                @linePageGenerationTime
-                <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
-            </p>
-        </div>
-    }
-
-    <environment include="Development">
-        <script src="~/Scripts/jquery-3.3.1.js"></script>
-        <script src="~/Scripts/bootstrap.js"></script>
-        <script src="~/Scripts/popper.min.js"></script>
-        <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-        <script src="~/Scripts/tooltip.min.js"></script>
-        <script src="~/Scripts/site.js" asp-append-version="true"></script>
-    </environment>
-
-    <environment exclude="Development">
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                crossorigin="anonymous"
-                asp-fallback-src="~/Scripts/jquery-3.3.1.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                crossorigin="anonymous"
-                asp-fallback-src="~/Scripts/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                asp-fallback-src="~/Scripts/popper.min.js"
-                asp-fallback-test="window.Popper">
-        </script>
-        <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-        <script src="~/Scripts/tooltip.min.js"></script>
-        <script src="~/Scripts/site.min.js" asp-append-version="true"></script>
-    </environment>
-
-
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
-
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+}

@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace TL.Engine.Middleware
+namespace TL.Engine.Web.Middleware
 {
     public class RequestTimestampMiddleware
     {

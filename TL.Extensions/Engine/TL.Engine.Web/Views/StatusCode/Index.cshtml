@@ -1,5 +1,4 @@
 ﻿@{
-    Layout = "~/Views/Shared/_SafeLayout.cshtml";
     ViewData["Title"] = "Ошибка!";
 }
 @model TL.Engine.Web.Models.ErrorViewModel
@@ -45,13 +44,4 @@
         </div>
     </div>
     <center><a href="@Model.ReturnUrl" class="btn btn-outline-info btn-lg" role="button">&laquo Верните меня туда, где всё работало!</a></center>
-    <hr />
-    <div class="row">
-        <div class="col-12">
-            <p>
-                <code>@Model.Exception?.Error?.Message</code>
-                <pre>@Model.Exception?.Error</pre>
-            </p>
-        </div>
-    </div>
 </div>

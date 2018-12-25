@@ -14,5 +14,7 @@ namespace TL.Engine.Web.Models
         public int StatusCode { get; set; }
 
         public IExceptionHandlerFeature Exception { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

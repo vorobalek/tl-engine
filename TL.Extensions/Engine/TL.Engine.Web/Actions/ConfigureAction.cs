@@ -1,8 +1,7 @@
 ﻿using ExtCore.Infrastructure.Actions;
 using Microsoft.AspNetCore.Builder;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using TL.Engine.Web.Middleware;
 
 namespace TL.Engine.Web.Actions
 {
@@ -12,7 +11,8 @@ namespace TL.Engine.Web.Actions
 
         public void Execute(IApplicationBuilder applicationBuilder, IServiceProvider serviceProvider)
         {
-            applicationBuilder.UseStatusCodePagesWithReExecute("/Error/{0}");
+            applicationBuilder.UseRequestTimestamp();
+            applicationBuilder.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
             applicationBuilder.UseExceptionHandler("/Error");
         }
     }

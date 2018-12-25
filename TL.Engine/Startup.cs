@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
-using TL.Engine.Middleware;
 using TL.Engine.Services;
 
 namespace TL.Engine
@@ -42,7 +41,6 @@ namespace TL.Engine
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseRequestTimestamp();
             app.UseExtCore();
         }
     }
