@@ -24,6 +24,11 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Remove="Areas\Account\Views\Home\BigRedButton.cshtml" />
+    <None Remove="Areas\Account\Views\Home\Exception.cshtml" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
   </ItemGroup>
   

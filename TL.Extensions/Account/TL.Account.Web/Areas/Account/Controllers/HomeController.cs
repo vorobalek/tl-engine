@@ -24,6 +24,18 @@ namespace TL.Account.Web.Areas.Account.Controllers
             return View(user);
         }
 
+        [Authorize(Policy = "SA")]
+        public IActionResult BigRedButton()
+        {
+            return View();
+        }
+
+        public IActionResult Exception()
+        {
+            throw new NotImplementedException("Test Exception");
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SetPassword(SetPasswordComponentModel model)
@@ -81,7 +93,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                             return View(model);
                         }
                     }
-                    await Authenticate(model.Username);
+                    await Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -125,7 +137,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                     Storage.GetRepository<IUserRepository>().Add(user);
                     Storage.Save();
 
-                    await Authenticate(model.Username);
+                    await Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -134,13 +146,21 @@ namespace TL.Account.Web.Areas.Account.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username)
             };
+
+            var roles = Storage.GetRepository<IUserRoleRepository>().GetByUser(user);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.RoleId.ToString()));
+            }
+
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 

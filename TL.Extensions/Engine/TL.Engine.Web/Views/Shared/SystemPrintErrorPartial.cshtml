@@ -1,0 +1,54 @@
+﻿@model TL.Engine.Web.Models.ErrorViewModel
+@{
+    var statusCode = Model.StatusCode;
+    var statusmessage = "";
+    switch (statusCode)
+    {
+        case 400:
+            statusmessage = "Неверный запрос: запрос не может быть выполнен из-за неправильного синтаксиса";
+            break;
+        case 401:
+            statusmessage = "Отказано в доступе";
+            break;
+        case 403:
+            statusmessage = "Отказано в доступе";
+            break;
+        case 404:
+            statusmessage = "Страницы не существует";
+            break;
+        case 408:
+            statusmessage = "Вышло время ожидания запроса";
+            break;
+        case 500:
+            statusmessage = "Внутренняя ошибка сервера - серверу не удалось завершить обработку запроса";
+            break;
+        default:
+            statusmessage = "Это странно... Произошло то, чего мы не ожидали";
+            break;
+    }
+}
+<div class="row">
+    <div class="col-2">
+        <img src="~/Styles/images/crying_cat.png" alt="Простите:(" width="100%" />
+    </div>
+    <div class="col-10">
+        <h1>Ошибка @Model.StatusCode</h1>
+        <h3>@statusmessage</h3>
+        @if (Model.ShowRequestId)
+        {
+            <p>
+                Request ID: @Model.RequestId
+            </p>
+        }
+        <center>
+            <div class="row">
+                <div class="col-auto">
+                    <a href="@Model.ReturnUrl" class="btn btn-outline-primary" role="button">&laquo Назад</a>
+                </div>
+                <div class="col-auto">
+                    <a href="/" class="btn btn-outline-primary" role="button">&laquo На главную</a>
+                </div>
+            </div>
+        </center>
+    </div>
+</div>

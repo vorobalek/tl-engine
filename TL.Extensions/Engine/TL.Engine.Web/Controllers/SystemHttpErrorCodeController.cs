@@ -7,25 +7,25 @@ using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers
 {
-    [Route("/StatusCode")]
-    public class StatusCodeController : Controller
+    [Route("/SystemHttpErrorCode")]
+    public class SystemHttpErrorCodeController : Controller
     {
-        public StatusCodeController(ILogger<StatusCodeController> logger)
+        public SystemHttpErrorCodeController(ILogger<SystemHttpErrorCodeController> logger)
         {
             Logger = logger;
         }
 
-        public ILogger<StatusCodeController> Logger { get; }
+        public ILogger<SystemHttpErrorCodeController> Logger { get; }
 
         [AllowAnonymous]
         [HttpGet("{code}")]
         public IActionResult Index(int code)
         {
             var reExecute = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-            Logger.LogInformation($"Unexpected Status Code: {code}, OriginalPath: {reExecute.OriginalPath}");
+            Logger.LogInformation($"Unexpected Status Code: {code}, OriginalPath: {reExecute?.OriginalPath ?? "not instance"}");
             return View(new ErrorViewModel
             {
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                RequestId = null,
                 Exception = HttpContext.Features.Get<IExceptionHandlerFeature>(),
                 ReturnUrl = Url.Content("/"),
                 StatusCode = code

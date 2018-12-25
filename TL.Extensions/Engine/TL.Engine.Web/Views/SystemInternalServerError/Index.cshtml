@@ -1,0 +1,18 @@
+﻿@model TL.Engine.Web.Models.ErrorViewModel
+@{
+    Layout = "~/Views/Shared/_SafeLayout.cshtml";
+    var errmessage = Model.Exception?.Error?.Message;
+    ViewData["Title"] = $"Ошибка{(string.IsNullOrWhiteSpace(errmessage) ? "" : $" - {errmessage}")}!";
+}
+<div class="container">
+    <partial name="SystemPrintErrorPartial" model="@Model" />
+    <hr />
+    <div class="row">
+        <div class="col-12">
+            <p>
+                <code>@Model.Exception?.Error?.Message</code>
+                <pre>@Model.Exception?.Error</pre>
+            </p>
+        </div>
+    </div>
+</div>

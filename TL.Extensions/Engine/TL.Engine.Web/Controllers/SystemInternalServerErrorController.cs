@@ -7,15 +7,15 @@ using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers
 {
-    [Route("/Error")]
-    public class ErrorController : Controller
+    [Route("/SystemInternalServerError")]
+    public class SystemInternalServerErrorController : Controller
     {
-        public ErrorController(ILogger<ErrorController> logger)
+        public SystemInternalServerErrorController(ILogger<SystemInternalServerErrorController> logger)
         {
             Logger = logger;
         }
 
-        public ILogger<ErrorController> Logger { get; }
+        public ILogger<SystemInternalServerErrorController> Logger { get; }
 
         [AllowAnonymous]
         public IActionResult Index()

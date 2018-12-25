@@ -12,8 +12,8 @@ namespace TL.Engine.Web.Actions
         public void Execute(IApplicationBuilder applicationBuilder, IServiceProvider serviceProvider)
         {
             applicationBuilder.UseRequestTimestamp();
-            applicationBuilder.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
-            applicationBuilder.UseExceptionHandler("/Error");
+            applicationBuilder.UseStatusCodePagesWithReExecute("/SystemHttpErrorCode/{0}");
+            applicationBuilder.UseExceptionHandler("/SystemInternalServerError");
         }
     }
 }

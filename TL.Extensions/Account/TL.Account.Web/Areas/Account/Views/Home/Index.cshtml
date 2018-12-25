@@ -15,4 +15,8 @@
         </div>
     }
 </div>
-<a class="btn btn-primary btn-lg" href="~/Account/Home/Logout" role="button">Logout</a>
+<div class="row">
+    <a asp-action="BigRedButton" asp-controller="Home" class="btn btn-danger btn-lg" role="button">Big Red Button</a>
+    <a asp-action="Exception" asp-controller="Home" class="btn btn-danger btn-lg" class="btn btn-primary btn-lg" role="button">Get Exception!</a>
+    <a class="btn btn-primary btn-lg" href="~/Account/Home/Logout" role="button">Logout</a>
+</div>

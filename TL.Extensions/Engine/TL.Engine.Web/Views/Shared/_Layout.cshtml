@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "~/Views/Shared/_SafeLayout.cshtml";
 }
 <partial name="NavbarPartial" />
@@ -26,4 +26,8 @@
             <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
         </p>
     </div>
+}
+@section Scripts
+{
+    @RenderSection("Scripts", required: false)
 }

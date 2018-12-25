@@ -17,7 +17,7 @@ namespace TL.Account.Data.Entities.Security
             UserRoles = new HashSet<UserRole>();
         }
 
-        public static Role Sa => 
+        public static Role Sa =>
             new Role()
             {
                 Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
