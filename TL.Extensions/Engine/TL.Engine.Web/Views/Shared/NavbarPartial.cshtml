@@ -8,22 +8,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="~/Account">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <span>
-                                Привет, @User.Identity.Name
-                            </span>
-                        }
-                        else
-                        {
-                            <span>
-                                Войти?
-                            </span>
-                        }
-                    </a>
-                </li>
+                @foreach (var item in ExtCore.Infrastructure.ExtensionManager.GetInstances<TL.Engine.SDK.Modules.ModuleBase>().Where(it => it.IsNavigationItem).OrderBy(it => it.NavigationOrder))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Content(item.Url)">
+                            @item.DisplayName
+                        </a>
+                    </li>
+                }
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

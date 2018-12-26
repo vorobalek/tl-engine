@@ -9,5 +9,9 @@ namespace TL.Devenv
         public override string Owner => "TL.Engine";
 
         public override string Url => "/Devenv";
+
+        public override string DisplayName => "Разработчикам";
+
+        public override int NavigationOrder => 200;
     }
 }

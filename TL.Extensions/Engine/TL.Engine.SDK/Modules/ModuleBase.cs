@@ -10,13 +10,19 @@ namespace TL.Engine.SDK.Modules
 
         public virtual string Description => $"Модуль системы TL Engine. Размещен по адресу {{Рабочий каталог TL Engine}}\\netcoreapp2.2\\Extensions\\{Name}.dll";
 
-        public virtual string Url => "";
-
         public virtual string Version => "1.0.0.0";
 
         public virtual string Authors => "vorobalek";
 
         public virtual string Owner => "";
+
+        public virtual string Url => "";
+
+        public virtual string DisplayName => "";
+
+        public virtual int NavigationOrder => 0;
+
+        public virtual bool IsNavigationItem => !string.IsNullOrWhiteSpace(DisplayName) && !string.IsNullOrWhiteSpace(Url);
 
         public virtual string Icon => "/Styles/images/package.png";
 

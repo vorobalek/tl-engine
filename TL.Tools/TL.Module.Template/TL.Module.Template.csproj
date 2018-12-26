@@ -81,13 +81,19 @@
     <Content Include="TL.Module.Data.Abstractions\TL.Module.Data.Abstractions.csproj" />
     <Content Include="TL.Module.Data.Abstractions\__TemplateIcon.ico" />
     <Content Include="TL.Module.Web\Details.cs" />
-    <Content Include="TL.Module.Web\MyTemplate.vstemplate" />
-    <Content Include="TL.Module.Web\TL.Module.Web.csproj" />
+    <Content Include="TL.Module.Web\MyTemplate.vstemplate">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TL.Module.Web\TL.Module.Web.csproj">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="TL.Module.Web\__TemplateIcon.ico" />
-	<Content Include="TL.Module.Web\Actions\*" />
-	<Content Include="TL.Module.Web\Areas\Module\Controllers\*" />
-	<Content Include="TL.Module.Web\Areas\Module\Views\*" />
-	<Content Include="TL.Module.Web\Areas\Module\Views\Shared\*" />
+    <Content Include="TL.Module.Web\Actions\*" />
+    <Content Include="TL.Module.Web\Areas\Module\Controllers\*" />
+    <Content Include="TL.Module.Web\Areas\Module\Views\*" />
+    <Content Include="TL.Module.Web\Areas\Module\Views\Shared\*" />
+    <Content Include="TL.Module.Web\Areas\Module\Styles\*" />
+    <Content Include="TL.Module.Web\Areas\Module\Styles\images\*" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TL.Module.Template.ico" />

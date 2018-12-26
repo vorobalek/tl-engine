@@ -9,5 +9,9 @@ namespace TL.Account
         public override string Owner => "TL.Engine";
 
         public override string Url => "/Account";
+
+        public override string DisplayName => "Аккаунт";
+
+        public override int NavigationOrder => 100;
     }
 }
