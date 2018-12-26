@@ -1,17 +1,59 @@
-﻿@model TL.Engine.Web.Models.ErrorViewModel
+﻿@using TL.Engine.Data.Entities.Reports;
+
+@model TL.Engine.Web.Models.ErrorViewModel
 @{
     Layout = "~/Views/Shared/_SafeLayout.cshtml";
-    var errmessage = Model.Exception?.Error?.Message;
-    ViewData["Title"] = $"Ошибка{(string.IsNullOrWhiteSpace(errmessage) ? "" : $" - {errmessage}")}!";
+    ViewData["Title"] = $"Ошибка{(string.IsNullOrWhiteSpace(Model.Message) ? "" : $" - {Model.Message}")}!";
 }
 <div class="container">
     <partial name="SystemPrintErrorPartial" model="@Model" />
     <hr />
+    <partial name="StatusMessagePartial" model="@Model.StatusMessage" />
+    <form asp-action="ErrorReport" asp-controller="SystemInternalServerError" asp-anti-forgery="true">
+        <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="@Model.Author">Представьтесь</label>
+            @if (string.IsNullOrWhiteSpace(Model.Author))
+            {
+                <input asp-for="@Model.Author" class="form-control" placeholder="Batman" />
+            }
+            else
+            {
+                <input asp-for="@Model.Author" class="form-control" value="@Model.Author" readonly />
+            }
+            <span asp-validation-for="@Model.Author" class="text-danger validation" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Description">Опишите проблему максимально точно</label>
+            <textarea class="form-control" placeholder="Я что-то нажал(-а) и оно сломалось" type="text" data-val="true" data-val-required="Опишите проблему"
+                      id="Description" name="Description" value="" style="margin-top: 0px; margin-bottom: 0px; height: 128px;"></textarea>
+            <span asp-validation-for="@Model.Description" class="text-danger validation" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Priority">Насколько это плохо?</label>
+            <select asp-for="@Model.Priority" asp-items="Html.GetEnumSelectList<ExceptionReportPriority>()" class="form-control">
+                <option disabled selected>Выберте один из вариантов</option>
+            </select>
+            <span asp-validation-for="@Model.Priority" class="text-danger validation" />
+        </div>
+
+        <input asp-for="@Model.StackTrace" class="invisible" value="@Model.StackTrace" />
+        <input asp-for="@Model.Message" class="invisible" value="@Model.Message" />
+        <input asp-for="@Model.RequestId" class="invisible" value="@Model.RequestId" />
+        <input asp-for="@Model.ReturnUrl" class="invisible" value="@Model.ReturnUrl" />
+        <input asp-for="@Model.StatusCode" class="invisible" value="@Model.StatusCode" />
+
+
+        <div class="form-group">
+            <input type="submit" value="Отправить" class="btn btn-outline-success form-control" />
+        </div>
+    </form>
+    <hr />
     <div class="row">
         <div class="col-12">
             <p>
-                <code>@Model.Exception?.Error?.Message</code>
-                <pre>@Model.Exception?.Error</pre>
+                <code>@Model.Message</code>
+                <pre>@Model.StackTrace</pre>
             </p>
         </div>
     </div>

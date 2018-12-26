@@ -26,7 +26,6 @@ namespace TL.Engine.Web.Controllers
             return View(new ErrorViewModel
             {
                 RequestId = null,
-                Exception = HttpContext.Features.Get<IExceptionHandlerFeature>(),
                 ReturnUrl = Url.Content("/"),
                 StatusCode = code
             });

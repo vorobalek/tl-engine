@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Shared\SystemPrintErrorPartial.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TL.Engine.Data\TL.Engine.Data.csproj" />
   </ItemGroup>
   
