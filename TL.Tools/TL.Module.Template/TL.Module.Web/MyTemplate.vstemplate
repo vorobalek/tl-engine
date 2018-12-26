@@ -30,7 +30,6 @@
               <ProjectItem ReplaceParameters="true" TargetFileName="package.png">package.png</ProjectItem>
             </Folder>
           </Folder>
-          <Folder Name="Models" TargetFolderName="Models" />
           <Folder Name="Views" TargetFolderName="Views">
             <Folder Name="Home" TargetFolderName="Home">
               <ProjectItem ReplaceParameters="true" TargetFileName="Index.cshtml">Index.cshtml</ProjectItem>
