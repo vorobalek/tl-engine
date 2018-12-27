@@ -22,6 +22,7 @@ namespace TL.Account.Web.Actions
                 {
                     options.Cookie.Name = "TL.Engine.Account";
                     options.LoginPath = "/Account/Home/Login";
+                    options.AccessDeniedPath = "/AccessDenied";
                 });
 
             serviceCollection

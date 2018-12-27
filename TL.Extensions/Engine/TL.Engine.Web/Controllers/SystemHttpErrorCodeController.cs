@@ -26,7 +26,7 @@ namespace TL.Engine.Web.Controllers
             return View(new ErrorViewModel
             {
                 RequestId = null,
-                ReturnUrl = Url.Content("/"),
+                ReturnUrl = Request.Headers["Referer"].ToString(),
                 StatusCode = code
             });
         }
