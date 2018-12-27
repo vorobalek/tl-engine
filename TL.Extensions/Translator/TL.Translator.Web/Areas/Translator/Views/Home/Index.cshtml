@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model TL.Translator.Web.Areas.Translator.Models.TranslateViewModel
+
+<div class="jumbotron">
+    <h1 class="display-4">Translator</h1>
+    <p class="lead">Простое приложение на ASP.NET Core, работающее с Yandex.Translate API</p>
+    <hr class="my-4">
+    <form action="/" id="form" data-ajax="true" class="form-row" data-ajax-update="#OutputResult">
+        <div class="col-6">
+            <label for="InputCulture">Перевести с</label>
+            <select name="InputCulture" id="InputCulture" class="form-control">
+                @if (Model?.AvailableInputCultures != null)
+                {
+                    @foreach (var item in Model.AvailableInputCultures)
+                    {
+                        if (item.Selected)
+                        {
+                            <option value="@item.Value" selected>@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                }
+                @if (!Model.AvailableInputCultures.Any(it => it.Selected))
+                {
+                    <option value="" selected>Определить язык</option>
+                }
+            </select><br />
+            <textarea id="Input" name="Input" class="form-control" type="text" style="margin-top: 0px; margin-bottom: 0px; height: 128px;">@Model.Input</textarea>
+        </div>
+        <div class="col-6">
+            <div id="OutputResult">
+                <partial name="Translate" />
+            </div>
+        </div>
+
+
+        <!--invisible fileds-->
+        <select name="InputCulture" value="@Model.InputCulture" class="invisible"></select>
+        <textarea name="Input" type="text" style="margin-top: 0px; margin-bottom: 0px; height: 128px;" value="@Model.Input" class="invisible"></textarea>
+    </form>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        var updater = function () {
+            $.ajax({
+                url: "/Translator/Home/Index",
+                type: "post",
+                data: $(document).find('#form').serialize(),
+                success: function (result) {
+                    $(document).find('#OutputResult').html(result);
+                }
+            });
+        };
+
+        $('#InputCulture').on('change', updater);
+        $('#Input').on('keyup', updater);
+        $(document).ready(updater);
+        $(document).on('click', function () {
+            $(document).find('#OutputResult').find('#OutputCulture').change(function () {
+                $.ajax({
+                    url: "/Translator/Home/Index",
+                    type: "post",
+                    data: $(document).find('#form').serialize(),
+                    success: function (result) {
+                        $(document).find('#OutputResult').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}
