@@ -6,6 +6,8 @@ namespace TL.Translator.Web.Areas.Translator.Models
 {
     public class TranslateViewModel
     {
+        public bool IsSwapped { get; set; } = false;
+
         public string Input { get; set; }
 
         public CultureInfo DetectedCulture { get; set; }

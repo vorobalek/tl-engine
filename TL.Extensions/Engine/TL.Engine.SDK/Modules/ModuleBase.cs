@@ -8,7 +8,7 @@ namespace TL.Engine.SDK.Modules
     {
         public virtual string Name => "TL.NonameModule";
 
-        public virtual string Description => $"Модуль системы TL Engine. Размещен по адресу {{Рабочий каталог TL Engine}}\\netcoreapp2.2\\Extensions\\{Name}.dll";
+        public virtual string Description => $"Модуль системы TL Engine. {Name}.dll";
 
         public virtual string Version => "1.0.0.0";
 
