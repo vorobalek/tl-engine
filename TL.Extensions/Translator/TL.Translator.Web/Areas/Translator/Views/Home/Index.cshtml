@@ -60,7 +60,7 @@
         $('#Input').on('keyup', updater);
         $('#IsSwapped').on('change', updater);
         $(document).ready(updater);
-        $(document).ready(function () {
+        $(document).on('click', function () {
             $(document).find('#OutputResult').find('#OutputCulture').change(function () {
                 $.ajax({
                     url: "/Translator/Home/Index",
