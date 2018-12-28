@@ -49,7 +49,7 @@
                         });
                     }
                 })
-                .fail(function () {
+                .fail(function (jqXHR, textok, err) {
                     alert(err + '! ' + alertMessage);
                     $('#methods').text(alertMessage);
                 });
