@@ -9,7 +9,7 @@ namespace TL.Account
         public override string Owner => "TL.Engine";
 
         public override string Description =>
-            "Отвечает за авторизацию и аутентефикацию.";
+            "Отвечает за авторизацию и аутентификацию.";
 
         public override string Authors => "Alexey Vorobev";
 
