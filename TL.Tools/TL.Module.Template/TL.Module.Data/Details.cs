@@ -7,5 +7,8 @@ namespace $safeprojectname$
         public override string Name => "$safeprojectname$";
 
         public override string Owner => "TL.$saferootprojectname$";
+
+        public override string Description =>
+            $"Модуль работы с данными. Дополнительный слой для доступа к данным {Owner} из других модулей системы TL Engine.";
     }
 }

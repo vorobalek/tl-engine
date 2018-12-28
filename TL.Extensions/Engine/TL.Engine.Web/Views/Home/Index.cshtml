@@ -35,7 +35,8 @@
               "<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">" +
                   "<div class=\"modal-content\">" +
                       "<div class=\"modal-header\">" +
-                          $"<h5 class=\"modal-title\" id=\"{moduleId}ModalLongTitle\">Подбробнее о модуле {module.Name}</h5>" +
+                          $"<h5 class=\"modal-title\" id=\"{moduleId}ModalLongTitle\">Подбробнее о модуле {module.DisplayName}" +
+                          $"{(module.Name != module.DisplayName ? $" ({module.Name})" : "")}</h5>" +
                           "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
                               "<span aria-hidden=\"true\">&times;</span>" +
                           "</button>" +
@@ -48,18 +49,18 @@
                               $"{@module.Authors}" +
                           "</p>" +
                           "<p>" +
-                              $"version {module.Version}" +
+                              $"version {module.GetVersion().ToString()}" +
                           "</p>" +
                       "</div>" +
                       "<div class=\"modal-footer\">" +
                           "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Закрыть</button>";
         if (!string.IsNullOrWhiteSpace(module.Url))
         {
-            modalDivArea += $"<a href=\"{module.Url}\" type=\"button\" class=\"btn btn-outline-dark\" role=\"button\">Перейти к модулю</a>";
+            modalDivArea += $"<a href=\"{module.Url}\" type=\"button\" class=\"btn btn-success\" role=\"button\">Перейти к модулю</a>";
         }
         else
         {
-            modalDivArea += "<a href=\"#\" type=\"button\" class=\"btn btn-outline-dark\" role=\"button\">Веб-часть недоступна</a>";
+            modalDivArea += "<a href=\"#\" type=\"button\" class=\"disabled btn btn-danger\" role=\"button\">Веб-часть недоступна</a>";
         }
         modalDivArea += "</div>" +
                 "</div>" +

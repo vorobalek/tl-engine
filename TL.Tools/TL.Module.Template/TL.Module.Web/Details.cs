@@ -8,5 +8,8 @@ namespace $safeprojectname$
         public override string Name => "$safeprojectname$";
 
         public override string Owner => "TL.$saferootprojectname$";
+
+        public override string Description =>
+            $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
     }
 }

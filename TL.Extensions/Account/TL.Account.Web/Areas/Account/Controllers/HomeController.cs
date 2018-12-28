@@ -33,7 +33,6 @@ namespace TL.Account.Web.Areas.Account.Controllers
         public IActionResult Exception()
         {
             throw new NotImplementedException("Test Exception");
-            return View();
         }
 
         [HttpPost]

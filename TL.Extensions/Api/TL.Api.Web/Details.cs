@@ -1,5 +1,4 @@
-﻿using System;
-using TL.Engine.SDK.Modules;
+﻿using TL.Engine.SDK.Modules;
 
 namespace TL.Api.Web
 {
@@ -8,5 +7,10 @@ namespace TL.Api.Web
         public override string Name => "TL.Api.Web";
 
         public override string Owner => "TL.Api";
+
+        public override string Description =>
+            $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
+
+        public override string Authors => "Alexey Vorobev";
     }
 }
