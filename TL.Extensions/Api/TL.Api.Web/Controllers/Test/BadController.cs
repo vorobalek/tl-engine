@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TL.Api.Web.Attributes.Http;
+using TL.Api.Web.Extensions;
 
 namespace TL.Api.Web.Controllers.Test
 {
@@ -11,7 +12,7 @@ namespace TL.Api.Web.Controllers.Test
         public override string Description => "Используйте для выполнения тестового неудачного запроса.";
 
         [ApiHttpGet(UsageDescription = "Этот метод работает без параметров")]
-        public IActionResult Get() => Json(GetJson(
+        public IActionResult Get() => BadRequest(HttpContext.GetJson(
                ok: false,
                error_code: StatusCodes.Status400BadRequest,
                description: "Bad Request. This is sample bad request like a demo version."

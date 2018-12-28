@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TL.Api.Web.Attributes.Http;
+using TL.Api.Web.Extensions;
 using TL.Api.Web.Services;
 
 namespace TL.Api.Web.Controllers.Test
@@ -18,6 +19,6 @@ namespace TL.Api.Web.Controllers.Test
         public override string Description => $"Используйте для получения автоматической API документации";
 
         [ApiHttpGet(UsageDescription = "Этот метод работает без параметров", ReturnableType = typeof(ApiDocumentation))]
-        public IActionResult Get() => Ok(GetJson(ok: true, result: apiDocumentationService.GetDocumentation(HttpContext.Request.Host)));
+        public IActionResult Get() => Ok(HttpContext.GetJson(ok: true, result: apiDocumentationService.GetDocumentation(HttpContext.Request.Host)));
     }
 }

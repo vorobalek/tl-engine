@@ -23,7 +23,9 @@
         <kbd>ok</kbd> равно
         <kbd>false</kbd>, а ошибка приведена в поле
         <kbd>description</kbd>. Так же возвращается поле
-        <kbd>errorСode</kbd>, чтобы помочь вам обрабатывать ошибки.
+        <kbd>errorСode</kbd>, чтобы помочь вам обрабатывать ошибки. Также мы всегда стараемся (если это возможно) возвращать поле
+        <kbd>requestTime</kbd>, которое содержит объект 
+        <a href="https://docs.microsoft.com/ru-ru/dotnet/api/system.timespan?view=netcore-2.2">TimeSpan</a> - продолжительность обработки вашего запроса сервером.
     </p>
     <h2>Пример удачного выполнения запроса</h2>
     <p>
@@ -56,21 +58,16 @@
                     $('#sampleGoodResponse')
                         .text(JSON.stringify(data, null, 2))
                 })
-                .fail(function () {
+                .fail(function (jqXHR, textok, err) {
                     alert(err + '! ' + alertMessage);
                     $('#sampleGoodResponse')
                         .text(alertMessage)
                 });
 
             $.getJSON(sampleBadUri)
-                .done(function (data) {
+                .fail(function (data) {
                     $('#sampleBadResponse')
-                        .text(JSON.stringify(data, null, 2))
-                })
-                .fail(function () {
-                    alert(err + '! ' + alertMessage);
-                    ('#sampleBadResponse')
-                        .text(alertMessage)
+                        .text(JSON.stringify(data.responseJSON, null, 2))
                 });
 
             $.getJSON(apiGetHostUri)

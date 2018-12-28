@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TL.Api.Web.Attributes.Http;
+using TL.Api.Web.Extensions;
 
 namespace TL.Api.Web.Controllers.Test
 {
@@ -12,6 +13,6 @@ namespace TL.Api.Web.Controllers.Test
 
         [ApiHttpGet(UsageDescription = "Этот метод работает без параметров", ReturnableType = typeof(HostString))]
         public IActionResult Get() =>
-            Ok(GetJson(true, HttpContext.Request.Host));
+            Ok(HttpContext.GetJson(true, HttpContext.Request.Host));
     }
 }

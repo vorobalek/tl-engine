@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TL.Api.Web.Attributes.Http;
+using TL.Api.Web.Extensions;
 using TL.Api.Web.Objects;
 using TL.Api.Web.Services;
 
@@ -48,7 +49,7 @@ namespace TL.Api.Web.Controllers.Test
                 });
             }
 
-            return Ok(GetJson(true, result));
+            return Ok(HttpContext.GetJson(true, result));
         }
 
         [ApiHttpGet("{name}", UsageDescription = "Укажите имя области методов API как часть маршрута", ReturnableType = typeof(ApiAreaModel), UsageSample = "/Test")]
@@ -61,7 +62,7 @@ namespace TL.Api.Web.Controllers.Test
                 Methods = ApiDocumentation.Methods.Where(method => method.Area.ToLowerInvariant() == name.ToLowerInvariant()).ToList()
             };
                 
-            return Ok(GetJson(true, result));
+            return Ok(HttpContext.GetJson(true, result));
         }
     }
 }
