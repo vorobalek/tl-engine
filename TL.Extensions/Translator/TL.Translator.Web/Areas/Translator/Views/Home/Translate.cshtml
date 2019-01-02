@@ -1,29 +1,33 @@
 ﻿@model TL.Translator.Web.Areas.Translator.Models.TranslateViewModel
 
-@if (!string.IsNullOrWhiteSpace(Model.InputCulture))
-{
-    var inputLang = new System.Globalization.CultureInfo(Model.InputCulture).DisplayName;
-    <label for="Output">Перевод с языка: @inputLang</label>
-}
-else
-{
-    <label for="Output">Перевод</label>
-}
-
-<select name="OutputCulture" id="OutputCulture" class="form-control">
-    @if (Model?.AvailableOutputCultures != null)
+<div class="form-group">
+    @if (!string.IsNullOrWhiteSpace(Model.InputCulture))
     {
-        @foreach (var item in Model.AvailableOutputCultures)
+        var inputLang = new System.Globalization.CultureInfo(Model.InputCulture).DisplayName;
+        <label for="Output">Перевод с языка: @inputLang</label>
+    }
+    else
+    {
+        <label for="Output">Перевод</label>
+    }
+    <select name="OutputCulture" id="OutputCulture" class="form-control">
+        @if (Model?.AvailableOutputCultures != null)
         {
-            if (item.Selected)
+            @foreach (var item in Model.AvailableOutputCultures)
             {
-                <option value="@item.Value" selected>@item.Text</option>
-            }
-            else
-            {
-                <option value="@item.Value">@item.Text</option>
+                if (item.Selected)
+                {
+                    <option value="@item.Value" selected>@item.Text</option>
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
             }
         }
-    }
-</select><br />
-<textarea id="Output" name="Output" class="form-control" type="text" style="margin-top: 0px; margin-bottom: 0px; height: 128px;">@Model.Output</textarea>
+    </select>
+</div><br />
+<div class="form-group">
+    <textarea id="Output" name="Output" class="form-control" type="text" style="margin-top: 0px; margin-bottom: 0px; height: 128px;">@Model.Output</textarea>
+</div>
+<partial name="StatusMessagePartial" model="@Model.StatusMessage" />

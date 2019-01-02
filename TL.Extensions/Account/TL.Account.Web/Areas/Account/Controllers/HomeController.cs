@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
 using TL.Account.Web.Areas.Account.Models;
+using TL.Translator.Data.Entities.Extensions;
 
 namespace TL.Account.Web.Areas.Account.Controllers
 {
@@ -21,7 +21,13 @@ namespace TL.Account.Web.Areas.Account.Controllers
         public IActionResult Index()
         {
             var user = Storage.GetRepository<IUserRepository>().GetByUsername(HttpContext.User.Identity.Name);
-            return View(user);
+            return View(new IndexViewModel()
+            {
+                Username = user.Username,
+                HasPassword = user.HasPassword,
+                Translations = user.GetTranslations(Storage),
+                UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByUser(user),
+            });
         }
 
         [Authorize(Policy = "SA")]

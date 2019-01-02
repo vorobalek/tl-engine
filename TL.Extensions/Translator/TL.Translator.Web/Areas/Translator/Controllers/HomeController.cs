@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ExtCore.Data.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using TL.Account.Data.Abstractions.Security;
+using TL.Translator.Data.Abstractions.Translations;
 using TL.Translator.Web.Areas.Translator.Models;
 using Yandex.Translator;
 
@@ -11,13 +15,15 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
 {
     public class HomeController : __TranslatorController__
     {
+        public IStorage Storage { get; set; }
+
         public IYandexTranslator Translator { get; }
 
         public List<SelectListItem> AvailableInputCultures { get; }
 
         public List<ITranslationPair> TranslationPairs { get; set; }
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IConfiguration configuration, IStorage storage)
         {
             Translator = Yandex.Translator.Yandex.Translator(api => api.ApiKey(configuration["YandexTranslateApiKey"]).Format(ApiDataFormat.Json));
             TranslationPairs = Translator.TranslationPairs().ToList();
@@ -33,6 +39,8 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
                 })
                 .OrderBy(it => it.Text)
                 .ToList();
+
+            Storage = storage;
         }
 
         [HttpGet]
@@ -44,9 +52,41 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
         [HttpPost]
         public IActionResult Index(TranslateViewModel model)
         {
+            model = FillModel(model);
+
+            return PartialView("Translate", model);
+        }
+
+        [HttpPost]
+        public IActionResult Save(TranslateViewModel model)
+        {
+            model = FillModel(model);
+
+            if (User.Identity.IsAuthenticated)
+            {
+                Storage.GetRepository<ITranslationRepository>().Add(new Data.Entities.Translations.Translation()
+                {
+                    AuthorId = Storage.GetRepository<IUserRepository>().GetByUsername(User.Identity.Name).Id,
+                    Date = DateTime.Now,
+                    InputCulture = model.InputCulture,
+                    OutputCulture = model.OutputCulture,
+                    InputText = model.Input,
+                    OutputText = model.Output
+                });
+                Storage.Save();
+                model.StatusMessage = "Ваш перевод сохранён!";
+            }
+
+            return PartialView("Translate", model);
+        }
+
+        private TranslateViewModel FillModel(TranslateViewModel model)
+        {
+            model.AvailableInputCultures = AvailableInputCultures;
+
             if (string.IsNullOrWhiteSpace(model.Input))
             {
-                return PartialView("Translate", new TranslateViewModel(AvailableInputCultures));
+                model.InputCulture = "en";
             }
 
             if (string.IsNullOrWhiteSpace(model.InputCulture))
@@ -106,7 +146,7 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
 
             model.Output = translation.Text;
 
-            return PartialView("Translate", model);
+            return model;
         }
     }
 }

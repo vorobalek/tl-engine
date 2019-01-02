@@ -1,5 +1,5 @@
-﻿@model TL.Account.Data.Entities.Security.User
-@if (Model.UserRoles == null)
+﻿@model System.Collections.Generic.IEnumerable<TL.Account.Data.Entities.Security.UserRole>
+@if (Model == null)
 {
     <p>
         Вы пока не состоите ни в одной группе.
@@ -9,7 +9,7 @@ else
 {
     <h4>Ваши группы: </h4>
     <ul>
-        @foreach (var role in Model.UserRoles)
+        @foreach (var role in Model)
         {
             <li>
                 @role.Role?.Name

@@ -10,8 +10,6 @@ namespace TL.Translator.Web.Areas.Translator.Models
 
         public string Input { get; set; }
 
-        public CultureInfo DetectedCulture { get; set; }
-
         public string InputCulture { get; set; }
 
         public string OutputCulture { get; set; }
@@ -21,6 +19,8 @@ namespace TL.Translator.Web.Areas.Translator.Models
         public IEnumerable<SelectListItem> AvailableInputCultures { get; set; }
 
         public IEnumerable<SelectListItem> AvailableOutputCultures { get; set; }
+
+        public string StatusMessage { get; set; }
 
         public TranslateViewModel()
         {

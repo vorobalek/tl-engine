@@ -1,9 +1,7 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
 
@@ -18,11 +16,9 @@ namespace TL.Account.Web.Areas.Account.Components
             Storage = storage;
         }
 
-        public IViewComponentResult Invoke(User user)
+        public IViewComponentResult Invoke(IEnumerable<UserRole> userRoles)
         {
-            user.UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByUserId(user.Id) as ICollection<UserRole>;
-
-            foreach (var role in user.UserRoles)
+            foreach (var role in userRoles)
             {
                 role.Role = Storage.GetRepository<IRoleRepository>().GetById(role.RoleId);
                 role.Role.UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByRoleId(role.Role.Id) as ICollection<UserRole>;
@@ -35,7 +31,7 @@ namespace TL.Account.Web.Areas.Account.Components
                 role.Role.UserRoles = role.Role.UserRoles.OrderBy(p => p.User.Username);
             }
 
-            return View(user);
+            return View(userRoles);
         }
     }
 }

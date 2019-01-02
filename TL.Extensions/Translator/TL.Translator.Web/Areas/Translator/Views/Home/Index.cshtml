@@ -9,33 +9,43 @@
     <hr class="my-4">
     <form action="/" id="form" data-ajax="true" class="form-row" data-ajax-update="#OutputResult">
         <div class="col">
-            <label for="InputCulture">Перевести с</label>
-            <select name="InputCulture" id="InputCulture" class="form-control">
-                @if (Model?.AvailableInputCultures != null)
-                {
-                    @foreach (var item in Model.AvailableInputCultures)
+            <div class="form-group">
+                <label for="InputCulture">Перевести с</label>
+                <select name="InputCulture" id="InputCulture" class="form-control">
+                    @if (Model?.AvailableInputCultures != null)
                     {
-                        if (item.Selected)
+                        @foreach (var item in Model.AvailableInputCultures)
                         {
-                            <option value="@item.Value" selected>@item.Text</option>
-                        }
-                        else
-                        {
-                            <option value="@item.Value">@item.Text</option>
+                            if (item.Selected)
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
                         }
                     }
-                }
-                @if (!Model.AvailableInputCultures.Any(it => it.Selected))
-                {
-                    <option value="" selected>Определить язык</option>
-                }
-            </select><br />
-            <textarea id="Input" name="Input" class="form-control" type="text" style="margin-top: 0px; margin-bottom: 0px; height: 128px;">@Model.Input</textarea>
+                    @if (!Model.AvailableInputCultures.Any(it => it.Selected))
+                    {
+                        <option value="" selected>Определить язык</option>
+                    }
+                </select>
+            </div><br />
+            <div class="form-group">
+                <textarea id="Input" name="Input" class="form-control" type="text" style="margin-top: 0px; margin-bottom: 0px; height: 128px;">@Model.Input</textarea>
+            </div>
         </div>
         <div class="col">
             <div id="OutputResult">
                 <partial name="Translate" />
             </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span id="SaveButton" class="btn btn-success">
+                    Сохранить перевод в личном кабинете
+                </span>
+            }
         </div>
 
         <!--invisible fileds-->
@@ -43,6 +53,7 @@
         <input name="Input" value="@Model.Input" type="hidden" class="invisible">
     </form>
 </div>
+
 @section Scripts {
     <script type="text/javascript">
         var updater = function () {
@@ -56,21 +67,24 @@
             });
         };
 
-        $('#InputCulture').on('change', updater);
-        $('#Input').on('keyup', updater);
-        $('#IsSwapped').on('change', updater);
-        $(document).ready(updater);
-        $(document).on('click', function () {
-            $(document).find('#OutputResult').find('#OutputCulture').change(function () {
-                $.ajax({
-                    url: "/Translator/Home/Index",
-                    type: "post",
-                    data: $(document).find('#form').serialize(),
-                    success: function (result) {
-                        $(document).find('#OutputResult').html(result);
-                    }
-                });
+        var saver = function () {
+            $.ajax({
+                url: "/Translator/Home/Save",
+                type: "post",
+                data: $(document).find('#form').serialize(),
+                success: function (result) {
+                    $(document).find('#OutputResult').html(result);
+                }
             });
+        };
+
+        $(document).ready(function () {
+            window['updater']();
+            $(document).find('#OutputResult').find('#OutputCulture').on('change', updater);
         });
+
+        $('#Input').on('keyup', updater);
+        $('#SaveButton').on('click', saver);
+        $('#InputCulture').on('change', updater);
     </script>
 }
