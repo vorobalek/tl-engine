@@ -7,7 +7,7 @@ namespace TL.Engine.SDK.Modules
 {
     public abstract class ModuleBase
     {
-        private Version MinimalVersion => new Version(0, 1, 0, 42);
+        private Version MinimalVersion => new Version(0, 1, 0, 43);
 
         public Version GetVersion()
         {
