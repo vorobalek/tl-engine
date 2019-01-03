@@ -11,9 +11,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0-alpha3" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Api\Views\**;Areas\Api\Styles\**;Areas\Api\Scripts\**" />
   </ItemGroup>
 
   <ItemGroup>

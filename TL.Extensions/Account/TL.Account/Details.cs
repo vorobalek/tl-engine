@@ -20,5 +20,7 @@ namespace TL.Account
         public override string Url => "/Account";
 
         public override string DisplayName => "Аккаунт";
+
+        public override string Icon => "/Areas/Account/Styles/images/package.png";
     }
 }

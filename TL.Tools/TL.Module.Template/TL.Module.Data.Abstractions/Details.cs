@@ -8,7 +8,9 @@ namespace $safeprojectname$
 
         public override string Owner => "TL.$saferootprojectname$";
 
+        public override string Icon => "/Areas/$saferootprojectname$/Styles/images/package.png";
+
         public override string Description =>
-            $"Модуль абстракций данных. Промежуточный слой интерфейсов, описывающих методы работы, допустимые с данными модуля {Owner}.";
+                $"Модуль абстракций данных. Промежуточный слой интерфейсов, описывающих методы работы, допустимые с данными модуля {Owner}.";
     }
 }

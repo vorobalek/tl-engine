@@ -8,6 +8,8 @@ namespace TL.Api.Data.Abstractions
 
         public override string Owner => "TL.Api";
 
+        public override string Icon => "/Areas/Api/Styles/images/package.png";
+
         public override string Description =>
             $"Модуль абстракций данных. Промежуточный слой интерфейсов, описывающих методы работы, допустимые с данными модуля {Owner}.";
 

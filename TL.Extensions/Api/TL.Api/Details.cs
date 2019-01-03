@@ -12,5 +12,7 @@ namespace TL.Api
             "Предоставляет открые методы для взаимодействия с системой TL Engine";
 
         public override string Authors => "Alexey Vorobev";
+
+        public override string Icon => "/Areas/Api/Styles/images/package.png";
     }
 }

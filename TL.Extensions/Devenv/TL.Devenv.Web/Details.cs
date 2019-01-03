@@ -9,6 +9,8 @@ namespace TL.Devenv.Web
 
         public override string Owner => "TL.Devenv";
 
+        public override string Icon => "/Areas/Devenv/Styles/images/package.png";
+
         public override string Description =>
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 

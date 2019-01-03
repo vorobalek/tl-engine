@@ -15,5 +15,7 @@ namespace TL.$saferootprojectname$
         public override string Url => "/$saferootprojectname$";
 
         public override string DisplayName => "$saferootprojectname$";
+
+        public override string Icon => "/Areas/$saferootprojectname$/Styles/images/package.png";
     }
 }

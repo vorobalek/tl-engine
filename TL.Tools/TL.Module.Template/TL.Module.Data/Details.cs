@@ -8,7 +8,9 @@ namespace $safeprojectname$
 
         public override string Owner => "TL.$saferootprojectname$";
 
+        public override string Icon => "/Areas/$saferootprojectname$/Styles/images/package.png";
+
         public override string Description =>
-            $"Модуль работы с данными. Дополнительный слой для доступа к данным {Owner} из других модулей системы TL Engine.";
+                $"Модуль работы с данными. Дополнительный слой для доступа к данным {Owner} из других модулей системы TL Engine.";
     }
 }

@@ -8,6 +8,8 @@ namespace TL.Translator.Web
 
         public override string Owner => "TL.Translator";
 
+        public override string Icon => "/Areas/Translator/Styles/images/package.png";
+
         public override string Description =>
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 

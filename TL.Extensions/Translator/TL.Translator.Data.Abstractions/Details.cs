@@ -8,6 +8,8 @@ namespace TL.Translator.Data.Abstractions
 
         public override string Owner => "TL.Translator";
 
+        public override string Icon => "/Areas/Translator/Styles/images/package.png";
+
         public override string Description =>
             $"Модуль абстракций данных. Промежуточный слой интерфейсов, описывающих методы работы, допустимые с данными модуля {Owner}.";
 

@@ -8,6 +8,8 @@ namespace TL.Api.Web
 
         public override string Owner => "TL.Api";
 
+        public override string Icon => "/Areas/Api/Styles/images/package.png";
+
         public override string Description =>
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 

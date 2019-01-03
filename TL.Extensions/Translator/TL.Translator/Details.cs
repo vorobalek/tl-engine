@@ -19,6 +19,8 @@ namespace TL.Translator
 
         public override string Url => "/Translator";
 
-        public override string DisplayName => "Translator";
+        public override string DisplayName => "Переводчик";
+
+        public override string Icon => "/Areas/Translator/Styles/images/package.png";
     }
 }

@@ -8,6 +8,8 @@ namespace TL.Account.Data.Entities
 
         public override string Owner => "TL.Account";
 
+        public override string Icon => "/Areas/Account/Styles/images/package.png";
+
         public override string Description =>
             $"Модуль сущностей данных. Основной слой, описывающий объекты модуля {Owner}, отображаемые в базу данных.";
 

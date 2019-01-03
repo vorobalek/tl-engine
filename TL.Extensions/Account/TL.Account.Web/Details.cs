@@ -8,6 +8,8 @@ namespace TL.Account.Web
 
         public override string Owner => "TL.Account";
 
+        public override string Icon => "/Areas/Account/Styles/images/package.png";
+
         public override string Description =>
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 

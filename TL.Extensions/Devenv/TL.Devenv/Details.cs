@@ -20,5 +20,7 @@ namespace TL.Devenv
         public override string Url => "/Devenv";
 
         public override string DisplayName => "Разработчикам";
+
+        public override string Icon => "/Areas/Devenv/Styles/images/package.png";
     }
 }
