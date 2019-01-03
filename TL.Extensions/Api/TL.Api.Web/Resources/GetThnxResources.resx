@@ -120,62 +120,62 @@
   <data name="Label" xml:space="preserve">
     <value>We're looking for a beautiful name. If you help us, your photo and quote will be forever immortalized in our API.
 
-                                          `-:+osyhddmmNNNNNmmddhyso+:-`                                          
-                                    ./oydNMMMNmdhyssoooyMMhoossyhdmNMMMNdyo/.                                    
-                               `:ohNMMNdmMMs`          `NMN`        `-/+ydNMMNho:`                               
-                            -odMMNho:.  hMM+            +MMo               ./ohNMMdo-                            
-                         :smMMdo-`      mMM:             dMN`                  `-odMMms:                         
-                      .omMNh/`          NMM-             :MMs                      `/hNMmo.                      
-                    /hMMh+`            `MMM.              hMM.                        `+hMMh/                    
-                 `+mMNs-               .MMM               .MMh                           :mMMm+`                 
-               `+mMmo`                 -MMN                sMM:                      ./sdNMMNmMm+`               
-              +mMm+`                   /MMd                `NMd                  -/ymNMMdy+-``+mMm/              
-            :dMNMo                     +MMh                 +MM/            `-+ymNMNhs/.`      `oNMd-            
-          `sNMy.hN-                    sMMs                  mMm`       .:ohNNMmy+-`             .yMNs`          
-         -mMm:  .Nd`                   yMMo                  :MM+   ./sdNMNds/.`                   :mMd-         
-        +NMy.    /Ms                   dMMo                   hMN+ymNMmho:``                        .yMN+        
-       sMMo       sM:                  NMMm`               `:+dMMMdy+-`                               oMMs       
-     `yMN/        `mN.                /MMMMd-          .:odNNmhNMM-                                    /NMy`     
-     yMN:          -Nh               `mMMMMMNh+:-..-/sdNNdy+-` mMMm.                                    :NMy     
-    sMM/            +M+              yMMMMMMMMMMNNNNNds/.`    .MMMMm:                                    /MMs    
-   /MMo              hN-           `yMMMMMMMMMMMMNh/.`       `dMMMMMNy-                                   oMM/   
-  .NMh               .Nd`         .hMMMMMMMMMMMmo.          .hMMMMMMMMNy-                                  hMN.  
-  yMN.                :Ms       `+NMMMMMMMMMMNo`          `/mMMMMMMMMMMMNd+.                            `.:yMMy  
- -MMs                  sM/    `/dMMMMMMMMMMMy.          -+dMMMMMMMMMMMMMMMMNdo:.                 `.-:+shmNMMMMM- 
- yMM.                  `dN.`-omMMMMMMMMMMMMs-------:/+ydNMMMMMMMMMMMMMMMMMMMMMMmdyo/:::::://+oshdmmNMMMMMMMMMMMy 
-`NMNssssyyyyyhhhhhhdddddNMmmNMMMMMMMMMMMMMMNNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMN`
-:MMmddddddddddhhdmNMMMMMMMMMdyssshmMMMMMMs+++++///////::://oshmMMMMMMMMMMMNho/:--.---/+sdNMMMMMMMMMMMMMMMMMMMNMM:
-oMM-``````.-:+shdmNmdhyo/-hM:     .+NMMMh                     .-odMMMMMMMh.             `-hMMMMMMMMMMMMMNdy+-:MMo
-yMM`.-/oydmmmdhs+:-.`     `mm`      :MMM-                        `/dMMMMM-                -MMMMMMMMMNdo:.`    MMy
-dMMmmmdhs+:-.`             :My      `MMy                           `sMMMM                 /MMMMMMmy/.         mMd
-dMN:-.`                     sM/     +MM.                             sMMM                /NMMNdo-`            mMd
-dMm                         `dN.   `mMs                              .MMM`             -hMMdo-`               mMd
-yMM                          .Nh   oMN.                               MMMy`         ./hNmy:`                  MMy
-oMM.                          +Mo .NMs                               .MMMMdo-.``.-ohNMd+.                    .MMo
-:MM/                           yN-yMN`                               oMMMMMMMmmmNMMMm+`                      /MM:
-`NMh                           `mmMMo                               .NMMMMMMMMMMMMMs.                        hMN`
- yMM.                           :MMN`                              `hMMMMMMMMMMMMN/                         .MMy 
- -MMs                           /MMy                              `yMMMMMMMMMMMMN:                          sMM- 
-  yMN.                         `mMMN.                            .hMMMMMMMMMMMMN:                          .NMy  
-  .NMh                         oMMsNh                          `/mMMMMMMMMMMMMM+                           hMN.  
-   /MMo                       .NMm`/Mo                        -hMMMMMMMMMMMMMMh                           oMM/   
-    sMM/                      yMM/  yM:                    `/hMMMMMMMMMMMMMMMM-                          /MMs    
-     yMN:                    -MMm   `mm`                `-smMMMMMMMMMMMMMMMMMd                          :NMy     
-     `yMN/                   hMM/    -My             `-smMMNNdhyyhdmNMMMMMMMM+                         /NMy`     
-       sMMo                 /MMd      oM/         `-odMMNdo-`      `-/yNMMMMM:                        oMMs       
-        +NMy`              `mMM:       hN.     `.odMMNmo-              .oNMMM-                      `yMN+        
-         :mMm:             +MMd        .Nd  `.odMMNmo-                   -mMM-                     :mMm-         
-          `sMMy.          `NMM:         /Ms+hMMMms:                       -MM/                   .yMNs`          
-            :dMNo`        sMMh         .+NMMMms:                           hMs                 `oNMd:            
-              +mMm+`     .MMM-      `/hNMMMM/`                             +Mh               `+mMm+              
-               `oNMm+`   hMMh    `/yNMMNy/:My                              -MN             `+mMm+`               
-                 `+mMNs.:MMM- `:yNMMNh/`   +M/                              NM-          .sNMm+`                 
-                   `/dMMNMMh:yNMMNh/`       hN.                             yMo       `/hMMd/                    
-                      -sNMMMMMMd+.          .Nd                             /Md    `/yNMms-                      
-                         :sNMMmo-            :Mo                            .MM.-ohMMNs:                         
-                            -odMMNho:`        sM:                          `:NMMMMdo-                            
-                               `:ohNMMNhs+:.` `mm`                  `.:+shNMMNho:`                               
-                                    ./oydNMMMNmmMdsoo+++++++oosyhdmNMMMNdyo/.                                    
-                                          `-:+osyhddmmNNNNNmmddhyso+:-`</value>
+ `.--------------------------------------------.              `-:///////////////////////////////////////////:.   
+.------------------------------------------------            `////////////////////////////////////////////////:  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+-------------------------------------------------`           ./////////////////////////////////////////////////  
+.------------------------------------------------            `:///////////////////////////////////////////////-  
+ `.-------------------------------------------.`               .::::::::::::::::::::::::::::::::::::::::::::-`   
+                                                                                                                 
+                                                                                                                 
+                                                                                                                 
+                                                                                                                 
+                                                                                     ``                          
+    ``````````````````````````````````````````                                      :oo+`                        
+ ./+++++++++++++++++++++++++++++++++++++++++++/-`                                   osss:                        
+:ooooooooooooooooooooooooooooooooooooooooooooooo+`                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-          -///////////////////////sssso//////////////////////:.
+ooooooooooooooooooooooooooooooooooooooooooooooooo-         -sssssssssssssssssssssssssssssssssssssssssssssssssssss
+ooooooooooooooooooooooooooooooooooooooooooooooooo-          :///////////////////////sssso///////////////////////.
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+ooooooooooooooooooooooooooooooooooooooooooooooooo-                                  ssss:                        
+/ooooooooooooooooooooooooooooooooooooooooooooooo+`                                  ssss:                        
+ -/+oooooooooooooooooooooooooooooooooooooooooo/:`                                   ssss:                        
+                                                                                    :sso.</value>
   </data>
 </root>

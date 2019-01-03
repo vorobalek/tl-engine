@@ -8,7 +8,7 @@ namespace TL.Api.Data.Entities
 
         public override string Owner => "TL.Api";
 
-        public override string Icon => "/Areas/Api/Styles/images/package.png";
+        public override string Icon => "/Areas/ApiHelp/Styles/images/package.png";
 
         public override string Description =>
             $"Модуль сущностей данных. Основной слой, описывающий объекты модуля {Owner}, отображаемые в базу данных.";

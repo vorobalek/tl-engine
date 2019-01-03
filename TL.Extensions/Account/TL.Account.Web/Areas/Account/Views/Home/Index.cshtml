@@ -1,6 +1,13 @@
 ﻿@model TL.Account.Web.Areas.Account.Models.IndexViewModel
+@{
+    ViewData["Title"] = User.Identity.Name;
+}
 
-<h1>Hello, @User.Identity.Name</h1>
+<div class="row">
+    <div class="col">
+        <h1 class="display-4">Hello, @User.Identity.Name</h1>
+    </div>
+</div>
 <div class="row">
     <div class="col-8">
         @await Component.InvokeAsync("RoleList", Model)
@@ -22,6 +29,9 @@
                 </li>
             }
         </ul>
+        <a asp-action="BigRedButton" asp-controller="Home" class="btn btn-danger btn-lg" role="button">Big Red Button</a>
+        <a asp-action="Exception" asp-controller="Home" class="btn btn-danger btn-lg" class="btn btn-primary btn-lg" role="button">Get Exception!</a>
+        <a class="btn btn-primary btn-lg" href="~/Account/Home/Logout" role="button">Logout</a>
     </div>
     @if (!Model.HasPassword)
     {
@@ -32,9 +42,4 @@
             @await Component.InvokeAsync("SetPassword", new TL.Account.Web.Areas.Account.Models.SetPasswordComponentModel())
         </div>
     }
-</div>
-<div class="row">
-    <a asp-action="BigRedButton" asp-controller="Home" class="btn btn-danger btn-lg" role="button">Big Red Button</a>
-    <a asp-action="Exception" asp-controller="Home" class="btn btn-danger btn-lg" class="btn btn-primary btn-lg" role="button">Get Exception!</a>
-    <a class="btn btn-primary btn-lg" href="~/Account/Home/Logout" role="button">Logout</a>
 </div>

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<TL.Engine.SDK.Modules.ModuleBase>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Добро пожаловать!";
 
     string globalModuleDivArea = "";
 
@@ -71,20 +71,18 @@
     }
 }
 
-<div>
-    <h1 class="display-4">Добро пожаловать!</h1>
-    <p class="lead">Поздравляем с запуском TL Engine Enterprise!</p>
-    <hr class="my-4">
-    <p>
-        Список доступных модулей TL Engine:
-    </p>
-    <ul class="list-group">
-        @foreach (var module in Model)
-        {
-            <li class="list-group-item">
-                @Html.Raw(f(module))
-            </li>
-        }
-    </ul>
-    @Html.Raw(globalModuleDivArea)
-</div>
+<h1 class="display-4">Добро пожаловать!</h1>
+<p class="lead">Поздравляем с запуском TL Engine Enterprise!</p>
+<hr class="my-4">
+<p>
+    Список доступных модулей TL Engine:
+</p>
+<ul class="list-group">
+    @foreach (var module in Model)
+    {
+        <li class="list-group-item">
+            @Html.Raw(f(module))
+        </li>
+    }
+</ul>
+@Html.Raw(globalModuleDivArea)

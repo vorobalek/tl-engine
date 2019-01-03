@@ -13,7 +13,7 @@ namespace TL.Account
 
         public override string Authors => "Alexey Vorobev";
 
-        public override bool IsNavigationItem => true;
+        public override bool IsNavigationItem => false;
 
         public override int NavigationOrder => 100;
 

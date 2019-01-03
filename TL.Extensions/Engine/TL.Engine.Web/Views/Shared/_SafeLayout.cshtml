@@ -5,12 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-        @(string.IsNullOrWhiteSpace(ViewData["Title"] as string) ? "" : $"{ViewData["Title"]} -") TL
+        @(string.IsNullOrWhiteSpace(ViewData["Title"] as string) ? "" : $"{ViewData["Title"]} - ")TL Engine
     </title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/Styles/css/bootstrap.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/Styles/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/Styles/images/pack/font/flaticon.css" asp-append-version="true" />
     </environment>
 
     <environment exclude="Development">
@@ -20,6 +21,7 @@
               asp-fallback-href="~/Styles/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/Styles/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/Styles/images/pack/font/flaticon.min.css" asp-append-version="true" />
     </environment>
 
     <link rel="icon" type="image/x-icon" href="~/Styles/images/logo.ico">

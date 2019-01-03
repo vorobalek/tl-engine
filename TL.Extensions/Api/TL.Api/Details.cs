@@ -13,6 +13,14 @@ namespace TL.Api
 
         public override string Authors => "Alexey Vorobev";
 
-        public override string Icon => "/Areas/Api/Styles/images/package.png";
+        public override bool IsNavigationItem => true;
+
+        public override int NavigationOrder => 200;
+
+        public override string Url => "/ApiHelp";
+
+        public override string DisplayName => "Api";
+
+        public override string Icon => "/Areas/ApiHelp/Styles/images/package.png";
     }
 }

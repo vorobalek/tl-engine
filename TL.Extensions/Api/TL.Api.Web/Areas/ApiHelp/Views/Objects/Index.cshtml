@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "API Объекты";
+    Layout = "~/Areas/ApiHelp/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col">
+    <h1>Объекты</h1>
+    <div id="contentMethods">
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var getHelpUri = '/api/system.Help'
+        $(document).ready(function () {
+            $.getJSON(getHelpUri)
+                .done(function (data) {
+                    if (data.ok) {
+                        formatResult(data.result).appendTo('#contentMethods')
+                    }
+                })
+                .fail(function () {
+                    alert(err + '! ' + alertMessage);
+                    $('#contentMethods').text(alertMessage);
+                })
+        })
+
+        function formatResult(result) {
+            var divResult = $('<div>');
+            $.each(result.objects, function (key, object) {
+                formatObject(object).appendTo(divResult);
+            })
+            divResult.append(relevantCheckDiv(result))
+            return divResult;
+        }
+
+        function relevantCheckDiv(result) {
+            var div = $('<div>')
+                .addClass('alert')
+            var p = $('<p>');
+            var span = $('<span>')
+                .addClass('glyphicon');
+            var strong = $('<text>')
+            if (!result.isRelevant) {
+                divClass = 'alert-danger';
+                spanClass = 'glyphicon-exclamation-sign';
+                strongText = '  Устаревшее API v"' + result.lastUpdate + '"';
+            } else {
+                divClass = 'alert-success';
+                spanClass = 'glyphicon-ok-sign';
+                strongText = '  Актуальная API v"' + result.lastUpdate + '"';
+            }
+            return div
+                .addClass(divClass)
+                .append(p
+                    .append(span
+                        .addClass(spanClass)
+                    )
+                    .append(strong.
+                        text(strongText)
+                    )
+                )
+        }
+
+        function formatObject(object) {
+            var tbody = $('<tbody>');
+            $.each(object.properties, function (key, property) {
+                formatProperty(property).appendTo(tbody);
+            })
+            return $('<div>')
+                .append($('<h3 id="' + object.name + '">')
+                    .text(object.name)
+                )
+                .append($('<p>').text(object.description))
+                .append($('<table>')
+                    .addClass('table')
+                    .addClass('table-bordered')
+                    .addClass('table-hover')
+                    .append($('<thead>')
+                        .append($('<tr>')
+                            .append($('<th>')
+                                .text("Параметр")
+                            )
+                            .append($('<th>')
+                                .text("Тип параметра")
+                            )
+                        )
+                    )
+                    .append(tbody)
+                )
+                .append($('<hr>'))
+        }
+
+        function formatProperty(property) {
+            return $('<tr>')
+                .append($('<td>')
+                    .text(property.name)
+                )
+                .append($('<td>')
+                    .text(property.type)
+                )
+        }
+    </script>
+}

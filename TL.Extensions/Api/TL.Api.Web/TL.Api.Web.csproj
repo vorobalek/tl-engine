@@ -17,15 +17,18 @@
   </ItemGroup>
   
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Api\Views\**;Areas\Api\Styles\**;Areas\Api\Scripts\**" />
+    <EmbeddedResource Include="Areas\ApiHelp\Views\**;Areas\ApiHelp\Styles\**;Areas\ApiHelp\Scripts\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Areas\ApiHelp\Views\Home\Index.cshtml" />
+    <None Remove="Areas\ApiHelp\Views\Shared\_Layout.cshtml" />
+    <None Remove="Areas\ApiHelp\Views\_ViewImports.cshtml" />
+    <None Remove="Areas\ApiHelp\Views\_ViewStart.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TL.Api.Data\TL.Api.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
