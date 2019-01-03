@@ -46,6 +46,6 @@ namespace TL.Engine.SDK.Modules
 
         public virtual string DisplayName => Name;
 
-        public virtual string Icon => "/Styles/images/package.png";
+        public virtual string Icon => "/Styles/images/base_package.png";
     }
 }
