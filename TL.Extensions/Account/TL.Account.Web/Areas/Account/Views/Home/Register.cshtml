@@ -1,4 +1,4 @@
-﻿@model TL.Account.Web.Areas.Account.Models.RegisterViewModel
+﻿@model TL.Account.Web.Areas.Account.ViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "Регистрация";
 }
@@ -6,7 +6,7 @@
 <h2>Регистрация</h2>
 <div class="row">
     <div class="col-auto">
-        <form asp-action="Register" asp-controller="Home" asp-anti-forgery="true">
+        <form asp-action="Register" asp-controller="Home" asp-anti-forgery="true" asp-route-returnUrl="@Model.ReturnUrl">
             <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label asp-for="@Model.Username">Введите логин</label>

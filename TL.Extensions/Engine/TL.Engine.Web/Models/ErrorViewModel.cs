@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using TL.Engine.Data.Entities.Reports;
 
 namespace TL.Engine.Web.Models

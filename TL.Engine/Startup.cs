@@ -36,6 +36,7 @@ namespace TL.Engine
                    options.ConnectionString = Configuration.GetConnectionString("SqlServer");
                    options.MigrationsAssembly = typeof(DesignTimeStorageContextFactory).GetTypeInfo().Assembly.FullName;
                });
+
             DesignTimeStorageContextFactory.Initialize(services.BuildServiceProvider());
         }
 

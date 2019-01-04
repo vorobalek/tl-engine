@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Relationships;
 using TL.Account.Data.Entities.Security;
-using TL.Account.Web.Areas.Account.Models;
+using TL.Account.Web.Areas.Account.ViewModels;
 using TL.Translator.Data.Abstractions.Translations;
 
 namespace TL.Account.Web.Areas.Account.Controllers
@@ -31,33 +31,6 @@ namespace TL.Account.Web.Areas.Account.Controllers
             });
         }
 
-        [Authorize(Policy = "SA")]
-        public IActionResult BigRedButton()
-        {
-            return View();
-        }
-
-        public IActionResult Exception()
-        {
-            throw new NotImplementedException("Test Exception");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult SetPassword(SetPasswordComponentModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var passwordHasher = new PasswordHasher<User>();
-                var user = Storage.GetRepository<IUserRepository>().GetByUsername(HttpContext.User.Identity.Name);
-                user.PasswordHash = passwordHasher.HashPassword(user, model.Password);
-                Storage.GetRepository<IUserRepository>().Update(user);
-                Storage.Save();
-                return RedirectToAction("Index", "Home");
-            }
-            return ViewComponent("SetPassword", model);
-        }
-
         IStorage Storage { get; }
 
         public HomeController(IStorage storage)
@@ -67,9 +40,9 @@ namespace TL.Account.Web.Areas.Account.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
-            return View();
+            return View(new LoginViewModel() { ReturnUrl = returnUrl ?? Url.Content("~/") });
         }
 
         [HttpPost]
@@ -100,24 +73,24 @@ namespace TL.Account.Web.Areas.Account.Controllers
                         }
                     }
                     await Authenticate(user);
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(model.ReturnUrl);
                 }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                ModelState.AddModelError(string.Empty, "Некорректные логин и(или) пароль");
             }
             return View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl = null)
         {
-            return View();
+            return View(new RegisterViewModel() { ReturnUrl = returnUrl ?? Url.Content("~/") });
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +128,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                     Storage.Save();
 
                     await Authenticate(user);
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(model.ReturnUrl);
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");

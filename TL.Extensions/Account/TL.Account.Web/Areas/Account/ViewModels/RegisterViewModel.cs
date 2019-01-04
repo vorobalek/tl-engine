@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TL.Account.Web.Areas.Account.Models
+namespace TL.Account.Web.Areas.Account.ViewModels
 {
     public class RegisterViewModel
     {
@@ -14,5 +14,7 @@ namespace TL.Account.Web.Areas.Account.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

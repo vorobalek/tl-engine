@@ -24,8 +24,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Remove="Areas\Account\Views\Home\BigRedButton.cshtml" />
-    <None Remove="Areas\Account\Views\Home\Exception.cshtml" />
     <None Remove="Areas\Account\Views\Profile\Index.cshtml" />
   </ItemGroup>
   

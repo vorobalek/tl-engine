@@ -6,9 +6,9 @@
     ViewData["Title"] = $"Ошибка{(string.IsNullOrWhiteSpace(Model.Message) ? "" : $" - {Model.Message}")}!";
 }
 <div class="container">
-    <partial name="SystemPrintErrorPartial" model="@Model" />
+    <partial name="_SystemPrintError" model="@Model" />
     <hr />
-    <partial name="StatusMessagePartial" model="@Model.StatusMessage" />
+    <partial name="_StatusMessage" model="@Model.StatusMessage" />
     <form asp-action="ErrorReport" asp-controller="SystemInternalServerError" asp-anti-forgery="true">
         <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
         <div class="form-group">

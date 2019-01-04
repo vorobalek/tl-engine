@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TL.Account.Data.Abstractions.Relationships;
 using TL.Account.Data.Abstractions.Security;
-using TL.Account.Web.Areas.Account.Models;
+using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
 {

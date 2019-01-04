@@ -2,7 +2,7 @@
 using TL.Account.Data.Entities.Security;
 using TL.Translator.Data.Entities.Translations;
 
-namespace TL.Account.Web.Areas.Account.Models
+namespace TL.Account.Web.Areas.Account.ViewModels
 {
     public class IndexViewModel
     {

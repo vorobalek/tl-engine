@@ -1,4 +1,4 @@
-﻿namespace TL.Account.Web.Areas.Account.Models
+﻿namespace TL.Account.Web.Areas.Account.ViewModels
 {
     public class ProfileViewModel
     {
