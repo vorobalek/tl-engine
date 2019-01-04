@@ -13,10 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExtCore.Infrastructure" Version="4.0.0-alpha3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
     <ProjectReference Include="..\TL.Account.Web\TL.Account.Web.csproj" />
   </ItemGroup>

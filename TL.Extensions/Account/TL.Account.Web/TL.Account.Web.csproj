@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0-alpha3" />
+    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />
   </ItemGroup>

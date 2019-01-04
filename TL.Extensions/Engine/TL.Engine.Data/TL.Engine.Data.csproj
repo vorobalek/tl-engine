@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExtCore.Data" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TL.Engine.Data.EntityFramework\TL.Engine.Data.EntityFramework.csproj" />
   </ItemGroup>
 
