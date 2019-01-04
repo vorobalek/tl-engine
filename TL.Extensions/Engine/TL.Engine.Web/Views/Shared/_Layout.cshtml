@@ -1,38 +1,41 @@
 ﻿@{
     Layout = "~/Views/Shared/_SafeLayout.cshtml";
 }
-<partial name="NavbarPartial" />
+@await Component.InvokeAsync("Nav")
 <br />
-<div class="container body-content">
-    <div class="row">
-        <div class="col">
-            @RenderBody()
+<div class="container-fluid body-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2" style="border-right: 1px solid rgba(0, 0, 0, .1)">
+                @await Component.InvokeAsync("Menu")
+            </div>
+            <div class="col-10">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy;@(DateTime.Now.Year > 2017 ? $"2017 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
+                </footer>
+                @{
+                    var linePageGenerationTime = "Страница сгенерирована за";
+                    var lineMs = "мс";
+                    var line = $"";
+                    var Start = Context.Items.ContainsKey("RequestStartedOn") ? Context.Items["RequestStartedOn"] as DateTime? : DateTime.MinValue;
+                    var Finish = DateTime.Now;
+                    <div class="text-center">
+                        <p class="help-block" style="font-size: 80%">
+                            UTC @Finish.ToUniversalTime()
+                            <br />
+                            LTC @Finish.ToLocalTime()
+                            <br />
+                            @linePageGenerationTime
+                            <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
+                        </p>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-    <hr />
-    <div class="row">
-        <footer>
-            <p>&copy;@(DateTime.Now.Year > 2017 ? $"2017 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
-        </footer>
-    </div>
 </div>
-@{
-    var linePageGenerationTime = "Страница сгенерирована за";
-    var lineMs = "мс";
-    var line = $"";
-    var Start = Context.Items.ContainsKey("RequestStartedOn") ? Context.Items["RequestStartedOn"] as DateTime? : DateTime.MinValue;
-    var Finish = DateTime.Now;
-    <div class="text-center">
-        <p class="help-block" style="font-size: 80%">
-            UTC @Finish.ToUniversalTime()
-            <br />
-            LTC @Finish.ToLocalTime()
-            <br />
-            @linePageGenerationTime
-            <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
-        </p>
-    </div>
-}
 @section Scripts
     {
     @RenderSection("Scripts", required: false)

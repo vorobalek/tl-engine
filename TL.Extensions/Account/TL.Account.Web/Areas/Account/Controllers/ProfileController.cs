@@ -1,4 +1,5 @@
 ﻿using ExtCore.Data.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,12 @@ namespace TL.Account.Web.Areas.Account.Controllers
         public ProfileController(IStorage storage)
         {
             Storage = storage;
+        }
+
+        [Authorize]
+        public IActionResult Index()
+        {
+            return RedirectToAction("Index", "Profile", new { username = User.Identity.Name });
         }
 
         [HttpGet("{username}")]

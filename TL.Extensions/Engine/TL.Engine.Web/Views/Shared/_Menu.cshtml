@@ -1,0 +1,8 @@
+﻿@model TL.Engine.Web.ViewModels.Shared.MenuViewModel
+
+<nav class="nav flex-column nav-pills">
+    @foreach (var menuItem in this.Model.MenuItems)
+    {
+        <partial name="_MenuItem" model="@menuItem" />
+    }
+</nav>

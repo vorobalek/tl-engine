@@ -1,0 +1,6 @@
+﻿@model TL.Engine.Web.ViewModels.Shared.ScriptsViewModel
+
+@foreach (var script in this.Model.Scripts)
+{
+    <partial name="_Script" model="@script" />
+}

@@ -1,0 +1,6 @@
+﻿@model TL.Engine.Web.ViewModels.Shared.StylesViewModel
+
+@foreach (var styleSheet in this.Model.Styles)
+{
+    <partial name="_Style" model="@styleSheet" />
+}

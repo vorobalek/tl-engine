@@ -1,14 +1,14 @@
-﻿@model IEnumerable<TL.Engine.SDK.Modules.ModuleBase>
+﻿@model IEnumerable<TL.Engine.SDK.Modularity.MetadataBase>
 @{
     ViewData["Title"] = "Добро пожаловать!";
 
     string globalModuleDivArea = "";
 
-    string f(TL.Engine.SDK.Modules.ModuleBase module)
+    string f(TL.Engine.SDK.Modularity.MetadataBase module)
     {
         var moduleId = string.Join("_", module.Name.Split("."));
         var r = $"<span class=\"row align-items-center\">" +
-                    $"<span class=\"col-auto\"><img src=\"{module.Icon}\" alt=\"Logo\"></span>" +
+                    $"<span class=\"col-auto\"><img src=\"/Styles/images/base_package.png\" alt=\"Logo\"></span>" +
                     $"<button type=\"button\" class=\"btn btn-link\" data-toggle=\"modal\" data-target=\"#{moduleId}Modal\"><span class=\"glyphicon glyphicon-info-sign\"></span></button>" +
                     $"<h4>{module.Name}</h4>" +
                     $"</span>";
@@ -27,7 +27,7 @@
         return r;
     }
 
-    string GetModal(TL.Engine.SDK.Modules.ModuleBase module)
+    string GetModal(TL.Engine.SDK.Modularity.MetadataBase module)
     {
         var moduleId = string.Join("_", module.Name.Split("."));
         var modalDivArea =
@@ -35,8 +35,8 @@
               "<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">" +
                   "<div class=\"modal-content\">" +
                       "<div class=\"modal-header\">" +
-                          $"<h5 class=\"modal-title\" id=\"{moduleId}ModalLongTitle\">Подбробнее о модуле {module.DisplayName}" +
-                          $"{(module.Name != module.DisplayName ? $" ({module.Name})" : "")}</h5>" +
+                          $"<h5 class=\"modal-title\" id=\"{moduleId}ModalLongTitle\">Подбробнее о модуле {module.Name}" +
+                          $"{module.Name}</h5>" +
                           "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
                               "<span aria-hidden=\"true\">&times;</span>" +
                           "</button>" +
@@ -54,15 +54,8 @@
                       "</div>" +
                       "<div class=\"modal-footer\">" +
                           "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Закрыть</button>";
-        if (!string.IsNullOrWhiteSpace(module.Url))
-        {
-            modalDivArea += $"<a href=\"{module.Url}\" type=\"button\" class=\"btn btn-success\" role=\"button\">Перейти к модулю</a>";
-        }
-        else
-        {
-            modalDivArea += "<a href=\"#\" type=\"button\" class=\"disabled btn btn-danger\" role=\"button\">Веб-часть недоступна</a>";
-        }
-        modalDivArea += "</div>" +
+                modalDivArea += "<a href=\"#\" type=\"button\" class=\"disabled btn btn-danger\" role=\"button\">Веб-часть недоступна</a>";
+                modalDivArea += "</div>" +
                 "</div>" +
             "</div>" +
         "</div>";
