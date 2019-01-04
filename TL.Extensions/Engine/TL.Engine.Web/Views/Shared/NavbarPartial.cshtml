@@ -25,10 +25,11 @@
             <ul class="navbar-nav justify-content-end">
                 @{
                     var spanclass = User.Identity.IsAuthenticated ? " flaticon-locked-3" : "flaticon-locked-2";
+                    var prefix = User.Identity.IsAuthenticated ? User.Identity.Name : "";
                 }
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="@spanclass"></span>
+                        @prefix<span class="@spanclass"></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="accountDropdownMenuLink">
                         @if (User.Identity.IsAuthenticated)

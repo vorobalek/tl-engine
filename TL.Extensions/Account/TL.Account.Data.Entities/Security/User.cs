@@ -1,6 +1,7 @@
 ﻿using ExtCore.Data.Entities.Abstractions;
 using System;
 using System.Collections.Generic;
+using TL.Account.Data.Entities.Relationships;
 
 namespace TL.Account.Data.Entities.Security
 {
@@ -10,22 +11,39 @@ namespace TL.Account.Data.Entities.Security
 
         public string Username { get; set; }
 
+        public string Description { get; set; }
+
         public bool HasPassword { get => !string.IsNullOrWhiteSpace(PasswordHash); }
 
         public string PasswordHash { get; set; }
 
+        public bool IsClosed { get; set; } = false;
+
         public virtual IEnumerable<UserRole> UserRoles { get; set; }
+
+        public virtual IEnumerable<Subscription> Subscriptions { get; set; }
 
         public User()
         {
             UserRoles = new HashSet<UserRole>();
+            Subscriptions = new HashSet<Subscription>();
         }
 
         public static User Sa => 
             new User()
             {
                 Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                Username = "sa"
+                Username = "sa",
+                Description = "Супер-пользователь системы TL Engine"
+            };
+
+        public static User System =>
+            new User()
+            {
+                Id = Guid.Parse("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+                Username = "system",
+                Description = "Автоматика системы TL Engine",
+                IsClosed = true,
             };
     }
 }

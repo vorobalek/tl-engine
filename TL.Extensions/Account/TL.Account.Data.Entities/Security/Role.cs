@@ -30,5 +30,12 @@ namespace TL.Account.Data.Entities.Security
                Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                Name = "user",
            };
+
+        public static Role System =>
+           new Role()
+           {
+               Id = Guid.Parse("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+               Name = "system",
+           };
     }
 }

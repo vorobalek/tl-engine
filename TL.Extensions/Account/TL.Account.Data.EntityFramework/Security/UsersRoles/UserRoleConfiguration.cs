@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Linq;
 using TL.Account.Data.Entities.Security;
 
 namespace TL.Account.Data.EntityFramework.Security.UsersRoles
@@ -15,10 +16,18 @@ namespace TL.Account.Data.EntityFramework.Security.UsersRoles
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}UsersRoles");
 
             builder
-                .HasData(new[]
-                {
-                    UserRole.Sa
-                });
+                .HasOne(e => e.Role)
+                .WithMany(e => e.UserRoles)
+                .HasForeignKey(e => e.RoleId);
+
+            builder
+                .HasOne(e => e.User)
+                .WithMany(e => e.UserRoles)
+                .HasForeignKey(e => e.UserId);
+
+            builder
+                .HasData(UserRole.Sa
+                .Concat(UserRole.System));
         }
     }
 }

@@ -16,12 +16,23 @@ namespace TL.Account.Data.EntityFramework.Security.Users
                 .IsUnique();
 
             builder
+                .HasMany(e => e.UserRoles)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId);
+
+            builder
+                .HasMany(e => e.Subscriptions)
+                .WithOne(e => e.From)
+                .HasForeignKey(e => e.FromId);
+
+            builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Users");
 
             builder
                 .HasData(new[]
                 {
-                    User.Sa
+                    User.Sa,
+                    User.System
                 });
         }
     }

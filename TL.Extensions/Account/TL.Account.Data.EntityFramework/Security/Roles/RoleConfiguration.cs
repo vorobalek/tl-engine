@@ -16,13 +16,19 @@ namespace TL.Account.Data.EntityFramework.Security.Roles
                 .IsUnique();
 
             builder
+                .HasMany(e => e.UserRoles)
+                .WithOne(e => e.Role)
+                .HasForeignKey(e => e.RoleId);
+
+            builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Roles");
 
             builder
                 .HasData(new[]
                 {
                     Role.Sa,
-                    Role.User
+                    Role.User,
+                    Role.System,
                 });
         }
     }

@@ -1,0 +1,43 @@
+﻿@model TL.Account.Web.Areas.Account.Models.ProfileViewModel
+@{
+    ViewData["Title"] = Model?.Username ?? "Опс!";
+}
+
+@if (Model == null)
+{
+    <h1>Опс... Пользователь не найден!</h1>
+}
+else
+{
+    <h1>Профиль пользователя @Model.Username:</h1>
+    <hr />
+    <h4>@Model.Description</h4>
+    <p>
+        Подписок: @Model.SubscriptionsCount
+    </p>
+    <p>
+        Подписчиков: @Model.FollowersCount
+    </p>
+    @if (Model.IsFollower)
+    {
+        <p>
+            Подписан на Вас.
+        </p>
+    }
+    else
+    {
+        <p>
+            Не подписан на Вас.
+        </p>
+    }
+    <p>
+        @if (Model.IsSubscription)
+        {
+            <button type="button" class="btn btn-link"><span class="flaticon-alarm"></span>Отписаться</button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-link"><span class="flaticon-alarm-1"></span>Подписаться</button>
+        }
+    </p>
+}
