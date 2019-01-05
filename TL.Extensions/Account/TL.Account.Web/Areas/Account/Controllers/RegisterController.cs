@@ -22,7 +22,10 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [AllowAnonymous]
         public IActionResult Index(string returnUrl = null)
         {
-           return View(new RegisterViewModel() { ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/") });
+            if (User.Identity.IsAuthenticated)
+                return Redirect(Url.Content("/"));
+
+            return View(new RegisterViewModel() { ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/") });
         }
 
         [HttpPost]
@@ -30,6 +33,9 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(RegisterViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                return Redirect(Url.Content("/"));
+
             if (ModelState.IsValid)
             {
                 var user = Storage.GetRepository<IUserRepository>().GetByUsername(model.Username);

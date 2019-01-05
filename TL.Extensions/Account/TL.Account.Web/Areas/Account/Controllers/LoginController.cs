@@ -19,6 +19,9 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [AllowAnonymous]
         public IActionResult Index(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+                return Redirect(Url.Content("/"));
+
             return View(new LoginViewModel() { ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/") });
         }
 
@@ -27,6 +30,9 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(LoginViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                return Redirect(Url.Content("/"));
+
             if (ModelState.IsValid)
             {
                 User user = Storage.GetRepository<IUserRepository>().GetByUsername(model.Username);

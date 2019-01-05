@@ -2,16 +2,18 @@
 
 <ul class="navbar-nav justify-content-end">
     <li class="nav-item dropleft">
-        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-link nav-link align-items-lg-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @if (User.Identity.IsAuthenticated)
             {
+                <strong>@User.Identity.Name&nbsp;&nbsp;</strong>
                 <img src="~/Styles/images/pack/png/unlocked.png" alt="User Logo" width="auto" height="32px" class="rounded-circle" />
             }
             else
             {
+                <strong>Аккаунт&nbsp;&nbsp;</strong>
                 <img src="~/Styles/images/pack/png/locked-6.png" alt="User Logo" width="auto" height="32px" class="rounded-circle" />
             }
-        </a>
+        </button>
         <div class="dropdown-menu" aria-labelledby="accountDropdownMenuLink">
             @if (User.Identity.IsAuthenticated)
             {
