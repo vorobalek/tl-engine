@@ -12,11 +12,8 @@ namespace TL.Account.Web.Areas.Account.Controllers
     [Route("/Account/Profile")]
     public class ProfileController : __AccountController__
     {
-        public IStorage Storage { get; set; }
-
-        public ProfileController(IStorage storage)
+        public ProfileController(IStorage storage) : base(storage)
         {
-            Storage = storage;
         }
 
         [Authorize]

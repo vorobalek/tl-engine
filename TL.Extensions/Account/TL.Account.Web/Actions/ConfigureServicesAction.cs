@@ -21,7 +21,7 @@ namespace TL.Account.Web.Actions
                 .AddCookie(options =>
                 {
                     options.Cookie.Name = "TL.Engine.Account";
-                    options.LoginPath = "/Account/Home/Login";
+                    options.LoginPath = "/Account/Login";
                     options.AccessDeniedPath = "/AccessDenied";
                 });
 
