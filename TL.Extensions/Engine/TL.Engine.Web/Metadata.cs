@@ -41,6 +41,7 @@ namespace TL.Engine.Web
         public override IEnumerable<NavItem> NavItems => new NavItem[]
         {
             new NavItem("/", "Главная", int.MinValue),
+            new NavItem("/SystemActiveModules", "Модули", int.MinValue, new string[] { "sa" }),
         };
     }
 }

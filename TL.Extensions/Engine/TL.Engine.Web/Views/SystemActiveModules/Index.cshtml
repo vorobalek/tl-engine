@@ -1,0 +1,76 @@
+﻿@model TL.Engine.Web.ViewModels.SystemActiveModules.SystemActiveModulesViewModel
+@{
+    ViewData["Title"] = "Модули";
+
+    string globalModuleDivArea = "";
+
+    string f(TL.Engine.SDK.Modularity.MetadataBase module)
+    {
+        var moduleId = string.Join("_", module.Name.Split("."));
+        var r = $"<span class=\"row align-items-center\">" +
+                    $"<span class=\"col-auto\"><img src=\"/Styles/images/base_package.png\" alt=\"Logo\"></span>" +
+                    $"<button type=\"button\" class=\"btn btn-link\" data-toggle=\"modal\" data-target=\"#{moduleId}Modal\"><span class=\"glyphicon glyphicon-info-sign\"></span></button>" +
+                    $"<h4>{module.Name}</h4>" +
+                    $"</span>";
+        globalModuleDivArea += GetModal(module);
+        if (module.SubModules.Any())
+        {
+            r += $"<ul class=\"list-group\">";
+            foreach (var submodule in module.SubModules)
+            {
+                r += "<li class=\"list-group-item\">";
+                r += f(submodule);
+                r += "</li>";
+            }
+            r += $"</ul>";
+        }
+        return r;
+    }
+
+    string GetModal(TL.Engine.SDK.Modularity.MetadataBase module)
+    {
+        var moduleId = string.Join("_", module.Name.Split("."));
+        var modalDivArea =
+          $"<div class=\"modal fade\" id=\"{moduleId}Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"{moduleId}ModalTitle\" aria-hidden=\"true\">" +
+              "<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">" +
+                  "<div class=\"modal-content\">" +
+                      "<div class=\"modal-header\">" +
+                          $"<h5 class=\"modal-title\" id=\"{moduleId}ModalLongTitle\">Подбробнее о модуле {module.Name}</h5>" +
+                          "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
+                              "<span aria-hidden=\"true\">&times;</span>" +
+                          "</button>" +
+                      "</div>" +
+                      "<div class=\"modal-body\">" +
+                          "<p>" +
+                              $"{@module.Description}" +
+                          "</p>" +
+                          "<p>" +
+                              $"{@module.Authors}" +
+                          "</p>" +
+                          "<p>" +
+                              $"version {module.GetVersion().ToString()}" +
+                          "</p>" +
+                      "</div>" +
+                      "<div class=\"modal-footer\">" +
+                          "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Закрыть</button>";
+                modalDivArea += "<a href=\"#\" type=\"button\" class=\"disabled btn btn-danger\" role=\"button\">Веб-часть недоступна</a>";
+                modalDivArea += "</div>" +
+                "</div>" +
+            "</div>" +
+        "</div>";
+
+        return modalDivArea;
+    }
+}
+
+<h1>Список доступных модулей TL Engine:</h1>
+<hr />
+<ul class="list-group">
+    @foreach (var module in Model.Modules)
+    {
+        <li class="list-group-item">
+            @Html.Raw(f(module))
+        </li>
+    }
+</ul>
+@Html.Raw(globalModuleDivArea)

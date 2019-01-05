@@ -1,8 +1,6 @@
-﻿using ExtCore.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
-using TL.Engine.SDK.Modularity;
+using TL.Engine.Web.ViewModels.Home;
 
 namespace TL.Engine.Web.Controllers
 {
@@ -10,8 +8,7 @@ namespace TL.Engine.Web.Controllers
     {
         public IActionResult Index()
         {
-            var extensions = ExtensionManager.GetInstances<MetadataBase>().Where(m => m.Owner == "").OrderBy(it => it.Name);
-            return View(extensions);
+            return View(new IndexViewModelFactory().Create());
         }
 
         public IActionResult Exception()

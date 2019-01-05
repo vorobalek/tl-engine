@@ -1,4 +1,4 @@
-﻿namespace TL.Engine.Web.ViewModels.Barebone
+﻿namespace TL.Engine.Web.ViewModels.Home
 {
     public class IndexViewModelFactory
     {

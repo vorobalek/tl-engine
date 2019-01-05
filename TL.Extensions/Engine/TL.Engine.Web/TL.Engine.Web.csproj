@@ -26,6 +26,7 @@
     <None Remove="Views\Shared\Components\Nav\Default.cshtml" />
     <None Remove="Views\Shared\_UNav.cshtml" />
     <None Remove="Views\Shared\_UNavItem.cshtml" />
+    <None Remove="Views\SystemActiveModules\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
