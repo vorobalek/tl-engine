@@ -15,15 +15,13 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
 {
     public class HomeController : __TranslatorController__
     {
-        public IStorage Storage { get; set; }
-
         public IYandexTranslator Translator { get; }
 
         public List<SelectListItem> AvailableInputCultures { get; }
 
         public List<ITranslationPair> TranslationPairs { get; set; }
 
-        public HomeController(IConfiguration configuration, IStorage storage)
+        public HomeController(IStorage storage, IConfiguration configuration) : base(storage)
         {
             Translator = Yandex.Translator.Yandex.Translator(api => api.ApiKey(configuration["YandexTranslateApiKey"]).Format(ApiDataFormat.Json));
             TranslationPairs = Translator.TranslationPairs().ToList();
@@ -39,8 +37,6 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
                 })
                 .OrderBy(it => it.Text)
                 .ToList();
-
-            Storage = storage;
         }
 
         [HttpGet]
