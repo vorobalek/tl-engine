@@ -22,7 +22,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [AllowAnonymous]
         public IActionResult Index(string returnUrl = null)
         {
-           return View(new RegisterViewModel() { ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("/") });
+           return View(new RegisterViewModel() { ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/") });
         }
 
         [HttpPost]

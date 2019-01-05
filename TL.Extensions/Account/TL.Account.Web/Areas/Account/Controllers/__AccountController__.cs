@@ -26,9 +26,10 @@ namespace TL.Account.Web.Areas.Account.Controllers
             };
 
             var roles = Storage.GetRepository<IUserRoleRepository>().GetByUser(user);
-            foreach (var role in roles)
+            foreach (var userRole in roles)
             {
-                claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.RoleId.ToString()));
+                var role = Storage.GetRepository<IRoleRepository>().GetById(userRole.RoleId);
+                claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.Name));
             }
 
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

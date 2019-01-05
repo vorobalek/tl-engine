@@ -29,6 +29,7 @@ namespace TL.Account.Web
 
         public override IEnumerable<NavItem> NavItems => new NavItem[]
         {
+            new NavItem("/Account/Manage/UserGroups", "Пользователи и группы", 1000, new string[] { "sa", "system" })
         };
     }
 }

@@ -1,0 +1,38 @@
+﻿@model TL.Engine.Web.ViewModels.Shared.UNavViewModel
+
+<ul class="navbar-nav justify-content-end">
+    <li class="nav-item dropleft">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <img src="~/Styles/images/pack/png/unlocked.png" alt="User Logo" width="auto" height="32px" class="rounded-circle" />
+            }
+            else
+            {
+                <img src="~/Styles/images/pack/png/locked-6.png" alt="User Logo" width="auto" height="32px" class="rounded-circle" />
+            }
+        </a>
+        <div class="dropdown-menu" aria-labelledby="accountDropdownMenuLink">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="dropdown-item" href="/Account"><strong>@User.Identity.Name</strong></a>
+            }
+
+            @foreach (var uNavItem in this.Model.UNavItems)
+            {
+                <partial name="_UNavItem" model="@uNavItem" />
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/Account/Home/Logout">Выход</a>
+            }
+            else
+            {
+                <a class="dropdown-item" href="/Account/Login">Вход</a>
+                <a class="dropdown-item" href="/Account/Register">Регистрация</a>
+            }
+        </div>
+    </li>
+</ul>

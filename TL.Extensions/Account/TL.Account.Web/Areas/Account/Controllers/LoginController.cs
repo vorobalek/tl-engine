@@ -19,7 +19,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [AllowAnonymous]
         public IActionResult Index(string returnUrl = null)
         {
-            return View(new LoginViewModel() { ReturnUrl = returnUrl });
+            return View(new LoginViewModel() { ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/") });
         }
 
         [HttpPost]

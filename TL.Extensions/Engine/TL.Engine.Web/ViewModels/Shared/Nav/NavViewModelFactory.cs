@@ -13,7 +13,7 @@ namespace TL.Engine.Web.ViewModels.Shared
 
             foreach (var extensionMetadata in ExtensionManager.GetInstances<MetadataBaseWeb>())
             {
-                navItems.AddRange(extensionMetadata.NavItems);
+                navItems.AddRange(extensionMetadata.NavItems.Where(ni => ni.Roles == null));
             }
 
             return new NavViewModel()

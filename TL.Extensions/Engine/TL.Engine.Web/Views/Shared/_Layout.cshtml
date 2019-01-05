@@ -1,7 +1,21 @@
-﻿@{
+﻿@using System.Security.Claims;
+
+@{
     Layout = "~/Views/Shared/_SafeLayout.cshtml";
 }
-@await Component.InvokeAsync("Nav")
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="position:absolute">
+    <a class="navbar-brand brandlabel" href="~/">
+        <img src="~/Styles/images/pack/png/app.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        @await Component.InvokeAsync("Nav")
+        @await Component.InvokeAsync("UNav", new { roles = User.Claims.Where(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Select(c => c.Value) })
+
+    </div>
+</nav>
 <br />
 <div class="container-fluid body-content">
     <div class="container-fluid">
