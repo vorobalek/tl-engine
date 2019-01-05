@@ -30,10 +30,12 @@ namespace TL.Engine.Web
 
             new Script("/Scripts/tooltip.min.js", 1000),
             new Script("/Scripts/site.min.js", 1000),
+            new Script("/Scripts/clipboard.min.js", 1000),
         };
 
         public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
         {
+            new MenuItem("/Home/Exception", "Проверить исключения", 1000)
         };
 
         public override IEnumerable<NavItem> NavItems => new NavItem[]

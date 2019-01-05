@@ -37,14 +37,12 @@
             <span asp-validation-for="@Model.Priority" class="text-danger validation" />
         </div>
 
-        <input asp-for="@Model.StackTrace" class="invisible" value="@Model.StackTrace" />
+        <input asp-for="@Model.StackTrace" class="invisible" value="@Model.StackTrace" id="stackTraceHideInput" />
         <input asp-for="@Model.Message" class="invisible" value="@Model.Message" />
         <input asp-for="@Model.RequestId" class="invisible" value="@Model.RequestId" />
         <input asp-for="@Model.ReturnUrl" class="invisible" value="@Model.ReturnUrl" />
         <input asp-for="@Model.StatusCode" class="invisible" value="@Model.StatusCode" />
-
-
-        <div class="form-group">
+        <div class="form-row">
             <input type="submit" value="Отправить" class="btn btn-outline-success form-control" />
         </div>
     </form>
@@ -52,9 +50,30 @@
     <div class="row">
         <div class="col-12">
             <p>
-                <code>@Model.Message</code>
-                <pre>@Model.StackTrace</pre>
+                <div class="row">
+                    <div class="col">
+                        <code>@Model.Message</code>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-sm btn-clipboard" data-clipboard-target="#stackTracePre">
+                            Копировать ошибку
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <pre id="stackTracePre">@Model.StackTrace</pre>
+                    </div>
+                </div>
             </p>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        new ClipboardJS('.btn-clipboard');
+    </script>
+}
