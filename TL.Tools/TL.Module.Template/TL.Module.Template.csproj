@@ -56,31 +56,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="TL.Module.Web\Areas\Module\ViewModels\Home\IndexViewModel.cs" />
+    <Content Include="TL.Module.Web\Areas\Module\ViewModels\Home\IndexViewModelFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="__TemplateIcon.ico" />
-    <Content Include="TL.Module\Details.cs" />
+    <Content Include="TL.Module\Metadata.cs" />
     <Content Include="TL.Module\MyTemplate.vstemplate" />
     <Content Include="TL.Module\TL.Module.csproj" />
     <Content Include="TL.Module\__TemplateIcon.ico" />
-    <Content Include="TL.Module.Data\Details.cs" />
+    <Content Include="TL.Module.Data\Metadata.cs" />
     <Content Include="TL.Module.Data\MyTemplate.vstemplate" />
     <Content Include="TL.Module.Data\TL.Module.Data.csproj" />
     <Content Include="TL.Module.Data\__TemplateIcon.ico" />
-    <Content Include="TL.Module.Data.Entities\Details.cs" />
+    <Content Include="TL.Module.Data.Entities\Metadata.cs" />
     <Content Include="TL.Module.Data.Entities\MyTemplate.vstemplate" />
     <Content Include="TL.Module.Data.Entities\TL.Module.Data.Entities.csproj" />
     <Content Include="TL.Module.Data.Entities\__TemplateIcon.ico" />
-    <Content Include="TL.Module.Data.EntityFramework\Details.cs" />
+    <Content Include="TL.Module.Data.EntityFramework\Metadata.cs" />
     <Content Include="TL.Module.Data.EntityFramework\EF_REGISTRATIONS.cs" />
     <Content Include="TL.Module.Data.EntityFramework\MyTemplate.vstemplate" />
     <Content Include="TL.Module.Data.EntityFramework\TL.Module.Data.EntityFramework.csproj" />
     <Content Include="TL.Module.Data.EntityFramework\__TemplateIcon.ico" />
-    <Content Include="TL.Module.Data.Abstractions\Details.cs" />
-    <Content Include="TL.Module.Data.Abstractions\MyTemplate.vstemplate" />
+    <Content Include="TL.Module.Data.Abstractions\Metadata.cs" />
+    <Content Include="TL.Module.Data.Abstractions\MyTemplate.vstemplate">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="TL.Module.Data.Abstractions\TL.Module.Data.Abstractions.csproj" />
     <Content Include="TL.Module.Data.Abstractions\__TemplateIcon.ico" />
-    <Content Include="TL.Module.Web\Details.cs" />
+    <Content Include="TL.Module.Web\Metadata.cs" />
     <Content Include="TL.Module.Web\MyTemplate.vstemplate">
       <SubType>Designer</SubType>
     </Content>
@@ -93,10 +97,11 @@
     <Content Include="TL.Module.Web\Areas\Module\Views\*" />
     <Content Include="TL.Module.Web\Areas\Module\Views\Shared\*" />
     <Content Include="TL.Module.Web\Areas\Module\Styles\*" />
-    <Content Include="TL.Module.Web\Areas\Module\Styles\images\*" />
+    <Content Include="TL.Module.Web\Areas\Module\Styles\images\package.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TL.Module.Template.ico" />
+    <Content Include="TL.Module.Web\Areas\Module\Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="TL.Module.Template.vstemplate">

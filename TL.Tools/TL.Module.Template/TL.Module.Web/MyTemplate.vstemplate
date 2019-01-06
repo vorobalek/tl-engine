@@ -22,12 +22,13 @@
       <Folder Name="Areas" TargetFolderName="Areas">
         <Folder Name="Module" TargetFolderName="$saferootprojectname$">
           <Folder Name="Controllers" TargetFolderName="Controllers">
-            <ProjectItem ReplaceParameters="true" TargetFileName="__$saferootprojectname$Controller__.cs">__BaseController__.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="__$saferootprojectname$Controller__.cs">__ModuleController__.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="HomeController.cs">HomeController.cs</ProjectItem>
           </Folder>
-          <Folder Name="Styles" TargetFolderName="Styles">
-            <Folder Name="images" TargetFolderName="images">
-              <ProjectItem ReplaceParameters="true" TargetFileName="package.png">package.png</ProjectItem>
+           <Folder Name="ViewModels" TargetFolderName="ViewModels">
+            <Folder Name="Home" TargetFolderName="Home">
+              <ProjectItem ReplaceParameters="true" TargetFileName="IndexViewModel.cs">IndexViewModel.cs</ProjectItem>
+              <ProjectItem ReplaceParameters="true" TargetFileName="IndexViewModelFactory.cs">IndexViewModelFactory.cs</ProjectItem>
             </Folder>
           </Folder>
           <Folder Name="Views" TargetFolderName="Views">
@@ -39,7 +40,7 @@
           </Folder>
         </Folder>
       </Folder>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Details.cs">Details.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Metadata.cs">Metadata.cs</ProjectItem>
     </Project>
   </TemplateContent>
   <WizardExtension>

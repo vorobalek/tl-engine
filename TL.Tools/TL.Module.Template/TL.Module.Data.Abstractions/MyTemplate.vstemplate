@@ -16,7 +16,7 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="TL.$saferootprojectname$.Data.Abstractions.csproj" File="TL.Module.Data.Abstractions.csproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="true" TargetFileName="Details.cs">Details.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Metadata.cs">Metadata.cs</ProjectItem>
     </Project>
   </TemplateContent>
   <WizardExtension>
