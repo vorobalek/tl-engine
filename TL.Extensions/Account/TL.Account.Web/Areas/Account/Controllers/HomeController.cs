@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Web.Areas.Account.ViewModels;
-using TL.Translator.Data.Abstractions.Translations;
 
 namespace TL.Account.Web.Areas.Account.Controllers
 {
@@ -28,9 +27,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
             return View(new IndexViewModel()
             {
                 Username = user.Username,
-                HasPassword = user.HasPassword,
-                Translations = Storage.GetRepository<ITranslationRepository>().GetByUser(user),
-                UserRoles = Storage.GetRepository<IUserRoleRepository>().GetByUser(user),
+                HasPassword = user.HasPassword
             });
         }
         

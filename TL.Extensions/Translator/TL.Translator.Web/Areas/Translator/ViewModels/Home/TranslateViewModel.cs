@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace TL.Translator.Web.Areas.Translator.Models
+namespace TL.Translator.Web.Areas.Translator.ViewModels.Home
 {
     public class TranslateViewModel
     {
+        public bool IsReady { get; set; } = false;
+
         public bool IsSwapped { get; set; } = false;
 
         public string Input { get; set; }

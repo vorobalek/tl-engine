@@ -1,0 +1,8 @@
+﻿ProjectTemplates
+EnvDTE.dll
+Microsoft.VisualStudio.TemplateWizardInterface.dll
+stdole.dll
+TL.Module.Template.Wizards.dll
+TL.Engine.VSIX.ico
+extension.vsixmanifest
+Microsoft.VisualStudio.TemplateWizardInterface.xml

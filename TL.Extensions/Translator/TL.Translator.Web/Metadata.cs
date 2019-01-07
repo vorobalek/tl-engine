@@ -24,6 +24,7 @@ namespace TL.Translator.Web
 
         public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
         {
+            new MenuItem("/Translator/History", "История переводов", 1000, new string[] { "user", "sa" }),
         };
 
         public override IEnumerable<NavItem> NavItems => new NavItem[]

@@ -18,6 +18,12 @@ namespace TL.Account.Data.Entities.Security
             new UserRole()
             {
                 UserId = User.Sa.Id,
+                RoleId = Role.User.Id,
+            },
+
+            new UserRole()
+            {
+                UserId = User.Sa.Id,
                 RoleId = Role.Sa.Id,
             },
 

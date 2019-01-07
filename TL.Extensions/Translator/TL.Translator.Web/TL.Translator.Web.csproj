@@ -22,6 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Areas\Translator\Views\History\Index.cshtml" />
+    <None Remove="Areas\Translator\Views\History\_HistoryItem.cshtml" />
+    <None Remove="Areas\Translator\Views\Home\_IsReady.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Account\TL.Account.Data\TL.Account.Data.csproj" />
     <ProjectReference Include="..\TL.Translator.Data\TL.Translator.Data.csproj" />
   </ItemGroup>
 

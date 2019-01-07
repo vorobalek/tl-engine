@@ -1,11 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Переводчик";
 }
-@model TL.Translator.Web.Areas.Translator.Models.TranslateViewModel
+@model TL.Translator.Web.Areas.Translator.ViewModels.Home.TranslateViewModel
 
 <h1 class="display-4">Translator</h1>
 <p class="lead">Простое приложение на ASP.NET Core, работающее с Yandex.Translate API</p>
 <hr class="my-4">
+<partial name="_IsReady" model ="@Model.IsReady" />
 <form action="/" id="form" data-ajax="true" class="form-row" data-ajax-update="#OutputResult">
     <div class="col">
         <div class="form-group">
@@ -37,7 +38,7 @@
     </div>
     <div class="col">
         <div id="OutputResult">
-            <partial name="Translate" />
+            <partial name="_Translate" />
         </div>
         @if (User.Identity.IsAuthenticated)
         {

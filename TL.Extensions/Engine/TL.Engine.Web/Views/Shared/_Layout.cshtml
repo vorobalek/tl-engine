@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
-                @await Component.InvokeAsync("Menu")
+                @await Component.InvokeAsync("Menu", new { roles = User.Claims.Where(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Select(c => c.Value) })
             </div>
             <div class="col-10 shadow-lg p-3 mb-5 rounded">
                 @RenderBody()

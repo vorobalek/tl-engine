@@ -28,7 +28,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\Translator\TL.Translator.Data\TL.Translator.Data.csproj" />
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
   </ItemGroup>
   

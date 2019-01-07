@@ -8,41 +8,53 @@ using System.Globalization;
 using System.Linq;
 using TL.Account.Data.Abstractions.Security;
 using TL.Translator.Data.Abstractions.Translations;
-using TL.Translator.Web.Areas.Translator.Models;
+using TL.Translator.Web.Areas.Translator.ViewModels.Home;
 using Yandex.Translator;
 
 namespace TL.Translator.Web.Areas.Translator.Controllers
 {
     public class HomeController : __TranslatorController__
     {
+        public bool IsReady { get; set; } = false;
+
         public IYandexTranslator Translator { get; }
 
-        public List<SelectListItem> AvailableInputCultures { get; }
+        public List<SelectListItem> AvailableInputCultures { get; } = new List<SelectListItem>();
 
-        public List<ITranslationPair> TranslationPairs { get; set; }
+        public List<ITranslationPair> TranslationPairs { get; set; } = new List<ITranslationPair>();
 
         public HomeController(IStorage storage, IConfiguration configuration) : base(storage)
         {
-            Translator = Yandex.Translator.Yandex.Translator(api => api.ApiKey(configuration["YandexTranslateApiKey"]).Format(ApiDataFormat.Json));
-            TranslationPairs = Translator.TranslationPairs().ToList();
+            try
+            {
+                Translator = Yandex.Translator.Yandex.Translator(api => api.ApiKey(configuration["YandexTranslateApiKey"]).Format(ApiDataFormat.Json));
+                TranslationPairs = Translator.TranslationPairs().ToList();
 
-            AvailableInputCultures = TranslationPairs
-                .ToList()
-                .Select(it => it.FromLanguage)
-                .Distinct()
-                .Select(it => new SelectListItem()
-                {
-                    Text = new CultureInfo(it).DisplayName,
-                    Value = it
-                })
-                .OrderBy(it => it.Text)
-                .ToList();
+                AvailableInputCultures = TranslationPairs
+                    .ToList()
+                    .Select(it => it.FromLanguage)
+                    .Distinct()
+                    .Select(it => new SelectListItem()
+                    {
+                        Text = new CultureInfo(it).DisplayName,
+                        Value = it
+                    })
+                    .OrderBy(it => it.Text)
+                    .ToList();
+
+                IsReady = true;
+
+            }
+            catch
+            {
+                IsReady = false;
+            }
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new TranslateViewModel(AvailableInputCultures) { Input = "Hello, World!" });
+            return View(FillModel(new TranslateViewModel(AvailableInputCultures) { Input = "Hello, World!" }));
         }
 
         [HttpPost]
@@ -50,7 +62,7 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
         {
             model = FillModel(model);
 
-            return PartialView("Translate", model);
+            return PartialView("_Translate", model);
         }
 
         [HttpPost]
@@ -73,11 +85,13 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
                 model.StatusMessage = "Ваш перевод сохранён!";
             }
 
-            return PartialView("Translate", model);
+            return PartialView("_Translate", model);
         }
 
         private TranslateViewModel FillModel(TranslateViewModel model)
         {
+            model.IsReady = IsReady;
+
             model.AvailableInputCultures = AvailableInputCultures;
 
             if (string.IsNullOrWhiteSpace(model.Input))
@@ -87,7 +101,7 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
 
             if (string.IsNullOrWhiteSpace(model.InputCulture))
             {
-                model.InputCulture = Translator.Detect(model.Input);
+                model.InputCulture = IsReady ? Translator?.Detect(model.Input) : "en";
             }
 
             model.AvailableInputCultures = TranslationPairs
@@ -114,7 +128,7 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
             {
                 if (supportedCulturesForInput.FirstOrDefault(it => it.ToLanguage == "ru") == null)
                 {
-                    model.OutputCulture = supportedCulturesForInput.FirstOrDefault().ToLanguage;
+                    model.OutputCulture = supportedCulturesForInput.FirstOrDefault()?.ToLanguage ?? "ru";
                 }
                 else
                 {
@@ -132,15 +146,13 @@ namespace TL.Translator.Web.Areas.Translator.Controllers
                     .OrderBy(it => it.Text)
                     .ToList();
 
-            var translation = Translator
+            model.Output = IsReady ? Translator?
                 .Translate(request =>
                     request.From(model.InputCulture)
                     .To(model.OutputCulture)
                     .Text(model.Input)
                     .Html()
-                );
-
-            model.Output = translation.Text;
+                ).Text : "Привет, мир!";
 
             return model;
         }
