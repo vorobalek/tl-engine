@@ -7,7 +7,7 @@ namespace TL.Engine.SDK.Modularity
 {
     public abstract class MetadataBase
     {
-        private Version MinimalVersion => new Version(0, 3, 1, 0);
+        private Version MinimalVersion => new Version(0, 3, 2, 0);
 
         public abstract string Name { get; }
 
