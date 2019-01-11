@@ -24,7 +24,7 @@ namespace TL.Account.Web
 
         public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
         {
-            new MenuItem("/Account/Profile", "Публичная страница", int.MinValue),
+            new MenuItem("/Account/Profile", "Публичная страница", int.MinValue, new string[] { "user" }),
         };
 
         public override IEnumerable<NavItem> NavItems => new NavItem[]
