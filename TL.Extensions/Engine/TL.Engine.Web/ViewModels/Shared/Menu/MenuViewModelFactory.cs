@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Modularity;
+using TL.Engine.SDK.Modularity.Items;
 
 namespace TL.Engine.Web.ViewModels.Shared
 {
@@ -13,7 +14,7 @@ namespace TL.Engine.Web.ViewModels.Shared
 
             roles = roles.ToList();
 
-            foreach (var extensionMetadata in ExtensionManager.GetInstances<MetadataBaseWeb>())
+            foreach (var extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>())
             {
                 foreach (var menuItem in extensionMetadata.MenuItems)
                 {

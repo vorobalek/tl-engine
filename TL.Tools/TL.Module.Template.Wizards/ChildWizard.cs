@@ -10,6 +10,7 @@ namespace TL.Module.Template.Wizards
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             replacementsDictionary.Add("$saferootprojectname$", RootWizard.GlobalDictionary["$saferootprojectname$"]);
+            replacementsDictionary.Add("$lower_saferootprojectname$", RootWizard.GlobalDictionary["$lower_saferootprojectname$"]);
         }
 
 

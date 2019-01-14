@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Modularity;
+using TL.Engine.SDK.Modularity.Items;
 
 namespace TL.Engine.Web.ViewModels.Shared
 {
@@ -11,7 +12,7 @@ namespace TL.Engine.Web.ViewModels.Shared
         {
             List<NavItem> navItems = new List<NavItem>();
 
-            foreach (var extensionMetadata in ExtensionManager.GetInstances<MetadataBaseWeb>())
+            foreach (var extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>())
             {
                 navItems.AddRange(extensionMetadata.NavItems.Where(ni => ni.Roles == null));
             }

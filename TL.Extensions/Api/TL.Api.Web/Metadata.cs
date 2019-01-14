@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using TL.Engine.SDK.Modularity;
+using TL.Engine.SDK.Modularity.Items;
 
 namespace TL.Api.Web
 {
-    public class Metadata : MetadataBaseWeb
+    public class Metadata : BaseMetadataWeb
     {
         public override string Name => "TL.Api.Web";
 
@@ -14,11 +15,11 @@ namespace TL.Api.Web
 
         public override string Authors => "Alexey Vorobev";
 
-        public override IEnumerable<Style> Styles => new Style[]
+        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
         {
         };
 
-        public override IEnumerable<Script> Scripts => new Script[]
+        public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
         {
         };
 

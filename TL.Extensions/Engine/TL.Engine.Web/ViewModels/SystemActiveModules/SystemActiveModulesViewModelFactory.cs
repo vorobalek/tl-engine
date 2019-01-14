@@ -10,7 +10,7 @@ namespace TL.Engine.Web.ViewModels.SystemActiveModules
         {
             return new SystemActiveModulesViewModel()
             {
-                Modules = ExtensionManager.GetInstances<MetadataBase>().Where(m => m.Owner == "").OrderBy(it => it.Name).ToList()
+                Modules = ExtensionManager.GetInstances<BaseMetadata>().Where(m => m.Owner == "").OrderBy(it => it.Name).ToList()
             };
         }
     }

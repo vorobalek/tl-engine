@@ -2,7 +2,7 @@
 
 namespace TL.Engine.SDK
 {
-    public class Metadata : MetadataBase
+    public class Metadata : BaseMetadata
     {
         public override string Name => "TL.Engine.SDK";
 

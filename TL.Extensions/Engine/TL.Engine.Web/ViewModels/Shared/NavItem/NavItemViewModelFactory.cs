@@ -1,4 +1,4 @@
-﻿using TL.Engine.SDK.Modularity;
+﻿using TL.Engine.SDK.Modularity.Items;
 
 namespace TL.Engine.Web.ViewModels.Shared
 {

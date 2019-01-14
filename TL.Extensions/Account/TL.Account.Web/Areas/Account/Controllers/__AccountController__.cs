@@ -12,7 +12,7 @@ using TL.Engine.SDK.Controllers;
 namespace TL.Account.Web.Areas.Account.Controllers
 {
     [Area("Account")]
-    public abstract class __AccountController__ : __BaseController__
+    public abstract class __AccountController__ : BaseController
     {
         public __AccountController__(IStorage storage) : base(storage)
         {

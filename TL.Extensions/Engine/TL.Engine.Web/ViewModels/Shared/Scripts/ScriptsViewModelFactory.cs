@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Modularity;
+using TL.Engine.SDK.Modularity.Items;
 
 namespace TL.Engine.Web.ViewModels.Shared
 {
@@ -9,11 +10,11 @@ namespace TL.Engine.Web.ViewModels.Shared
     {
         public ScriptsViewModel Create()
         {
-            List<Script> scripts = new List<Script>();
+            List<ScriptItem> scripts = new List<ScriptItem>();
 
-            foreach (var extensionMetadata in ExtensionManager.GetInstances<MetadataBaseWeb>())
+            foreach (var extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>())
             {
-                scripts.AddRange(extensionMetadata.Scripts);
+                scripts.AddRange(extensionMetadata.ScriptItems);
             }
 
             return new ScriptsViewModel()

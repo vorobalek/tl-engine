@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Modularity;
+using TL.Engine.SDK.Modularity.Items;
 
 namespace TL.Engine.Web.ViewModels.Shared
 {
@@ -9,11 +10,11 @@ namespace TL.Engine.Web.ViewModels.Shared
     {
         public StylesViewModel Create()
         {
-            List<Style> styles = new List<Style>();
+            List<StyleItem> styles = new List<StyleItem>();
 
-            foreach (MetadataBaseWeb extensionMetadata in ExtensionManager.GetInstances<MetadataBaseWeb>())
+            foreach (BaseMetadataWeb extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>())
             {
-                styles.AddRange(extensionMetadata.Styles);
+                styles.AddRange(extensionMetadata.StyleItems);
             }
 
             return new StylesViewModel()

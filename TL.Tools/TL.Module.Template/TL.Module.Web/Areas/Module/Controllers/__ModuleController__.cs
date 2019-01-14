@@ -5,7 +5,7 @@ using TL.Engine.SDK.Controllers;
 namespace $safeprojectname$.Areas.$saferootprojectname$.Controllers
 {
     [Area("$saferootprojectname$")]
-    public abstract class __$saferootprojectname$Controller__ : __BaseController__
+    public abstract class __$saferootprojectname$Controller__ : BaseController
     {
         public __$saferootprojectname$Controller__(IStorage storage) : base(storage)
         {

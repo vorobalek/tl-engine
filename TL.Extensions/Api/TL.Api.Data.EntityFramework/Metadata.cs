@@ -2,7 +2,7 @@
 
 namespace TL.Api.Data.EntityFramework
 {
-    public class Metadata : MetadataBase
+    public class Metadata : BaseMetadata
     {
         public override string Name => "TL.Api.Data.EntityFramework";
 

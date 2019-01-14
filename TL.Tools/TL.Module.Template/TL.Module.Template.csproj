@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="TL.Module.Web\Api\Module\HelloController.cs" />
+    <Content Include="TL.Module.Web\Api\Module\_ModuleApiController.cs" />
     <Content Include="TL.Module.Web\Areas\Module\ViewModels\Home\IndexViewModel.cs" />
     <Content Include="TL.Module.Web\Areas\Module\ViewModels\Home\IndexViewModelFactory.cs" />
   </ItemGroup>
@@ -97,7 +99,6 @@
     <Content Include="TL.Module.Web\Areas\Module\Views\*" />
     <Content Include="TL.Module.Web\Areas\Module\Views\Shared\*" />
     <Content Include="TL.Module.Web\Areas\Module\Styles\*" />
-    <Content Include="TL.Module.Web\Areas\Module\Styles\images\package.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TL.Module.Template.ico" />
@@ -114,6 +115,7 @@
       <Name>TL.Module.Template.Wizards</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

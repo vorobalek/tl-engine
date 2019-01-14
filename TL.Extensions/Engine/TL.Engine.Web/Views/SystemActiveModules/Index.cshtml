@@ -4,7 +4,7 @@
 
     string globalModuleDivArea = "";
 
-    string f(TL.Engine.SDK.Modularity.MetadataBase module)
+    string f(TL.Engine.SDK.Modularity.BaseMetadata module)
     {
         var moduleId = string.Join("_", module.Name.Split("."));
         var r = $"<span class=\"row align-items-center\">" +
@@ -27,7 +27,7 @@
         return r;
     }
 
-    string GetModal(TL.Engine.SDK.Modularity.MetadataBase module)
+    string GetModal(TL.Engine.SDK.Modularity.BaseMetadata module)
     {
         var moduleId = string.Join("_", module.Name.Split("."));
         var modalDivArea =

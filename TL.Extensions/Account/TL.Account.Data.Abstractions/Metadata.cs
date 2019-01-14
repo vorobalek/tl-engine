@@ -2,7 +2,7 @@
 
 namespace TL.Account.Data.Abstractions
 {
-    public class Metadata : MetadataBase
+    public class Metadata : BaseMetadata
     {
         public override string Name => "TL.Account.Data.Abstractions";
 

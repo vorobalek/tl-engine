@@ -2,7 +2,7 @@
 
 namespace TL.Translator.Data.Entities
 {
-    public class Metadata : MetadataBase
+    public class Metadata : BaseMetadata
     {
         public override string Name => "TL.Translator.Data.Entities";
 

@@ -5,6 +5,6 @@ namespace TL.Engine.Web.ViewModels.SystemActiveModules
 {
     public class SystemActiveModulesViewModel
     {
-        public IList<MetadataBase> Modules { get; set; }
+        public IList<BaseMetadata> Modules { get; set; }
     }
 }

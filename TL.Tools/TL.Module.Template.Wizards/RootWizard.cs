@@ -11,6 +11,7 @@ namespace TL.Module.Template.Wizards
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             GlobalDictionary["$saferootprojectname$"] = replacementsDictionary["$safeprojectname$"];
+            GlobalDictionary["$lower_saferootprojectname$"] = replacementsDictionary["$safeprojectname$"].ToLowerInvariant();
         }
 
         public bool ShouldAddProjectItem(string filePath)

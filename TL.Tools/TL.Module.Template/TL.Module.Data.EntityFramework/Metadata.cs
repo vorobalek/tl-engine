@@ -2,7 +2,7 @@
 
 namespace $safeprojectname$
 {
-    public class Metadata : MetadataBase
+    public class Metadata : BaseMetadata
 {
         public override string Name => "$safeprojectname$";
 

@@ -12,11 +12,6 @@ namespace TL.Api.Web.Actions
         public void Execute(IRouteBuilder routeBuilder, IServiceProvider serviceProvider)
         {
             routeBuilder.MapRoute(
-                name: "Api",
-                template: "{controller}/{action}/{id?}",
-                defaults: new { contoller = "Help", action = "Get" }
-            );
-            routeBuilder.MapRoute(
                name: "Api.Help",
                template: "ApiHelp/{controller}/{action}/{id?}",
                constraints: new { area = "ApiHelp" },
