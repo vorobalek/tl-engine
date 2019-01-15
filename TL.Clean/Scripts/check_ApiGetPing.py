@@ -6,7 +6,7 @@ if not sys.warnoptions:
     os.environ["PYTHONWARNINGS"] = "ingore"
 
 import requests, json, time
-url = "https://localhost:5001/api/test.ping"
+url = "https://localhost:5001/api/system.ping"
 
 buff = []
 

@@ -6,7 +6,7 @@ if not sys.warnoptions:
     os.environ["PYTHONWARNINGS"] = "ingore"
 
 import requests, json, time
-url = "https://localhost:5001/api/test.help"
+url = "https://localhost:5001/api/system.help"
 
 buff = []
 
@@ -17,4 +17,7 @@ for i in range(count):
 t2 = time.time()
 
 print(t2 - t1)
-
+s = 0
+for item in buff:
+    s += float(json.loads(item.text)['requestTime'].split(':')[-1])
+print(s)
