@@ -7,13 +7,12 @@
         @(string.IsNullOrWhiteSpace(ViewData["Title"] as string) ? "" : $"{ViewData["Title"]} - ")TL Engine
     </title>
     @await Component.InvokeAsync("Styles")
-    @await Component.InvokeAsync("Scripts")
     <link rel="icon" type="image/x-icon" href="~/Styles/images/logo_tl.ico">
 </head>
 <body>
     @RenderBody()
-    @RenderSection("Scripts", required: false)
-    <script>
+    @await Component.InvokeAsync("Scripts")
+    <script type="text/javascript">
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -30,5 +29,6 @@
             }, false);
         })();
     </script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -13,7 +13,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         @await Component.InvokeAsync("Nav")
         @await Component.InvokeAsync("UNav", new { roles = User.Claims.Where(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Select(c => c.Value) })
-
     </div>
 </nav>
 <br />
@@ -50,7 +49,6 @@
         </div>
     </div>
 </div>
-@section Scripts
-    {
+@section Scripts {
     @RenderSection("Scripts", required: false)
 }
