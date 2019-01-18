@@ -25,9 +25,6 @@ namespace TL.Api.Web
 
         public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
         {
-            new MenuItem("/ApiHelp", "Введение в API", 100),
-            new MenuItem("/ApiHelp/Methods", "Методы API", 101),
-            new MenuItem("/ApiHelp/Objects", "Объекты API", 102),
         };
 
         public override IEnumerable<NavItem> NavItems => new NavItem[]
