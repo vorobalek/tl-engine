@@ -44,8 +44,9 @@ namespace TL.TelegramBots.Web.Bots
             catch
             {
                 Logger.TLogWarning($"Запуск не удался - @{Username} Попытка повтора через {TimeSpan.FromMilliseconds(RetryPeriod).TotalSeconds} сек...");
-                await Task.Delay(RetryPeriod);
 
+                await Task.Delay(RetryPeriod);
+                await StopAsync();
                 await StartAsync();
             }
         }
@@ -59,7 +60,10 @@ namespace TL.TelegramBots.Web.Bots
             }
             catch
             {
-                Logger.LogCritical($"Остановка не удалась - @{Username}");
+                Logger.LogCritical($"Остановка не удалась - @{Username} Попытка повтора через {TimeSpan.FromMilliseconds(RetryPeriod).TotalSeconds} сек...");
+                await Task.Delay(RetryPeriod);
+
+                await StopAsync();
             }
         }
 
@@ -99,6 +103,7 @@ namespace TL.TelegramBots.Web.Bots
         protected override void TgClient_OnReceiveError(object sender, ReceiveErrorEventArgs e)
         {
             Logger.TLogCritical($"Ошибка приёма на боте {NativeName}:@{Username}. {e.ApiRequestException}");
+            Thread.Sleep(1000);
         }
 
         protected override void Process()

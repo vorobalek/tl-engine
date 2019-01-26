@@ -23,11 +23,11 @@ namespace TL.TelegramBots.Web
 
         public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
         {
+            new MenuItem("/TelegramBots", "Интеграция с Telegram", 1000, new[] { "sa" })
         };
 
         public override IEnumerable<NavItem> NavItems => new NavItem[]
         {
-                new NavItem("/TelegramBots", "TelegramBots", 1000),
         };
     }
 }

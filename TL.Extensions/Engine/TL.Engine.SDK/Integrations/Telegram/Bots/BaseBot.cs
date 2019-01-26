@@ -31,9 +31,9 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         public abstract Task SendAsync(IMessage message);
 
-        public virtual async Task StartAsync()
+        public virtual Task StartAsync()
         {
-            await Task.Run(() =>
+            return Task.Run(() =>
             {
                 WorkThread = new Thread(WorkProcess)
                 {
@@ -50,19 +50,21 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
             });
         }
 
-        public virtual async Task StopAsync()
+        public virtual Task StopAsync()
         {
-            await Task.Run(async () =>
+            return Task.Run(() =>
             {
                 TgClient.StopReceiving();
+                TgClient.OnUpdate -= TgClient_OnUpdate;
+                TgClient.OnReceiveError -= TgClient_OnReceiveError;
                 while (!MessagesQueue.IsEmpty)
                 {
-                    await Task.Delay(1000);
+                    Thread.Sleep(1000);
                 }
                 IsOnline = false;
                 while (WorkThread.ThreadState == ThreadState.Running)
                 {
-                    await Task.Delay(1000);
+                    Thread.Sleep(1000);
                 }
             });
         }
