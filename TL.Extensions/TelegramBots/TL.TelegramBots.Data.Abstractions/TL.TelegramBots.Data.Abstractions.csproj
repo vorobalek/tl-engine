@@ -14,11 +14,10 @@
 
   <ItemGroup>
     <PackageReference Include="ExtCore.Data.Abstractions" Version="4.0.0" />
-    <PackageReference Include="ExtCore.Infrastructure" Version="4.0.0" />
-    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
-    <PackageReference Include="Telegram.Bot" Version="14.10.0" />
-    <PackageReference Include="Telegram.Bot.Analyzers" Version="1.2.0" />
-    <PackageReference Include="Telegram.Bot.Extensions.Passport" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TL.TelegramBots.Data.Entities\TL.TelegramBots.Data.Entities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Attributes.Http;
 using TL.Engine.SDK.Controllers;
+using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Models;
 using TL.Engine.SDK.Objects;
 
@@ -73,7 +73,7 @@ namespace TL.Engine.SDK.Services.ApiDocumentation
                                 {
                                     Name = apiprotocol.HttpMethods.FirstOrDefault(),
                                     Description = apiprotocol.UsageDescription,
-                                    ReturnableType = GetGenericTypeFullName(apiprotocol?.ReturnableType),
+                                    ReturnableType = apiprotocol?.ReturnableType.GetFullName(),
                                     Sample = $"{controller.Command}{apiprotocol.UsageSample}"
                                 };
                             })
@@ -99,29 +99,13 @@ namespace TL.Engine.SDK.Services.ApiDocumentation
                                 return new ApiPropertyModel()
                                 {
                                     Name = prop.Name,
-                                    Type = GetGenericTypeFullName(prop.PropertyType)
+                                    Type = prop.PropertyType.GetFullName()
                                 };
                             })
                             .ToList()
                     };
                 })
                 .ToList();
-        }
-
-        private string GetGenericTypeFullName(Type type)
-        {
-            if (type?.IsGenericType ?? false)
-            {
-                var genericTypesNames = new List<string>();
-                foreach (var item in type.GenericTypeArguments)
-                {
-                    genericTypesNames.Add(GetGenericTypeFullName(item));
-                }
-
-                return $"{type.Name.Split('`')[0]}<{string.Join(", ", genericTypesNames)}>";
-            }
-
-            return type?.Name;
         }
     }
 }

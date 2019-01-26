@@ -1,0 +1,27 @@
+﻿@model System.Collections.Generic.IEnumerable<TL.Engine.SDK.Integrations.Telegram.Bots.IBaseBot>
+<h1>Запущенные боты:</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Тип</th>
+            <th>Время жизни</th>
+            <th>Средний отклик</th>
+            <th>Убить</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bot in Model)
+        {
+            <tr>
+                <td><a href="https://t.me/@bot.Username">@@@bot.Username</a></td>
+                <td>@bot.GetType().Name</td>
+                <td>@bot.Uptime</td>
+                <td>@bot.PerformanceMs</td>
+                <td>
+                    <button class="btn btn-danger" onclick="kill('@bot.Username')">Убить</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

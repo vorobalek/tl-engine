@@ -1,0 +1,53 @@
+﻿using ExtCore.Data.Abstractions;
+using ExtCore.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using TL.Engine.SDK.Integrations.Telegram.Bots;
+using TL.Engine.SDK.Services.TelegramBotProvider;
+using TL.TelegramBots.Web.Areas.TelegramBots.ViewModels.Home;
+
+namespace TL.TelegramBots.Web.Areas.TelegramBots.Controllers
+{
+    public class HomeController : __TelegramBotsController__
+    {
+        ITelegramBotProviderService TelegramBotProvider { get; }
+
+        ILoggerFactory LoggerFactory { get; }
+
+        public HomeController(IStorage storage, ITelegramBotProviderService telegramBotProvider, ILoggerFactory loggerFactory) : base(storage)
+        {
+            TelegramBotProvider = telegramBotProvider;
+            LoggerFactory = loggerFactory;
+        }
+
+        public IActionResult Index()
+        {
+            return View(new IndexViewModelFactory().Create(TelegramBotProvider));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Start(IndexViewModel model)
+        {
+            var bot = ExtensionManager.GetImplementations<IBaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == model.BotType);
+            if (bot != null)
+            {
+                await TelegramBotProvider.StartAsync(Activator.CreateInstance(bot, LoggerFactory, model.Token, null) as IBaseBot);
+            }
+            return PartialView("_OnlineBots", new IndexViewModelFactory().Create(TelegramBotProvider).Bots);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Kill(string username)
+        {
+            var bot = TelegramBotProvider.GetOnline().FirstOrDefault(it => it.Username == username);
+            if (bot != null)
+            {
+                await TelegramBotProvider.StopAsync(bot);
+            }
+            return PartialView("_OnlineBots", new IndexViewModelFactory().Create(TelegramBotProvider).Bots);
+        }
+    }
+}

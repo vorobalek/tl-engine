@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using TL.Engine.SDK.Services.ApiDocumentation;
+using TL.Engine.SDK.Services.TelegramBotProvider;
 
 namespace TL.Engine.SDK.Actions
 {
@@ -12,6 +13,7 @@ namespace TL.Engine.SDK.Actions
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
             serviceCollection.AddTransient<IApiDocumentationService, ApiDocumentationService>();
+            serviceCollection.AddTransient<ITelegramBotProviderService, TelegramBotProviderService>();
         }
     }
 }
