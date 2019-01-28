@@ -1,15 +1,15 @@
 ﻿@model System.Collections.Generic.IEnumerable<TL.Engine.SDK.Integrations.Telegram.Bots.IBaseBot>
 <h1>Запущенные боты:</h1>
 <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead>
+    <table class="table table-bordered table-hover table-responsive-stack">
+        <thead class="thead-light">
             <tr>
-                <th>#</th>
-                <th>Имя</th>
-                <th>Тип</th>
-                <th>Время жизни</th>
-                <th>Средний отклик</th>
-                <th>Убить</th>
+                <th style="flex-basis: 5%">#</th>
+                <th style="flex-basis: 15%">Имя</th>
+                <th style="flex-basis: 25%">Тип</th>
+                <th style="flex-basis: 25%">Время жизни</th>
+                <th style="flex-basis: 15%">Средний отклик</th>
+                <th style="flex-basis: 15%">Убить</th>
             </tr>
         </thead>
         <tbody>
@@ -18,12 +18,12 @@
                 foreach (var bot in Model)
                 {
                     <tr>
-                        <th scope="row">@i</th>
-                        <td><a href="https://t.me/@bot.Username">@@@bot.Username</a></td>
-                        <td>@bot.GetType().Name</td>
-                        <td>@bot.Uptime.Days д. @bot.Uptime.Hours ч. @bot.Uptime.Minutes м. @bot.Uptime.Seconds с.</td>
-                        <td>@bot.PerformanceMs</td>
-                        <td>
+                        <td style="flex-basis: 5%">@i</td>
+                        <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
+                        <td style="flex-basis: 25%">@bot.GetType().Name</td>
+                        <td style="flex-basis: 25%">@bot.Uptime.Days д. @bot.Uptime.Hours ч. @bot.Uptime.Minutes м. @bot.Uptime.Seconds с.</td>
+                        <td style="flex-basis: 15%">@bot.PerformanceMs</td>
+                        <td style="flex-basis: 15%">
                             <button class="btn btn-danger" onclick="kill('@bot.Username')">Убить</button>
                         </td>
                     </tr>
