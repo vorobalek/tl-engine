@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Integrations\Views\**;Areas\Integrations\Styles\**;Areas\Integrations\Scripts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Areas\Integrations\ViewModels\Home\Index.cshtml" />
+    <None Remove="Areas\Integrations\Views\Home\Index.cshtml" />
+    <None Remove="Areas\Integrations\Views\Home\_OnlineBots.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TL.Integrations.Data\TL.Integrations.Data.csproj" />
+    <ProjectReference Include="..\TL.Integrations.Telegram\TL.Integrations.Telegram.csproj" />
+  </ItemGroup>
+
+</Project>
