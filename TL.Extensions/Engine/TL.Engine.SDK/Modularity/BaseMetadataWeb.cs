@@ -5,12 +5,14 @@ namespace TL.Engine.SDK.Modularity
 {
     public abstract class BaseMetadataWeb : BaseMetadata
     {
-        public abstract IEnumerable<StyleItem> StyleItems { get; }
+        public abstract IEnumerable<LinkItem> NavbarItems { get; }
 
         public abstract IEnumerable<ScriptItem> ScriptItems { get; }
 
-        public abstract IEnumerable<MenuItem> MenuItems { get; }
+        public abstract IEnumerable<LinkItem> SidebarItems { get; }
 
-        public abstract IEnumerable<NavItem> NavItems { get; }
+        public abstract IEnumerable<StyleItem> StyleItems { get; }
+
+        public abstract IEnumerable<LinkItem> UserNavbarItems { get; }
     }
 }

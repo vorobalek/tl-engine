@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -85,18 +86,21 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         private DateTime StartTime { get; set; }
 
-        private TimeSpan RequestSumaryTime { get; set; }
+        private TimeSpan[] RequestSumaryTime { get; set; } = new TimeSpan[10];
 
         private int RequestSumaryCount { get; set; }
+
+        private int RequestSumaryCountTemp { get; set; }
 
         private Thread WorkThread { get; set; }
 
         public TimeSpan Uptime => DateTime.Now - StartTime;
 
-        public double PerformanceMs => RequestSumaryTime.TotalMilliseconds / RequestSumaryCount;
+        public double PerformanceMs => RequestSumaryTime.Sum(it => it.TotalMilliseconds) / RequestSumaryCountTemp;
 
         private void WorkProcess()
         {
+            int i = 0;
             while (IsOnline)
             {
                 if (MessagesQueue.IsEmpty)
@@ -109,8 +113,9 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
                 Process();
                 var stop = DateTime.Now;
 
-                RequestSumaryTime += (stop - start);
+                RequestSumaryTime[++i % 10] = (stop - start);
                 ++RequestSumaryCount;
+                RequestSumaryCountTemp = i;
             }
         }
     }

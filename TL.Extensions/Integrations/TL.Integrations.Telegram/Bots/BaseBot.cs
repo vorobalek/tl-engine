@@ -24,8 +24,8 @@ namespace TL.Integrations.Telegram.Bots
         {
             Logger = loggerFactory.CreateLogger(GetType());
 
-            CommandHandler = new HCommand(this).ImportBaseMethods<Engine.SDK.Integrations.Telegram.Bots.BaseBot>();
-            MessageHandler = new HMessage(this).ImportBaseMethods<Engine.SDK.Integrations.Telegram.Bots.BaseBot>();
+            CommandHandler = new HCommand(this).ImportBaseMethods<BaseBot>();
+            MessageHandler = new HMessage(this).ImportBaseMethods<BaseBot>();
 
             Logger.TLogInformation($"Бот {name} сконфигурирован.");
         }

@@ -15,7 +15,7 @@ namespace TL.Account.Web
 
         public override string Authors => "Alexey Vorobev";
 
-        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
+        public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
         };
 
@@ -23,12 +23,16 @@ namespace TL.Account.Web
         {
         };
 
-        public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
+        public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new MenuItem("/Account/Profile", "Публичная страница", int.MinValue, new string[] { "user" }),
+            new LinkItem("/Account/Profile", "Публичная страница", int.MinValue, new string[] { "user" }),
         };
 
-        public override IEnumerable<NavItem> NavItems => new NavItem[]
+        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
+        {
+        };
+
+        public override IEnumerable<LinkItem> UserNavbarItems => new LinkItem[]
         {
         };
     }

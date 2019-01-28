@@ -22,10 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Shared\Components\UNav\Default.cshtml" />
-    <None Remove="Views\Shared\Components\Nav\Default.cshtml" />
-    <None Remove="Views\Shared\_UNav.cshtml" />
-    <None Remove="Views\Shared\_UNavItem.cshtml" />
+    <None Remove="Views\Shared\Components\UserNavbar\Default.cshtml" />
+    <None Remove="Views\Shared\Components\Navbar\Default.cshtml" />
+    <None Remove="Views\Shared\_UserNavbar.cshtml" />
+    <None Remove="Views\Shared\_UserNavbarItem.cshtml" />
     <None Remove="Views\SystemActiveModules\Index.cshtml" />
   </ItemGroup>
 

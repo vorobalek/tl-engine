@@ -14,6 +14,8 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
 
         public static List<IBaseBot> OnlineBots { get; } = new List<IBaseBot>();
 
+        public static List<string> CandidateBots { get; } = new List<string>();
+
         public TelegramBotProviderService(ILogger<TelegramBotProviderService> logger)
         {
             Logger = logger;
@@ -30,17 +32,24 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
 
         public async Task StartAsync(IBaseBot bot)
         {
-            if (OnlineBots.FirstOrDefault(it => it.Token == bot.Token) == null)
+            if (OnlineBots.FirstOrDefault(it => it.Token == bot.Token) == null && !CandidateBots.Contains(bot.Token))
             {
+                CandidateBots.Add(bot.Token);
                 await bot.StartAsync();
                 OnlineBots.Add(bot);
+                CandidateBots.RemoveAll(it => it == bot.Token);
             }
         }
 
         public async Task StopAsync(IBaseBot bot)
         {
-            OnlineBots.RemoveAll(it => it.Token == bot.Token);
-            await bot.StopAsync();
+            if (!CandidateBots.Contains(bot.Token))
+            {
+                CandidateBots.Add(bot.Token);
+                OnlineBots.RemoveAll(it => it.Token == bot.Token);
+                await bot.StopAsync();
+                CandidateBots.RemoveAll(it => it == bot.Token);
+            }
         }
     }
 }

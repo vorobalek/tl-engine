@@ -13,7 +13,7 @@ namespace TL.Integrations.Web
         public override string Description =>
                 $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 
-        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
+        public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
         };
 
@@ -21,12 +21,16 @@ namespace TL.Integrations.Web
         {
         };
 
-        public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
+        public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new MenuItem("/Integrations/Telegram", "Интеграция с Telegram", 1000, new[] { "sa" })
+            new LinkItem("/Integrations/Telegram", "Интеграция с Telegram", 1000, new[] { "sa" })
         };
 
-        public override IEnumerable<NavItem> NavItems => new NavItem[]
+        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
+        {
+        };
+
+        public override IEnumerable<LinkItem> UserNavbarItems => new LinkItem[]
         {
         };
     }

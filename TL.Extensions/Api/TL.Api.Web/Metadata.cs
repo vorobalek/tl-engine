@@ -15,21 +15,25 @@ namespace TL.Api.Web
 
         public override string Authors => "Alexey Vorobev";
 
-        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
+        public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
+            new LinkItem("/ApiHelp", "Api", 1000),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
         {
         };
 
-        public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
+        public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
         };
 
-        public override IEnumerable<NavItem> NavItems => new NavItem[]
+        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
         {
-            new NavItem("/ApiHelp", "Api", 1000),
+        };
+
+        public override IEnumerable<LinkItem> UserNavbarItems => new LinkItem[]
+        {
         };
     }
 }

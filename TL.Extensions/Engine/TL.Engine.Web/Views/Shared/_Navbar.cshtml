@@ -1,0 +1,10 @@
+﻿@model TL.Engine.Web.ViewModels.Shared.LinksViewModel
+
+<ul class="navbar-nav mr-auto">
+    @foreach (var item in this.Model.Items)
+    {
+        <li class="nav-item">
+            <partial name="_NavbarItem" model="@item" />
+        </li>
+    }
+</ul>

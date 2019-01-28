@@ -1,18 +1,21 @@
-﻿@using System.Security.Claims;
-
-@{
+﻿@{
     Layout = "~/Views/Shared/_SafeLayout.cshtml";
 }
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm mb-5 rounded" style="position:absolute">
     <a class="navbar-brand brandlabel" href="~/">
         <img src="~/Styles/images/logo_tl.ico" width="40" height="40" class="d-inline-block align-top" alt="">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userNavbarSupportedContent" aria-controls="userNavbarSupportedContent" aria-expanded="false" aria-label="Toggle user navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        @await Component.InvokeAsync("Nav")
-        @await Component.InvokeAsync("UNav", new { roles = User.Claims.Where(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Select(c => c.Value) })
+        @await Component.InvokeAsync("Navbar")
+    </div>
+    <div class="collapse navbar-collapse" id="userNavbarSupportedContent">
+        @await Component.InvokeAsync("UserNavbar")
     </div>
 </nav>
 <br />
@@ -20,13 +23,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
-                @await Component.InvokeAsync("Menu", new { roles = User.Claims.Where(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Select(c => c.Value) })
+                @await Component.InvokeAsync("Sidebar")
             </div>
-            <div class="col-10 shadow-lg p-3 mb-5 rounded">
+            <div class="col shadow-lg p-3 mb-5 rounded">
                 @RenderBody()
                 <hr />
                 <footer>
-                    <p>&copy;@(DateTime.Now.Year > 2017 ? $"2017 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
+                    <p>&copy;@(DateTime.Now.Year > 2018 ? $"2018 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
                 </footer>
                 @{
                     var linePageGenerationTime = "Страница сгенерирована за";

@@ -29,6 +29,12 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         }
 
         [HttpPost]
+        public IActionResult Update()
+        {
+            return PartialView("_OnlineBots", new IndexViewModelFactory().Create(TelegramBotProvider).Bots);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Start(IndexViewModel model)
         {
             var bot = ExtensionManager.GetImplementations<IBaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == model.BotType);

@@ -60,5 +60,20 @@
                 }
             });
         }
+
+        update = function () {
+            $.ajax({
+                url: '/Integrations/Telegram/Update',
+                type: 'post',
+                success: function (result) {
+                    $(document).find('#onlinebots').html(result);
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            setInterval('update()', 500);
+        })
+
     </script>
 }

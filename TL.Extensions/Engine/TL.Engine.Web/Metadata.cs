@@ -13,11 +13,9 @@ namespace TL.Engine.Web
 
         public override string Authors => "Alexey Vorobev";
 
-        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
+        public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new StyleItem("//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css", int.MinValue),
-            new StyleItem("/Styles/css/site.min.css", int.MinValue),
-            new StyleItem("/Styles/images/pack/font/flaticon.min.css", int.MinValue),
+            new LinkItem("/", "Главная", int.MinValue),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
@@ -33,15 +31,21 @@ namespace TL.Engine.Web
             new ScriptItem("/Scripts/clipboard.min.js", int.MinValue),
         };
 
-        public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
+        public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new MenuItem("/Home/Exception", "Проверить исключения", 1000)
+            new LinkItem("/Home/Exception", "Проверить исключения", 0, new string[] { "sa" }),
         };
 
-        public override IEnumerable<NavItem> NavItems => new NavItem[]
+        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
         {
-            new NavItem("/", "Главная", int.MinValue),
-            new NavItem("/SystemActiveModules", "Модули", int.MinValue, new string[] { "sa" }),
+            new StyleItem("//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css", int.MinValue),
+            new StyleItem("/Styles/css/site.min.css", int.MinValue),
+            new StyleItem("/Styles/images/pack/font/flaticon.min.css", int.MinValue),
+        };
+
+        public override IEnumerable<LinkItem> UserNavbarItems => new LinkItem[]
+        {
+            new LinkItem("/SystemActiveModules", "Модули", int.MinValue, new string[] { "sa" }),
         };
     }
 }
