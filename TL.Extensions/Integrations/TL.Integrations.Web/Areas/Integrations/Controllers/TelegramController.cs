@@ -7,17 +7,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 using TL.Engine.SDK.Services.TelegramBotProvider;
-using TL.Integrations.Web.Areas.Integrations.ViewModels.Home;
+using TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram;
 
 namespace TL.Integrations.Web.Areas.Integrations.Controllers
 {
-    public class HomeController : __IntegrationsController__
+    public class TelegramController : __IntegrationsController__
     {
         ITelegramBotProviderService TelegramBotProvider { get; }
 
         ILoggerFactory LoggerFactory { get; }
 
-        public HomeController(IStorage storage, ITelegramBotProviderService telegramBotProvider, ILoggerFactory loggerFactory) : base(storage)
+        public TelegramController(IStorage storage, ITelegramBotProviderService telegramBotProvider, ILoggerFactory loggerFactory) : base(storage)
         {
             TelegramBotProvider = telegramBotProvider;
             LoggerFactory = loggerFactory;

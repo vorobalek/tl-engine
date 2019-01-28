@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Areas\Integrations\ViewModels\Home\Index.cshtml" />
-    <None Remove="Areas\Integrations\Views\Home\Index.cshtml" />
-    <None Remove="Areas\Integrations\Views\Home\_OnlineBots.cshtml" />
+    <None Remove="Areas\Integrations\ViewModels\Telegram\Index.cshtml" />
+    <None Remove="Areas\Integrations\Views\Telegram\Index.cshtml" />
+    <None Remove="Areas\Integrations\Views\Telegram\_OnlineBots.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

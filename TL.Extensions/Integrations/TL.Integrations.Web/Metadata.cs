@@ -23,7 +23,7 @@ namespace TL.Integrations.Web
 
         public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
         {
-            new MenuItem("/Integrations", "Интеграция с Telegram", 1000, new[] { "sa" })
+            new MenuItem("/Integrations/Telegram", "Интеграция с Telegram", 1000, new[] { "sa" })
         };
 
         public override IEnumerable<NavItem> NavItems => new NavItem[]

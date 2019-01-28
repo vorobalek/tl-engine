@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 
-namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Home
+namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram
 {
     public class IndexViewModel
     {

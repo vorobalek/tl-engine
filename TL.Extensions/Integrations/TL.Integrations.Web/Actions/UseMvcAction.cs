@@ -15,7 +15,7 @@ namespace TL.Integrations.Web.Actions
                name: "Integrations.Web",
                template: "Integrations/{controller}/{action}/{id?}",
                constraints: new { area = "Integrations" },
-               defaults: new { area = "Integrations", controller = "Home", action = "Index" }
+               defaults: new { area = "Integrations", controller = "Telegram", action = "Index" }
            );
         }
     }

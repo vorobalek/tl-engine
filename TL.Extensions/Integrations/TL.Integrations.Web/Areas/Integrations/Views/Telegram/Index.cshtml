@@ -1,4 +1,4 @@
-﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Home.IndexViewModel
+﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.IndexViewModel
 
 <h1>Запустить бота:</h1>
 <form id="formbot" asp-anti-forgery="true" class="needs-validation" novalidate>
@@ -41,7 +41,7 @@
 
         start = function (args) {
             $.ajax({
-                url: '/Integrations/Home/Start?' + args,
+                url: '/Integrations/Telegram/Start?' + args,
                 type: 'post',
                 success: function (result) {
                     $(document).find('#onlinebots').html(result);
@@ -53,7 +53,7 @@
 
         kill = function (username) {
             $.ajax({
-                url: "/Integrations/Home/Kill?username=" + username,
+                url: "/Integrations/Telegram/Kill?username=" + username,
                 type: "post",
                 success: function (result) {
                     $(document).find('#onlinebots').html(result);
