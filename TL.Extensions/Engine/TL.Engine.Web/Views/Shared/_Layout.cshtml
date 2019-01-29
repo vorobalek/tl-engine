@@ -2,56 +2,75 @@
     Layout = "~/Views/Shared/_SafeLayout.cshtml";
 }
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm mb-5 rounded" style="position:absolute">
-    <a class="navbar-brand brandlabel" href="~/">
+    <a class="navbar-brand brandlabel col-auto" href="~/">
         <img src="~/Styles/images/logo_tl.ico" width="40" height="40" class="d-inline-block align-top" alt="">
     </a>
-    <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="btn btn-light navbar-toggler mr-0" type="button" data-toggle="collapse" data-target="#sidebarSupportedContent"
+            aria-controls="sidebarSupportedContent" aria-expanded="true" aria-label="Toggle sidebar">
+        <span id="btn_sidebarSupportedContent" class="glyphicon glyphicon-menu-down"></span>
+    </button>
+    <button class="btn btn-light navbar-toggler mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="glyphicon glyphicon-menu-hamburger"></span>
     </button>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userNavbarSupportedContent" aria-controls="userNavbarSupportedContent" aria-expanded="false" aria-label="Toggle user navigation">
+    <button class="btn btn-light navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#userNavbarSupportedContent"
+            aria-controls="userNavbarSupportedContent" aria-expanded="false" aria-label="Toggle user navigation">
         <span class="glyphicon glyphicon-user"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse col" id="navbarSupportedContent">
         @await Component.InvokeAsync("Navbar")
     </div>
-    <div class="collapse navbar-collapse" id="userNavbarSupportedContent">
+    <div class="collapse navbar-collapse col-auto" id="userNavbarSupportedContent">
         @await Component.InvokeAsync("UserNavbar")
     </div>
 </nav>
 <br />
 <div class="container-fluid body-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2">
-                @await Component.InvokeAsync("Sidebar")
-            </div>
-            <div class="col shadow-lg p-3 mb-5 rounded">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p>&copy;@(DateTime.Now.Year > 2018 ? $"2018 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
-                </footer>
-                @{
-                    var linePageGenerationTime = "Страница сгенерирована за";
-                    var lineMs = "мс";
-                    var line = $"";
-                    var Start = Context.Items.ContainsKey("RequestStartedOn") ? Context.Items["RequestStartedOn"] as DateTime? : DateTime.MinValue;
-                    var Finish = DateTime.Now;
-                    <div class="text-center">
-                        <p class="help-block" style="font-size: 80%">
-                            UTC @Finish.ToUniversalTime()
-                            <br />
-                            LTC @Finish.ToLocalTime()
-                            <br />
-                            @linePageGenerationTime
-                            <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
-                        </p>
-                    </div>
-                }
-            </div>
+    <div class="row">
+        <div id="sidebarSupportedContent" class="col-auto collapse dont-collapse-sm">
+            @await Component.InvokeAsync("Sidebar")
+        </div>
+        <div class="col shadow-lg p-3 mb-5 rounded">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy;@(DateTime.Now.Year > 2018 ? $"2018 - {DateTime.Now.Year}" : $"{DateTime.Now.Year}") TL</p>
+            </footer>
+            @{
+                var linePageGenerationTime = "Страница сгенерирована за";
+                var lineMs = "мс";
+                var line = $"";
+                var Start = Context.Items.ContainsKey("RequestStartedOn") ? Context.Items["RequestStartedOn"] as DateTime? : DateTime.MinValue;
+                var Finish = DateTime.Now;
+                <div class="text-center">
+                    <p class="help-block" style="font-size: 80%">
+                        UTC @Finish.ToUniversalTime()
+                        <br />
+                        LTC @Finish.ToLocalTime()
+                        <br />
+                        @linePageGenerationTime
+                        <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
+                    </p>
+                </div>
+            }
         </div>
     </div>
 </div>
 @section Scripts {
     @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).find('#sidebarSupportedContent')
+                .on('hide.bs.collapse', function () {
+                    $('#btn_sidebarSupportedContent')
+                        .removeClass('glyphicon-menu-up')
+                        .addClass('glyphicon-menu-down')
+                })
+                .on('show.bs.collapse', function () {
+                    $('#btn_sidebarSupportedContent')
+                        .removeClass('glyphicon-menu-down')
+                        .addClass('glyphicon-menu-up')
+                })
+        })
+    </script>
 }

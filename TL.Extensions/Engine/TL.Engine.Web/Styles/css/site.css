@@ -6,6 +6,14 @@
     src: url('../fonts/SansForgetica-Regular.otf') format('opentype');
 }
 
+@media (min-width: 992px) {
+    .collapse.dont-collapse-sm {
+        display: block;
+        height: auto !important;
+        visibility: visible;
+    }
+}
+
 .table-responsive-stack tr {
     display: -webkit-box;
     display: -ms-flexbox;

@@ -26,7 +26,7 @@
         })
 
         function formatResult(result) {
-            var divResult = $('<div>');
+            var divResult = $('<div>')
             $.each(result.methods, function (key, method) {
                 formatMethod(method).appendTo(divResult);
             })
@@ -44,7 +44,7 @@
             if (!result.isRelevant) {
                 divClass = 'alert-danger';
                 spanClass = 'glyphicon-exclamation-sign';
-                strongText = '  Устаревшее API v"'+result.lastUpdate+'"';
+                strongText = '  Устаревшее API v"' + result.lastUpdate + '"';
             } else {
                 divClass = 'alert-success';
                 spanClass = 'glyphicon-ok-sign';
@@ -72,27 +72,32 @@
                     .text(method.command)
                 )
                 .append($('<p>').text(method.description))
-                .append($('<table>')
-                    .addClass('table')
-                    .addClass('table-bordered')
-                    .addClass('table-hover')
-                    .append($('<thead>')
-                        .append($('<tr>')
-                            .append($('<th>')
-                                .text("Протокол")
-                            )
-                            .append($('<th>')
-                                .text("Описание")
-                            )
-                            .append($('<th>')
-                                .text("Возвращаемый тип")
-                            )
-                            .append($('<th>')
-                                .text("Пример")
+                .append($('<div>')
+                    .addClass('table-responsive')
+                    .append($('<table>')
+                        .addClass('table')
+                        .addClass('table-bordered')
+                        .addClass('table-hover')
+                        .addClass('table-responsive-stack')
+                        .append($('<thead>')
+                            .addClass('thead-light')
+                            .append($('<tr>')
+                                .append($('<th style="flex-basis: 25%">')
+                                    .text("Протокол")
+                                )
+                                .append($('<th style="flex-basis: 25%">')
+                                    .text("Описание")
+                                )
+                                .append($('<th style="flex-basis: 25%">')
+                                    .text("Возвращаемый тип")
+                                )
+                                .append($('<th style="flex-basis: 25%">')
+                                    .text("Пример")
+                                )
                             )
                         )
+                        .append(tbody)
                     )
-                    .append(tbody)
                 )
                 .append($('<hr>'))
         }
@@ -104,16 +109,16 @@
                         window.open('/api/' + protocol.sample);
                     }
                 })
-                .append($('<td>')
+                .append($('<td style="flex-basis: 25%">')
                     .text(protocol.name)
                 )
-                .append($('<td>')
+                .append($('<td style="flex-basis: 25%">')
                     .text(protocol.description)
                 )
-                .append($('<td>')
+                .append($('<td style="flex-basis: 25%">')
                     .text(protocol.returnableType)
                 )
-                .append($('<td>')
+                .append($('<td style="flex-basis: 25%">')
                     .text(protocol.sample)
                 )
         }
