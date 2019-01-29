@@ -29,12 +29,10 @@ $(document).ready(function () {
         if ($(window).width() < 768) {
             $(".table-responsive-stack").each(function (i) {
                 $(this).find(".table-responsive-stack-thead").show();
-                $(this).find('thead').hide();
             });
         } else {
             $(".table-responsive-stack").each(function (i) {
                 $(this).find(".table-responsive-stack-thead").hide();
-                $(this).find('thead').show();
             });
         }
     }
