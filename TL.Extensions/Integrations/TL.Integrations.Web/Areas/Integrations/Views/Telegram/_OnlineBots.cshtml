@@ -6,9 +6,10 @@
             <tr>
                 <th style="flex-basis: 5%">#</th>
                 <th style="flex-basis: 15%">Имя</th>
-                <th style="flex-basis: 25%">Тип</th>
-                <th style="flex-basis: 25%">Время жизни</th>
-                <th style="flex-basis: 15%">Средний отклик</th>
+                <th style="flex-basis: 15%">Тип</th>
+                <th style="flex-basis: 20%">Время жизни</th>
+                <th style="flex-basis: 15%">Ответов</th>
+                <th style="flex-basis: 15%">Задержка</th>
                 <th style="flex-basis: 15%">Убить</th>
             </tr>
         </thead>
@@ -20,8 +21,9 @@
                     <tr>
                         <td style="flex-basis: 5%">@i</td>
                         <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
-                        <td style="flex-basis: 25%">@bot.GetType().Name</td>
-                        <td style="flex-basis: 25%">@bot.Uptime.Days д. @bot.Uptime.Hours ч. @bot.Uptime.Minutes м. @bot.Uptime.Seconds с.</td>
+                        <td style="flex-basis: 15%">@bot.GetType().Name</td>
+                        <td style="flex-basis: 20%">@bot.Uptime.Days д. @bot.Uptime.Hours ч. @bot.Uptime.Minutes м. @bot.Uptime.Seconds с.</td>
+                        <td style="flex-basis: 15%">@bot.RequestSumaryCount</td>
                         <td style="flex-basis: 15%">@bot.PerformanceMs</td>
                         <td style="flex-basis: 15%">
                             <button class="btn btn-danger" onclick="kill('@bot.Username')">Убить</button>

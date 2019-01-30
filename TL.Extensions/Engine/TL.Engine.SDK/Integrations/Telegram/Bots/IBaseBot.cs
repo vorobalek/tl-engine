@@ -14,6 +14,12 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         bool IsOnline { get; }
 
+        int RequestSumaryCount { get; set; }
+
+        double PerformanceMs { get; }
+
+        TimeSpan Uptime { get; }
+
         void Send(IMessage message);
 
         Task SendAsync(IMessage message);
@@ -21,9 +27,5 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
         Task StartAsync();
 
         Task StopAsync();
-
-        TimeSpan Uptime { get; }
-
-        double PerformanceMs { get; }
     }
 }

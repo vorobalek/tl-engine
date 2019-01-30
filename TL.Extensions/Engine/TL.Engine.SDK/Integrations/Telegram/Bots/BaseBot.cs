@@ -18,6 +18,8 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
             RetryPeriod = retryPeriod;
             CancelTimeout = cancelTimeout;
             TgClient = new TelegramBotClient(token);
+
+            RequestSumaryCount = 0;
         }
 
         public virtual string Token { get; }
@@ -27,6 +29,12 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
         public virtual string NativeName { get; }
 
         public bool IsOnline { get; protected set; }
+
+        public int RequestSumaryCount { get; set; } = 0;
+
+        public double PerformanceMs => RequestSumaryTime.Sum(it => it.TotalMilliseconds) / RequestSumaryCountTemp;
+
+        public TimeSpan Uptime => DateTime.Now - StartTime;
 
         public abstract void Send(IMessage message);
 
@@ -88,19 +96,12 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         private TimeSpan[] RequestSumaryTime { get; set; } = new TimeSpan[10];
 
-        private int RequestSumaryCount { get; set; }
-
         private int RequestSumaryCountTemp { get; set; }
 
         private Thread WorkThread { get; set; }
 
-        public TimeSpan Uptime => DateTime.Now - StartTime;
-
-        public double PerformanceMs => RequestSumaryTime.Sum(it => it.TotalMilliseconds) / RequestSumaryCountTemp;
-
         private void WorkProcess()
         {
-            int i = 0;
             while (IsOnline)
             {
                 if (MessagesQueue.IsEmpty)
@@ -113,9 +114,8 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
                 Process();
                 var stop = DateTime.Now;
 
-                RequestSumaryTime[++i % 10] = (stop - start);
-                ++RequestSumaryCount;
-                RequestSumaryCountTemp = i;
+                RequestSumaryTime[++RequestSumaryCount % 10] = (stop - start);
+                RequestSumaryCountTemp = Math.Min(RequestSumaryCount, 10);
             }
         }
     }
