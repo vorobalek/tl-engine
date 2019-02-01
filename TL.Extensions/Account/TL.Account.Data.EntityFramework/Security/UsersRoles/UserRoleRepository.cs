@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
 
