@@ -13,21 +13,25 @@ namespace $safeprojectname$
         public override string Description =>
                 $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 
-        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
+        public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
+            new LinkItem("/$saferootprojectname$", "$saferootprojectname$", 1000),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
         {
         };
 
-        public override IEnumerable<MenuItem> MenuItems => new MenuItem[]
+        public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
         };
 
-        public override IEnumerable<NavItem> NavItems => new NavItem[]
+        public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
         {
-                new NavItem("/$saferootprojectname$", "$saferootprojectname$", 1000),
+        };
+
+        public override IEnumerable<LinkItem> UserNavbarItems => new LinkItem[]
+        {
         };
     }
 }
