@@ -22,7 +22,8 @@ namespace TL.Account.Web.Areas.Account.Controllers
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username),
+                new Claim(nameof(Data.Entities.Security.User.Id), user.Id.ToString())
             };
 
             var roles = Storage.GetRepository<IUserRoleRepository>().GetByUser(user);

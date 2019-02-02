@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using TL.Account.Data.Entities.Security;
+using TL.Integrations.Data.Entities.Telegram.Relationships;
 
 namespace TL.Integrations.Data.Entities.Telegram.Security
 {
@@ -19,6 +20,8 @@ namespace TL.Integrations.Data.Entities.Telegram.Security
 
         public virtual IEnumerable<TgUserRole> UserRoles { get; set; }
 
+        public virtual IEnumerable<TgConnection> Connections { get; set; }
+
         public Guid? UserId { get; set; }
 
         public virtual User User { get; set; }
@@ -26,6 +29,7 @@ namespace TL.Integrations.Data.Entities.Telegram.Security
         public TgUser()
         {
             UserRoles = new HashSet<TgUserRole>();
+            Connections = new HashSet<TgConnection>();
         }
     }
 }

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TL.Integrations.Data.Abstractions.Telegram;
+using TL.Integrations.Data.Abstractions.Telegram.Security;
 using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsers

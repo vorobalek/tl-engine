@@ -27,7 +27,8 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 
                 CallbackQueryId = callbackQuery.Id,
 
-                Text = $"‼️ <b>Разработчики ещё не запилили это!</b>",
+                Text = $"‼️ <b>Разработчики ещё не запилили это!</b>\r\n\r\n" +
+                $"Нет, мы не ленивые, мы работаем. Если вы видите это сообщение, значит скоро тут появится новый функционал. (Разработчик №0)",
                 ReplyMarkup = new InlineKeyboardMarkup(new[]
                 {
                     new[]

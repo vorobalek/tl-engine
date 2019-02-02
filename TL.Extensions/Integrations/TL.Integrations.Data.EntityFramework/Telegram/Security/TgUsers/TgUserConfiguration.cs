@@ -19,6 +19,12 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsers
             builder
                 .HasOne(e => e.User)
                 .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasMany(e => e.Connections)
+                .WithOne(e => e.User)
                 .HasForeignKey(e => e.UserId);
 
             builder

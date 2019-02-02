@@ -128,6 +128,7 @@ namespace TL.Integrations.Telegram.Bots
                         MessageType = MessageType.Text,
                         ChatId = e.Update.GetSenderChatId(),
                         Text = $"‼️ <b>Разработчики ещё не запилили это!</b>\r\n\r\n" +
+                        $"Нет, мы не ленивые, мы работаем. Если вы видите это сообщение, значит скоро тут появится новый функционал. (Разработчик №0)\r\n\r\n" +
                         $"Тип взаимодействия <b>{e.Update.GetGenericTypeString()}</b> не поддерживается или для него не найден подходящий хэндлер.\r\n\r\n" +
                         $"🖖🏻 <b>Я вас не понимаю, но вот список команд, которые я в состоянии понять</b>\r\n\r\n{commands}",
                         ParseMode = ParseMode.Html

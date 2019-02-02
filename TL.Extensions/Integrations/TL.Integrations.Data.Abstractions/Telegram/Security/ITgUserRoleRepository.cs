@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using TL.Integrations.Data.Entities.Telegram.Security;
 
-namespace TL.Integrations.Data.Abstractions.Telegram
+namespace TL.Integrations.Data.Abstractions.Telegram.Security
 {
     public interface ITgUserRoleRepository : IRepository
     {

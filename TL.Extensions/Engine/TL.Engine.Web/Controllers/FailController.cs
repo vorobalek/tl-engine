@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
+using System.Linq;
+using TL.Account.Data.Abstractions.Security;
+using TL.Account.Data.Extensions;
 using TL.Engine.Data.Abstractions.Reports;
 using TL.Engine.Data.Entities.Reports;
 using TL.Engine.Web.Models;
@@ -62,6 +65,12 @@ namespace TL.Engine.Web.Controllers
                     Message = model.Message,
                     StackTrace = model.StackTrace
                 };
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    report.User = User.GetUser(Storage);
+                }
+
                 Storage.GetRepository<IExceptionReportRepository>().Add(report);
                 Storage.Save();
                 model.StatusMessage = "Спасибо за ваш фидбек!";
@@ -70,7 +79,7 @@ namespace TL.Engine.Web.Controllers
             {
                 ModelState.AddModelError("", "Одно или несколько полей были заполнены неверно!");
             }
-            return View("index", model);
+            return View("Index", model);
         }
     }
 }

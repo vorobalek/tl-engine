@@ -1,6 +1,7 @@
 ﻿using ExtCore.Data.Entities.Abstractions;
 using System;
 using System.ComponentModel.DataAnnotations;
+using TL.Account.Data.Entities.Security;
 
 namespace TL.Engine.Data.Entities.Reports
 {
@@ -22,6 +23,10 @@ namespace TL.Engine.Data.Entities.Reports
     public class Report : IEntity
     {
         public Guid Id { get; set; }
+
+        public Guid? UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         public string Author { get; set; }
 

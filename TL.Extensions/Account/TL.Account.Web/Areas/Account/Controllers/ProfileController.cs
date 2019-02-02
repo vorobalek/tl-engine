@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using TL.Account.Data.Abstractions.Relationships;
 using TL.Account.Data.Abstractions.Security;
+using TL.Account.Data.Extensions;
 using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
@@ -34,7 +35,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
 
             var user_followers = Storage.GetRepository<ISubscriptionRepository>().Followers(user);
             var user_subscriptions = Storage.GetRepository<ISubscriptionRepository>().Subscriptions(user);
-            var requster = Storage.GetRepository<IUserRepository>().GetByUsername(User.Identity.Name);
+            var requster = User.GetUser(Storage);
 
             bool isF = false,
                 isS = false;

@@ -10,7 +10,7 @@ namespace TL.Engine.Data.EntityFramework.Reports
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
-            modelbuilder.ApplyConfiguration(new ExceptionReportConfig());
+            modelbuilder.ApplyConfiguration(new ExceptionReportConfiguration());
         }
     }
 }

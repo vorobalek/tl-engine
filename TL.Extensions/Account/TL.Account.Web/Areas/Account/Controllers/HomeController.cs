@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
+using TL.Account.Data.Extensions;
 using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
@@ -23,7 +24,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
 
         public IActionResult Index()
         {
-            var user = Storage.GetRepository<IUserRepository>().GetByUsername(HttpContext.User.Identity.Name);
+            var user = User.GetUser(Storage);
             return View(new IndexViewModel()
             {
                 Username = user.Username,
