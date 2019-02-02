@@ -6,9 +6,9 @@
     <div class="col-md-9">
         <div class="row">
             <nav class="nav">
-                <a class="nav-link" href="/ApiHelp">Введение</a>
-                <a class="nav-link" href="/ApiHelp/Methods">Методы</a>
-                <a class="nav-link" href="/ApiHelp/Objects">Возвращаемые объекты</a>
+                <a class="nav-link" href="/apihelp">Введение</a>
+                <a class="nav-link" href="/apihelp/methods">Методы</a>
+                <a class="nav-link" href="/apihelp/objects">Возвращаемые объекты</a>
             </nav>
         </div>
         <div class="row">
@@ -40,11 +40,11 @@
                 .done(function (data) {
                     if (data.ok) {
                         $.each(data.result.methods, function (key, item) {
-                            $('<a class="nav-link" href="/ApiHelp/Methods#' + getId(item) + '">' + item.command + '</a>')
+                            $('<a class="nav-link" href="/apihelp/methods#' + getId(item) + '">' + item.command + '</a>')
                                 .appendTo($('#methods'));
                         });
                         $.each(data.result.objects, function (key, item) {
-                            $('<a class="nav-link" href="/ApiHelp/Objects#' + item.name + '">' + item.name + '</a>')
+                            $('<a class="nav-link" href="/apihelp/objects#' + item.name + '">' + item.name + '</a>')
                                 .appendTo($('#objects'));
                         });
                     }

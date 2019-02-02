@@ -6,15 +6,15 @@ using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers
 {
-    [Route("/SystemHttpErrorCode")]
-    public class SystemHttpErrorCodeController : Controller
+    [Route("/error")]
+    public class ErrorController : Controller
     {
-        public SystemHttpErrorCodeController(ILogger<SystemHttpErrorCodeController> logger)
+        public ErrorController(ILogger<ErrorController> logger)
         {
             Logger = logger;
         }
 
-        public ILogger<SystemHttpErrorCodeController> Logger { get; }
+        public ILogger<ErrorController> Logger { get; }
 
         [AllowAnonymous]
         [HttpGet("{code}")]

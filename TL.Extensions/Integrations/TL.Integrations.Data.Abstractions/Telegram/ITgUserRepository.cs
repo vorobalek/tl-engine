@@ -7,6 +7,8 @@ namespace TL.Integrations.Data.Abstractions.Telegram
 {
     public interface ITgUserRepository : IRepository
     {
+        IEnumerable<TgUser> GetByAccountId(Guid id);
+
         TgUser GetById(Guid id);
 
         TgUser GetByTgId(int id);
@@ -16,7 +18,5 @@ namespace TL.Integrations.Data.Abstractions.Telegram
         void Update(TgUser user);
 
         IEnumerable<TgUser> GetAll();
-
-        IEnumerable<TgUser> GetAllReferrals(TgUser user);
     }
 }

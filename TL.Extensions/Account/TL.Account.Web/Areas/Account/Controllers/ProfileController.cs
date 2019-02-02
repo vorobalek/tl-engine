@@ -9,7 +9,7 @@ using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
 {
-    [Route("/Account/Profile")]
+    [Route("/account/profile")]
     public class ProfileController : __AccountController__
     {
         public ProfileController(IStorage storage) : base(storage)
@@ -19,7 +19,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Profile", new { username = User.Identity.Name });
+            return RedirectToAction("index", "profile", new { username = User.Identity.Name });
         }
 
         [HttpGet("{username}")]

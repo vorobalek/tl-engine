@@ -7,10 +7,10 @@ namespace TL.Engine.Data.Abstractions.Reports
 {
     public interface IExceptionReportRepository : IRepository
     {
-        IEnumerable<ExceptionReport> GetAll();
+        IEnumerable<Report> GetAll();
 
-        ExceptionReport GetById(Guid id);
+        Report GetById(Guid id);
 
-        void Add(ExceptionReport report);
+        void Add(Report report);
     }
 }

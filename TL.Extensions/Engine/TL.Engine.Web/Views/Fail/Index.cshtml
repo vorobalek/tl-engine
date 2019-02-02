@@ -2,20 +2,20 @@
 
 @model TL.Engine.Web.Models.ErrorViewModel
 @{
-    Layout = "~/Views/Shared/_SafeLayout.cshtml";
+    Layout = "~/Views/Shared/_LayoutSafe.cshtml";
     ViewData["Title"] = $"Ошибка{(string.IsNullOrWhiteSpace(Model.Message) ? "" : $" - {Model.Message}")}!";
 }
 <div class="container">
-    <partial name="_SystemPrintError" model="@Model" />
+    <partial name="_Error" model="@Model" />
     <hr />
     <partial name="_StatusMessage" model="@Model.StatusMessage" />
-    <form asp-action="ErrorReport" asp-controller="SystemInternalServerError" asp-anti-forgery="true">
+    <form asp-action="report" asp-controller="fail" asp-anti-forgery="true">
         <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
         <div class="form-group">
             <label asp-for="@Model.Author">Представьтесь</label>
             @if (string.IsNullOrWhiteSpace(Model.Author))
             {
-                <input asp-for="@Model.Author" class="form-control" placeholder="Batman" />
+                <input asp-for="@Model.Author" class="form-control" placeholder="Иванов Иван Иванович" />
             }
             else
             {
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label asp-for="@Model.Priority">Насколько это плохо?</label>
-            <select asp-for="@Model.Priority" asp-items="Html.GetEnumSelectList<ExceptionReportPriority>()" class="form-control">
+            <select asp-for="@Model.Priority" asp-items="Html.GetEnumSelectList<ReportPriority>()" class="form-control">
                 <option disabled selected>Выберте один из вариантов</option>
             </select>
             <span asp-validation-for="@Model.Priority" class="text-danger validation" />

@@ -17,7 +17,7 @@ namespace TL.Api.Web
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/ApiHelp", "Api", 1000),
+            new LinkItem("/apihelp", "Api", 1000),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]

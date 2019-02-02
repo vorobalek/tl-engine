@@ -4,9 +4,9 @@ using TL.Engine.Data.Entities.Reports;
 
 namespace TL.Engine.Data.EntityFramework.Reports
 {
-    public class ExceptionReportConfig : IEntityTypeConfiguration<ExceptionReport>
+    public class ExceptionReportConfig : IEntityTypeConfiguration<Report>
     {
-        public void Configure(EntityTypeBuilder<ExceptionReport> builder)
+        public void Configure(EntityTypeBuilder<Report> builder)
         {
             builder
                 .HasKey(e => e.Id);

@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace TL.Engine.Web.Controllers
 {
     [AllowAnonymous]
-    public class AccessDeniedController : Controller
+    public class DeniedController : Controller
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "SystemHttpErrorCode", new { code = 403 });
+            return RedirectToAction("index", "error", new { code = 403 });
         }
     }
 }

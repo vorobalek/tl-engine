@@ -13,9 +13,9 @@ namespace TL.Integrations.Web.Actions
         {
             routeBuilder.MapRoute(
                name: "Integrations.Web",
-               template: "Integrations/{controller}/{action}/{id?}",
-               constraints: new { area = "Integrations" },
-               defaults: new { area = "Integrations", controller = "Telegram", action = "Index" }
+               template: "integrations/{controller}/{action}/{id?}",
+               constraints: new { area = "integrations" },
+               defaults: new { area = "integrations", controller = "telegram", action = "index" }
            );
         }
     }

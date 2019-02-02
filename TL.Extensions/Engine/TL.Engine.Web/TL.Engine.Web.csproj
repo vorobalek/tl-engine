@@ -26,7 +26,7 @@
     <None Remove="Views\Shared\Components\Navbar\Default.cshtml" />
     <None Remove="Views\Shared\_UserNavbar.cshtml" />
     <None Remove="Views\Shared\_UserNavbarItem.cshtml" />
-    <None Remove="Views\SystemActiveModules\Index.cshtml" />
+    <None Remove="Views\Modules\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

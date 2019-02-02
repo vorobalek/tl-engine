@@ -19,12 +19,23 @@ namespace TL.Account.Data.Entities.Security
 
         public bool IsClosed { get; set; } = false;
 
+        public bool IsDeleted { get; set; } = false;
+
+        public DateTime RegistrationDate { get; set; }
+
+        public Guid? ReferrerId { get; set; }
+
+        public virtual User Referrer { get; set; }
+
+        public virtual IEnumerable<User> Referrals { get; set; }
+
         public virtual IEnumerable<UserRole> UserRoles { get; set; }
 
         public virtual IEnumerable<Subscription> Subscriptions { get; set; }
 
         public User()
         {
+            Referrals = new HashSet<User>();
             UserRoles = new HashSet<UserRole>();
             Subscriptions = new HashSet<Subscription>();
         }

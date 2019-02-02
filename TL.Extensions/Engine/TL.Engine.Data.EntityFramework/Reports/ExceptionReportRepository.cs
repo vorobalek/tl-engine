@@ -7,19 +7,19 @@ using TL.Engine.Data.Entities.Reports;
 
 namespace TL.Engine.Data.EntityFramework.Reports
 {
-    public class ExceptionReportRepository : RepositoryBase<ExceptionReport>, IExceptionReportRepository
+    public class ExceptionReportRepository : RepositoryBase<Report>, IExceptionReportRepository
     {
-        public void Add(ExceptionReport report)
+        public void Add(Report report)
         {
             dbSet.Add(report);
         }
 
-        public IEnumerable<ExceptionReport> GetAll()
+        public IEnumerable<Report> GetAll()
         {
             return dbSet.OrderBy(e => e.Date);
         }
 
-        public ExceptionReport GetById(Guid id)
+        public Report GetById(Guid id)
         {
             return dbSet.FirstOrDefault(e => e.Id == id);
         }

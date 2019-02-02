@@ -11,10 +11,10 @@ using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers
 {
-    [Route("/SystemInternalServerError")]
-    public class SystemInternalServerErrorController : Controller
+    [Route("/fail")]
+    public class FailController : Controller
     {
-        public SystemInternalServerErrorController(IStorage storage, ILogger<SystemInternalServerErrorController> logger)
+        public FailController(IStorage storage, ILogger<FailController> logger)
         {
             Storage = storage;
             Logger = logger;
@@ -22,7 +22,7 @@ namespace TL.Engine.Web.Controllers
 
         public IStorage Storage { get; }
 
-        public ILogger<SystemInternalServerErrorController> Logger { get; }
+        public ILogger<FailController> Logger { get; }
 
         [AllowAnonymous]
         public IActionResult Index()
@@ -45,7 +45,7 @@ namespace TL.Engine.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ErrorReport(ErrorViewModel model)
+        public IActionResult Report(ErrorViewModel model)
         {
             if (!string.IsNullOrWhiteSpace(model.StackTrace))
             {
@@ -53,11 +53,11 @@ namespace TL.Engine.Web.Controllers
             }
             if (ModelState.IsValid)
             {
-                var report = new ExceptionReport()
+                var report = new Report()
                 {
                     Author = model.Author,
                     Description = model.Description,
-                    Priority = model.Priority as ExceptionReportPriority?,
+                    Priority = model.Priority as ReportPriority?,
                     Date = DateTime.Now,
                     Message = model.Message,
                     StackTrace = model.StackTrace
@@ -70,7 +70,7 @@ namespace TL.Engine.Web.Controllers
             {
                 ModelState.AddModelError("", "Одно или несколько полей были заполнены неверно!");
             }
-            return View("Index", model);
+            return View("index", model);
         }
     }
 }

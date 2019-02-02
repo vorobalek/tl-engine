@@ -5,7 +5,7 @@ using TL.Engine.Web.ViewModels.SystemActiveModules;
 namespace TL.Engine.Web.Controllers
 {
     [Authorize(Roles = "sa")]
-    public class SystemActiveModulesController : Controller
+    public class ModulesController : Controller
     {
         public IActionResult Index()
         {

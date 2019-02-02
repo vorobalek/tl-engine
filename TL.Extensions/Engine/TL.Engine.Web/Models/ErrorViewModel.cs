@@ -30,7 +30,7 @@ namespace TL.Engine.Web.Models
         public string StackTrace { get; set; }
 
         [Required(ErrorMessage = "На сколько проблема критична?")]
-        public ExceptionReportPriority? Priority { get; set; }
+        public ReportPriority? Priority { get; set; }
 
         public DateTime Date { get; set; }
     }

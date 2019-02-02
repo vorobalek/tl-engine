@@ -17,9 +17,9 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsers
                  .HasForeignKey(e => e.UserId);
 
             builder
-                .HasMany(e => e.Referrals)
-                .WithOne(e => e.Referrer)
-                .HasForeignKey(e => e.ReferrerId);
+                .HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId);
 
             builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}TgUsers");

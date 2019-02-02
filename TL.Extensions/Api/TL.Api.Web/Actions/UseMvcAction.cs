@@ -13,9 +13,9 @@ namespace TL.Api.Web.Actions
         {
             routeBuilder.MapRoute(
                name: "Api.Help",
-               template: "ApiHelp/{controller}/{action}/{id?}",
-               constraints: new { area = "ApiHelp" },
-               defaults: new { area = "ApiHelp", controller = "Home", action = "Index" }
+               template: "apihelp/{controller}/{action}/{id?}",
+               constraints: new { area = "apihelp" },
+               defaults: new { area = "apihelp", controller = "home", action = "index" }
            );
         }
     }

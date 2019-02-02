@@ -16,6 +16,11 @@ namespace TL.Account.Data.EntityFramework.Security.Users
                 .IsUnique();
 
             builder
+                .HasMany(e => e.Referrals)
+                .WithOne(e => e.Referrer)
+                .HasForeignKey(e => e.ReferrerId);
+
+            builder
                 .HasMany(e => e.UserRoles)
                 .WithOne(e => e.User)
                 .HasForeignKey(e => e.UserId);

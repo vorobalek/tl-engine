@@ -14,7 +14,7 @@ namespace TL.Engine.Web.Actions
             routeBuilder.MapRoute(
                 name: "Engine.Web",
                 template: "{controller}/{action}/{id?}",
-                defaults: new { controller = "Home", action = "Index" }
+                defaults: new { controller = "home", action = "index" }
             );
         }
     }

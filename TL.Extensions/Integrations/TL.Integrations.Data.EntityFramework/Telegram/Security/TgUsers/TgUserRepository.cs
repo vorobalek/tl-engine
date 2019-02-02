@@ -16,12 +16,12 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsers
 
         public IEnumerable<TgUser> GetAll()
         {
-            return dbSet.OrderBy(e => e.RegistrationDate);
+            return dbSet.OrderBy(e => e.Username);
         }
 
-        public IEnumerable<TgUser> GetAllReferrals(TgUser user)
+        public IEnumerable<TgUser> GetByAccountId(Guid id)
         {
-            return dbSet.Where(e => e.ReferrerId == user.Id);
+            return dbSet.Where(e => e.UserId == id);
         }
 
         public TgUser GetById(Guid id)

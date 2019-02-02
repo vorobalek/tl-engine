@@ -9,7 +9,7 @@ namespace TL.Account.Web.Actions
 {
     public class ConfigureServicesAction : IConfigureServicesAction
     {
-        public int Priority => 1000;
+        public int Priority => int.MinValue;
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
@@ -21,8 +21,8 @@ namespace TL.Account.Web.Actions
                 .AddCookie(options =>
                 {
                     options.Cookie.Name = "TL.Engine.Account";
-                    options.LoginPath = "/Account/Login";
-                    options.AccessDeniedPath = "/AccessDenied";
+                    options.LoginPath = "/account/login";
+                    options.AccessDeniedPath = "/denied";
                 });
 
             serviceCollection

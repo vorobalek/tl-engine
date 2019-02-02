@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TL.Engine.Data.Entities.Reports
 {
-    public enum ExceptionReportPriority
+    public enum ReportPriority
     {
         [Display(Name = "Незначительная")]
         Minor,
@@ -19,7 +19,7 @@ namespace TL.Engine.Data.Entities.Reports
         Blocker
     }
 
-    public class ExceptionReport : IEntity
+    public class Report : IEntity
     {
         public Guid Id { get; set; }
 
@@ -31,7 +31,7 @@ namespace TL.Engine.Data.Entities.Reports
 
         public string StackTrace { get; set; }
 
-        public ExceptionReportPriority? Priority { get; set; }
+        public ReportPriority? Priority { get; set; }
 
         public DateTime Date { get; set; }
     }

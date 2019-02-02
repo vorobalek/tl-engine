@@ -41,7 +41,7 @@
 
         start = function (args) {
             $.ajax({
-                url: '/Integrations/Telegram/Start?' + args,
+                url: '/integrations/telegram/start?' + args,
                 type: 'post',
                 success: function (result) {
                     $(document).find('#onlinebots').html(result);
@@ -53,7 +53,7 @@
 
         kill = function (username) {
             $.ajax({
-                url: "/Integrations/Telegram/Kill?username=" + username,
+                url: "/integrations/telegram/kill?username=" + username,
                 type: "post",
                 success: function (result) {
                     $(document).find('#onlinebots').html(result);
@@ -63,7 +63,7 @@
 
         update = function () {
             $.ajax({
-                url: '/Integrations/Telegram/Update',
+                url: '/integrations/telegram/update',
                 type: 'post',
                 success: function (result) {
                     $(document).find('#onlinebots').html(result);
