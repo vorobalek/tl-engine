@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
@@ -11,9 +10,17 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Default
 
         public override string Description => "";
 
-        protected override Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery)
         {
-            throw new NotImplementedException();
+            var msg = (Bot as Bots.DefaultBot).GetHelloMessage();
+            msg.ChatId = callbackQuery.Message.Chat;
+            msg.IsEditMessage = true;
+            msg.EditMessageId = callbackQuery.Message.MessageId;
+            msg.CallbackQueryId = callbackQuery.Id;
+
+            await Bot.SendAsync(msg);
+
+            return new HandlerMethodResult(true);
         }
     }
 }

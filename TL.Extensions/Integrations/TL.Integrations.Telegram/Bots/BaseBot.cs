@@ -139,6 +139,7 @@ namespace TL.Integrations.Telegram.Bots
                         {
                             try
                             {
+                                Logger.TLogWarning($"Попытка отредактировать сообщение для {message.ChatId}");
                                 TgClient.EditMessageTextAsync(
                                     message.ChatId,
                                     message.EditMessageId,
@@ -147,13 +148,18 @@ namespace TL.Integrations.Telegram.Bots
                                     message.DisableWebPagePreview,
                                     message.ReplyMarkup as InlineKeyboardMarkup,
                                     message.CancellationToken).Wait();
+                                Logger.TLogWarning($"Успешно отредактировано сообщение для {message.ChatId}");
                             }
-                            catch { }
+                            catch (Exception ex)
+                            {
+                                Logger.TLogError($"Ошибка редактирования сообщения для {message.ChatId}\r\n{ex}");
+                            }
                         }
                         else
                         {
                             try
                             {
+                                Logger.TLogWarning($"Попытка отправить сообщение для {message.ChatId}");
                                 TgClient.SendTextMessageAsync(
                                     message.ChatId,
                                     message.Text,
@@ -163,14 +169,19 @@ namespace TL.Integrations.Telegram.Bots
                                     message.ReplyToMessageId,
                                     message.ReplyMarkup,
                                     message.CancellationToken).Wait();
+                                Logger.TLogWarning($"Успешно отправлено сообщение для {message.ChatId}");
                             }
-                            catch { }
+                            catch (Exception ex)
+                            {
+                                Logger.TLogError($"Ошибка отправки сообщения для {message.ChatId}\r\n{ex}");
+                            }
                         }
 
                         if (message.IsEditMessage || message.IsCallbackAnswer)
                         {
                             try
                             {
+                                Logger.TLogWarning($"Попытка отправить отклик для {message.ChatId}");
                                 TgClient.AnswerCallbackQueryAsync(
                                     message.CallbackQueryId,
                                     message.CallbackAnswerText,
@@ -178,8 +189,12 @@ namespace TL.Integrations.Telegram.Bots
                                     message.CallbackUrl,
                                     message.CallbackCacheTime,
                                     message.CancellationToken).Wait();
+                                Logger.TLogWarning($"Успешно отправлен отклик для {message.ChatId}");
                             }
-                            catch { }
+                            catch (Exception ex)
+                            {
+                                Logger.TLogError($"Ошибка отправки отклика для {message.ChatId}\r\n{ex}");
+                            }
                         }
                         break;
                     case MessageType.Photo:

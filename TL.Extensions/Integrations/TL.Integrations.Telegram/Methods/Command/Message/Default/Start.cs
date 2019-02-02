@@ -19,20 +19,10 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Default
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message)
         {
-            await Bot.SendAsync(new Engine.SDK.Integrations.Telegram.Messages.Message()
-            {
-                MessageType = global::Telegram.Bot.Types.Enums.MessageType.Text,
-                ChatId = message.Chat,
-                Text = DateTime.Now.ToString(),
+            var msg = (Bot as Bots.DefaultBot).GetHelloMessage();
+            msg.ChatId = message.Chat;
 
-                ReplyMarkup = new InlineKeyboardMarkup(new[]
-                {
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData("✅ Тык!", "some.query.request")
-                    }
-                })
-            });
+            await Bot.SendAsync(msg);
 
             return new HandlerMethodResult(true);
         }

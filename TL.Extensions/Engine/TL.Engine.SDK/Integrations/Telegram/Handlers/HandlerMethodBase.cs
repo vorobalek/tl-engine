@@ -41,7 +41,7 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
             }
             catch (Exception ex)
             {
-                return new HandlerMethodResult(false, $"{Command}: {ex}");
+                return new HandlerMethodResult(false, "", $"{Command}: {ex}");
             }
         }
     }
