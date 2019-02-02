@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Default
@@ -22,7 +23,15 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Default
             {
                 MessageType = global::Telegram.Bot.Types.Enums.MessageType.Text,
                 ChatId = message.Chat,
-                Text = DateTime.Now.ToString()
+                Text = DateTime.Now.ToString(),
+
+                ReplyMarkup = new InlineKeyboardMarkup(new[]
+                {
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData("✅ Тык!", "some.query.request")
+                    }
+                })
             });
 
             return new HandlerMethodResult(true);

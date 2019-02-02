@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot.Args;
@@ -16,8 +17,6 @@ namespace TL.Integrations.Telegram.Bots
     {
         public virtual IHandlerBase CommandHandler { get; protected set; }
 
-        public virtual IHandlerBase MessageHandler { get; protected set; }
-
         protected virtual ILogger Logger { get; }
 
         public BaseBot(ILoggerFactory loggerFactory, string token, string name = null) : base(token, name)
@@ -25,7 +24,6 @@ namespace TL.Integrations.Telegram.Bots
             Logger = loggerFactory.CreateLogger(GetType());
 
             CommandHandler = new HCommand(this).ImportBaseMethods<BaseBot>();
-            MessageHandler = new HMessage(this).ImportBaseMethods<BaseBot>();
 
             Logger.TLogInformation($"Бот {name} сконфигурирован.");
         }
@@ -77,24 +75,47 @@ namespace TL.Integrations.Telegram.Bots
 
         protected override async void TgClient_OnUpdate(object sender, UpdateEventArgs e)
         {
-            if ((await CommandHandler.ExecuteAsync(e.Update)).Ok)
+            var hresult = await CommandHandler.ExecuteAsync(e.Update);
+            if (hresult.IsOk)
             {
-                ;
-            }
-            else if ((await MessageHandler.ExecuteAsync(e.Update)).Ok)
-            {
-                ;
+                Logger.TLogInformation($"Успешно обработано обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}");
             }
             else
             {
-                await SendAsync(new Message()
+                if (hresult.IsFill)
                 {
-                    MessageType = MessageType.Text,
-                    ChatId = e.Update.GetSenderChatId(),
-                    Text = $"‼️ <b>Разработчики ещё не запилили это!</b>\r\n\r\n" +
-                    $"Тип взаимодействия <b>{e.Update.Type}:{e.Update.GetGenericTypeString()}</b> не поддерживается или для него не найден подходящий хэндлер.",
-                    ParseMode = ParseMode.Html
-                });
+                    var exceptions = string.Join("\r\n", hresult.Results.Select(r => r.Exception));
+                    await SendAsync(new Message()
+                    {
+                        MessageType = MessageType.Text,
+                        ChatId = e.Update.GetSenderChatId(),
+                        Text = $"‼️ <b>Произошла одна или несколько ошибок!</b>\r\n\r\n" +
+                        $"<pre>{exceptions}</pre>",
+                        ParseMode = ParseMode.Html
+                    });
+                    Logger.TLogError($"Произошла одна или несколько ошибок при обновлении {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}\r\n" +
+                        $"{exceptions}");
+                }
+                else
+                {
+                    var commands_arr = CommandHandler.Methods
+                        .Where(it => (!it.IsPrivate) && (it.UpdateType == UpdateType.Message))
+                        .OrderBy(it => it.Command)
+                        .Select(it => $"{it.Command} {it.Description}");
+
+                    var commands = string.Join("\r\n", commands_arr);
+
+                    await SendAsync(new Message()
+                    {
+                        MessageType = MessageType.Text,
+                        ChatId = e.Update.GetSenderChatId(),
+                        Text = $"‼️ <b>Разработчики ещё не запилили это!</b>\r\n\r\n" +
+                        $"Тип взаимодействия <b>{e.Update.GetGenericTypeString()}</b> не поддерживается или для него не найден подходящий хэндлер.\r\n\r\n" +
+                        $"🖖🏻 <b>Я вас не понимаю, но вот список команд, которые я в состоянии понять</b>\r\n\r\n{commands}",
+                        ParseMode = ParseMode.Html
+                    });
+                    Logger.TLogWarning($"Обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()} не поддерживается или для него не найден подходящий хэндлер.");
+                }
             }
         }
 
@@ -146,7 +167,7 @@ namespace TL.Integrations.Telegram.Bots
                             catch { }
                         }
 
-                        if (message.IsCallbackAnswer)
+                        if (message.IsEditMessage || message.IsCallbackAnswer)
                         {
                             try
                             {

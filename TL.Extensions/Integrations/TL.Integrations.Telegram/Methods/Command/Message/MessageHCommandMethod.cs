@@ -23,7 +23,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message
             return rules.All(rule => rule);
         }
 
-        public override async Task<IHandlerMethodResult> ExecuteAsync(Update update)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(Update update)
         {
             return await ExecuteAsync(update.Message);
         }

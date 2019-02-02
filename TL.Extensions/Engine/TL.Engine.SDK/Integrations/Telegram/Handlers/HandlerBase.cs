@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 
 namespace TL.Engine.SDK.Integrations.Telegram.Handlers
@@ -30,15 +31,18 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 
         public async Task<IHandlerResult> ExecuteAsync(Update update)
         {
-            var methods = Methods.Where(m => m.IsPolicyAcceptable(update) && m.IsRelevantMethod(update));
+            var methods = Methods
+                .Where(m => m.IsPolicyAcceptable(update) && m.IsRelevantMethod(update))
+                .OrderBy(m => m.Priority);
 
-            var results = new List<IHandlerMethodResult>();
-            if (methods.Count() > 0)
+            var results = await methods.ExecuteAsync(update);
+
+            if (results.Count() == 0)
             {
-                foreach (var method in methods)
-                {
-                    results.Add(await method.ExecuteAsync(update));
-                }
+                results = await Methods
+                    .Where(m => m.Command == "notimplemented" && m.UpdateType == update.Type)
+                    .OrderBy(m => m.Priority)
+                    .ExecuteAsync(update);
             }
 
             return new HandlerResult(results);

@@ -64,5 +64,25 @@ namespace TL.Engine.SDK.Extensions
         {
             logger.LogCritical(eventId, exception, message.AddDateTimeMs(), args);
         }
+
+        public static void TLogError(this ILogger logger, string message, params object[] args)
+        {
+            logger.LogError(message.AddDateTimeMs(), args);
+        }
+
+        public static void TLogError(this ILogger logger, EventId eventId, string message, params object[] args)
+        {
+            logger.LogError(eventId, message.AddDateTimeMs(), args);
+        }
+
+        public static void TLogError(this ILogger logger, Exception exception, string message, params object[] args)
+        {
+            logger.LogError(exception, message.AddDateTimeMs(), args);
+        }
+
+        public static void TLogError(this ILogger logger, EventId eventId, Exception exception, string message, params object[] args)
+        {
+            logger.LogError(eventId, exception, message.AddDateTimeMs(), args);
+        }
     }
 }

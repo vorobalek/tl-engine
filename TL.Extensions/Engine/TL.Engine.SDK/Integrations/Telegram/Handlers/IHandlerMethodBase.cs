@@ -11,9 +11,11 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
         IBaseBot Bot { get; }
         IHandlerBase Handler { get; set; }
 
+        int Priority { get; }
         string Command { get; }
         string Description { get; }
 
+        bool IsBlocker { get; }
         bool IsPrivate { get; }
         bool IsTerminated { get; }
 
@@ -25,6 +27,6 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 
         UpdateType UpdateType { get; }
 
-        Task<IHandlerMethodResult> ExecuteAsync(Update update);
+        Task<IHandlerMethodResult> TryExecuteAsync(Update update);
     }
 }

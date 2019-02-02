@@ -4,7 +4,9 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 {
     public interface IHandlerResult
     {
-        bool Ok { get; }
+        bool IsOk { get; }
+
+        bool IsFill { get; }
 
         IEnumerable<IHandlerMethodResult> Results { get; }
     }

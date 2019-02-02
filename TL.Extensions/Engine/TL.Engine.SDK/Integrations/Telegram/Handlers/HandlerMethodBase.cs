@@ -16,9 +16,11 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
             HandlerType = handlerType;
         }
 
+        public virtual int Priority => 1000;
         public abstract string Command { get; }
         public abstract string Description { get; }
 
+        public virtual bool IsBlocker => false;
         public virtual bool IsPrivate => false;
         public virtual bool IsTerminated => false;
 
@@ -30,6 +32,17 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 
         public abstract UpdateType UpdateType { get; }
 
-        public abstract Task<IHandlerMethodResult> ExecuteAsync(Update update);
+        protected abstract Task<IHandlerMethodResult> ExecuteAsync(Update update);
+        public virtual async Task<IHandlerMethodResult> TryExecuteAsync(Update update)
+        {
+            try
+            {
+                return await ExecuteAsync(update);
+            }
+            catch (Exception ex)
+            {
+                return new HandlerMethodResult(false, $"{Command}: {ex}");
+            }
+        }
     }
 }

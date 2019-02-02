@@ -5,5 +5,7 @@
         bool Ok { get; }
 
         string Result { get; }
+
+        string Exception { get; }
     }
 }

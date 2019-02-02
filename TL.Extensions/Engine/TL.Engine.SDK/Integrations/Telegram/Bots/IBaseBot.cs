@@ -20,6 +20,7 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         TimeSpan Uptime { get; }
 
+        [Obsolete("Использование этого метода может отрицаельно сказаться на производительности системы")]
         void Send(IMessage message);
 
         Task SendAsync(IMessage message);
