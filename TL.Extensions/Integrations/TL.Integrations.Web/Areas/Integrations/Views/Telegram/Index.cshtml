@@ -1,11 +1,15 @@
 ﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.IndexViewModel
 
+@{ 
+    ViewData["Title"] = "Telegram";
+}
+
 <h1>Запустить бота:</h1>
 <form id="formbot" asp-anti-forgery="true" class="needs-validation" novalidate>
     <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
     <div class="form-group">
         <label asp-for="@Model.Token">Токен Бота</label>
-        <input type="text" asp-for="@Model.Token" class="form-control" placeholder="Токен" required />
+        <input id="token" type="text" asp-for="@Model.Token" class="form-control" placeholder="Токен" required />
         <div class="valid-feedback">
             Ок
         </div>
@@ -15,7 +19,7 @@
     </div>
     <div class="form-group">
         <label asp-for="@Model.BotType">Тип бота, пожалуйста</label>
-        <select asp-for="@Model.BotType" asp-items="@Model.AvailableTypes" class="form-control" required>
+        <select id="botType" asp-for="@Model.BotType" asp-items="@Model.AvailableTypes" class="form-control" required>
             <option disabled selected>Выберте один из вариантов</option>
         </select>
         <div class="valid-feedback">
@@ -24,6 +28,10 @@
         <div class="invalid-feedback">
             Выберите один из вариантов
         </div>
+    </div>
+    <div class="form-group form-check">
+        <input id="quietStartup" class="form-check-input" type="checkbox" asp-for="@Model.QuietStartup" checked />
+        <label class="form-check-label" asp-for="@Model.QuietStartup">Игнорировать пропущенные обновления при запуске</label>
     </div>
 </form>
 <div class="form-group">
@@ -45,8 +53,9 @@
                 type: 'post',
                 success: function (result) {
                     $(document).find('#onlinebots').html(result);
-                    $('#formbot').find('input').val('');
-                    $('#formbot').find('select').prop('selectedIndex', 0);
+                    $('#formbot').find('#token').val('');
+                    $('#formbot').find('#botType').prop('selectedIndex', 0);
+                    $('#formbot').find('#quietStartup').prop('checked', true);
                 }
             })
         }
@@ -72,7 +81,7 @@
         }
 
         $(document).ready(function () {
-            setInterval('update()', 500);
+            var hupdate = setInterval('update()', 500);
         })
 
     </script>

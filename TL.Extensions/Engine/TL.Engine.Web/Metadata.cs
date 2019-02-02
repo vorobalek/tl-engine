@@ -26,6 +26,7 @@ namespace TL.Engine.Web
             new ScriptItem("//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js", int.MinValue),
             new ScriptItem("//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js", int.MinValue),
 
+            new ScriptItem("/Scripts/jquery.maskedinput.min.js", int.MinValue),
             new ScriptItem("/Scripts/tooltip.min.js", int.MinValue),
             new ScriptItem("/Scripts/site.min.js", int.MinValue),
             new ScriptItem("/Scripts/clipboard.min.js", int.MinValue),

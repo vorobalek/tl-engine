@@ -14,7 +14,9 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         bool IsOnline { get; }
 
-        int RequestSumaryCount { get; set; }
+        int UpdatesSummaryCount { get; }
+
+        int RequestsSummaryCount { get; }
 
         double PerformanceMs { get; }
 

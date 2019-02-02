@@ -11,15 +11,15 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 {
     public abstract class BaseBot : IBaseBot
     {
-        public BaseBot(string token, string name = null, int retryPeriod = 5000, int cancelTimeout = 5000)
+        public BaseBot(string token, string name = null, bool skipUpdates = false, int retryPeriod = 5000, int cancelTimeout = 5000)
         {
             Token = token;
             NativeName = name;
+            SkipUpdates = skipUpdates;
             RetryPeriod = retryPeriod;
             CancelTimeout = cancelTimeout;
-            TgClient = new TelegramBotClient(token);
 
-            RequestSumaryCount = 0;
+            TgClient = new TelegramBotClient(token);
         }
 
         public virtual string Token { get; }
@@ -30,9 +30,11 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         public bool IsOnline { get; protected set; }
 
-        public int RequestSumaryCount { get; set; } = 0;
+        public int UpdatesSummaryCount { get; protected set; } = 0;
 
-        public double PerformanceMs => RequestSumaryTime.Sum(it => it.TotalMilliseconds) / RequestSumaryCountTemp;
+        public int RequestsSummaryCount { get; protected set; } = 0;
+
+        public double PerformanceMs => RequestsSummaryTime.Sum(it => it.TotalMilliseconds) / RequestsSummaryCountTemp;
 
         public TimeSpan Uptime => DateTime.Now - StartTime;
 
@@ -51,6 +53,11 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
                 MessagesQueue = new ConcurrentQueue<IMessage>();
                 TgClient.OnUpdate += TgClient_OnUpdate;
                 TgClient.OnReceiveError += TgClient_OnReceiveError;
+
+                UpdatesSummaryCount = 0;
+                RequestsSummaryCount = 0;
+                RequestsSummaryCountTemp = 0;
+                RequestsSummaryTime = new TimeSpan[10];
 
                 IsOnline = true;
                 WorkThread.Start();
@@ -78,7 +85,25 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
             });
         }
 
-        protected abstract void TgClient_OnUpdate(object sender, UpdateEventArgs e);
+        protected virtual bool SkipUpdates { get; set; }
+
+        protected virtual int SkippedUpdatesCount { get; set; }
+
+        protected virtual void TgClient_OnUpdate(object sender, UpdateEventArgs e)
+        {
+            if (SkipUpdates)
+            {
+                if (UpdatesSummaryCount < SkippedUpdatesCount)
+                {
+                    ++UpdatesSummaryCount;
+                    return;
+                }
+                else
+                {
+                    SkipUpdates = false;
+                }
+            }
+        }
 
         protected abstract void TgClient_OnReceiveError(object sender, ReceiveErrorEventArgs e);
 
@@ -94,9 +119,9 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         private DateTime StartTime { get; set; }
 
-        private TimeSpan[] RequestSumaryTime { get; set; } = new TimeSpan[10];
+        private TimeSpan[] RequestsSummaryTime { get; set; } = new TimeSpan[10];
 
-        private int RequestSumaryCountTemp { get; set; }
+        private int RequestsSummaryCountTemp { get; set; }
 
         private Thread WorkThread { get; set; }
 
@@ -114,8 +139,8 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
                 Process();
                 var stop = DateTime.Now;
 
-                RequestSumaryTime[++RequestSumaryCount % 10] = (stop - start);
-                RequestSumaryCountTemp = Math.Min(RequestSumaryCount, 10);
+                RequestsSummaryTime[++RequestsSummaryCount % 10] = (stop - start);
+                RequestsSummaryCountTemp = Math.Min(RequestsSummaryCount, 10);
             }
         }
     }

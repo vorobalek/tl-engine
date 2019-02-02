@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading;
@@ -19,19 +20,28 @@ namespace TL.Integrations.Telegram.Bots
 
         protected virtual ILogger Logger { get; }
 
-        public BaseBot(ILoggerFactory loggerFactory, string token, string name = null) : base(token, name)
+        protected virtual IServiceProvider ServiceProvider { get; }
+
+        public BaseBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : this(serviceProvider, token, null, skipUpdates)
         {
-            Logger = loggerFactory.CreateLogger(GetType());
+        }
+
+        public BaseBot(IServiceProvider serviceProvider, string token, string name = null, bool skipUpdates = false) : base(token, name, skipUpdates)
+        {
+            ServiceProvider = serviceProvider;
+
+            Logger = ServiceProvider.GetService<ILoggerFactory>().CreateLogger(GetType());
+            Logger.TLogWarning($"Логгер для бота {name} сконфигурирован.");
 
             CommandHandler = new HCommand(this).ImportBaseMethods<BaseBot>();
-
-            Logger.TLogInformation($"Бот {name} сконфигурирован.");
+            Logger.TLogWarning($"Бот {name} сконфигурирован.");
         }
 
         public override async Task StartAsync()
         {
             try
             {
+                SkippedUpdatesCount = (await TgClient.GetUpdatesAsync()).Length;
                 await base.StartAsync();
 
                 Username = (await TgClient.GetMeAsync(new CancellationTokenSource(CancelTimeout).Token)).Username;
@@ -75,10 +85,18 @@ namespace TL.Integrations.Telegram.Bots
 
         protected override async void TgClient_OnUpdate(object sender, UpdateEventArgs e)
         {
+            base.TgClient_OnUpdate(sender, e);
+
+            if (SkipUpdates)
+            {
+                Logger.TLogWarning($"Обновление {UpdatesSummaryCount} из {SkippedUpdatesCount} проигнорировано.");
+                return;
+            }
+
             var hresult = await CommandHandler.ExecuteAsync(e.Update);
             if (hresult.IsOk)
             {
-                Logger.TLogInformation($"Успешно обработано обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}");
+                Logger.TLogWarning($"Успешно обработано обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}");
             }
             else
             {

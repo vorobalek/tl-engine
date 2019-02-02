@@ -1,7 +1,6 @@
 ﻿using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,12 +14,12 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
     {
         ITelegramBotProviderService TelegramBotProvider { get; }
 
-        ILoggerFactory LoggerFactory { get; }
+        IServiceProvider ServiceProvider { get; }
 
-        public TelegramController(IStorage storage, ITelegramBotProviderService telegramBotProvider, ILoggerFactory loggerFactory) : base(storage)
+        public TelegramController(IStorage storage, ITelegramBotProviderService telegramBotProvider, IServiceProvider serviceProvider) : base(storage)
         {
             TelegramBotProvider = telegramBotProvider;
-            LoggerFactory = loggerFactory;
+            ServiceProvider = serviceProvider;
         }
 
         public IActionResult Index()
@@ -37,12 +36,21 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         [HttpPost]
         public async Task<IActionResult> Start(IndexViewModel model)
         {
-            var bot = ExtensionManager.GetImplementations<IBaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == model.BotType);
-            if (bot != null)
+            var ret = new IndexViewModelFactory().Create(TelegramBotProvider);
+            var parts = model.Token.Split(':');
+            if (parts.Length > 0 && int.TryParse(parts[0], out int id))
             {
-                await TelegramBotProvider.StartAsync(Activator.CreateInstance(bot, LoggerFactory, model.Token, null) as IBaseBot);
+                var bot = ExtensionManager.GetImplementations<Telegram.Bots.BaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == model.BotType);
+                if (bot != null)
+                {
+                    await TelegramBotProvider.StartAsync(Activator.CreateInstance(bot, ServiceProvider, model.Token, null, model.QuietStartup) as Telegram.Bots.BaseBot);
+                }
             }
-            return PartialView("_OnlineBots", new IndexViewModelFactory().Create(TelegramBotProvider).Bots);
+            else
+            {
+                ret.StatusMessage = "Токен указан неверно! Токен должен выглядеть как-то так: \"123456789:AAG94pkt5-jUyHJT2TukjNPOkW_zkATWx70\"";
+            }
+            return PartialView("_OnlineBots", ret.Bots);
         }
 
         [HttpPost]
