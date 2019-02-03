@@ -24,20 +24,20 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
         public virtual bool IsPrivate => false;
         public virtual bool IsTerminated => false;
 
-        public abstract bool IsRelevantMethod(Update update);
-        public abstract bool IsPolicyAcceptable(Update update);
+        public abstract bool IsRelevantMethod(Update update, params object[] args);
+        public abstract bool IsPolicyAcceptable(Update update, params object[] args);
 
         public abstract Type BotType { get; }
         public Type HandlerType { get; }
 
         public abstract UpdateType UpdateType { get; }
 
-        protected abstract Task<IHandlerMethodResult> ExecuteAsync(Update update);
-        public virtual async Task<IHandlerMethodResult> TryExecuteAsync(Update update)
+        protected abstract Task<IHandlerMethodResult> ExecuteAsync(Update update, params object[] args);
+        public virtual async Task<IHandlerMethodResult> TryExecuteAsync(Update update, params object[] args)
         {
             try
             {
-                return await ExecuteAsync(update);
+                return await ExecuteAsync(update, args);
             }
             catch (Exception ex)
             {

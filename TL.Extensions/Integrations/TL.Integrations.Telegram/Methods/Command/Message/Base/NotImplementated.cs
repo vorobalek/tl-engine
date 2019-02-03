@@ -14,7 +14,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 
         public override int Priority => int.MinValue;
 
-        protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)
         {
             var commands_arr = (Bot as Bots.BaseBot).CommandHandler.Methods
                .Where(it => (!it.IsPrivate) && (it.UpdateType == global::Telegram.Bot.Types.Enums.UpdateType.Message))

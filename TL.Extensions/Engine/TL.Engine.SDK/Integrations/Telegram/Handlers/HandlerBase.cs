@@ -29,20 +29,20 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 
         public List<IHandlerMethodBase> Methods { get; private set; }
 
-        public async Task<IHandlerResult> ExecuteAsync(Update update)
+        public async Task<IHandlerResult> ExecuteAsync(Update update, params object[] args)
         {
             var methods = Methods
-                .Where(m => m.IsPolicyAcceptable(update) && m.IsRelevantMethod(update))
+                .Where(m => m.IsPolicyAcceptable(update, args) && m.IsRelevantMethod(update, args))
                 .OrderBy(m => m.Priority);
 
-            var results = await methods.ExecuteAsync(update);
+            var results = await methods.ExecuteAsync(update, args);
 
             if (results.Count() == 0)
             {
                 results = await Methods
                     .Where(m => m.Command == "notimplemented" && m.UpdateType == update.Type)
                     .OrderBy(m => m.Priority)
-                    .ExecuteAsync(update);
+                    .ExecuteAsync(update, args);
             }
 
             return new HandlerResult(results);

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Extensions;
+using TL.Account.Data.Managers.User;
 using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
@@ -17,7 +18,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
     {
         public IHostingEnvironment HostingEnvironment { get; }
 
-        public HomeController(IStorage storage, IHostingEnvironment appEnvironment) : base(storage)
+        public HomeController(IStorage storage, IUserManager userManager, IHostingEnvironment appEnvironment) : base(storage, userManager)
         {
             HostingEnvironment = appEnvironment;
         }

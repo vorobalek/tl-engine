@@ -8,7 +8,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
     {
         public override Type BotType => typeof(BaseBot);
 
-        public override bool IsPolicyAcceptable(Update update)
+        public override bool IsPolicyAcceptable(Update update, params object[] args)
         {
             return true;
         }

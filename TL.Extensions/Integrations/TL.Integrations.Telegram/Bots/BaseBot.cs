@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using TL.Account.Data.Entities.Security;
+using TL.Account.Data.Managers.User;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TL.Engine.SDK.Integrations.Telegram.Messages;
@@ -22,6 +24,8 @@ namespace TL.Integrations.Telegram.Bots
 
         protected virtual IServiceProvider ServiceProvider { get; }
 
+        protected virtual IUserManager UserManager { get; }
+
         public BaseBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : this(serviceProvider, token, null, skipUpdates)
         {
         }
@@ -32,6 +36,9 @@ namespace TL.Integrations.Telegram.Bots
 
             Logger = ServiceProvider.GetService<ILoggerFactory>().CreateLogger(GetType());
             Logger.TLogWarning($"Логгер для бота {name} сконфигурирован.");
+
+            UserManager = ServiceProvider.GetService<IUserManager>();
+            Logger.TLogWarning($"UserManager для бота {name} сконфигурирован.");
 
             CommandHandler = new HCommand(this).ImportBaseMethods<BaseBot>();
             Logger.TLogWarning($"Бот {name} сконфигурирован.");
@@ -93,7 +100,19 @@ namespace TL.Integrations.Telegram.Bots
                 return;
             }
 
-            var hresult = await CommandHandler.ExecuteAsync(e.Update);
+            var chatId = e.Update.GetSenderChatId();
+            var fromId = e.Update.GetSenderId();
+            var username = $"tg:{fromId.Identifier}";
+            var password = Guid.NewGuid().ToString();
+
+            User user = await UserManager.GetAcync(username);
+
+            if (user == null && chatId.Identifier == fromId.Identifier)
+            {
+                user = await UserManager.CreateAsync(username, password, "Этот аккаунт создан автоматически системой интеграции с Telegram");
+            }
+
+            var hresult = await CommandHandler.ExecuteAsync(e.Update, user);
             if (hresult.IsOk)
             {
                 Logger.TLogWarning($"Успешно обработано обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}");

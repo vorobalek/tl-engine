@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Default
@@ -12,12 +10,12 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Default
 
         public override string Description => "Начать работу с ботом";
 
-        public override bool IsPolicyAcceptable(Update update)
+        public override bool IsPolicyAcceptable(Update update, params object[] args)
         {
             return true;
         }
 
-        protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)
         {
             var msg = (Bot as Bots.DefaultBot).GetHelloMessage();
             msg.ChatId = message.Chat;

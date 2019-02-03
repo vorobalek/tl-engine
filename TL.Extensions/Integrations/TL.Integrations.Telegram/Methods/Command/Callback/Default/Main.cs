@@ -10,7 +10,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Default
 
         public override string Description => "";
 
-        protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
             var msg = (Bot as Bots.DefaultBot).GetHelloMessage();
             msg.ChatId = callbackQuery.Message.Chat;

@@ -19,14 +19,14 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
         bool IsPrivate { get; }
         bool IsTerminated { get; }
 
-        bool IsRelevantMethod(Update update);
-        bool IsPolicyAcceptable(Update update);
+        bool IsRelevantMethod(Update update, params object[] args);
+        bool IsPolicyAcceptable(Update update, params object[] args);
 
         Type BotType { get; }
         Type HandlerType { get; }
 
         UpdateType UpdateType { get; }
 
-        Task<IHandlerMethodResult> TryExecuteAsync(Update update);
+        Task<IHandlerMethodResult> TryExecuteAsync(Update update, params object[] args);
     }
 }

@@ -8,14 +8,14 @@ namespace TL.Engine.SDK.Extensions
 {
     public static class HandlerMethodExtensions
     {
-        public static async Task<IEnumerable<IHandlerMethodResult>> ExecuteAsync(this IEnumerable<IHandlerMethodBase> methods, Update update)
+        public static async Task<IEnumerable<IHandlerMethodResult>> ExecuteAsync(this IEnumerable<IHandlerMethodBase> methods, Update update, params object[] args)
         {
             var results = new List<IHandlerMethodResult>();
             if (methods.Count() > 0)
             {
                 foreach (var method in methods)
                 {
-                    results.Add(await method.TryExecuteAsync(update));
+                    results.Add(await method.TryExecuteAsync(update, args));
                     if (method.IsBlocker) break;
                 }
             }

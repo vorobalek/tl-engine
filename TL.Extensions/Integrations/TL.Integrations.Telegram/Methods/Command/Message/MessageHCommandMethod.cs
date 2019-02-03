@@ -10,7 +10,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message
     {
         public override UpdateType UpdateType => UpdateType.Message;
 
-        public override bool IsRelevantMethod(Update update)
+        public override bool IsRelevantMethod(Update update, params object[] args)
         {
             var rules = new bool[]
             {
@@ -23,11 +23,11 @@ namespace TL.Integrations.Telegram.Methods.Command.Message
             return rules.All(rule => rule);
         }
 
-        protected override async Task<IHandlerMethodResult> ExecuteAsync(Update update)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(Update update, params object[] args)
         {
-            return await ExecuteAsync(update.Message);
+            return await ExecuteAsync(update.Message, args);
         }
 
-        protected abstract Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message);
+        protected abstract Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args);
     }
 }

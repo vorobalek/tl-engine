@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
+using TL.Account.Data.Managers.User;
 using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
 {
     public class LoginController : __AccountController__
     {
-        public LoginController(IStorage storage) : base(storage)
+        public LoginController(IStorage storage, IUserManager userManager) : base(storage, userManager)
         {
         }
 
@@ -55,7 +56,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                             return View(model);
                         }
                     }
-                    await Authenticate(user);
+                    await UserManager.AuthenticateAsync(user, HttpContext);
                     return Redirect(model.ReturnUrl);
                 }
                 ModelState.AddModelError(string.Empty, "Некорректные логин и(или) пароль");

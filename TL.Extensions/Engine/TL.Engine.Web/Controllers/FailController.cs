@@ -61,7 +61,7 @@ namespace TL.Engine.Web.Controllers
                     Author = model.Author,
                     Description = model.Description,
                     Priority = model.Priority as ReportPriority?,
-                    Date = DateTime.Now,
+                    Date = DateTime.Now.ToUniversalTime(),
                     Message = model.Message,
                     StackTrace = model.StackTrace
                 };

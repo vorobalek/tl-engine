@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using TL.Account.Data.Abstractions.Relationships;
-using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Extensions;
+using TL.Account.Data.Managers.User;
 using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
@@ -13,7 +12,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
     [Route("/account/profile")]
     public class ProfileController : __AccountController__
     {
-        public ProfileController(IStorage storage) : base(storage)
+        public ProfileController(IStorage storage, IUserManager userManager) : base(storage, userManager)
         {
         }
 
@@ -26,16 +25,16 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [HttpGet("{username}")]
         public IActionResult Index(string username)
         {
-            var user = Storage.GetRepository<IUserRepository>().GetByUsername(username);
+            var user = username.GetUser(Storage);
 
             if (user == null)
             {
                 return View(null);
             }
 
-            var user_followers = Storage.GetRepository<ISubscriptionRepository>().Followers(user);
-            var user_subscriptions = Storage.GetRepository<ISubscriptionRepository>().Subscriptions(user);
-            var requster = User.GetUser(Storage);
+            var user_followers = user.GetFollowers(Storage);
+            var user_subscriptions = user.GetSubscriptions(Storage);
+            var requster = User?.GetUser(Storage);
 
             bool isF = false,
                 isS = false;

@@ -11,6 +11,6 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 
         List<IHandlerMethodBase> Methods { get; }
 
-        Task<IHandlerResult> ExecuteAsync(Update update);
+        Task<IHandlerResult> ExecuteAsync(Update update, params object[] args);
     }
 }

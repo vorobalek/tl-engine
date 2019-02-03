@@ -1,10 +1,9 @@
 ﻿using ExtCore.Infrastructure.Actions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using TL.Engine.SDK.Services.ApiDocumentation;
-using TL.Engine.SDK.Services.TelegramBotProvider;
+using TL.Account.Data.Managers.User;
 
-namespace TL.Engine.SDK.Actions
+namespace TL.Account.Data.Actions
 {
     public class ConfigureServicesAction : IConfigureServicesAction
     {
@@ -12,8 +11,7 @@ namespace TL.Engine.SDK.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
-            serviceCollection.AddSingleton<IApiDocumentationService, ApiDocumentationService>();
-            serviceCollection.AddSingleton<ITelegramBotProviderService, TelegramBotProviderService>();
+            serviceCollection.AddSingleton<IUserManager, UserManager>();
         }
     }
 }

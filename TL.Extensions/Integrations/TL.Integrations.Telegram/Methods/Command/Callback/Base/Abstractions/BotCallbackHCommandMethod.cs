@@ -7,7 +7,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
     {
         public override Type BotType => typeof(Bots.BaseBot);
 
-        protected override bool IsPolicyAcceptable(CallbackQuery callbackQuery)
+        protected override bool IsPolicyAcceptable(CallbackQuery callbackQuery, params object[] args)
         {
             return true;
         }

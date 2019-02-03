@@ -15,7 +15,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 
         public override int Priority => int.MinValue;
 
-        protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
             await Bot.SendAsync(new Engine.SDK.Integrations.Telegram.Messages.Message()
             {
