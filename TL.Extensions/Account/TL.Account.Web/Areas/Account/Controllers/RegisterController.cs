@@ -40,7 +40,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await UserManager.TryCreateAsync(model.Username, model.Password);
+                var user = await UserManager.GetOrCreateAsync(model.Username, model.Password);
                 if (user != null)
                 {
                     await UserManager.AuthenticateAsync(user, HttpContext);

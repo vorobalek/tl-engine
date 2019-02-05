@@ -4,6 +4,7 @@
     ViewData["Title"] = "Telegram";
 }
 
+<div id="status"></div>
 <h1>Запустить бота:</h1>
 <form id="formbot" asp-anti-forgery="true" class="needs-validation" novalidate>
     <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
@@ -52,7 +53,7 @@
                 url: '/integrations/telegram/start?' + args,
                 type: 'post',
                 success: function (result) {
-                    $(document).find('#onlinebots').html(result);
+                    $(document).find('#status').append(result);
                     $('#formbot').find('#token').val('');
                     $('#formbot').find('#botType').prop('selectedIndex', 0);
                     $('#formbot').find('#quietStartup').prop('checked', true);
@@ -65,7 +66,7 @@
                 url: "/integrations/telegram/kill?username=" + username,
                 type: "post",
                 success: function (result) {
-                    $(document).find('#onlinebots').html(result);
+                    $(document).find('#status').append(result);
                 }
             });
         }

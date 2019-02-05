@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TL.Integrations.Data.Entities.Telegram.Security;
+using TL.Integrations.Data.Entities.Telegram.System;
 
-namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgBots
+namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
 {
     public class TgBotConfiguration : IEntityTypeConfiguration<TgBot>
     {

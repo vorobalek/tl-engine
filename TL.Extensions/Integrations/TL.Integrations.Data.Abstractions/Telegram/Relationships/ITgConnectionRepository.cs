@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using TL.Integrations.Data.Entities.Telegram.Security;
+using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.Abstractions.Telegram.Relationships
 {

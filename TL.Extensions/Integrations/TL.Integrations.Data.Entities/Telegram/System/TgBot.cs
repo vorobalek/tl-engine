@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 
-namespace TL.Integrations.Data.Entities.Telegram.Security
+namespace TL.Integrations.Data.Entities.Telegram.System
 {
     public class TgBot : IEntity
     {

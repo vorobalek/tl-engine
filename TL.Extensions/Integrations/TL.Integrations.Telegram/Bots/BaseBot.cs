@@ -12,6 +12,7 @@ using TL.Account.Data.Managers.User;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TL.Engine.SDK.Integrations.Telegram.Messages;
+using TL.Integrations.Data.Extensions;
 using TL.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Bots
@@ -71,12 +72,9 @@ namespace TL.Integrations.Telegram.Bots
                 await base.StopAsync();
                 Logger.TLogWarning($"@{Username} остановлен.");
             }
-            catch
+            catch (Exception ex)
             {
-                Logger.LogCritical($"Остановка не удалась - @{Username} Попытка повтора через {TimeSpan.FromMilliseconds(RetryPeriod).TotalSeconds} сек...");
-                await Task.Delay(RetryPeriod);
-
-                await StopAsync();
+                Logger.LogCritical($"Остановка не удалась - @{Username}\r\n{ex}");
             }
         }
 
@@ -100,17 +98,7 @@ namespace TL.Integrations.Telegram.Bots
                 return;
             }
 
-            var chatId = e.Update.GetSenderChatId();
-            var fromId = e.Update.GetSenderId();
-            var username = $"tg:{fromId.Identifier}";
-            var password = Guid.NewGuid().ToString();
-
-            User user = await UserManager.GetAcync(username);
-
-            if (user == null && chatId.Identifier == fromId.Identifier)
-            {
-                user = await UserManager.CreateAsync(username, password, "Этот аккаунт создан автоматически системой интеграции с Telegram");
-            }
+            var user = e.Update.GetOrCreateUserAsync(ServiceProvider);
 
             var hresult = await CommandHandler.ExecuteAsync(e.Update, user);
             if (hresult.IsOk)

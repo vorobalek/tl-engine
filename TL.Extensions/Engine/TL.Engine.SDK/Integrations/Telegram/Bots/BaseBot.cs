@@ -20,6 +20,8 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
             CancelTimeout = cancelTimeout;
 
             TgClient = new TelegramBotClient(token);
+            TgClient.OnUpdate += TgClient_OnUpdate;
+            TgClient.OnReceiveError += TgClient_OnReceiveError;
         }
 
         public virtual string Token { get; }
@@ -51,8 +53,6 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
                     Name = Username
                 };
                 MessagesQueue = new ConcurrentQueue<IMessage>();
-                TgClient.OnUpdate += TgClient_OnUpdate;
-                TgClient.OnReceiveError += TgClient_OnReceiveError;
 
                 UpdatesSummaryCount = 0;
                 RequestsSummaryCount = 0;
@@ -71,8 +71,6 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
             return Task.Run(() =>
             {
                 TgClient.StopReceiving();
-                TgClient.OnUpdate -= TgClient_OnUpdate;
-                TgClient.OnReceiveError -= TgClient_OnReceiveError;
                 while (!MessagesQueue.IsEmpty)
                 {
                     Thread.Sleep(1000);

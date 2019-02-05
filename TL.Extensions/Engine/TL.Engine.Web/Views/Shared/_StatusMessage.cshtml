@@ -1,12 +1,15 @@
 ﻿@model string
+@{ 
+    var id = Guid.NewGuid().ToString();
+}
 @if (!String.IsNullOrEmpty(Model))
 {
-    <div class="alert alert-success alert-dismissible" role="alert" id="systemStatusMessage">
+    <div class="alert alert-success alert-dismissible" role="alert" id="@id">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         @Model
     </div>
 
     <script type="text/javascript">
-        setTimeout(function () { $("#systemStatusMessage").fadeOut('fast') }, 3000);
+        setTimeout(function () { $("#@id").fadeOut('fast') }, 3000);
     </script>
 }

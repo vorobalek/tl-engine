@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TL.Integrations.Data.Abstractions.Telegram.Security;
-using TL.Integrations.Data.Entities.Telegram.Security;
+using TL.Integrations.Data.Abstractions.Telegram.System;
+using TL.Integrations.Data.Entities.Telegram.System;
 
-namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgBots
+namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
 {
     public class TgBotRepository : RepositoryBase<TgBot>, ITgBotRepository
     {

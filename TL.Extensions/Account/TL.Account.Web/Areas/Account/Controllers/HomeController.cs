@@ -32,12 +32,5 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 HasPassword = user.HasPassword
             });
         }
-        
-        public async Task<IActionResult> Logout(string returnUrl = null)
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            var ReturnUrl = returnUrl ?? Request.Headers["Referer"].ToString();
-            return Redirect(Url.IsLocalUrl(ReturnUrl) ? ReturnUrl : Url.Content("~/"));
-        }
     }
 }

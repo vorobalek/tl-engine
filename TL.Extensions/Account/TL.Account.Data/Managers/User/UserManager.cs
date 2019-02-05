@@ -1,11 +1,9 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Relationships;
@@ -25,17 +23,20 @@ namespace TL.Account.Data.Managers.User
             Storage = storage;
         }
 
-        public Task<TUser> GetAcync(string username)
+        public Task<TUser> GetAsync(Guid id)
+        {
+            return Task.Run(() =>
+            {
+                return id.GetUser(Storage);
+            });
+        }
+
+        public Task<TUser> GetAsync(string username)
         {
             return Task.Run(() =>
             {
                 return username.GetUser(Storage);
             });
-        }
-
-        public Task<TUser> Get(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public Task<TUser> CreateAsync(string username, string password, string description = null)
@@ -78,40 +79,24 @@ namespace TL.Account.Data.Managers.User
             });
         }
 
-        public async Task<TUser> TryCreateAsync(string username, string password, string description = null)
+        public async Task<TUser> GetOrCreateAsync(string username, string password = null, string description = null)
         {
-            var user = await GetAcync(username);
+            var user = await GetAsync(username);
             if (user == null)
             {
-                return await CreateAsync(username, password, description);
+                if (password == null)
+                {
+                    throw new ArgumentNullException(nameof(password), $"Запрещено создавать пользователей без пароля!");
+                }
+
+                user = await CreateAsync(username, password, description);
             }
-            else
-            {
-                return null;
-            }
+            return user;
         }
 
         public Task AuthenticateAsync(TUser user, HttpContext httpContext)
         {
-            return Task.Run(async () =>
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username),
-                    new Claim(nameof(TUser.Id), user.Id.ToString())
-                };
-
-                var roles = Storage.GetRepository<IUserRoleRepository>().GetByUser(user);
-                foreach (var userRole in roles)
-                {
-                    var role = Storage.GetRepository<IRoleRepository>().GetById(userRole.RoleId);
-                    claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.Name));
-                }
-
-                ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-
-                await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-            });
+            return user.AuthenticateAsync(Storage, httpContext);
         }
     }
 }

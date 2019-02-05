@@ -1,7 +1,7 @@
 ﻿using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
-namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgBots
+namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
 {
     public class TgBotRegistrar : IEntityRegistrar
     {

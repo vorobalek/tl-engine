@@ -5,6 +5,7 @@ using System.Linq;
 using TL.Integrations.Data.Abstractions.Telegram.Relationships;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 using TL.Integrations.Data.Entities.Telegram.Security;
+using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnections
 {

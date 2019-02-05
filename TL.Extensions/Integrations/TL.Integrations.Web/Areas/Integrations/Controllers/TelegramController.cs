@@ -38,30 +38,39 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         {
             var ret = new IndexViewModelFactory().Create(TelegramBotProvider);
             var parts = model.Token.Split(':');
-            if (parts.Length > 0 && int.TryParse(parts[0], out int id))
+            if (parts.Length > 1 && int.TryParse(parts[0], out int id))
             {
-                var bot = ExtensionManager.GetImplementations<Telegram.Bots.BaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == model.BotType);
-                if (bot != null)
+                bool f = await TelegramBotProvider.StartAsync(model.BotType, model.Token, null, model.QuietStartup);
+                if (f)
                 {
-                    await TelegramBotProvider.StartAsync(Activator.CreateInstance(bot, ServiceProvider, model.Token, null, model.QuietStartup) as Telegram.Bots.BaseBot);
+                    ret.StatusMessage = "Бот запущен";
+                }
+                else
+                {
+                    ret.StatusMessage = "Не удалось запустить бота";
                 }
             }
             else
             {
                 ret.StatusMessage = "Токен указан неверно! Токен должен выглядеть как-то так: \"123456789:AAG94pkt5-jUyHJT2TukjNPOkW_zkATWx70\"";
             }
-            return PartialView("_OnlineBots", ret.Bots);
+            return PartialView("_StatusMessage", ret.StatusMessage);
         }
 
         [HttpPost]
         public async Task<IActionResult> Kill(string username)
         {
-            var bot = TelegramBotProvider.GetOnline().FirstOrDefault(it => it.Username == username);
-            if (bot != null)
+            bool f = await TelegramBotProvider.StopAsync(username);
+            string message;
+            if (f)
             {
-                await TelegramBotProvider.StopAsync(bot);
+                message = "Бот остановлен";
             }
-            return PartialView("_OnlineBots", new IndexViewModelFactory().Create(TelegramBotProvider).Bots);
+            else
+            {
+                message = "Не удалось остановить бота";
+            }
+            return PartialView("_StatusMessage", message);
         }
     }
 }

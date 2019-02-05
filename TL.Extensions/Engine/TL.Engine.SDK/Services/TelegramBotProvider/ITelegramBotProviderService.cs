@@ -11,8 +11,14 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
 
         IEnumerable<IBaseBot> GetOnline();
 
-        Task StartAsync(IBaseBot bot);
+        Task<bool> StartAsync(string botTypeName, string token, string name = null, bool skipUpdates = false);
 
-        Task StopAsync(IBaseBot bot);
+        Task<bool> StartAsync(Type botType, string token, string name = null, bool skipUpdates = false);
+
+        Task<bool> StartAsync(IBaseBot bot);
+
+        Task<bool> StopAsync(string username);
+
+        Task<bool> StopAsync(IBaseBot bot);
     }
 }

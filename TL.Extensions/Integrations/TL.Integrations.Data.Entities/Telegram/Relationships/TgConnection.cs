@@ -1,6 +1,7 @@
 ﻿using ExtCore.Data.Entities.Abstractions;
 using System;
 using TL.Integrations.Data.Entities.Telegram.Security;
+using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.Entities.Telegram.Relationships
 {

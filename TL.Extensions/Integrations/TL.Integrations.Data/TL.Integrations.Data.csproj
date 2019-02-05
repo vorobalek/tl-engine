@@ -20,4 +20,9 @@
     <ProjectReference Include="..\TL.Integrations.Data.EntityFramework\TL.Integrations.Data.EntityFramework.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Actions\" />
+    <Folder Include="Managers\" />
+  </ItemGroup>
+
 </Project>
