@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="~/Styles/images/logo_tl.ico">
 </head>
 <body>
-    <div id="_StatusMessage" style="position:fixed; bottom: 15px; right: 15px; width: 600px; z-index: 1000; opacity: .85"></div>
+    <div id="status-messages-block" class="status-messages-block"></div>
     @RenderBody()
     @await Component.InvokeAsync("Scripts")
     @RenderSection("Scripts", required: false)

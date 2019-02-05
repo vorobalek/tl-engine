@@ -52,7 +52,7 @@
                 url: '/integrations/telegram/start?' + args,
                 type: 'post',
                 success: function (result) {
-                    $(document).find('#_StatusMessage').append(result);
+                    $(document).find('#status-messages-block').append(result);
                     $('#formbot').find('#token').val('');
                     $('#formbot').find('#botType').prop('selectedIndex', 0);
                     $('#formbot').find('#quietStartup').prop('checked', true);
@@ -65,7 +65,7 @@
                 url: "/integrations/telegram/kill?username=" + username,
                 type: "post",
                 success: function (result) {
-                    $(document).find('#_StatusMessage').append(result);
+                    $(document).find('#status-messages-block').append(result);
                 }
             });
         }
