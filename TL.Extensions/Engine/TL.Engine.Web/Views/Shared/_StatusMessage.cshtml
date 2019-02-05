@@ -1,15 +1,25 @@
 ﻿@model string
-@{ 
-    var id = Guid.NewGuid().ToString();
+@{
+    var alert_id = Guid.NewGuid().ToString();
+    var block_id = Guid.NewGuid().ToString();
 }
 @if (!String.IsNullOrEmpty(Model))
 {
-    <div class="alert alert-success alert-dismissible" role="alert" id="@id">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        @Model
-    </div>
+    <div id="@block_id">
+        <div class="alert alert-info alert-dismissible" role="alert" id="@alert_id">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p>
+                @Model
+            </p>
+        </div>
 
-    <script type="text/javascript">
-        setTimeout(function () { $("#@id").fadeOut('fast') }, 3000);
-    </script>
+        <script type="text/javascript">
+            setTimeout(function () {
+                $(document).find("#@alert_id").fadeOut('fast');
+                setTimeout(function () {
+                    $(document).find("#@block_id").remove();
+                }, 5000);
+            }, 5000);
+        </script>
+    </div>
 }
