@@ -8,8 +8,7 @@
 <div class="container">
     <partial name="_Error" model="@Model" />
     <hr />
-    <partial name="_StatusMessage" model="@Model.StatusMessage" />
-    <form asp-action="report" asp-controller="fail" asp-anti-forgery="true">
+    <form id="form-report">
         <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
         <div class="form-group">
             <label asp-for="@Model.Author">Представьтесь</label>
@@ -42,10 +41,12 @@
         <input asp-for="@Model.RequestId" class="invisible" value="@Model.RequestId" />
         <input asp-for="@Model.ReturnUrl" class="invisible" value="@Model.ReturnUrl" />
         <input asp-for="@Model.StatusCode" class="invisible" value="@Model.StatusCode" />
-        <div class="form-row">
-            <input type="submit" value="Отправить" class="btn btn-outline-success form-control" />
-        </div>
     </form>
+    <div class="form-row">
+        <button id="submit" class="btn btn-outline-success form-control" onclick="report($('#form-report').serialize())">
+            Отправить
+        </button>
+    </div>
     <hr />
     <div class="row">
         <div class="col-12">
@@ -73,7 +74,18 @@
 </div>
 
 @section Scripts {
-    <script>
+    <script type="text/javascript">
         new ClipboardJS('.btn-clipboard');
+
+        report = function (args) {
+            $.ajax({
+                url: '/fail?' + args,
+                type: 'post',
+                success: function (result) {
+                    $(document).find('#status-messages-block').append(result);
+                    $(document).find('#form-report')[0].reset();
+                }
+            })
+        }
     </script>
 }

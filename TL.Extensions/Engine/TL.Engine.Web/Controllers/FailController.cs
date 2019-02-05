@@ -47,9 +47,10 @@ namespace TL.Engine.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Report(ErrorViewModel model)
         {
+            string message;
+
             if (!string.IsNullOrWhiteSpace(model.StackTrace))
             {
                 model.StackTrace = string.Join("\r\n   ", model.StackTrace.Split("   "));
@@ -73,13 +74,13 @@ namespace TL.Engine.Web.Controllers
 
                 Storage.GetRepository<IExceptionReportRepository>().Add(report);
                 Storage.Save();
-                model.StatusMessage = "Спасибо за ваш фидбек!";
+                message = "Спасибо за ваш фидбек!";
             }
             else
             {
-                ModelState.AddModelError("", "Одно или несколько полей были заполнены неверно!");
+                message = "Одно или несколько полей были заполнены неверно. Ваш репорт не отправлен.";
             }
-            return View("Index", model);
+            return PartialView("_StatusMessage", message);
         }
     }
 }

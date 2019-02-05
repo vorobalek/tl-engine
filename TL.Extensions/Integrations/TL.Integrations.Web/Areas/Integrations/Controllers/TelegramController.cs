@@ -36,25 +36,32 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         [HttpPost]
         public async Task<IActionResult> Start(IndexViewModel model)
         {
-            var ret = new IndexViewModelFactory().Create(TelegramBotProvider);
-            var parts = model.Token.Split(':');
-            if (parts.Length > 1 && int.TryParse(parts[0], out int id))
+            string message;
+            if (ModelState.IsValid)
             {
-                bool f = await TelegramBotProvider.StartAsync(model.BotType, model.Token, null, model.QuietStartup);
-                if (f)
+                var parts = model.Token.Split(':');
+                if (parts.Length > 1 && int.TryParse(parts[0], out int id))
                 {
-                    ret.StatusMessage = "Бот запущен";
+                    bool f = await TelegramBotProvider.StartAsync(model.BotType, model.Token, null, model.QuietStartup);
+                    if (f)
+                    {
+                        message = "Бот запущен";
+                    }
+                    else
+                    {
+                        message = "Не удалось запустить бота";
+                    }
                 }
                 else
                 {
-                    ret.StatusMessage = "Не удалось запустить бота";
+                    message = "Токен указан неверно! Токен должен выглядеть как-то так: \"123456789:AAG94pkt5-jUyHJT2TukjNPOkW_zkATWx70\"";
                 }
             }
             else
             {
-                ret.StatusMessage = "Токен указан неверно! Токен должен выглядеть как-то так: \"123456789:AAG94pkt5-jUyHJT2TukjNPOkW_zkATWx70\"";
+                message = "Одно или несколько полей были заполнены неверно";
             }
-            return PartialView("_StatusMessage", ret.StatusMessage);
+            return PartialView("_StatusMessage", message);
         }
 
         [HttpPost]
