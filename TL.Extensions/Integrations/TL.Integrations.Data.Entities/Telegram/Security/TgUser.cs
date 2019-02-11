@@ -1,15 +1,13 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Entities;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 
 namespace TL.Integrations.Data.Entities.Telegram.Security
 {
-    public class TgUser : IEntity
+    public class TgUser : EntityComparableStored<Guid>
     {
-        public Guid Id { get; set; }
-
         public int TgId { get; set; }
 
         public string FirstName { get; set; }
@@ -26,7 +24,7 @@ namespace TL.Integrations.Data.Entities.Telegram.Security
 
         public virtual User User { get; set; }
 
-        public TgUser()
+        public TgUser() : base()
         {
             UserRoles = new HashSet<TgUserRole>();
             Connections = new HashSet<TgConnection>();

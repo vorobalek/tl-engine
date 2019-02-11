@@ -1,10 +1,10 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Entities;
 
 namespace TL.Account.Data.Entities.Relationships
 {
-    public class Subscription : IEntity
+    public class Subscription : EntityStored
     {
         public Guid FromId { get; set; }
 

@@ -14,6 +14,26 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
             dbSet.Add(bot);
         }
 
+        public void Update(TgBot bot)
+        {
+            bot.ModifiedDate = DateTime.Now.ToUniversalTime();
+            dbSet.Update(bot);
+        }
+
+        public void Remove(TgBot bot)
+        {
+            dbSet.Remove(bot);
+        }
+
+        public void Remove(Guid guid)
+        {
+            var candidate = dbSet.FirstOrDefault(e => e.Id == guid);
+            if (candidate != null)
+            {
+                dbSet.Remove(candidate);
+            }
+        }
+
         public IEnumerable<TgBot> GetAll()
         {
             return dbSet.OrderBy(e => e.Username);
@@ -24,14 +44,14 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
             return dbSet.FirstOrDefault(e => e.Id == id);
         }
 
+        public TgBot GetByTokenAndType(string token, string type)
+        {
+            return dbSet.FirstOrDefault(it => it.Token == token && it.TypeName == type);
+        }
+
         public IEnumerable<TgBot> GetByUsername(string username)
         {
             return dbSet.Where(e => e.Username == username);
-        }
-
-        public void Update(TgBot bot)
-        {
-            dbSet.Update(bot);
         }
     }
 }

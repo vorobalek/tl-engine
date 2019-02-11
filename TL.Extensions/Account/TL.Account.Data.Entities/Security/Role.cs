@@ -1,18 +1,16 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TL.Engine.SDK.Entities;
 
 namespace TL.Account.Data.Entities.Security
 {
-    public class Role : IEntity
+    public class Role : EntityComparableStored<Guid>
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public virtual IEnumerable<UserRole> UserRoles { get; set; }
 
-        public Role()
+        public Role() : base()
         {
             UserRoles = new HashSet<UserRole>();
         }

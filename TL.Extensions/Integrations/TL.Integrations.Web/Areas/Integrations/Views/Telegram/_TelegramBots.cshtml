@@ -1,0 +1,82 @@
+﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared.TelegramBotsViewModel
+
+<div class="table-responsive">
+    <h1>Запущенные боты:</h1>
+    <table class="table table-bordered table-hover table-responsive-stack">
+        <thead class="thead-light">
+            <tr>
+                <th style="flex-basis: 5%">#</th>
+                <th style="flex-basis: 15%">Имя</th>
+                <th style="flex-basis: 15%">Тип</th>
+                <th style="flex-basis: 20%">Время жизни</th>
+                <th style="flex-basis: 15%">Ответов</th>
+                <th style="flex-basis: 15%">Задержка</th>
+                <th style="flex-basis: 15%">Состояние</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var i = 1;
+                foreach (var bot in Model.ActiveBots.OrderBy(b => b.Uptime))
+                {
+                    <tr>
+                        <td style="flex-basis: 5%">@i</td>
+                        <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
+                        <td style="flex-basis: 15%">@bot.GetType().Name</td>
+                        <td style="flex-basis: 20%">@bot.Uptime.Days д. @bot.Uptime.Hours ч. @bot.Uptime.Minutes м. @bot.Uptime.Seconds с.</td>
+                        <td style="flex-basis: 15%">@bot.RequestsSummaryCount</td>
+                        <td style="flex-basis: 15%">@bot.PerformanceMs</td>
+                        <td style="flex-basis: 15%">
+                            <button class="btn btn-danger" onclick="kill('@bot.Username')">Остановить</button>
+                        </td>
+                    </tr>
+                    ++i;
+                }
+            }
+        </tbody>
+    </table>
+    <hr />
+    <h1>Сохраненные боты:</h1>
+    <table class="table table-bordered table-hover table-responsive-stack">
+        <thead class="thead-light">
+            <tr>
+                <th style="flex-basis: 5%">#</th>
+                <th style="flex-basis: 15%">Имя</th>
+                <th style="flex-basis: 15%">Тип</th>
+                <th style="flex-basis: 15%">Автозапуск</th>
+                <th style="flex-basis: 15%">Тихий запуск</th>
+                <th style="flex-basis: 20%">Последний запуск</th>
+                <th style="flex-basis: 15%">Состояние</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var bot in Model.SavedNoActive.OrderByDescending(b => b.LastStartDate))
+                {
+                    string lineLastStartupDate;
+                    if (bot.LastStartDate.HasValue)
+                    {
+                        var dt = DateTime.Now.ToUniversalTime() - bot.LastStartDate.Value;
+                        lineLastStartupDate = $"{dt.Days} д. {dt.Hours} ч. {dt.Minutes} м. {dt.Seconds} с. назад";
+                    }
+                    else
+                    {
+                        lineLastStartupDate = "не запускался прежде";
+                    }
+                    <tr>
+                        <td style="flex-basis: 5%">@i</td>
+                        <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
+                        <td style="flex-basis: 15%">@bot.TypeName</td>
+                        <td style="flex-basis: 15%">@(bot.AutoStart ? "Да" : "Нет")</td>
+                        <td style="flex-basis: 15%">@(bot.SkipUpdates ? "Да" : "Нет")</td>
+                        <td style="flex-basis: 20%">@lineLastStartupDate</td>
+                        <td style="flex-basis: 15%">
+                            <button class="btn btn-success" onclick="startSaved('@bot.Id.ToString()')">Запустить</button>
+                        </td>
+                    </tr>
+                    ++i;
+                }
+            }
+        </tbody>
+    </table>
+</div>

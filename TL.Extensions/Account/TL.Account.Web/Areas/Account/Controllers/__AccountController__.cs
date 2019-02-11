@@ -1,13 +1,6 @@
 ﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using TL.Account.Data.Abstractions.Security;
-using TL.Account.Data.Entities.Security;
-using TL.Account.Data.Managers.User;
+using TL.Account.Data.Managers;
 using TL.Engine.SDK.Controllers;
 
 namespace TL.Account.Web.Areas.Account.Controllers

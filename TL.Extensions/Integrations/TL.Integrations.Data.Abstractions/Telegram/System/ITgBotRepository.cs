@@ -11,10 +11,16 @@ namespace TL.Integrations.Data.Abstractions.Telegram.System
 
         void Update(TgBot bot);
 
-        IEnumerable<TgBot> GetAll();
+        void Remove(TgBot bot);
+
+        void Remove(Guid guid);
 
         TgBot GetById(Guid id);
 
+        IEnumerable<TgBot> GetAll();
+
         IEnumerable<TgBot> GetByUsername(string username);
+
+        TgBot GetByTokenAndType(string token, string type);
     }
 }

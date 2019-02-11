@@ -16,7 +16,7 @@ namespace TL.Engine.Data.EntityFramework.Reports
 
         public IEnumerable<Report> GetAll()
         {
-            return dbSet.OrderBy(e => e.Date);
+            return dbSet.OrderBy(e => e.CreationDate);
         }
 
         public Report GetById(Guid id)

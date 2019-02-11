@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 
 namespace TL.Engine.SDK.Services.TelegramBotProvider
@@ -11,14 +10,14 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
 
         IEnumerable<IBaseBot> GetOnline();
 
-        Task<bool> StartAsync(string botTypeName, string token, string name = null, bool skipUpdates = false);
+        bool Start(string token, string typeName, out IBaseBot bot, string name = null, bool skipUpdates = false);
 
-        Task<bool> StartAsync(Type botType, string token, string name = null, bool skipUpdates = false);
+        bool Start(string token, Type type, out IBaseBot bot, string name = null, bool skipUpdates = false);
 
-        Task<bool> StartAsync(IBaseBot bot);
+        bool Start(IBaseBot bot);
 
-        Task<bool> StopAsync(string username);
+        bool Stop(string username);
 
-        Task<bool> StopAsync(IBaseBot bot);
+        bool Stop(IBaseBot bot);
     }
 }

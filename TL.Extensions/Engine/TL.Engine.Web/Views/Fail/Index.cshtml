@@ -43,7 +43,7 @@
         <input asp-for="@Model.StatusCode" class="invisible" value="@Model.StatusCode" />
     </form>
     <div class="form-row">
-        <button id="submit" class="btn btn-outline-success form-control" onclick="report($('#form-report').serialize())">
+        <button id="submit" class="btn btn-outline-success form-control" onclick="server_alert('/fail', '#form-report', true)">
             Отправить
         </button>
     </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-sm btn-clipboard" data-clipboard-target="#stackTracePre">
+                        <button class="btn btn-sm btn-clipboard" data-clipboard-target="#stackTracePre" onclick="server_alert('Текст ошибки скопирован в буфер обмена')">
                             Копировать ошибку
                         </button>
                     </div>
@@ -76,16 +76,5 @@
 @section Scripts {
     <script type="text/javascript">
         new ClipboardJS('.btn-clipboard');
-
-        report = function (args) {
-            $.ajax({
-                url: '/fail?' + args,
-                type: 'post',
-                success: function (result) {
-                    $(document).find('#status-messages-block').append(result);
-                    $(document).find('#form-report')[0].reset();
-                }
-            })
-        }
     </script>
 }

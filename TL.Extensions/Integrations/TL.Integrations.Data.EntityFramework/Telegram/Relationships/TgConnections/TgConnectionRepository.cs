@@ -21,12 +21,12 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnecti
             dbSet.Add(new TgConnection() { BotId = botId, UserId = userId });
         }
 
-        public IEnumerable<Guid> Bots(TgUser user)
+        public IEnumerable<Guid> GetBots(TgUser user)
         {
-            return Bots(user.Id);
+            return GetBots(user.Id);
         }
 
-        public IEnumerable<Guid> Bots(Guid userId)
+        public IEnumerable<Guid> GetBots(Guid userId)
         {
             return dbSet.Where(e => e.UserId == userId).Select(e => e.BotId);
         }
@@ -41,12 +41,12 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnecti
             dbSet.Remove(new TgConnection() { BotId = botId, UserId = userId });
         }
 
-        public IEnumerable<Guid> Members(TgBot bot)
+        public IEnumerable<Guid> GetMembers(TgBot bot)
         {
-            return Members(bot.Id);
+            return GetMembers(bot.Id);
         }
 
-        public IEnumerable<Guid> Members(Guid botId)
+        public IEnumerable<Guid> GetMembers(Guid botId)
         {
             return dbSet.Where(e => e.BotId == botId).Select(e => e.UserId);
         }

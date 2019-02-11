@@ -1,11 +1,10 @@
 ﻿using ExtCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using TL.Engine.SDK.Integrations.Telegram.Bots;
+using System.Linq;
 using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Integrations.Telegram.Bots;
 
 namespace TL.Engine.SDK.Services.TelegramBotProvider
 {
@@ -34,24 +33,24 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
 
         public IEnumerable<IBaseBot> GetOnline() => OnlineBots;
 
-        public Task<bool> StartAsync(string botTypeName, string token, string name = null, bool skipUpdates = false)
+        public bool Start(string token, string typeName, out IBaseBot bot, string name = null, bool skipUpdates = false)
         {
-            var botType = ExtensionManager.GetImplementations<IBaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == botTypeName);
-            return StartAsync(botType, token, name, skipUpdates);
+            var botType = ExtensionManager.GetImplementations<IBaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == typeName);
+            return Start(token, botType, out bot, name, skipUpdates);
         }
 
-        public Task<bool> StartAsync(Type botType, string token, string name = null, bool skipUpdates = false)
+        public bool Start(string token, Type type, out IBaseBot bot, string name = null, bool skipUpdates = false)
         {
-            if (botType == null)
+            if (type == null)
             {
-                throw new ArgumentNullException(nameof(botType));
+                throw new ArgumentNullException(nameof(type));
             }
 
-            var bot = Activator.CreateInstance(botType, ServiceProvider, token, name, skipUpdates) as IBaseBot;
-            return StartAsync(bot);
+            bot = Activator.CreateInstance(type, ServiceProvider, token, name, skipUpdates) as IBaseBot;
+            return Start(bot);
         }
 
-        public async Task<bool> StartAsync(IBaseBot bot)
+        public bool Start(IBaseBot bot)
         {
             if (bot == null)
             {
@@ -61,7 +60,7 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
             if (OnlineBots.FirstOrDefault(it => it.Token == bot.Token) == null && !CandidateBots.Contains(bot.Token))
             {
                 CandidateBots.Add(bot.Token);
-                await bot.StartAsync();
+                bot.StartAsync().Wait();
                 OnlineBots.Add(bot);
                 CandidateBots.RemoveAll(it => it == bot.Token);
                 return true;
@@ -73,13 +72,13 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
             }
         }
 
-        public Task<bool> StopAsync(string username)
+        public bool Stop(string username)
         {
             var bot = OnlineBots.FirstOrDefault(b => b.Username == username);
-            return StopAsync(bot);
+            return Stop(bot);
         }
 
-        public async Task<bool> StopAsync(IBaseBot bot)
+        public bool Stop(IBaseBot bot)
         {
             if (bot == null)
             {
@@ -90,7 +89,7 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
             {
                 CandidateBots.Add(bot.Token);
                 OnlineBots.RemoveAll(it => it.Token == bot.Token);
-                await bot.StopAsync();
+                bot.StopAsync().Wait();
                 CandidateBots.RemoveAll(it => it == bot.Token);
                 return true;
             }

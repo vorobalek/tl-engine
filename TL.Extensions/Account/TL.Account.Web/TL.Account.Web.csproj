@@ -24,10 +24,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Remove="Areas\Account\Views\Profile\Index.cshtml" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
   </ItemGroup>
   

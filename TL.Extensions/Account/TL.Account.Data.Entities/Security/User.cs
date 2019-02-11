@@ -1,14 +1,12 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using TL.Account.Data.Entities.Relationships;
+using TL.Engine.SDK.Entities;
 
 namespace TL.Account.Data.Entities.Security
 {
-    public class User : IEntity
+    public class User : EntityComparableStored<Guid>
     {
-        public Guid Id { get; set; }
-
         public string Username { get; set; }
 
         public string Description { get; set; }
@@ -21,8 +19,6 @@ namespace TL.Account.Data.Entities.Security
 
         public bool IsDeleted { get; set; } = false;
 
-        public DateTime RegistrationDate { get; set; }
-
         public Guid? ReferrerId { get; set; }
 
         public virtual User Referrer { get; set; }
@@ -33,7 +29,7 @@ namespace TL.Account.Data.Entities.Security
 
         public virtual IEnumerable<Subscription> Subscriptions { get; set; }
 
-        public User()
+        public User() : base()
         {
             Referrals = new HashSet<User>();
             UserRoles = new HashSet<UserRole>();

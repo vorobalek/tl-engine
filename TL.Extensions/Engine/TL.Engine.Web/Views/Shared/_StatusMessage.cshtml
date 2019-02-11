@@ -2,16 +2,24 @@
 @{
     var alert_id = Guid.NewGuid().ToString();
     var block_id = Guid.NewGuid().ToString();
+    var date_time = DateTime.Now;
 }
 @if (!String.IsNullOrEmpty(Model))
 {
     <div id="@block_id">
         <div class="alert alert-info alert-dismissible" role="alert" id="@alert_id">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            @Model
+            <span class="glyphicon glyphicon-time"></span>
+            <span id="date-time-@alert_id"></span>
+            <p>
+                @Model
+            </p>
         </div>
 
         <script type="text/javascript">
+            var dt = new Date();
+            var time = ("0" + dt.getHours()).slice(-2) + ":" + ("0" + dt.getMinutes()).slice(-2) + ":" + ("0" + dt.getSeconds()).slice(-2);
+            $(document).find("#date-time-@alert_id").append(time);
             setTimeout(function () {
                 $(document).find("#@alert_id").fadeOut('fast');
                 setTimeout(function () {

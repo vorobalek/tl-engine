@@ -1,12 +1,12 @@
 ﻿using ExtCore.Data.Abstractions;
-using ExtCore.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 using TL.Engine.SDK.Services.TelegramBotProvider;
-using TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram;
+using TL.Integrations.Data.Managers;
+using TL.Integrations.Telegram.Extensions;
+using TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index;
+using TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared;
 
 namespace TL.Integrations.Web.Areas.Integrations.Controllers
 {
@@ -16,10 +16,13 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
 
         IServiceProvider ServiceProvider { get; }
 
-        public TelegramController(IStorage storage, ITelegramBotProviderService telegramBotProvider, IServiceProvider serviceProvider) : base(storage)
+        ITgBotManager TgBotManager { get; }
+
+        public TelegramController(IStorage storage, ITelegramBotProviderService telegramBotProvider, IServiceProvider serviceProvider, ITgBotManager tgBotManager) : base(storage)
         {
             TelegramBotProvider = telegramBotProvider;
             ServiceProvider = serviceProvider;
+            TgBotManager = tgBotManager;
         }
 
         public IActionResult Index()
@@ -30,11 +33,42 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         [HttpPost]
         public IActionResult Update()
         {
-            return PartialView("_OnlineBots", new IndexViewModelFactory().Create(TelegramBotProvider).Bots);
+            return PartialView("_TelegramBots", new TelegramBotsViewModelFactory().Create(Storage, TelegramBotProvider));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Start(IndexViewModel model)
+        public IActionResult StartSaved(string id)
+        {
+            string message;
+            if (Guid.TryParse(id, out Guid guid))
+            {
+                var savedBot = TgBotManager.Get(guid);
+                if (savedBot != null)
+                {
+                    bool f = TelegramBotProvider.DelayedStart(ServiceProvider, savedBot.Token, savedBot.TypeName, out IBaseBot bot, savedBot.Username, savedBot.SkipUpdates, savedBot.AutoStart);
+                    if (f)
+                    {
+                        message = $"Бот @{bot.Username} запущен";
+                    }
+                    else
+                    {
+                        message = $"Не удалось запустить бота @{savedBot.Username}";
+                    }
+                }
+                else
+                {
+                    message = "Не удалось обнаружить бота";
+                }
+            }
+            else
+            {
+                message = "Не удалось разобрать идентефикатор бота";
+            }
+            return PartialView("_StatusMessage", message);
+        }
+
+        [HttpPost]
+        public IActionResult Start(IndexViewModel model)
         {
             string message;
             if (ModelState.IsValid)
@@ -42,10 +76,10 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
                 var parts = model.Token.Split(':');
                 if (parts.Length > 1 && int.TryParse(parts[0], out int id))
                 {
-                    bool f = await TelegramBotProvider.StartAsync(model.BotType, model.Token, null, model.QuietStartup);
+                    bool f = TelegramBotProvider.DelayedStart(ServiceProvider, model.Token, model.BotType, out IBaseBot bot, null, model.SkipUpdates, model.AutoStartup);
                     if (f)
                     {
-                        message = "Бот запущен";
+                        message = $"Бот @{bot.Username} запущен";
                     }
                     else
                     {
@@ -65,17 +99,17 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Kill(string username)
+        public IActionResult Kill(string username)
         {
-            bool f = await TelegramBotProvider.StopAsync(username);
+            bool f = TelegramBotProvider.Stop(username);
             string message;
             if (f)
             {
-                message = "Бот остановлен";
+                message = $"Бот @{username} остановлен";
             }
             else
             {
-                message = "Не удалось остановить бота";
+                message = $"Не удалось остановить бота @{username}";
             }
             return PartialView("_StatusMessage", message);
         }

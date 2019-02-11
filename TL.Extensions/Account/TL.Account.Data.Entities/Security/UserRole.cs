@@ -1,9 +1,9 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
+using TL.Engine.SDK.Entities;
 
 namespace TL.Account.Data.Entities.Security
 {
-    public class UserRole : IEntity
+    public class UserRole : EntityStored
     {
         public Guid UserId { get; set; }
 

@@ -1,18 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using TL.Account.Data.Entities.Security;
-using TL.Account.Data.Managers.User;
+using TL.Account.Data.Managers;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TL.Engine.SDK.Integrations.Telegram.Messages;
-using TL.Integrations.Data.Extensions;
 using TL.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Bots
@@ -88,7 +85,7 @@ namespace TL.Integrations.Telegram.Bots
             await Task.Run(() => MessagesQueue.Enqueue(message));
         }
 
-        protected override async void TgClient_OnUpdate(object sender, UpdateEventArgs e)
+        protected override void TgClient_OnUpdate(object sender, UpdateEventArgs e)
         {
             base.TgClient_OnUpdate(sender, e);
 
@@ -96,52 +93,6 @@ namespace TL.Integrations.Telegram.Bots
             {
                 Logger.TLogWarning($"Обновление {UpdatesSummaryCount} из {SkippedUpdatesCount} проигнорировано.");
                 return;
-            }
-
-            var user = e.Update.GetOrCreateUserAsync(ServiceProvider);
-
-            var hresult = await CommandHandler.ExecuteAsync(e.Update, user);
-            if (hresult.IsOk)
-            {
-                Logger.TLogWarning($"Успешно обработано обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}");
-            }
-            else
-            {
-                if (hresult.IsFill)
-                {
-                    var exceptions = string.Join("\r\n", hresult.Results.Select(r => r.Exception));
-                    await SendAsync(new Message()
-                    {
-                        MessageType = MessageType.Text,
-                        ChatId = e.Update.GetSenderChatId(),
-                        Text = $"‼️ <b>Произошла одна или несколько ошибок!</b>\r\n\r\n" +
-                        $"<pre>{exceptions}</pre>",
-                        ParseMode = ParseMode.Html
-                    });
-                    Logger.TLogError($"Произошла одна или несколько ошибок при обновлении {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}\r\n" +
-                        $"{exceptions}");
-                }
-                else
-                {
-                    var commands_arr = CommandHandler.Methods
-                        .Where(it => (!it.IsPrivate) && (it.UpdateType == UpdateType.Message))
-                        .OrderBy(it => it.Command)
-                        .Select(it => $"{it.Command} {it.Description}");
-
-                    var commands = string.Join("\r\n", commands_arr);
-
-                    await SendAsync(new Message()
-                    {
-                        MessageType = MessageType.Text,
-                        ChatId = e.Update.GetSenderChatId(),
-                        Text = $"‼️ <b>Разработчики ещё не запилили это!</b>\r\n\r\n" +
-                        $"Нет, мы не ленивые, мы работаем. Если вы видите это сообщение, значит скоро тут появится новый функционал. (Разработчик №0)\r\n\r\n" +
-                        $"Тип взаимодействия <b>{e.Update.GetGenericTypeString()}</b> не поддерживается или для него не найден подходящий хэндлер.\r\n\r\n" +
-                        $"🖖🏻 <b>Я вас не понимаю, но вот список команд, которые я в состоянии понять</b>\r\n\r\n{commands}",
-                        ParseMode = ParseMode.Html
-                    });
-                    Logger.TLogWarning($"Обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()} не поддерживается или для него не найден подходящий хэндлер.");
-                }
             }
         }
 

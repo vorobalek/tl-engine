@@ -21,12 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Areas\Integrations\ViewModels\Telegram\Index.cshtml" />
-    <None Remove="Areas\Integrations\Views\Telegram\Index.cshtml" />
-    <None Remove="Areas\Integrations\Views\Telegram\_OnlineBots.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TL.Integrations.Data\TL.Integrations.Data.csproj" />
     <ProjectReference Include="..\TL.Integrations.Telegram\TL.Integrations.Telegram.csproj" />
   </ItemGroup>

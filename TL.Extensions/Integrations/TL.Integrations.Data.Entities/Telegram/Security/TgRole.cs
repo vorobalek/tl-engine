@@ -1,18 +1,16 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TL.Engine.SDK.Entities;
 
 namespace TL.Integrations.Data.Entities.Telegram.Security
 {
-    public class TgRole : IEntity
+    public class TgRole : EntityComparableStored<Guid>
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public virtual IEnumerable<TgUserRole> UserRoles { get; set; }
 
-        public TgRole()
+        public TgRole() : base()
         {
             UserRoles = new HashSet<TgUserRole>();
         }

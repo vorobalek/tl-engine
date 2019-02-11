@@ -2,7 +2,7 @@
 using System.Linq;
 using TL.Engine.SDK.Services.TelegramBotProvider;
 
-namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram
+namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index
 {
     public class IndexViewModelFactory
     {

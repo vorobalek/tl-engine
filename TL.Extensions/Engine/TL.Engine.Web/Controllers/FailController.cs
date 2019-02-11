@@ -57,12 +57,14 @@ namespace TL.Engine.Web.Controllers
             }
             if (ModelState.IsValid)
             {
+                var date = DateTime.Now.ToUniversalTime();
                 var report = new Report()
                 {
                     Author = model.Author,
                     Description = model.Description,
                     Priority = model.Priority as ReportPriority?,
-                    Date = DateTime.Now.ToUniversalTime(),
+                    CreationDate = date,
+                    ModifiedDate = date,
                     Message = model.Message,
                     StackTrace = model.StackTrace
                 };

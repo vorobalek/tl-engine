@@ -12,7 +12,7 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
                 .HasKey(e => new { e.Id });
 
             builder
-                .HasIndex(e => new { e.Token, e.Username, e.TypeName })
+                .HasIndex(e => new { e.Token, e.TypeName })
                 .IsUnique();
 
             builder

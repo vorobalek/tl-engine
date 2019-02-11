@@ -12,7 +12,10 @@ namespace TL.Engine.Data.EntityFramework.Reports
                 .HasKey(e => e.Id);
 
             builder
-                .HasIndex(e => e.Date);
+                .HasIndex(e => e.CreationDate);
+
+            builder
+                .HasIndex(e => e.ModifiedDate);
 
             builder
                 .HasIndex(e => e.Message);

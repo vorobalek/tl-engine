@@ -1,7 +1,7 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.Reports
 {
@@ -20,10 +20,8 @@ namespace TL.Engine.Data.Entities.Reports
         Blocker
     }
 
-    public class Report : IEntity
+    public class Report : EntityComparableStored<Guid>
     {
-        public Guid Id { get; set; }
-
         public Guid? UserId { get; set; }
 
         public virtual User User { get; set; }
@@ -38,6 +36,8 @@ namespace TL.Engine.Data.Entities.Reports
 
         public ReportPriority? Priority { get; set; }
 
-        public DateTime Date { get; set; }
+        public Report() : base()
+        {
+        }
     }
 }

@@ -41,3 +41,31 @@ $(document).ready(function () {
         flexTable();
     };
 });
+
+function server_alert(f, s, r) {
+    if (arguments.length === 0) {
+
+    }
+    else if (arguments.length > 1) {
+        r = r == null ? false : r;
+        $.ajax({
+            url: f + '?' + $(document).find(s).serialize(),
+            type: 'post',
+            success: function (result) {
+                $(document).find('#status-messages-block').append(result);
+                if (r) {
+                    $(document).find(s)[0].reset();
+                }
+            }
+        })
+    }
+    else {
+        $.ajax({
+            url: '/alert?message=' + f,
+            type: 'post',
+            success: function (result) {
+                $(document).find('#status-messages-block').append(result);
+            }
+        })
+    }
+}

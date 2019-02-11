@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 
-namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram
+namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index
 {
     public class IndexViewModel
     {
@@ -13,7 +13,9 @@ namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram
         [Required(ErrorMessage = "Необходимо выбрать логику поведения")]
         public string BotType { get; set; }
 
-        public bool QuietStartup { get; set; }
+        public bool SkipUpdates { get; set; }
+
+        public bool AutoStartup { get; set; }
 
         public SelectList AvailableTypes { get; set; }
 

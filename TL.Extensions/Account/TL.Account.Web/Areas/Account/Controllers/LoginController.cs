@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
-using TL.Account.Data.Managers.User;
+using TL.Account.Data.Managers;
 using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
@@ -29,7 +29,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(LoginViewModel model)
+        public IActionResult Index(LoginViewModel model)
         {
             if (User.Identity.IsAuthenticated)
                 return Redirect(Url.Content("/"));
@@ -56,7 +56,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                             return View(model);
                         }
                     }
-                    await UserManager.AuthenticateAsync(user, HttpContext);
+                    UserManager.Authenticate(user, HttpContext);
                     return Redirect(model.ReturnUrl);
                 }
                 ModelState.AddModelError(string.Empty, "Некорректные логин и(или) пароль");

@@ -16,12 +16,12 @@ namespace TL.Integrations.Data.Abstractions.Telegram.Relationships
 
         void Delete(Guid botId, Guid userId);
 
-        IEnumerable<Guid> Bots(TgUser user);
+        IEnumerable<Guid> GetBots(TgUser user);
 
-        IEnumerable<Guid> Bots(Guid userId);
+        IEnumerable<Guid> GetBots(Guid userId);
 
-        IEnumerable<Guid> Members(TgBot bot);
+        IEnumerable<Guid> GetMembers(TgBot bot);
 
-        IEnumerable<Guid> Members(Guid botId);
+        IEnumerable<Guid> GetMembers(Guid botId);
     }
 }

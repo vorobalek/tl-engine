@@ -1,14 +1,12 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TL.Engine.SDK.Entities;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 
 namespace TL.Integrations.Data.Entities.Telegram.System
 {
-    public class TgBot : IEntity
+    public class TgBot : EntityComparableStored<Guid>
     {
-        public Guid Id { get; set; }
-
         public string Token { get; set; }
 
         public string Username { get; set; }
@@ -23,9 +21,11 @@ namespace TL.Integrations.Data.Entities.Telegram.System
 
         public bool IsRelevant { get; set; }
 
+        public DateTime? LastStartDate { get; set; }
+
         public virtual IEnumerable<TgConnection> Connections { get; set; }
 
-        public TgBot()
+        public TgBot() : base()
         {
             Connections = new HashSet<TgConnection>();
         }

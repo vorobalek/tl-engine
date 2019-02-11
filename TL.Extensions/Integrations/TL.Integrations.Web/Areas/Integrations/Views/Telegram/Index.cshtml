@@ -1,4 +1,4 @@
-﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.IndexViewModel
+﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index.IndexViewModel
 
 @{
     ViewData["Title"] = "Telegram";
@@ -20,8 +20,12 @@
         <span asp-validation-for="@Model.BotType" class="text-danger validation" />
     </div>
     <div class="form-group form-check">
-        <input class="form-check-input" type="checkbox" asp-for="@Model.QuietStartup" checked />
-        <label class="form-check-label" asp-for="@Model.QuietStartup">Игнорировать пропущенные обновления при запуске</label>
+        <input class="form-check-input" type="checkbox" asp-for="@Model.SkipUpdates" checked />
+        <label class="form-check-label" asp-for="@Model.SkipUpdates">Игнорировать пропущенные обновления при запуске</label>
+    </div>
+    <div class="form-group form-check">
+        <input class="form-check-input" type="checkbox" asp-for="@Model.AutoStartup" checked />
+        <label class="form-check-label" asp-for="@Model.AutoStartup">Автоматически запускать при старте системы</label>
     </div>
 </form>
 <div class="form-group">
@@ -31,7 +35,6 @@
 </div>
 <hr />
 <div id="online-bots">
-    <partial name="_OnlineBots" model="@Model.Bots" />
 </div>
 
 @section Scripts {
@@ -40,6 +43,17 @@
         start = function (args) {
             $.ajax({
                 url: '/integrations/telegram/start?' + args,
+                type: 'post',
+                success: function (result) {
+                    $(document).find('#status-messages-block').append(result);
+                    $(document).find('#form-bots')[0].reset();
+                }
+            })
+        }
+
+        startSaved = function (guid) {
+            $.ajax({
+                url: '/integrations/telegram/startsaved?id=' + guid,
                 type: 'post',
                 success: function (result) {
                     $(document).find('#status-messages-block').append(result);

@@ -1,9 +1,9 @@
-﻿using ExtCore.Data.Entities.Abstractions;
-using System;
+﻿using System;
+using TL.Engine.SDK.Entities;
 
 namespace TL.Integrations.Data.Entities.Telegram.Security
 {
-    public class TgUserRole : IEntity
+    public class TgUserRole : EntityStored
     {
         public Guid UserId { get; set; }
 

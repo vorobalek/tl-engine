@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using TL.Account.Data.Extensions;
-using TL.Account.Data.Managers.User;
+using TL.Account.Data.Managers;
 using TL.Account.Web.Areas.Account.ViewModels;
 
 namespace TL.Account.Web.Areas.Account.Controllers
