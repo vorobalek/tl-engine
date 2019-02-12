@@ -55,19 +55,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{088D2108-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{DAF2BD16-CF03-4276-A342-540572166F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data.Entities", "TL.Extensions\Integrations\TL.Integrations.Data.Entities\TL.Integrations.Data.Entities.csproj", "{CDACD8E5-8B0C-4673-A902-2A9931A95429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data.Entities", "TL.Extensions\Integrations\TL.Integrations.Data.Entities\TL.Integrations.Data.Entities.csproj", "{CDACD8E5-8B0C-4673-A902-2A9931A95429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data.Abstractions", "TL.Extensions\Integrations\TL.Integrations.Data.Abstractions\TL.Integrations.Data.Abstractions.csproj", "{02D35E86-4700-4BE5-A464-1984B365DA3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data.Abstractions", "TL.Extensions\Integrations\TL.Integrations.Data.Abstractions\TL.Integrations.Data.Abstractions.csproj", "{02D35E86-4700-4BE5-A464-1984B365DA3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data.EntityFramework", "TL.Extensions\Integrations\TL.Integrations.Data.EntityFramework\TL.Integrations.Data.EntityFramework.csproj", "{D0D471DE-03A1-437A-9DFC-AEBB6D01A03B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data.EntityFramework", "TL.Extensions\Integrations\TL.Integrations.Data.EntityFramework\TL.Integrations.Data.EntityFramework.csproj", "{D0D471DE-03A1-437A-9DFC-AEBB6D01A03B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data", "TL.Extensions\Integrations\TL.Integrations.Data\TL.Integrations.Data.csproj", "{7A5E2605-F612-4EA8-9005-BC243C444088}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data", "TL.Extensions\Integrations\TL.Integrations.Data\TL.Integrations.Data.csproj", "{7A5E2605-F612-4EA8-9005-BC243C444088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Web", "TL.Extensions\Integrations\TL.Integrations.Web\TL.Integrations.Web.csproj", "{0D35EF73-B577-46A0-B6A6-D873EA0B68E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Web", "TL.Extensions\Integrations\TL.Integrations.Web\TL.Integrations.Web.csproj", "{0D35EF73-B577-46A0-B6A6-D873EA0B68E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations", "TL.Extensions\Integrations\TL.Integrations\TL.Integrations.csproj", "{0358DCCD-CC25-460C-8BB8-1D889AD8DB15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations", "TL.Extensions\Integrations\TL.Integrations\TL.Integrations.csproj", "{0358DCCD-CC25-460C-8BB8-1D889AD8DB15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Telegram", "TL.Extensions\Integrations\TL.Integrations.Telegram\TL.Integrations.Telegram.csproj", "{595065FC-EEA6-43F8-8254-3F71618CEEE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Telegram", "TL.Extensions\Integrations\TL.Integrations.Telegram\TL.Integrations.Telegram.csproj", "{595065FC-EEA6-43F8-8254-3F71618CEEE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crm", "Crm", "{9B736275-8C18-47F4-B99E-CC19A31159D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.Entities", "TL.Extensions\Crm\TL.Crm.Data.Entities\TL.Crm.Data.Entities.csproj", "{8CFC90B0-9A96-4BFB-9B94-A0945D78C586}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.Abstractions", "TL.Extensions\Crm\TL.Crm.Data.Abstractions\TL.Crm.Data.Abstractions.csproj", "{609738C3-0C2B-4837-9ADF-FEABCFC0B1CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.EntityFramework", "TL.Extensions\Crm\TL.Crm.Data.EntityFramework\TL.Crm.Data.EntityFramework.csproj", "{35D3E818-88F9-4077-B54E-3F9507F12A00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data", "TL.Extensions\Crm\TL.Crm.Data\TL.Crm.Data.csproj", "{1C47D9B8-5C11-4AE3-84DC-F7412455A44C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Web", "TL.Extensions\Crm\TL.Crm.Web\TL.Crm.Web.csproj", "{11BB8D2A-C1B3-45B6-A690-35F6634993A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm", "TL.Extensions\Crm\TL.Crm\TL.Crm.csproj", "{6D8A4D93-D0FB-4743-AD81-A91A6E6EE63A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,6 +193,30 @@ Global
 		{595065FC-EEA6-43F8-8254-3F71618CEEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{595065FC-EEA6-43F8-8254-3F71618CEEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{595065FC-EEA6-43F8-8254-3F71618CEEE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CFC90B0-9A96-4BFB-9B94-A0945D78C586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CFC90B0-9A96-4BFB-9B94-A0945D78C586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CFC90B0-9A96-4BFB-9B94-A0945D78C586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CFC90B0-9A96-4BFB-9B94-A0945D78C586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{609738C3-0C2B-4837-9ADF-FEABCFC0B1CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{609738C3-0C2B-4837-9ADF-FEABCFC0B1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{609738C3-0C2B-4837-9ADF-FEABCFC0B1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{609738C3-0C2B-4837-9ADF-FEABCFC0B1CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D3E818-88F9-4077-B54E-3F9507F12A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D3E818-88F9-4077-B54E-3F9507F12A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D3E818-88F9-4077-B54E-3F9507F12A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D3E818-88F9-4077-B54E-3F9507F12A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C47D9B8-5C11-4AE3-84DC-F7412455A44C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C47D9B8-5C11-4AE3-84DC-F7412455A44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C47D9B8-5C11-4AE3-84DC-F7412455A44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C47D9B8-5C11-4AE3-84DC-F7412455A44C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11BB8D2A-C1B3-45B6-A690-35F6634993A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11BB8D2A-C1B3-45B6-A690-35F6634993A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11BB8D2A-C1B3-45B6-A690-35F6634993A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11BB8D2A-C1B3-45B6-A690-35F6634993A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8A4D93-D0FB-4743-AD81-A91A6E6EE63A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8A4D93-D0FB-4743-AD81-A91A6E6EE63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8A4D93-D0FB-4743-AD81-A91A6E6EE63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8A4D93-D0FB-4743-AD81-A91A6E6EE63A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -213,6 +251,13 @@ Global
 		{0D35EF73-B577-46A0-B6A6-D873EA0B68E6} = {DAF2BD16-CF03-4276-A342-540572166F7A}
 		{0358DCCD-CC25-460C-8BB8-1D889AD8DB15} = {DAF2BD16-CF03-4276-A342-540572166F7A}
 		{595065FC-EEA6-43F8-8254-3F71618CEEE4} = {DAF2BD16-CF03-4276-A342-540572166F7A}
+		{9B736275-8C18-47F4-B99E-CC19A31159D5} = {0B766231-C411-4BBA-9A38-3BC69CA83D56}
+		{8CFC90B0-9A96-4BFB-9B94-A0945D78C586} = {9B736275-8C18-47F4-B99E-CC19A31159D5}
+		{609738C3-0C2B-4837-9ADF-FEABCFC0B1CF} = {9B736275-8C18-47F4-B99E-CC19A31159D5}
+		{35D3E818-88F9-4077-B54E-3F9507F12A00} = {9B736275-8C18-47F4-B99E-CC19A31159D5}
+		{1C47D9B8-5C11-4AE3-84DC-F7412455A44C} = {9B736275-8C18-47F4-B99E-CC19A31159D5}
+		{11BB8D2A-C1B3-45B6-A690-35F6634993A3} = {9B736275-8C18-47F4-B99E-CC19A31159D5}
+		{6D8A4D93-D0FB-4743-AD81-A91A6E6EE63A} = {9B736275-8C18-47F4-B99E-CC19A31159D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DAD5B3A2-F0CE-4F86-AADC-8EFFB7195955}
