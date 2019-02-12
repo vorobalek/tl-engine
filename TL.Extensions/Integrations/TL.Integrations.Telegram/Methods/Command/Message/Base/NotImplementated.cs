@@ -16,7 +16,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)
         {
-            var commands_arr = (Bot as Bots.BaseBot).CommandHandler.Methods
+            var commands_arr = Bot.CommandHandler.Methods
                .Where(it => (!it.IsPrivate) && (it.UpdateType == global::Telegram.Bot.Types.Enums.UpdateType.Message))
                .OrderBy(it => it.Command)
                .Select(it => $"{it.Command} {it.Description}");

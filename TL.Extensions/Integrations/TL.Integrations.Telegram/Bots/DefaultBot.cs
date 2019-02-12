@@ -11,11 +11,11 @@ namespace TL.Integrations.Telegram.Bots
 {
     public class DefaultBot : BaseBot
     {
-        public DefaultBot(IServiceProvider serviceProvider, string token, string name = null, bool skipUpdates = false) : base(serviceProvider, token, name, skipUpdates)
+        public DefaultBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : this(serviceProvider, token, null, skipUpdates)
         {
         }
 
-        public DefaultBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : base(serviceProvider, token, skipUpdates)
+        public DefaultBot(IServiceProvider serviceProvider, string token, string name = null, bool skipUpdates = false) : base(serviceProvider, token, name, skipUpdates)
         {
         }
 

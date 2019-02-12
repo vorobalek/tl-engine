@@ -15,7 +15,7 @@ namespace TL.Engine.SDK.Extensions
                  .ToList()
                  .ForEach(m =>
                  {
-                     if (handler.Methods.FirstOrDefault(it => it.GetType() == m.GetType()) == null)
+                     if (!handler.Methods.Select(it => it.GetType()).Contains(m.GetType()))
                      {
                          m.Handler = handler;
                          handler.Methods.Add(m);

@@ -17,7 +17,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Default
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)
         {
-            var msg = (Bot as Bots.DefaultBot).GetHelloMessage();
+            var msg = Bot.GetHelloMessage();
             msg.ChatId = message.Chat;
 
             await Bot.SendAsync(msg);

@@ -11,7 +11,14 @@ namespace TL.Integrations.Telegram.Extensions
         public static bool DelayedStart(this ITelegramBotProviderService telegramBotProvider, IServiceProvider serviceProvider, string token, string typeName, out IBaseBot bot, string nativeName = null, bool skipUpdates = true, bool autoStart = true)
         {
             var tgBotManager = serviceProvider.GetService<ITgBotManager>();
-            var tgBot = tgBotManager.GetOrCreate(token, typeName);
+
+            var tgBot = tgBotManager.Get(token, typeName);
+            bool isNewBot = false;
+            if (tgBot == null)
+            {
+                isNewBot = true;
+                tgBot = tgBotManager.Create(token, typeName);
+            }
 
             bool success = telegramBotProvider.Start(token, typeName, out bot, nativeName, skipUpdates);
             if (success)
@@ -21,7 +28,10 @@ namespace TL.Integrations.Telegram.Extensions
             }
             else
             {
-                tgBotManager.Remove(tgBot.Id);
+                if (isNewBot)
+                {
+                    tgBotManager.Remove(tgBot.Id);
+                }
             }
             return false;
         }

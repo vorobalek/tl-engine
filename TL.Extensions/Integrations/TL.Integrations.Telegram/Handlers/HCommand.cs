@@ -3,11 +3,10 @@ using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Handlers
 {
-    public class HCommand : HandlerBase
+    public class HCommand : Handler
     {
-        public HCommand(IBaseBot bot) : base(bot.GetType())
+        public HCommand(IBaseBot bot) : base(bot)
         {
-            Bot = bot;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Default
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
-            var msg = (Bot as Bots.DefaultBot).GetHelloMessage();
+            var msg = Bot.GetHelloMessage();
             msg.ChatId = callbackQuery.Message.Chat;
             msg.IsEditMessage = true;
             msg.EditMessageId = callbackQuery.Message.MessageId;
