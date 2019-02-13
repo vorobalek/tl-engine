@@ -99,7 +99,7 @@ namespace TL.Integrations.Telegram.Bots
 
             var user = e.Update.GetOrCreateUser(this, ServiceProvider);
 
-            var hresult = CommandHandler.ExecuteAsync(e.Update, user).Result;
+            var hresult = CommandHandler.ExecuteAsync(e.Update, ServiceProvider, user).Result;
             if (hresult.IsOk)
             {
                 Logger.TLogWarning($"Успешно обработано обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}");
