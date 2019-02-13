@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using TL.Account.Data.Entities.Security;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.System
 {
-    public class StringVariable : EntityStored
+    public class StringVariable : EntityComparableStored<Guid>
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Value { get; set; }
+
+        public Guid AuthorId { get; set; }
+
+        public User Author { get; set; }
     }
 }

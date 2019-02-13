@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TL.Engine.Data.Entities.System;
 
-namespace TL.Engine.Data.EntityFramework.System
+namespace TL.Engine.Data.EntityFramework.System.StringVariables
 {
-    public class StringVariableConfig : IEntityTypeConfiguration<StringVariable>
+    public class StringVariableConfiguration : IEntityTypeConfiguration<StringVariable>
     {
         public void Configure(EntityTypeBuilder<StringVariable> builder)
         {
@@ -15,8 +12,12 @@ namespace TL.Engine.Data.EntityFramework.System
                 .HasKey(e => e.Id);
 
             builder
-                .HasIndex(e => e.Name)
-                .IsUnique();
+                .HasIndex(e => e.Name);
+
+            builder
+                .HasOne(e => e.Author)
+                .WithMany()
+                .HasForeignKey(e => e.AuthorId);
 
             builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}StringVariables");
