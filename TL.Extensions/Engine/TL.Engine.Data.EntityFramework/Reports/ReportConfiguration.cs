@@ -4,7 +4,7 @@ using TL.Engine.Data.Entities.Reports;
 
 namespace TL.Engine.Data.EntityFramework.Reports
 {
-    public class ExceptionReportConfiguration : IEntityTypeConfiguration<Report>
+    public class ReportConfiguration : IEntityTypeConfiguration<Report>
     {
         public void Configure(EntityTypeBuilder<Report> builder)
         {
@@ -27,7 +27,7 @@ namespace TL.Engine.Data.EntityFramework.Reports
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}ExceptionReports");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}Reports");
         }
     }
 }

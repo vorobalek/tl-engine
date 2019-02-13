@@ -7,7 +7,7 @@ using TL.Engine.Data.Entities.Reports;
 
 namespace TL.Engine.Data.EntityFramework.Reports
 {
-    public class ExceptionReportRepository : RepositoryBase<Report>, IExceptionReportRepository
+    public class ReportRepository : RepositoryBase<Report>, IReportRepository
     {
         public void Add(Report report)
         {

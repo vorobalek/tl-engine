@@ -6,11 +6,11 @@ using System.Text;
 
 namespace TL.Engine.Data.EntityFramework.Reports
 {
-    public class ExceptionReportRegistrar : IEntityRegistrar
+    public class ReportRegistrar : IEntityRegistrar
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
-            modelbuilder.ApplyConfiguration(new ExceptionReportConfiguration());
+            modelbuilder.ApplyConfiguration(new ReportConfiguration());
         }
     }
 }

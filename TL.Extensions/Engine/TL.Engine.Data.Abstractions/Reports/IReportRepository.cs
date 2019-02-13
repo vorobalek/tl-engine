@@ -5,7 +5,7 @@ using TL.Engine.Data.Entities.Reports;
 
 namespace TL.Engine.Data.Abstractions.Reports
 {
-    public interface IExceptionReportRepository : IRepository
+    public interface IReportRepository : IRepository
     {
         IEnumerable<Report> GetAll();
 

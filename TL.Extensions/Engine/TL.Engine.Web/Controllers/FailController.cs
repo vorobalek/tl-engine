@@ -74,7 +74,7 @@ namespace TL.Engine.Web.Controllers
                     report.User = User.GetUser(Storage);
                 }
 
-                Storage.GetRepository<IExceptionReportRepository>().Add(report);
+                Storage.GetRepository<IReportRepository>().Add(report);
                 Storage.Save();
                 message = "Спасибо за ваш фидбек!";
             }
