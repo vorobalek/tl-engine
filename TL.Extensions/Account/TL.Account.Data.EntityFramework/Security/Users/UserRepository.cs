@@ -1,13 +1,13 @@
-﻿using ExtCore.Data.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.EntityFramework.Security.Users
 {
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : EntityRepository<User>, IUserRepository
     {
         public void Add(User user)
         {

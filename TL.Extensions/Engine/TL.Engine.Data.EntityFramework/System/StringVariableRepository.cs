@@ -1,13 +1,13 @@
-﻿using ExtCore.Data.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.Data.Abstractions.System;
 using TL.Engine.Data.Entities.System;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.System
 {
-    public class StringVariableRepository : RepositoryBase<StringVariable>, IStringVariableRepository
+    public class StringVariableRepository : EntityRepository<StringVariable>, IStringVariableRepository
     {
         public IEnumerable<StringVariable> GetAll()
         {

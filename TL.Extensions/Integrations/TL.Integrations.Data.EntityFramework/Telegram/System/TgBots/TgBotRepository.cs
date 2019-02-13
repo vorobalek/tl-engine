@@ -1,13 +1,13 @@
-﻿using ExtCore.Data.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TL.Engine.SDK.Repositories;
 using TL.Integrations.Data.Abstractions.Telegram.System;
 using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
 {
-    public class TgBotRepository : RepositoryBase<TgBot>, ITgBotRepository
+    public class TgBotRepository : EntityRepository<TgBot>, ITgBotRepository
     {
         public void Add(TgBot bot)
         {

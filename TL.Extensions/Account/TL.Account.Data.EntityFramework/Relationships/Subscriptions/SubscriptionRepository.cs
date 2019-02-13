@@ -1,15 +1,14 @@
-﻿using ExtCore.Data.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TL.Account.Data.Abstractions.Relationships;
 using TL.Account.Data.Entities.Relationships;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions
 {
-    public class SubscriptionRepository : RepositoryBase<Subscription>, ISubscriptionRepository
+    public class SubscriptionRepository : EntityRepository<Subscription>, ISubscriptionRepository
     {
         public void Add(User from, User to)
         {

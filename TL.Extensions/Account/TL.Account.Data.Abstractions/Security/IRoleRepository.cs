@@ -1,11 +1,11 @@
-﻿using ExtCore.Data.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.Abstractions.Security
 {
-    public interface IRoleRepository : IRepository
+    public interface IRoleRepository : IEntityRepository<Role>
     {
         IEnumerable<Role> GetAll();
 

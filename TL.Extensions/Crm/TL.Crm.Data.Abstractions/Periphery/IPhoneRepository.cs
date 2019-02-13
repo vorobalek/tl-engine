@@ -1,8 +1,9 @@
-﻿using ExtCore.Data.Abstractions;
+﻿using TL.Crm.Data.Entities.Periphery;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Crm.Data.Abstractions.Periphery
 {
-    public interface IPhoneRepository : IRepository
+    public interface IPhoneRepository : IEntityRepository<Phone>
     {
     }
 }

@@ -1,13 +1,13 @@
-﻿using ExtCore.Data.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.EntityFramework.Security.UsersRoles
 {
-    public class UserRoleRepository : RepositoryBase<UserRole>, IUserRoleRepository
+    public class UserRoleRepository : EntityRepository<UserRole>, IUserRoleRepository
     {
         public IEnumerable<UserRole> GetByUser(User user)
         {

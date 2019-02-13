@@ -1,7 +1,7 @@
-﻿using ExtCore.Data.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TL.Engine.SDK.Repositories;
 using TL.Integrations.Data.Abstractions.Telegram.Relationships;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 using TL.Integrations.Data.Entities.Telegram.Security;
@@ -9,7 +9,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnections
 {
-    public class TgConnectionRepository : RepositoryBase<TgConnection>, ITgConnectionRepository
+    public class TgConnectionRepository : EntityRepository<TgConnection>, ITgConnectionRepository
     {
         public void Add(TgBot bot, TgUser user)
         {

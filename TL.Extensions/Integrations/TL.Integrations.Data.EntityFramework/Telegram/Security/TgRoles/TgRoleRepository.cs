@@ -1,13 +1,13 @@
-﻿using ExtCore.Data.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TL.Engine.SDK.Repositories;
 using TL.Integrations.Data.Abstractions.Telegram.Security;
 using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgRoles
 {
-    public class TgRoleRepository : RepositoryBase<TgRole>, ITgRoleRepository
+    public class TgRoleRepository : EntityRepository<TgRole>, ITgRoleRepository
     {
         public IEnumerable<TgRole> GetAll()
         {

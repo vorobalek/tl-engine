@@ -1,11 +1,12 @@
-﻿using ExtCore.Data.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TL.Account.Data.Entities.Relationships;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.Abstractions.Relationships
 {
-    public interface ISubscriptionRepository : IRepository
+    public interface ISubscriptionRepository : IEntityRepository<Subscription>
     {
         IEnumerable<Guid> Followers(User user);
 

@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="ExtCore.Data.Abstractions" Version="4.0.0" />
     <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="4.0.0" />
+    <PackageReference Include="ExtCore.Data.EntityFramework" Version="4.0.0" />
     <PackageReference Include="ExtCore.Infrastructure" Version="4.0.0" />
     <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
     <PackageReference Include="Telegram.Bot" Version="14.10.0" />

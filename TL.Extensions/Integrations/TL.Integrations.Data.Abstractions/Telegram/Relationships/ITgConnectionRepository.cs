@@ -1,12 +1,13 @@
-﻿using ExtCore.Data.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TL.Engine.SDK.Repositories;
+using TL.Integrations.Data.Entities.Telegram.Relationships;
 using TL.Integrations.Data.Entities.Telegram.Security;
 using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.Abstractions.Telegram.Relationships
 {
-    public interface ITgConnectionRepository : IRepository
+    public interface ITgConnectionRepository : IEntityRepository<TgConnection>
     {
         void Add(TgBot bot, TgUser user);
 

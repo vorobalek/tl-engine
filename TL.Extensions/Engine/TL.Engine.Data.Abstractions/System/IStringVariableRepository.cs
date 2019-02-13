@@ -1,11 +1,11 @@
-﻿using ExtCore.Data.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using TL.Engine.Data.Entities.System;
+using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.System
 {
-    public interface IStringVariableRepository : IRepository
+    public interface IStringVariableRepository : IEntityRepository<StringVariable>
     {
         IEnumerable<StringVariable> GetAll();
 
