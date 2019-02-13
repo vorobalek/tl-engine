@@ -11,17 +11,17 @@ namespace TL.Account.Data.EntityFramework.Security.Roles
     {
         public IEnumerable<Role> GetAll()
         {
-            return dbSet.OrderBy(obj => obj.Name);
+            return dbSet.OrderBy(obj => obj.Name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public Role GetById(Guid id)
         {
-            return dbSet.FirstOrDefault(obj => obj.Id == id);
+            return Load(dbSet.SingleOrDefault(obj => obj.Id == id));
         }
 
         public Role GetByName(string name)
         {
-            return dbSet.FirstOrDefault(obj => obj.Name == name);
+            return Load(dbSet.SingleOrDefault(obj => obj.Name == name));
         }
     }
 }

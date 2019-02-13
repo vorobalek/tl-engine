@@ -16,12 +16,12 @@ namespace TL.Engine.Data.EntityFramework.Reports
 
         public IEnumerable<Report> GetAll()
         {
-            return dbSet.OrderBy(e => e.CreationDate);
+            return dbSet.OrderBy(e => e.CreationDate).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public Report GetById(Guid id)
         {
-            return dbSet.FirstOrDefault(e => e.Id == id);
+            return Load(dbSet.SingleOrDefault(e => e.Id == id));
         }
     }
 }

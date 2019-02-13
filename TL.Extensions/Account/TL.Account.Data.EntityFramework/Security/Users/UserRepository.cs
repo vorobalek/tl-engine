@@ -16,17 +16,17 @@ namespace TL.Account.Data.EntityFramework.Security.Users
 
         public IEnumerable<User> GetAll()
         {
-            return dbSet.OrderBy(obj => obj.Username);
+            return dbSet.OrderBy(obj => obj.Username).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public User GetById(Guid id)
         {
-            return dbSet.FirstOrDefault(obj => obj.Id == id);
+            return Load(dbSet.SingleOrDefault(obj => obj.Id == id));
         }
 
         public User GetByUsername(string username)
         {
-            return dbSet.FirstOrDefault(obj => obj.Username == username);
+            return Load(dbSet.SingleOrDefault(obj => obj.Username == username));
         }
 
         public void Update(User user)

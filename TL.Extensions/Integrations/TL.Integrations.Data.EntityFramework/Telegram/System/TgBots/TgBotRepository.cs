@@ -36,22 +36,22 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
 
         public IEnumerable<TgBot> GetAll()
         {
-            return dbSet.OrderBy(e => e.Username);
+            return dbSet.OrderBy(e => e.Username).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public TgBot GetById(Guid id)
         {
-            return dbSet.FirstOrDefault(e => e.Id == id);
+            return Load(dbSet.SingleOrDefault(e => e.Id == id));
         }
 
         public TgBot GetByTokenAndType(string token, string type)
         {
-            return dbSet.FirstOrDefault(it => it.Token == token && it.TypeName == type);
+            return Load(dbSet.SingleOrDefault(it => it.Token == token && it.TypeName == type));
         }
 
         public IEnumerable<TgBot> GetByUsername(string username)
         {
-            return dbSet.Where(e => e.Username == username);
+            return dbSet.Where(e => e.Username == username).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
     }
 }

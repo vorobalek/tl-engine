@@ -16,22 +16,22 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsers
 
         public IEnumerable<TgUser> GetAll()
         {
-            return dbSet.OrderBy(e => e.Username);
+            return dbSet.OrderBy(e => e.Username).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public IEnumerable<TgUser> GetByAccountId(Guid id)
         {
-            return dbSet.Where(e => e.UserId == id);
+            return dbSet.Where(e => e.UserId == id).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public TgUser GetById(Guid id)
         {
-            return dbSet.FirstOrDefault(e => e.Id == id);
+            return Load(dbSet.SingleOrDefault(e => e.Id == id));
         }
 
         public TgUser GetByTgId(int id)
         {
-            return dbSet.FirstOrDefault(e => e.TgId == id);
+            return Load(dbSet.SingleOrDefault(e => e.TgId == id));
         }
 
         public void Update(TgUser user)

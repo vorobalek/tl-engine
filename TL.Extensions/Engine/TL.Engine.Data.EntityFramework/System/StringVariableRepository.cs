@@ -11,17 +11,17 @@ namespace TL.Engine.Data.EntityFramework.System
     {
         public IEnumerable<StringVariable> GetAll()
         {
-            return dbSet.OrderBy(obj => obj.Name);
+            return dbSet.OrderBy(obj => obj.Name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public StringVariable GetById(Guid id)
         {
-            return dbSet.FirstOrDefault(obj => obj.Id == id);
+            return Load(dbSet.SingleOrDefault(obj => obj.Id == id));
         }
 
         public IEnumerable<StringVariable> GetByName(string name)
         {
-            return dbSet.Where(obj => obj.Name == name);
+            return dbSet.Where(obj => obj.Name == name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id))); ;
         }
     }
 }

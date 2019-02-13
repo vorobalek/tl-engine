@@ -11,17 +11,17 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgRoles
     {
         public IEnumerable<TgRole> GetAll()
         {
-            return dbSet.OrderBy(e => e.Name);
+            return dbSet.OrderBy(e => e.Name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
         }
 
         public TgRole GetById(Guid id)
         {
-            return dbSet.FirstOrDefault(e => e.Id == id);
+            return Load(dbSet.SingleOrDefault(e => e.Id == id));
         }
 
         public TgRole GetByName(string name)
         {
-            return dbSet.FirstOrDefault(e => e.Name == name);
+            return Load(dbSet.SingleOrDefault(e => e.Name == name));
         }
     }
 }
