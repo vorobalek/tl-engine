@@ -15,7 +15,7 @@ namespace TL.Crm.Web
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/crm", "CRM", 1000),
+            new LinkItem("/crm", "Работа с клиентами", 500, new[] { "sa" }),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
