@@ -4,7 +4,7 @@ using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 {
-    public class NotImplementated : BotMessageHCommandMethod
+    public class NotImplementated : BaseBotMessageHCommandMethod
     {
         public override bool IsPrivate => true;
 

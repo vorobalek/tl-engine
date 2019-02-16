@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
+using System.Reflection;
+using TL.Engine.SDK.Attributes.Bots;
 using TL.Engine.SDK.Services.TelegramBotProvider;
 
 namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index
@@ -10,7 +12,9 @@ namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index
         {
             return new IndexViewModel()
             {
-                AvailableTypes = new SelectList(telegramBotProvider.GetBotTypes().OrderBy(t => t.Name).Select(it => it.Name)),
+                AvailableTypes = telegramBotProvider.GetBotTypes()
+                    .Select(it => new SelectListItem((it.GetCustomAttribute(typeof(BotAttribute)) as BotAttribute)?.Name ?? it.Name, it.Name))
+                    .OrderBy(it => it.Text),
                 Bots = telegramBotProvider.GetOnline()
             };
         }

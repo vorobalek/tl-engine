@@ -4,9 +4,9 @@ using TL.Crm.Data.Entities.Periphery;
 
 namespace TL.Crm.Data.EntityFramework.Periphery.Phones
 {
-    public class PhoneConfiguration : IEntityTypeConfiguration<Phone>
+    public class LeadPhoneConfiguration : IEntityTypeConfiguration<LeadPhone>
     {
-        public void Configure(EntityTypeBuilder<Phone> builder)
+        public void Configure(EntityTypeBuilder<LeadPhone> builder)
         {
             builder
                 .HasKey(e => e.Id);
@@ -20,7 +20,7 @@ namespace TL.Crm.Data.EntityFramework.Periphery.Phones
                 .HasForeignKey(e => e.LeadId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}Phones");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}LeadsPhones");
         }
     }
 }

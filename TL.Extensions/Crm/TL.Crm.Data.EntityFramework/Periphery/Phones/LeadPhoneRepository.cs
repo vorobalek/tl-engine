@@ -4,7 +4,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Crm.Data.EntityFramework.Periphery.Phones
 {
-    public class PhoneRepository : EntityRepository<Phone>, IPhoneRepository
+    public class LeadPhoneRepository : EntityRepository<LeadPhone>, ILeadPhoneRepository
     {
     }
 }

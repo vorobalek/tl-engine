@@ -17,7 +17,7 @@ namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index
 
         public bool AutoStartup { get; set; }
 
-        public SelectList AvailableTypes { get; set; }
+        public IEnumerable<SelectListItem> AvailableTypes { get; set; }
 
         public IEnumerable<IBaseBot> Bots { get; set; }
     }

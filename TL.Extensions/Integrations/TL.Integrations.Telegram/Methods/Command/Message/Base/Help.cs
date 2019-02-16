@@ -4,7 +4,7 @@ using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 {
-    public class Help : BotMessageHCommandMethod
+    public class Help : BaseBotMessageHCommandMethod
     {
         public override string Command => "/help";
 

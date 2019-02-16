@@ -1,7 +1,10 @@
 ﻿using System;
+using TL.Engine.SDK.Attributes.Bots;
+using TL.Integrations.Telegram.Bots;
 
-namespace TL.Integrations.Telegram.Bots.Crm
+namespace TL.Crm.Telegram.Bots
 {
+    [Bot("CRM.Клиенты")]
     public class CrmClientBot : BaseBot
     {
         public CrmClientBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : base(serviceProvider, token, skipUpdates)

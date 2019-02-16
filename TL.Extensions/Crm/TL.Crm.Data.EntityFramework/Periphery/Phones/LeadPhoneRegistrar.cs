@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TL.Crm.Data.EntityFramework.Periphery.Phones
 {
-    public class PhoneRegistrar : IEntityRegistrar
+    public class LeadPhoneRegistrar : IEntityRegistrar
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
-            modelbuilder.ApplyConfiguration(new PhoneConfiguration());
+            modelbuilder.ApplyConfiguration(new LeadPhoneConfiguration());
         }
     }
 }

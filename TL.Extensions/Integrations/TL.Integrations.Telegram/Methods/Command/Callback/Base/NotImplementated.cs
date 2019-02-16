@@ -5,7 +5,7 @@ using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 {
-    public class NotImplementated : BotCallbackHCommandMethod
+    public class NotImplementated : BaseBotCallbackHCommandMethod
     {
         public override bool IsPrivate => true;
 

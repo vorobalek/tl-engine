@@ -22,7 +22,7 @@ namespace TL.Crm.Data.Entities.Core
 
         public virtual Contractor Contractor { get; set; }
 
-        public virtual IEnumerable<Phone> Phones { get; set; }
+        public virtual IEnumerable<LeadPhone> Phones { get; set; }
 
         public Guid? OriginalId { get; set; }
 
@@ -32,7 +32,7 @@ namespace TL.Crm.Data.Entities.Core
 
         public Lead() : base()
         {
-            Phones = new HashSet<Phone>();
+            Phones = new HashSet<LeadPhone>();
             Dublicates = new HashSet<Lead>();
         }
     }

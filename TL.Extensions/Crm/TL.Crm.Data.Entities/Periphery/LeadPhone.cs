@@ -4,7 +4,7 @@ using TL.Engine.SDK.Entities;
 
 namespace TL.Crm.Data.Entities.Periphery
 {
-    public class Phone : EntityComparableStored<Guid>
+    public class LeadPhone : EntityComparableStored<Guid>
     {
         public Guid LeadId { get; set; }
 

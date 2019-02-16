@@ -3,7 +3,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Crm.Data.Abstractions.Periphery
 {
-    public interface IPhoneRepository : IEntityRepository<Phone>
+    public interface ILeadPhoneRepository : IEntityRepository<LeadPhone>
     {
     }
 }

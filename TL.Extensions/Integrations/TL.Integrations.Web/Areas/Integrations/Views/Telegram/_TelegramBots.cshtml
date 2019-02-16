@@ -1,4 +1,13 @@
 ﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared.TelegramBotsViewModel
+@using System.Reflection;
+@using TL.Engine.SDK.Attributes.Bots;
+@using TL.Engine.SDK.Integrations.Telegram.Bots;
+
+@{
+    var types = ExtCore.Infrastructure.ExtensionManager
+                .GetImplementations<IBaseBot>()
+                .Where(t => !t.IsAbstract);
+}
 
 <div class="table-responsive">
     <h1>Запущенные боты:</h1>
@@ -22,7 +31,7 @@
                     <tr>
                         <td style="flex-basis: 5%">@i</td>
                         <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
-                        <td style="flex-basis: 15%">@bot.GetType().Name</td>
+                        <td style="flex-basis: 15%">@((bot.GetType().GetCustomAttribute(typeof(BotAttribute)) as BotAttribute)?.Name ?? bot.GetType().Name)</td>
                         <td style="flex-basis: 20%">@bot.Uptime.Days д. @bot.Uptime.Hours ч. @bot.Uptime.Minutes м. @bot.Uptime.Seconds с.</td>
                         <td style="flex-basis: 15%">@bot.RequestsSummaryCount</td>
                         <td style="flex-basis: 15%">@bot.PerformanceMs</td>
@@ -66,7 +75,7 @@
                     <tr>
                         <td style="flex-basis: 5%">@i</td>
                         <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
-                        <td style="flex-basis: 15%">@bot.TypeName</td>
+                        <td style="flex-basis: 15%">@((types.FirstOrDefault(t => t.Name == bot.TypeName)?.GetCustomAttribute(typeof(BotAttribute)) as BotAttribute)?.Name ?? bot.TypeName)</td>
                         <td style="flex-basis: 15%">@(bot.AutoStart ? "Да" : "Нет")</td>
                         <td style="flex-basis: 15%">@(bot.SkipUpdates ? "Да" : "Нет")</td>
                         <td style="flex-basis: 20%">@lineLastStartupDate</td>
