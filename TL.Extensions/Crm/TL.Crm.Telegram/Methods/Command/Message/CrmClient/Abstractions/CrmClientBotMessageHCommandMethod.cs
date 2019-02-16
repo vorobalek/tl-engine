@@ -2,7 +2,7 @@
 using TL.Crm.Telegram.Bots;
 using TL.Integrations.Telegram.Methods.Command.Message;
 
-namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Abstractions
+namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient
 {
     public abstract class CrmClientBotMessageHCommandMethod : MessageHCommandMethod
     {
