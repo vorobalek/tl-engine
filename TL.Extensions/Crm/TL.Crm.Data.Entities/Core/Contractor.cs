@@ -6,11 +6,14 @@ namespace TL.Crm.Data.Entities.Core
 {
     public class Contractor : EntityComparableStored<Guid>
     {
-        public virtual IEnumerable<Lead> Leads { get; set; }
+        public IEnumerable<Lead> Leads { get; set; }
+
+        public IEnumerable<Invite> Invites { get; set; }
 
         public Contractor()
         {
             Leads = new HashSet<Lead>();
+            Invites = new HashSet<Invite>();
         }
     }
 }

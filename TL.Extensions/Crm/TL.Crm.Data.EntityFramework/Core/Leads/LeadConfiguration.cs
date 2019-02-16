@@ -34,6 +34,11 @@ namespace TL.Crm.Data.EntityFramework.Core.Leads
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
+                .HasOne(e => e.Invite)
+                .WithOne(e => e.Referral)
+                .HasForeignKey<Invite>(e => e.RefferalId);
+
+            builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Leads");
         }
     }

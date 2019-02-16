@@ -21,13 +21,13 @@ namespace TL.Account.Data.Entities.Security
 
         public Guid? ReferrerId { get; set; }
 
-        public virtual User Referrer { get; set; }
+        public User Referrer { get; set; }
 
-        public virtual IEnumerable<User> Referrals { get; set; }
+        public IEnumerable<User> Referrals { get; set; }
 
-        public virtual IEnumerable<UserRole> UserRoles { get; set; }
+        public IEnumerable<UserRole> UserRoles { get; set; }
 
-        public virtual IEnumerable<Subscription> Subscriptions { get; set; }
+        public IEnumerable<Subscription> Subscriptions { get; set; }
 
         public User() : base()
         {
