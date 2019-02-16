@@ -17,10 +17,16 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback
                 update.Type == UpdateType.CallbackQuery,
                 update?.CallbackQuery?.Message?.Type == MessageType.Text,
                 !string.IsNullOrWhiteSpace(update?.CallbackQuery?.Data),
-                update?.CallbackQuery?.Data?.StartsWith(Command) ?? false
+                update?.CallbackQuery?.Data?.StartsWith(Command) ?? false,
+                IsRelevantMethod(update?.Message, args)
             };
 
             return rules.All(rule => rule);
+        }
+
+        protected virtual bool IsRelevantMethod(global::Telegram.Bot.Types.Message message, object[] args)
+        {
+            return true;
         }
 
         public override bool IsPolicyAcceptable(Update update, params object[] args)
@@ -28,7 +34,10 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback
             return IsPolicyAcceptable(update.CallbackQuery, args);
         }
 
-        protected abstract bool IsPolicyAcceptable(CallbackQuery callbackQuery, params object[] args);
+        protected virtual bool IsPolicyAcceptable(CallbackQuery callbackQuery, params object[] args)
+        {
+            return true;
+        }
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(Update update, params object[] args)
         {

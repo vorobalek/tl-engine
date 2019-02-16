@@ -123,7 +123,7 @@ namespace TL.Integrations.Telegram.Bots
                 else
                 {
                     var commands_arr = CommandHandler.Methods
-                        .Where(it => (!it.IsPrivate) && (it.UpdateType == UpdateType.Message))
+                        .Where(it => (!it.IsPrivate) && it.IsPolicyAcceptable(e.Update, ServiceProvider, user) && (it.UpdateType == UpdateType.Message))
                         .OrderBy(it => it.Command)
                         .Select(it => $"{it.Command} {it.Description}");
 

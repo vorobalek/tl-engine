@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Telegram.Bot.Types;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Base
@@ -17,7 +18,9 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
         protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)
         {
             var commands_arr = Bot.CommandHandler.Methods
-               .Where(it => (!it.IsPrivate) && (it.UpdateType == global::Telegram.Bot.Types.Enums.UpdateType.Message))
+               .Where(it => (!it.IsPrivate) 
+                   && it.IsPolicyAcceptable(new Update() { Message = message }) 
+                   && (it.UpdateType == global::Telegram.Bot.Types.Enums.UpdateType.Message))
                .OrderBy(it => it.Command)
                .Select(it => $"{it.Command} {it.Description}");
 
