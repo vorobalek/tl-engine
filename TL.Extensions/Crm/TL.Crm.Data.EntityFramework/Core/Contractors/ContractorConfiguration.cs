@@ -22,6 +22,12 @@ namespace TL.Crm.Data.EntityFramework.Core.Contractors
                 .HasForeignKey(e => e.ReferrerId);
 
             builder
+               .HasOne(e => e.Original)
+               .WithMany(e => e.Dublicates)
+               .HasForeignKey(e => e.OriginalId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Contractors");
         }
     }
