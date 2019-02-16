@@ -7,31 +7,11 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.EntityFramework.Security.Users
 {
-    public class UserRepository : EntityRepository<User>, IUserRepository
+    public class UserRepository : EntityComparableStoredRepository<User, Guid>, IUserRepository
     {
-        public void Add(User user)
-        {
-            dbSet.Add(user);
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return dbSet.OrderBy(obj => obj.Username).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
-        }
-
-        public User GetById(Guid id)
-        {
-            return Load(dbSet.SingleOrDefault(obj => obj.Id == id));
-        }
-
         public User GetByUsername(string username)
         {
             return Load(dbSet.SingleOrDefault(obj => obj.Username == username));
-        }
-
-        public void Update(User user)
-        {
-            dbSet.Update(user);
         }
     }
 }

@@ -19,13 +19,5 @@ namespace TL.Account.Data.Abstractions.Relationships
         IEnumerable<Guid> Friends(User user);
 
         IEnumerable<Guid> Friends(Guid userId);
-
-        void Add(User from, User to);
-
-        void Add(Guid from, Guid to);
-
-        void Delete(User from, User to);
-
-        void Delete(Guid from, Guid to);
     }
 }

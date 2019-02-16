@@ -11,16 +11,6 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnecti
 {
     public class TgConnectionRepository : EntityRepository<TgConnection>, ITgConnectionRepository
     {
-        public void Add(TgBot bot, TgUser user)
-        {
-            Add(bot.Id, user.Id);
-        }
-
-        public void Add(Guid botId, Guid userId)
-        {
-            dbSet.Add(new TgConnection() { BotId = botId, UserId = userId });
-        }
-
         public IEnumerable<Guid> GetBots(TgUser user)
         {
             return GetBots(user.Id);
@@ -29,16 +19,6 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnecti
         public IEnumerable<Guid> GetBots(Guid userId)
         {
             return dbSet.Where(e => e.UserId == userId).Select(e => e.BotId);
-        }
-
-        public void Delete(TgBot bot, TgUser user)
-        {
-            Delete(bot.Id, user.Id);
-        }
-
-        public void Delete(Guid botId, Guid userId)
-        {
-            dbSet.Remove(new TgConnection() { BotId = botId, UserId = userId });
         }
 
         public IEnumerable<Guid> GetMembers(TgBot bot)

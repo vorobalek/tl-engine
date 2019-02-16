@@ -97,9 +97,9 @@ namespace TL.Integrations.Data.Managers
             return tgBot;
         }
 
-        public void Remove(Guid guid)
+        public void Remove(TgBot bot)
         {
-            Storage.GetRepository<ITgBotRepository>().Remove(guid);
+            Storage.GetRepository<ITgBotRepository>().Delete(bot);
             Storage.Save();
         }
     }

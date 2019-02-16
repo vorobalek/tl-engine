@@ -5,12 +5,8 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.Abstractions.Security
 {
-    public interface IRoleRepository : IEntityRepository<Role>
+    public interface IRoleRepository : IEntityComparableStoredRepository<Role, Guid>
     {
-        IEnumerable<Role> GetAll();
-
-        Role GetById(Guid id);
-
         Role GetByName(string name);
     }
 }

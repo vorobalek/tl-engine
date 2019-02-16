@@ -8,13 +8,8 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.System.StringVariables
 {
-    public class StringVariableRepository : EntityRepository<StringVariable>, IStringVariableRepository
+    public class StringVariableRepository : EntityComparableStoredRepository<StringVariable, Guid>, IStringVariableRepository
     {
-        public IEnumerable<StringVariable> GetAll()
-        {
-            return dbSet.OrderBy(obj => obj.Name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
-        }
-
         public IEnumerable<StringVariable> GetByAuthor(User user)
         {
             return GetByAuthorId(user.Id);
@@ -23,11 +18,6 @@ namespace TL.Engine.Data.EntityFramework.System.StringVariables
         public IEnumerable<StringVariable> GetByAuthorId(Guid guid)
         {
             return dbSet.Where(obj => obj.AuthorId == guid).OrderBy(obj => obj.Name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
-        }
-
-        public StringVariable GetById(Guid id)
-        {
-            return Load(dbSet.SingleOrDefault(obj => obj.Id == id));
         }
 
         public IEnumerable<StringVariable> GetByName(string name)

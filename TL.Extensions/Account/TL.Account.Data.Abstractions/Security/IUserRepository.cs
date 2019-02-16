@@ -5,16 +5,8 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.Abstractions.Security
 {
-    public interface IUserRepository : IEntityRepository<User>
+    public interface IUserRepository : IEntityComparableStoredRepository<User, Guid>
     {
-        IEnumerable<User> GetAll();
-
-        User GetById(Guid id);
-
         User GetByUsername(string username);
-
-        void Add(User user);
-
-        void Update(User user);
     }
 }

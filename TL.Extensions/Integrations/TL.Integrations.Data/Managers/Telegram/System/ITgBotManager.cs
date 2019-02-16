@@ -16,6 +16,6 @@ namespace TL.Integrations.Data.Managers
 
         TgBot UpdateOrCreate(string token, string typename, string username = null, string nativename = null, bool skip_updates = true, bool auto_start = false, DateTime? lastStartupDate = null);
 
-        void Remove(Guid id);
+        void Remove(TgBot bot);
     }
 }

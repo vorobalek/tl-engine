@@ -5,12 +5,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.Reports
 {
-    public interface IReportRepository : IEntityRepository<Report>
+    public interface IReportRepository : IEntityComparableStoredRepository<Report, Guid>
     {
-        IEnumerable<Report> GetAll();
-
-        Report GetById(Guid id);
-
-        void Add(Report report);
     }
 }

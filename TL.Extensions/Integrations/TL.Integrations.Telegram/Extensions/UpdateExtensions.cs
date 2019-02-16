@@ -10,6 +10,7 @@ using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 using TL.Integrations.Data.Abstractions.Telegram.Relationships;
 using TL.Integrations.Data.Abstractions.Telegram.Security;
+using TL.Integrations.Data.Entities.Telegram.Relationships;
 using TL.Integrations.Data.Managers;
 using User = TL.Account.Data.Entities.Security.User;
 
@@ -39,7 +40,7 @@ namespace TL.Integrations.Telegram.Extensions
                         tgUser.Username = update.Message.From.Username;
                         storage.GetRepository<ITgUserRepository>().Update(tgUser);
 
-                        tgConnectionRepository.Add(tgBot, tgUser);
+                        tgConnectionRepository.Add(new TgConnection() { Bot = tgBot, User = tgUser });
                         storage.Save();
                     }
                 }

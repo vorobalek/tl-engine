@@ -2,11 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using TL.Crm.Data.Abstractions.Core;
+using TL.Crm.Data.Abstractions.Periphery;
 using TL.Crm.Data.Entities.Core;
+using TL.Crm.Data.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TLUser = TL.Account.Data.Entities.Security.User;
 
@@ -34,6 +37,42 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient
                             User = user,
                         });
                         storage.Save();
+                    }
+
+                    if (lead.Invite == null)
+                    {
+                        //Запрашиваем инвайт
+                    }
+                    else
+                    {
+                        var invite = storage.GetRepository<IInviteRepository>().GetById(lead.InviteId.Value);
+                        if (invite != null)
+                        {
+                            if (!invite.IsActivated)
+                            {
+                                var contractor = storage.GetRepository<IContractorRepository>().GetById(invite.ReferrerId).GetOriginal(storage);
+
+                                //Ваш контрагент передает вам привет и предлагает зарегистрироваться)
+                                //Запрашиваем номер телефона
+                                //Активируем инвайт
+                            }
+                            else
+                            {
+                                if (lead.Phones.Count() > 0)
+                                {
+                                    var leadPhones = lead.Phones.Select(e => storage.GetRepository<ILeadPhoneRepository>().GetById(e.Id));
+                                    //Запрашиваем ФИО
+                                }
+                                else
+                                {
+                                    //запрашиваем номер телефона
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //Инвайт не найден или недействителен
+                        }
                     }
                 }
             }

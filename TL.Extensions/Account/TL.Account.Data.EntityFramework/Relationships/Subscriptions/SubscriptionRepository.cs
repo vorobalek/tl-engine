@@ -10,26 +10,6 @@ namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions
 {
     public class SubscriptionRepository : EntityRepository<Subscription>, ISubscriptionRepository
     {
-        public void Add(User from, User to)
-        {
-            Add(from.Id, to.Id);
-        }
-
-        public void Add(Guid from, Guid to)
-        {
-            dbSet.Add(new Subscription() { FromId = from, ToId = to });
-        }
-
-        public void Delete(User from, User to)
-        {
-            Delete(from.Id, to.Id);
-        }
-
-        public void Delete(Guid from, Guid to)
-        {
-            dbSet.Remove(new Subscription() { FromId = from, ToId = to });
-        }
-
         public IEnumerable<Guid> Followers(User user)
         {
             return Followers(user.Id);

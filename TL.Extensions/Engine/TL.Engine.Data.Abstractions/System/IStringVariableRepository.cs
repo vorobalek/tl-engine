@@ -6,12 +6,8 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.System
 {
-    public interface IStringVariableRepository : IEntityRepository<StringVariable>
+    public interface IStringVariableRepository : IEntityComparableStoredRepository<StringVariable, Guid>
     {
-        IEnumerable<StringVariable> GetAll();
-
-        StringVariable GetById(Guid id);
-
         IEnumerable<StringVariable> GetByName(string name);
 
         IEnumerable<StringVariable> GetByAuthor(User user);

@@ -30,7 +30,7 @@ namespace TL.Integrations.Telegram.Extensions
             {
                 if (isNewBot)
                 {
-                    tgBotManager.Remove(tgBot.Id);
+                    tgBotManager.Remove(tgBot);
                 }
             }
             return false;

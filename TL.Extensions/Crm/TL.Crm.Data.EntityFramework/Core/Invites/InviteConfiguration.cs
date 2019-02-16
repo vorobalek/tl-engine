@@ -14,8 +14,7 @@ namespace TL.Crm.Data.EntityFramework.Core.Invites
             builder
                 .HasOne(e => e.Referral)
                 .WithOne(e => e.Invite)
-                .HasForeignKey<Lead>(e => e.InviteId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey<Lead>(e => e.InviteId);
 
             builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Invites");

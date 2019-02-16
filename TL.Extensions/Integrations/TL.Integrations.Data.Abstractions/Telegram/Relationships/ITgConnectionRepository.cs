@@ -9,14 +9,6 @@ namespace TL.Integrations.Data.Abstractions.Telegram.Relationships
 {
     public interface ITgConnectionRepository : IEntityRepository<TgConnection>
     {
-        void Add(TgBot bot, TgUser user);
-
-        void Add(Guid botId, Guid userId);
-
-        void Delete(TgBot bot, TgUser user);
-
-        void Delete(Guid botId, Guid userId);
-
         IEnumerable<Guid> GetBots(TgUser user);
 
         IEnumerable<Guid> GetBots(Guid userId);
