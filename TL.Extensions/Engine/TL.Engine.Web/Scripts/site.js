@@ -42,9 +42,25 @@ $(document).ready(function () {
     };
 });
 
-function server_alert(f, s, r) {
-    if (arguments.length === 0) {
+function _alert(f) {
+    $.ajax({
+        url: '/alert?message=' + f,
+        type: 'post',
+        success: function (result) {
+            $(document).find('#status-messages-block').append(result);
+        }
+    })
+}
 
+function server_alert(f, s, r) {
+    if (arguments.length == 1) {
+        $.ajax({
+            url: f,
+            type: 'post',
+            success: function (result) {
+                $(document).find('#status-messages-block').append(result);
+            }
+        })
     }
     else if (arguments.length > 1) {
         r = r == null ? false : r;
@@ -56,15 +72,6 @@ function server_alert(f, s, r) {
                 if (r) {
                     $(document).find(s)[0].reset();
                 }
-            }
-        })
-    }
-    else {
-        $.ajax({
-            url: '/alert?message=' + f,
-            type: 'post',
-            success: function (result) {
-                $(document).find('#status-messages-block').append(result);
             }
         })
     }

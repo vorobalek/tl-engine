@@ -29,7 +29,7 @@
     </div>
 </form>
 <div class="form-group">
-    <button id="submit" class="btn btn-success" onclick="start($('#form-bots').serialize())">
+    <button id="submit" class="btn btn-success" onclick="start()">
         Запустить
     </button>
 </div>
@@ -40,36 +40,17 @@
 @section Scripts {
     <script type="text/javascript">
 
-        start = function (args) {
-            $.ajax({
-                url: '/integrations/telegram/start?' + args,
-                type: 'post',
-                success: function (result) {
-                    $(document).find('#status-messages-block').append(result);
-                    $(document).find('#form-bots')[0].reset();
-                }
-            })
+        start = function () {
+            server_alert('/integrations/telegram/start', '#form-bots', true);
         }
 
         startSaved = function (guid) {
-            $.ajax({
-                url: '/integrations/telegram/startsaved?id=' + guid,
-                type: 'post',
-                success: function (result) {
-                    $(document).find('#status-messages-block').append(result);
-                    $(document).find('#form-bots')[0].reset();
-                }
-            })
+            server_alert('/integrations/telegram/startsaved?id=' + guid);
+            $(document).find('#form-bots')[0].reset();
         }
 
         kill = function (username) {
-            $.ajax({
-                url: "/integrations/telegram/kill?username=" + username,
-                type: "post",
-                success: function (result) {
-                    $(document).find('#status-messages-block').append(result);
-                }
-            });
+            server_alert('/integrations/telegram/kill?username=' + username);
         }
 
         update = function () {
