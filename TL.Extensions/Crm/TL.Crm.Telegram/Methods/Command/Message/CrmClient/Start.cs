@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 using TL.Crm.Data.Abstractions.Core;
 using TL.Crm.Data.Abstractions.Periphery;
 using TL.Crm.Data.Entities.Core;
@@ -55,6 +57,20 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient
                                 //Ваш контрагент передает вам привет и предлагает зарегистрироваться)
                                 //Запрашиваем номер телефона
                                 //Активируем инвайт
+
+                                await Bot.SendAsync(new Engine.SDK.Integrations.Telegram.Messages.Message()
+                                {
+                                    ChatId = message.From.Id,
+                                    MessageType = MessageType.Text,
+                                    Text = "Номер телефона, пожалуйста",
+                                    ReplyMarkup = new ReplyKeyboardMarkup(new[]
+                                    {
+                                        new[]
+                                        {
+                                            KeyboardButton.WithRequestContact("Отправить номер"),
+                                        }
+                                    }, true, true)
+                                });
                             }
                             else
                             {
