@@ -16,7 +16,6 @@ namespace TL.Engine.Web.Controllers
 
         public ILogger<ErrorController> Logger { get; }
 
-        [AllowAnonymous]
         [HttpGet("{code}")]
         public IActionResult Index(int code)
         {

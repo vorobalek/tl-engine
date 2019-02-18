@@ -14,7 +14,6 @@ using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers
 {
-    [Route("/fail")]
     public class FailController : Controller
     {
         public FailController(IStorage storage, ILogger<FailController> logger)
@@ -27,8 +26,27 @@ namespace TL.Engine.Web.Controllers
 
         public ILogger<FailController> Logger { get; }
 
-        [AllowAnonymous]
+        [HttpGet]
         public IActionResult Index()
+        {
+            var ex = HttpContext.Features.Get<IExceptionHandlerFeature>();
+            var model = new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                Message = ex?.Error?.Message,
+                StackTrace = ex?.Error?.ToString(),
+                ReturnUrl = Request.Headers["Referer"].ToString(),
+                StatusCode = 500
+            };
+            if (User.Identity.IsAuthenticated)
+            {
+                model.Author = User.Identity.Name;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Index(object foo)
         {
             var ex = HttpContext.Features.Get<IExceptionHandlerFeature>();
             var model = new ErrorViewModel
@@ -49,7 +67,7 @@ namespace TL.Engine.Web.Controllers
         [HttpPost]
         public IActionResult Report(ErrorViewModel model)
         {
-            string message;
+            string message = "";
 
             if (!string.IsNullOrWhiteSpace(model.StackTrace))
             {

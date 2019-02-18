@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TL.Engine.Web.Controllers
 {
-    [AllowAnonymous]
     public class DeniedController : Controller
     {
         public IActionResult Index()
