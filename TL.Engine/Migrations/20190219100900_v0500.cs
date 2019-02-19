@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TL.Engine.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class v0500 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

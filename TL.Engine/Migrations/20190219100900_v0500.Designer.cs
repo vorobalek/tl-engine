@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TL.Engine.Migrations
 {
     [DbContext(typeof(StorageContext))]
-    [Migration("20190218123348_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190219100900_v0500")]
+    partial class v0500
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
