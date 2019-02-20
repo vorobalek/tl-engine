@@ -4,26 +4,21 @@ using System;
 using System.Collections.Generic;
 using TL.Account.Data.Managers;
 using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Managers;
 using TL.Integrations.Data.Abstractions.Telegram.Security;
 using TL.Integrations.Data.Entities.Telegram.Security;
 using TL.Integrations.Data.Extensions;
 
 namespace TL.Integrations.Data.Managers
 {
-    public class TgUserManager : ITgUserManager
+    public class TgUserManager : EntityComparableStoredManager<TgUser, Guid>,  ITgUserManager
     {
-        public IStorage Storage { get; }
-
-        public ILogger Logger { get; }
+        public TgUserManager(IUserManager userManager, IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
+        {
+            UserManager = userManager;
+        }
 
         public IUserManager UserManager { get; }
-
-        public TgUserManager(IStorage storage, IUserManager userManager, ILoggerFactory loggerFactory)
-        {
-            Storage = storage;
-            UserManager = userManager;
-            Logger = loggerFactory.CreateLogger(GetType());
-        }
 
         public TgUser Create(int id, string username = null, string firstname = null, string lastname = null)
         {
@@ -63,11 +58,6 @@ namespace TL.Integrations.Data.Managers
         }
 
         public TgUser Get(int id)
-        {
-            return id.GetTgUser(Storage);
-        }
-
-        public TgUser Get(Guid id)
         {
             return id.GetTgUser(Storage);
         }

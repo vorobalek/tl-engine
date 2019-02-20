@@ -2,6 +2,7 @@
 using System;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 using TL.Engine.SDK.Services.TelegramBotProvider;
+using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
 
 namespace TL.Integrations.Telegram.Extensions
@@ -12,25 +13,41 @@ namespace TL.Integrations.Telegram.Extensions
         {
             var tgBotManager = serviceProvider.GetService<ITgBotManager>();
 
-            var tgBot = tgBotManager.Get(token, typeName);
+            var tgBot = tgBotManager.Get(e => e.Token == token && e.TypeName == typeName);
+
             bool isNewBot = false;
             if (tgBot == null)
             {
                 isNewBot = true;
-                tgBot = tgBotManager.Create(token, typeName);
+                tgBot = tgBotManager.Create(new TgBot()
+                {
+                    Token = token,
+                    TypeName = typeName,
+                    NativeName = nativeName,
+                    SkipUpdates = skipUpdates,
+                    AutoStart = autoStart
+                });
             }
 
+            tgBot.State = TgBotState.Start;
+            tgBotManager.Update(tgBot);
+
             bool success = telegramBotProvider.Start(token, typeName, out bot, nativeName, skipUpdates);
+
             if (success)
             {
-                tgBotManager.UpdateOrCreate(token, typeName, bot.Username, nativeName, skipUpdates, autoStart, DateTime.Now.ToUniversalTime());
+                tgBot.State = TgBotState.Run;
+                tgBot.Username = bot.Username;
+                tgBot.LastStartDate = DateTime.Now.ToUniversalTime();
+
+                tgBotManager.Update(tgBot);
                 return true;
             }
             else
             {
                 if (isNewBot)
                 {
-                    tgBotManager.Remove(tgBot);
+                    tgBotManager.Delete(tgBot);
                 }
             }
             return false;

@@ -10,7 +10,7 @@ namespace TL.Crm.Data.Extensions
         {
             if (contractor.OriginalId == null) return contractor;
 
-            return storage.GetRepository<IContractorRepository>().GetById(contractor.OriginalId.Value).GetOriginal(storage);
+            return storage.GetRepository<IContractorRepository>().Get(contractor.OriginalId.Value).GetOriginal(storage);
         }
     }
 }

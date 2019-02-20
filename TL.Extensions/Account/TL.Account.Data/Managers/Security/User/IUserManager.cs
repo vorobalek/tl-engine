@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using TL.Account.Data.Entities.Security;
+using TL.Engine.SDK.Managers;
 
 namespace TL.Account.Data.Managers
 {
-    public interface IUserManager
+    public interface IUserManager : IEntityComparableStoredManager<User, Guid>
     {
-        User Get(Guid id);
-
         User Get(string username);
 
         User Create(string username, string password, string description = null);

@@ -16,6 +16,10 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
                 .IsUnique();
 
             builder
+                .Property(e => e.State)
+                .HasDefaultValue(TgBotState.None);
+
+            builder
                 .HasMany(e => e.Connections)
                 .WithOne(e => e.Bot)
                 .HasForeignKey(e => e.BotId);

@@ -47,12 +47,12 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient
                     }
                     else
                     {
-                        var invite = storage.GetRepository<IInviteRepository>().GetById(lead.InviteId.Value);
+                        var invite = storage.GetRepository<IInviteRepository>().Get(lead.InviteId.Value);
                         if (invite != null)
                         {
                             if (!invite.IsActivated)
                             {
-                                var contractor = storage.GetRepository<IContractorRepository>().GetById(invite.ReferrerId).GetOriginal(storage);
+                                var contractor = storage.GetRepository<IContractorRepository>().Get(invite.ReferrerId).GetOriginal(storage);
 
                                 //Ваш контрагент передает вам привет и предлагает зарегистрироваться)
                                 //Запрашиваем номер телефона
@@ -76,7 +76,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient
                             {
                                 if (lead.Phones.Count() > 0)
                                 {
-                                    var leadPhones = lead.Phones.Select(e => storage.GetRepository<ILeadPhoneRepository>().GetById(e.Id));
+                                    var leadPhones = lead.Phones.Select(e => storage.GetRepository<ILeadPhoneRepository>().Get(e.Id));
                                     //Запрашиваем ФИО
                                 }
                                 else

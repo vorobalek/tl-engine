@@ -1,13 +1,12 @@
 ﻿using System;
+using TL.Engine.SDK.Managers;
 using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.Managers
 {
-    public interface ITgUserManager
+    public interface ITgUserManager : IEntityComparableStoredManager<TgUser, Guid>
     {
         TgUser Get(int id);
-
-        TgUser Get(Guid id);
 
         TgUser Create(int id, string username = null, string firstname = null, string lastname = null);
 

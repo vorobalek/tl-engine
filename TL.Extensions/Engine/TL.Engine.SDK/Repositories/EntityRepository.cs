@@ -8,7 +8,7 @@ namespace TL.Engine.SDK.Repositories
 {
     public abstract class EntityRepository<TEntity> : RepositoryBase<TEntity>, IEntityRepository<TEntity> where TEntity : class, IEntity
     {
-        public TEntity Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
             if (entity is IEntityStored entityStored)
             {
@@ -19,17 +19,27 @@ namespace TL.Engine.SDK.Repositories
             return Load(dbSet.Add(entity).Entity);
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             dbSet.Remove(entity);
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual TEntity Get(Func<TEntity, bool> predicate)
         {
-            return dbSet.Select(e => Load(e));
+            return Load(dbSet.SingleOrDefault(e => predicate(e)));
         }
 
-        public TEntity Update(TEntity entity)
+        public virtual IEnumerable<TEntity> GetAll()
+        {
+            return GetAll(e => true);
+        }
+
+        public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate)
+        {
+            return dbSet.Where(e => predicate(e)).Select(e => Load(e));
+        }
+
+        public virtual TEntity Update(TEntity entity)
         {
             if (entity is IEntityStored entityStored)
             {

@@ -2,32 +2,21 @@
 using Microsoft.Extensions.Logging;
 using System;
 using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Managers;
 using TL.Engine.SDK.Services.TelegramBotProvider;
 using TL.Integrations.Data.Abstractions.Telegram.System;
 using TL.Integrations.Data.Entities.Telegram.System;
-using TL.Integrations.Data.Extensions;
 
 namespace TL.Integrations.Data.Managers
 {
-    public class TgBotManager : ITgBotManager
+    public class TgBotManager : EntityComparableStoredManager<TgBot, Guid>, ITgBotManager
     {
-        public IStorage Storage { get; }
-
-        public ILogger Logger { get; }
-
-        public ITelegramBotProviderService TelegramBotProvider { get; }
-
-        public TgBotManager(IStorage storage, ITelegramBotProviderService telegramBotProvider, ILoggerFactory loggerFactory)
+        public TgBotManager(ITelegramBotProviderService telegramBotProvider, IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
         {
-            Storage = storage;
-            Logger = loggerFactory.CreateLogger(GetType());
             TelegramBotProvider = telegramBotProvider;
         }
 
-        public TgBot Get(Guid id)
-        {
-            return id.GetTgBot(Storage);
-        }
+        public ITelegramBotProviderService TelegramBotProvider { get; }
 
         public TgBot Get(string token, string typename)
         {
@@ -95,12 +84,6 @@ namespace TL.Integrations.Data.Managers
                 Storage.Save();
             }
             return tgBot;
-        }
-
-        public void Remove(TgBot bot)
-        {
-            Storage.GetRepository<ITgBotRepository>().Delete(bot);
-            Storage.Save();
         }
     }
 }

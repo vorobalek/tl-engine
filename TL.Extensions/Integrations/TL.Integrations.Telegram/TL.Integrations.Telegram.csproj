@@ -8,6 +8,10 @@
     <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
     <ProjectReference Include="..\TL.Integrations.Data\TL.Integrations.Data.csproj" />

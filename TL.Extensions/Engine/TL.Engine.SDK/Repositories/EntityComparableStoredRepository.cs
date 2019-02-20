@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.SDK.Repositories
@@ -8,9 +7,9 @@ namespace TL.Engine.SDK.Repositories
         where TEntity : EntityComparableStored<TKey>
         where TKey : IComparable
     {
-        public TEntity GetById(TKey key)
+        public TEntity Get(TKey key)
         {
-            return Load(dbSet.SingleOrDefault(e => e.Id.Equals(key)));
+            return Get(e => e.Id.Equals(key));
         }
     }
 }

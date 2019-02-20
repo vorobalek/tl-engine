@@ -9,7 +9,7 @@ namespace TL.Account.Data.Extensions
     {
         public static User GetUser(this Guid uid, IStorage storage)
         {
-            var user = storage.GetRepository<IUserRepository>().GetById(uid);
+            var user = storage.GetRepository<IUserRepository>().Get(uid);
             return user;
         }
     }

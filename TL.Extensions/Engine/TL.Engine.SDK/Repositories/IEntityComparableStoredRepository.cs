@@ -7,6 +7,6 @@ namespace TL.Engine.SDK.Repositories
         where TEntity : EntityComparableStored<TKey>
         where TKey : IComparable
     {
-        TEntity GetById(TKey key);
+        TEntity Get(TKey key);
     }
 }

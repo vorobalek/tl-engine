@@ -9,24 +9,14 @@ using TL.Account.Data.Entities.Relationships;
 using TL.Account.Data.Entities.Security;
 using TL.Account.Data.Extensions;
 using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Managers;
 
 namespace TL.Account.Data.Managers
 {
-    public class UserManager : IUserManager
+    public class UserManager : EntityComparableStoredManager<User, Guid>, IUserManager
     {
-        IStorage Storage { get; }
-
-        ILogger Logger { get; }
-
-        public UserManager(IStorage storage, ILoggerFactory loggerFactory)
+        public UserManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
         {
-            Storage = storage;
-            Logger = loggerFactory.CreateLogger(GetType());
-        }
-
-        public User Get(Guid id)
-        {
-            return id.GetUser(Storage);
         }
 
         public User Get(string username)

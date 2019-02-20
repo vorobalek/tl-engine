@@ -1,8 +1,10 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 using TL.Engine.SDK.Services.TelegramBotProvider;
+using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
 using TL.Integrations.Telegram.Extensions;
 using TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index;
@@ -101,15 +103,32 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         [HttpPost]
         public IActionResult Kill(string username)
         {
-            bool f = TelegramBotProvider.Stop(username);
             string message;
-            if (f)
+            var bot = TelegramBotProvider.GetOnline().FirstOrDefault(e => e.Username == username);
+            if (bot == null)
             {
-                message = $"Бот @{username} остановлен";
+                message = $"Бот с именем @{username} не был запущен";
             }
             else
             {
-                message = $"Не удалось остановить бота @{username}";
+                var tgBot = TgBotManager.Get(e => e.Token == bot.Token && e.TypeName == bot.GetType().Name);
+                var oldState = tgBot.State;
+                tgBot.State = TgBotState.Pause;
+                TgBotManager.Update(tgBot);
+
+                bool f = TelegramBotProvider.Stop(username);
+                if (f)
+                {
+                    tgBot.State = TgBotState.Stop;
+                    TgBotManager.Update(tgBot);
+                    message = $"Бот @{username} остановлен";
+                }
+                else
+                {
+                    tgBot.State = oldState;
+                    TgBotManager.Update(tgBot);
+                    message = $"Не удалось остановить бота @{username}";
+                }
             }
             return PartialView("_StatusMessage", message);
         }

@@ -1,8 +1,9 @@
 ﻿@model TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared.TelegramBotsViewModel
 @using System.Reflection;
+@using TL.Engine.SDK.Extensions;
 @using TL.Engine.SDK.Attributes.Bots;
 @using TL.Engine.SDK.Integrations.Telegram.Bots;
-
+@using TL.Integrations.Data.Entities.Telegram.System;
 @{
     var types = ExtCore.Infrastructure.ExtensionManager
                 .GetImplementations<IBaseBot>()
@@ -28,6 +29,7 @@
                 var i = 1;
                 foreach (var bot in Model.ActiveBots.OrderBy(b => b.Uptime))
                 {
+                    var tgBot = Model.SavedBots.FirstOrDefault(e => e.Token == bot.Token && e.TypeName == bot.GetType().Name);
                     <tr>
                         <td style="flex-basis: 5%">@i</td>
                         <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
@@ -36,7 +38,7 @@
                         <td style="flex-basis: 15%">@bot.RequestsSummaryCount</td>
                         <td style="flex-basis: 15%">@bot.PerformanceMs</td>
                         <td style="flex-basis: 15%">
-                            <button class="btn btn-danger" onclick="kill('@bot.Username')">Остановить</button>
+                            <button class="btn btn-danger" onclick="kill('@bot.Username')">@(tgBot == null ? "Остановить" : tgBot.State.DisplayName())</button>
                         </td>
                     </tr>
                     ++i;
@@ -60,18 +62,24 @@
         </thead>
         <tbody>
             @{
-                foreach (var bot in Model.SavedNoActive.OrderByDescending(b => b.LastStartDate))
+                foreach (var bot in Model.SavedBots.OrderByDescending(b => b.LastStartDate))
                 {
-                    string lineLastStartupDate;
-                    if (bot.LastStartDate.HasValue)
+                    if (bot.State == TgBotState.Run)
                     {
-                        var dt = DateTime.Now.ToUniversalTime() - bot.LastStartDate.Value;
-                        lineLastStartupDate = $"{dt.Days} д. {dt.Hours} ч. {dt.Minutes} м. {dt.Seconds} с. назад";
+                        continue;
                     }
                     else
                     {
-                        lineLastStartupDate = "не запускался прежде";
-                    }
+                        string lineLastStartupDate;
+                        if (bot.LastStartDate.HasValue)
+                        {
+                            var dt = DateTime.Now.ToUniversalTime() - bot.LastStartDate.Value;
+                            lineLastStartupDate = $"{dt.Days} д. {dt.Hours} ч. {dt.Minutes} м. {dt.Seconds} с. назад";
+                        }
+                        else
+                        {
+                            lineLastStartupDate = "не запускался прежде";
+                        }
                     <tr>
                         <td style="flex-basis: 5%">@i</td>
                         <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
@@ -80,12 +88,13 @@
                         <td style="flex-basis: 15%">@(bot.SkipUpdates ? "Да" : "Нет")</td>
                         <td style="flex-basis: 20%">@lineLastStartupDate</td>
                         <td style="flex-basis: 15%">
-                            <button class="btn btn-success" onclick="startSaved('@bot.Id.ToString()')">Запустить</button>
+                            <button class="btn btn-success" onclick="startSaved('@bot.Id.ToString()')">@bot.State.DisplayName()</button>
                         </td>
                     </tr>
-                    ++i;
+                            ++i;
+                        }
+                    }
                 }
-            }
         </tbody>
     </table>
 </div>

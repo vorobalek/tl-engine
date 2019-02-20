@@ -11,13 +11,13 @@ namespace TL.Integrations.Data.Extensions
     {
         public static TgBot GetTgBot(this Guid guid, IStorage storage)
         {
-            var tgBot = storage.GetRepository<ITgBotRepository>().GetById(guid);
+            var tgBot = storage.GetRepository<ITgBotRepository>().Get(guid);
             return tgBot;
         }
 
         public static TgUser GetTgUser(this Guid guid, IStorage storage)
         {
-            var tgUser = storage.GetRepository<ITgUserRepository>().GetById(guid);
+            var tgUser = storage.GetRepository<ITgUserRepository>().Get(guid);
             return tgUser;
         }
     }
