@@ -10,18 +10,28 @@ namespace TL.Engine.SDK.Repositories
     {
         public virtual TEntity Add(TEntity entity)
         {
-            if (entity is IEntityStored entityStored)
+            if (entity != null)
             {
-                entityStored.CreationDate = DateTime.Now.ToUniversalTime();
-                entityStored.ModifiedDate = DateTime.Now.ToUniversalTime();
-                entity = entityStored as TEntity;
+                if (entity is IEntityStored entityStored)
+                {
+                    entityStored.CreationDate = DateTime.Now.ToUniversalTime();
+                    entityStored.ModifiedDate = DateTime.Now.ToUniversalTime();
+                    entity = entityStored as TEntity;
+                }
+                return Load(dbSet.Add(entity).Entity);
             }
-            return Load(dbSet.Add(entity).Entity);
+            else
+            {
+                return null;
+            }
         }
 
         public virtual void Delete(TEntity entity)
         {
-            dbSet.Remove(entity);
+            if (entity != null)
+            {
+                dbSet.Remove(entity);
+            }
         }
 
         public virtual TEntity Get(Func<TEntity, bool> predicate)
@@ -41,12 +51,19 @@ namespace TL.Engine.SDK.Repositories
 
         public virtual TEntity Update(TEntity entity)
         {
-            if (entity is IEntityStored entityStored)
+            if (entity != null)
             {
-                entityStored.ModifiedDate = DateTime.Now.ToUniversalTime();
-                entity = entityStored as TEntity;
+                if (entity is IEntityStored entityStored)
+                {
+                    entityStored.ModifiedDate = DateTime.Now.ToUniversalTime();
+                    entity = entityStored as TEntity;
+                }
+                return Load(dbSet.Update(entity).Entity);
             }
-            return Load(dbSet.Update(entity).Entity);
+            else
+            {
+                return null;
+            }
         }
 
         protected virtual TEntity Load(TEntity entity)

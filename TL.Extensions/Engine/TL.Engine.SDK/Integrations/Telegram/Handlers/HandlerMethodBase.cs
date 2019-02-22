@@ -20,7 +20,7 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
         public abstract string Command { get; }
         public abstract string Description { get; }
 
-        public virtual bool IsBlocker => false;
+        public virtual bool IsBlocker => true;
         public virtual bool IsPrivate => false;
         public virtual bool IsTerminated => false;
 

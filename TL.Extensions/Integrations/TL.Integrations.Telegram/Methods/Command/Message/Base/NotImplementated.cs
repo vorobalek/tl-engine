@@ -13,7 +13,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 
         public override string Description => "";
 
-        public override int Priority => int.MinValue;
+        public override int Priority => 0;
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)
         {

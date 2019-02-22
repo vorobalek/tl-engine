@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 using TL.Engine.SDK.Services.TelegramBotProvider;
@@ -29,10 +30,11 @@ namespace TL.Integrations.Telegram.Services
         {
             try
             {
-                var tgBots = TgBotManager.GetAll(e => e.AutoStart || e.State == TgBotState.Restart || e.State == TgBotState.Start || e.State == TgBotState.Run);
+                var tgBots = TgBotManager.GetAll(e => e.AutoStart || e.State == TgBotState.Restart || e.State == TgBotState.Start || e.State == TgBotState.Run).ToArray();
 
-                foreach (var tgBot in tgBots)
+                for (int i = 0; i < tgBots.Length; ++i)
                 {
+                    var tgBot = tgBots[i];
                     Logger.TLogWarning($"Попытка автоматического запуска бота @{tgBot.Username} на {tgBot.TypeName}");
 
                     tgBot.State = TgBotState.Start;
