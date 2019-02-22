@@ -20,33 +20,37 @@ namespace TL.Integrations.Telegram.Extensions
     {
         public static User GetOrCreateUser(this Update update, IBaseBot bot, IServiceProvider serviceProvider)
         {
-            var chatId = update.GetSenderChatId();
-            var fromId = update.GetSenderId();
-
-            var tgUser = serviceProvider.GetService<ITgUserManager>().GetOrCreate((int)fromId.Identifier, fromId.Username);
-
-            if (chatId.Identifier == fromId.Identifier)
+            try
             {
-                if (update.Type == UpdateType.Message)
+                var chatId = update.GetSenderChatId();
+                var fromId = update.GetSenderId();
+
+                var tgUser = serviceProvider.GetService<ITgUserManager>().GetOrCreate((int)fromId.Identifier, fromId.Username);
+
+                if (chatId.Identifier == fromId.Identifier)
                 {
-                    var storage = serviceProvider.GetService<IStorage>();
-                    var tgConnectionRepository = storage.GetRepository<ITgConnectionRepository>();
-
-                    var tgBot = serviceProvider.GetService<ITgBotManager>().Get(bot.Token, bot.GetType().Name);
-                    if (!tgConnectionRepository.GetMembers(tgBot).Contains(tgUser.Id))
+                    if (update.Type == UpdateType.Message)
                     {
-                        tgUser.FirstName = update.Message.From.FirstName;
-                        tgUser.LastName = update.Message.From.LastName;
-                        tgUser.Username = update.Message.From.Username;
-                        storage.GetRepository<ITgUserRepository>().Update(tgUser);
+                        var storage = serviceProvider.GetService<IStorage>();
+                        var tgConnectionRepository = storage.GetRepository<ITgConnectionRepository>();
 
-                        tgConnectionRepository.Add(new TgConnection() { Bot = tgBot, User = tgUser });
-                        storage.Save();
+                        var tgBot = serviceProvider.GetService<ITgBotManager>().Get(bot.Token, bot.GetType().Name);
+                        if (!tgConnectionRepository.GetMembers(tgBot).Contains(tgUser.Id))
+                        {
+                            tgUser.FirstName = update.Message.From.FirstName;
+                            tgUser.LastName = update.Message.From.LastName;
+                            tgUser.Username = update.Message.From.Username;
+                            storage.GetRepository<ITgUserRepository>().Update(tgUser);
+
+                            tgConnectionRepository.Add(new TgConnection() { Bot = tgBot, User = tgUser });
+                            storage.Save();
+                        }
                     }
-                }
 
-                return serviceProvider.GetService<IUserManager>().Get(tgUser.UserId.Value);
+                    return serviceProvider.GetService<IUserManager>().Get(tgUser.UserId.Value);
+                }
             }
+            catch { }
 
             return null;
         }
