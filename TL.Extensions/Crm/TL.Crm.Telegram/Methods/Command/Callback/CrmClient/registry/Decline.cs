@@ -18,6 +18,8 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
 
         public override string Description => "Сбросить введенные данные";
 
+        public override int Priority => 65;
+
         protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
             if (args[0] is IServiceProvider serviceProvider)
@@ -25,47 +27,68 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                 if (args[1] is TlUser user)
                 {
                     var leadManager = serviceProvider.GetService<ILeadManager>();
+                    var inviteManager = serviceProvider.GetService<IInviteManager>();
+                    var contractorManager = serviceProvider.GetService<IContractorManager>();
                     var leadPhoneManager = serviceProvider.GetService<ILeadPhoneManager>();
 
                     var originalLead = user.GetOriginalLead(serviceProvider);
+                    var originalContracotr = user.GetOriginalContractor(serviceProvider);
 
                     if (originalLead != null)
                     {
-                        originalLead.Firstname = null;
-                        originalLead.Lastname = null;
-                        originalLead.Middlename = null;
-
-                        leadManager.Update(originalLead);
-                        leadPhoneManager.Delete(e => e.LeadId == originalLead.Id);
-
-                        await Bot.SendAsync(new TlMessage()
+                        if (originalContracotr == null)
                         {
-                            MessageType = MessageType.Text,
-                            ChatId = callbackQuery.From.Id,
+                            originalLead.Firstname = null;
+                            originalLead.Lastname = null;
+                            originalLead.Middlename = null;
 
-                            IsEditMessage = true,
-                            IsCallbackAnswer = true,
+                            leadManager.Update(originalLead);
+                            leadPhoneManager.Delete(e => e.LeadId == originalLead.Id);
 
-                            CallbackQueryId = callbackQuery.Id,
-                            CallbackAnswerText = $"‼️ Данные сброшены, начните занаво!",
-                            CallbackShowAlert = true,
-
-                        });
-                        await Bot.SendAsync(new TlMessage()
-                        {
-                            MessageType = MessageType.Text,
-                            ChatId = callbackQuery.From.Id,
-
-                            Text = $"‼️ <b>Данные сброшены, начните занаво!</b>",
-                            ReplyMarkup = new ReplyKeyboardMarkup(new[]
+                            await Bot.SendAsync(new TlMessage()
                             {
-                                new[]
+                                MessageType = MessageType.Text,
+                                ChatId = callbackQuery.From.Id,
+
+                                IsCallbackAnswer = true,
+
+                                CallbackQueryId = callbackQuery.Id,
+                                CallbackAnswerText = $"‼️ Данные сброшены, начните занаво!",
+                                CallbackShowAlert = true,
+
+                            });
+
+                            await Bot.SendAsync(new TlMessage()
+                            {
+                                MessageType = MessageType.Text,
+                                ChatId = callbackQuery.From.Id,
+
+                                Text = $"‼️ <b>Данные сброшены, начните занаво!</b>",
+                                ReplyMarkup = new ReplyKeyboardMarkup(new[]
                                 {
-                                    new KeyboardButton("👌🏻 Ок"),
-                                },
-                            }, resizeKeyboard: true, oneTimeKeyboard: true),
-                            ParseMode = ParseMode.Html,
-                        });
+                                    new[]
+                                    {
+                                        new KeyboardButton("👌🏻 Ок"),
+                                    },
+                                }, resizeKeyboard: true, oneTimeKeyboard: true),
+                                ParseMode = ParseMode.Html,
+                            });
+                        }
+                        else
+                        {
+                            await Bot.SendAsync(new TlMessage()
+                            {
+                                MessageType = MessageType.Text,
+                                ChatId = callbackQuery.From.Id,
+
+                                IsCallbackAnswer = true,
+
+                                CallbackQueryId = callbackQuery.Id,
+                                CallbackAnswerText = $"‼️ Учетная карточка уже сущетвует, сброс данных невозможнен!",
+                                CallbackShowAlert = true,
+
+                            });
+                        }
                     }
                 }
             }

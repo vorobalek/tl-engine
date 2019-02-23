@@ -20,6 +20,8 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
 
         public override string Description => "Зарегистрировать введенные данные";
 
+        public override int Priority => 65;
+
         protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
             if (args[0] is IServiceProvider serviceProvider)
