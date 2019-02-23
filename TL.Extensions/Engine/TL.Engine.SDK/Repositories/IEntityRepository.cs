@@ -7,7 +7,8 @@ namespace TL.Engine.SDK.Repositories
     public interface IEntityRepository<TEntity> : IRepository where TEntity : class, IEntity
     {
         TEntity Add(TEntity entity);
-        void Delete(TEntity entity);
+        TEntity Delete(TEntity entity);
+        void Remove(TEntity entity);
         TEntity Get(Func<TEntity, bool> predicate);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate);

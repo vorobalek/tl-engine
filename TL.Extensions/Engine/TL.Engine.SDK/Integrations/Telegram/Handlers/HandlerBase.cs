@@ -37,14 +37,6 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 
             var results = await methods.ExecuteAsync(update, args);
 
-            if (results.Count() == 0)
-            {
-                results = await Methods
-                    .Where(m => m.Command == "notimplemented" && m.UpdateType == update.Type)
-                    .OrderBy(m => m.Priority)
-                    .ExecuteAsync(update, args);
-            }
-
             return new HandlerResult(results);
         }
     }

@@ -9,7 +9,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
     {
         public override bool IsPrivate => true;
 
-        public override string Command => "notimplemented";
+        public override string Command => "";
 
         public override string Description => "";
 

@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ExtCore.Data.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using TL.Engine.SDK.Integrations.Telegram.Bots;
 using TL.Engine.SDK.Services.TelegramBotProvider;
+using TL.Integrations.Data.Abstractions.Telegram.System;
 using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
 
@@ -50,7 +52,9 @@ namespace TL.Integrations.Telegram.Extensions
 
                 if (isNewBot)
                 {
-                    tgBotManager.Delete(tgBot);
+                    var storage = serviceProvider.GetService<IStorage>();
+                    storage.GetRepository<ITgBotRepository>().Remove(tgBot);
+                    storage.Save();
                 }
             }
             return false;

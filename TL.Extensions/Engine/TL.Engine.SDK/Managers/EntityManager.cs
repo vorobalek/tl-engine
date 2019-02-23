@@ -61,27 +61,47 @@ namespace TL.Engine.SDK.Managers
             return createdEntity;
         }
 
-        public virtual void Delete(TEntity entity)
+        public virtual TEntity Delete(TEntity entity)
         {
+            TEntity returnableEntity = null;
             try
             {
-                Storage.GetRepository<IEntityRepository<TEntity>>().Delete(entity);
+                returnableEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Delete(entity);
                 Storage.Save();
             }
             catch (Exception ex)
             {
                 Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
             }
+            return returnableEntity;
         }
 
-        public void Delete(Func<TEntity, bool> predicate)
+        public virtual TEntity Delete(Func<TEntity, bool> predicate)
         {
+            TEntity entity = null;
             try
             {
+                var repository = Storage.GetRepository<IEntityRepository<TEntity>>();
+                entity = repository.Delete(repository.Get(predicate));
+                Storage.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
+            }
+            return entity;
+        }
+
+        public IEnumerable<TEntity> DeleteAll(Func<TEntity, bool> predicate)
+        {
+            var returnableEntities = new List<TEntity>();
+            try
+            {
+                var repository = Storage.GetRepository<IEntityRepository<TEntity>>();
                 var entities = GetAll(predicate).ToArray();
                 for (int i = 0; i < entities.Length; ++i)
                 {
-                    Storage.GetRepository<IEntityRepository<TEntity>>().Delete(entities[i]);
+                    returnableEntities.Add(repository.Delete(entities[i]));
                 }
                 Storage.Save();
             }
@@ -89,6 +109,7 @@ namespace TL.Engine.SDK.Managers
             {
                 Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
             }
+            return returnableEntities;
         }
 
         public virtual TEntity Get(Func<TEntity, bool> predicate)

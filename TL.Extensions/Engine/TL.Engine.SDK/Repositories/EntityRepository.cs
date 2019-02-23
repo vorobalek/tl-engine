@@ -26,12 +26,18 @@ namespace TL.Engine.SDK.Repositories
             }
         }
 
-        public virtual void Delete(TEntity entity)
+        public virtual TEntity Delete(TEntity entity)
         {
             if (entity != null)
             {
+                if (entity is IEntityStored entityStored)
+                {
+                    entityStored.ModifiedDate = DateTime.Now.ToUniversalTime();
+                    entity = entityStored as TEntity;
+                }
                 entity.IsDeleted = true;
             }
+            return Load(entity);
         }
 
         public virtual TEntity Get(Func<TEntity, bool> predicate)
@@ -47,6 +53,11 @@ namespace TL.Engine.SDK.Repositories
         public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate)
         {
             return dbSet.Where(e => predicate(e) && !e.IsDeleted).Select(e => Load(e));
+        }
+
+        public void Remove(TEntity entity)
+        {
+            dbSet.Remove(entity);
         }
 
         public virtual TEntity Update(TEntity entity)

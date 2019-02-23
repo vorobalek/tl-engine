@@ -10,11 +10,11 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
     {
         public override bool IsPrivate => true;
 
-        public override string Command => "notimplemented";
+        public override string Command => "";
 
         public override string Description => "";
 
-        public override int Priority => int.MinValue;
+        public override int Priority => 10000;
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
@@ -50,7 +50,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
                 ParseMode = global::Telegram.Bot.Types.Enums.ParseMode.Html
             });
 
-            return new HandlerMethodResult(true, "asdasd");
+            return new HandlerMethodResult(true);
         }
     }
 }

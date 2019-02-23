@@ -20,7 +20,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
         {
             var originalContractor = user.GetOriginalContractor(serviceProvider);
             var originalLead = user.GetOriginalLead(serviceProvider);
-            var leadPhones = leadPhoneManager.GetAll(e => e.LeadId == originalLead.Id);
+            var leadPhone = leadPhoneManager.Get(e => e.LeadId == originalLead.Id);
 
             if (originalContractor == null)
             {
@@ -30,20 +30,20 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                     ChatId = message.From.Id,
                     Text = $"👌🏻 <b>Всё верно?</b>\r\n\r\n" +
                     $"Я сохранил ваши данные:\r\n" +
-                    $"☑️ <b>Номер телефона:</b> {leadPhones.LastOrDefault().PhoneNumber}\r\n" +
+                    $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
                     $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
                     $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
                     $"☑️ <b>Отчество:</b> {originalLead.Middlename}\r\n\r\n" +
                     $"Всё верно? Или начнём сначала?",
                     ParseMode = ParseMode.Html,
                     ReplyMarkup = new InlineKeyboardMarkup(new[]
+                    {
+                        new[]
                         {
-                            new[]
-                            {
-                                InlineKeyboardButton.WithCallbackData("✅ Всё верно", "crm.registry.accept"),
-                                InlineKeyboardButton.WithCallbackData("❌ Начать сначала", "crm.registry.decline"),
-                            }
-                        })
+                            InlineKeyboardButton.WithCallbackData("✅ Всё верно", "crm.registry.accept"),
+                            InlineKeyboardButton.WithCallbackData("❌ Начать сначала", "crm.registry.decline"),
+                        }
+                    })
                 });
             }
             else

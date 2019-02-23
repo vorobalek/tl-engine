@@ -47,7 +47,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
                 var savedBot = TgBotManager.Get(guid);
                 if (savedBot != null)
                 {
-                    bool f = TelegramBotProvider.DelayedStart(ServiceProvider, savedBot.Token, savedBot.TypeName, out IBaseBot bot, savedBot.Username, savedBot.SkipUpdates, savedBot.AutoStart);
+                    bool f = TelegramBotProvider.DelayedStart(ServiceProvider, savedBot.Token, savedBot.TypeName, out IBaseBot bot, savedBot.NativeName, savedBot.SkipUpdates, savedBot.AutoStart);
                     if (f)
                     {
                         message = $"Бот @{bot.Username} запущен";

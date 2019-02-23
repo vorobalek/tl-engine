@@ -19,7 +19,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
         protected override async Task<IHandlerMethodResult> ExecuteProtectionAsync(global::Telegram.Bot.Types.Message message, IServiceProvider serviceProvider, Account.Data.Entities.Security.User user, ILeadManager leadManager, IInviteManager inviteManager, ILeadPhoneManager leadPhoneManager, IContractorManager contractorManager)
         {
             var originalLead = user.GetOriginalLead(serviceProvider);
-            var leadPhones = leadPhoneManager.GetAll(e => e.LeadId == originalLead.Id);
+            var leadPhone = leadPhoneManager.Get(e => e.LeadId == originalLead.Id);
 
             if (string.IsNullOrWhiteSpace(originalLead.Lastname))
             {
@@ -37,7 +37,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         ChatId = message.From.Id,
                         Text = $"👌🏻 <b>Продолжим?</b>\r\n\r\n" +
                         $"Я сохранил ваши данные:\r\n" +
-                        $"☑️ <b>Номер телефона:</b> {leadPhones.LastOrDefault().PhoneNumber}\r\n" +
+                        $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
                         $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n\r\n" +
                         $"Теперь отправьте мне свою фамилию, пожалуйста.",
                         ParseMode = ParseMode.Html,
@@ -53,7 +53,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         ChatId = message.From.Id,
                         Text = $"👌🏻 <b>Продолжим?</b>\r\n\r\n" +
                         $"Я сохранил ваши данные:\r\n" +
-                        $"☑️ <b>Номер телефона:</b> {leadPhones.LastOrDefault().PhoneNumber}\r\n" +
+                        $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
                         $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
                         $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n\r\n" +
                         $"Теперь отправьте мне своё отчество, пожалуйста.",

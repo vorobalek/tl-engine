@@ -14,7 +14,8 @@ namespace TL.Engine.SDK.Managers
         IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate);
         TEntity GetOrCreate(Func<TEntity, bool> predicate, TEntity entity = null);
         TEntity Update(TEntity entity);
-        void Delete(TEntity entity);
-        void Delete(Func<TEntity, bool> predicate);
+        TEntity Delete(TEntity entity);
+        TEntity Delete(Func<TEntity, bool> predicate);
+        IEnumerable<TEntity> DeleteAll(Func<TEntity, bool> predicate);
     }
 }

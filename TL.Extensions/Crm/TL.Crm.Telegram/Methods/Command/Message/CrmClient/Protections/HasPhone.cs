@@ -25,12 +25,13 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
             var invite = inviteManager.Get(e => e.ReferralId.HasValue && e.ReferralId == originalLead.Id);
             var referrerContractor = contractorManager.GetOriginalContractor(invite.Referrer.Id);
             var referrerLead = referrerContractor.GetOriginLead(serviceProvider);
+            var leadPhone = leadPhoneManager.Get(e => e.LeadId == originalLead.Id);
 
-            if (originalLead.Phones.Count() == 0)
+            if (leadPhone == null)
             {
                 if (message.Type == MessageType.Contact)
                 {
-                    leadPhoneManager.Create(new LeadPhone()
+                    leadPhone = leadPhoneManager.Create(new LeadPhone()
                     {
                         Lead = originalLead,
                         PhoneNumber = message.Contact.PhoneNumber,
@@ -42,7 +43,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                     var regex = new Regex("^(\\+7|7|8)?[\\s\\-]?\\(?[489][0-9]{2}\\)?[\\s\\-]?[0-9]{3}[\\s\\-]?[0-9]{2}[\\s\\-]?[0-9]{2}$", RegexOptions.Compiled);
                     if (regex.IsMatch(message.Text))
                     {
-                        leadPhoneManager.Create(new LeadPhone()
+                        leadPhone = leadPhoneManager.Create(new LeadPhone()
                         {
                             Lead = originalLead,
                             PhoneNumber = message.Text,
@@ -50,7 +51,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                     }
                 }
 
-                if (originalLead.Phones.Count() == 0)
+                if (leadPhone == null)
                 {
                     //Запрашиваем номер телефона
                     await Bot.SendAsync(new TlMessage()
@@ -72,7 +73,6 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                 }
                 else
                 {
-                    var leadPhones = leadPhoneManager.GetAll(e => e.LeadId == originalLead.Id);
                     // Запрашиваем имя
                     await Bot.SendAsync(new TlMessage()
                     {
@@ -80,7 +80,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         ChatId = message.From.Id,
                         Text = $"👌🏻 <b>Продолжим?</b>\r\n\r\n" +
                         $"Я сохранил ваши данные:\r\n" +
-                        $"☑️ <b>Номер телефона:</b> {leadPhones.LastOrDefault().PhoneNumber}\r\n\r\n" +
+                        $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n\r\n" +
                         $"Теперь отправьте мне своё имя, пожалуйста.",
                         ParseMode = ParseMode.Html,
                         ReplyMarkup = new ReplyKeyboardRemove()

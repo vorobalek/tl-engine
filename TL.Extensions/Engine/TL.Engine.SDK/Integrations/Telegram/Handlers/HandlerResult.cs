@@ -5,7 +5,7 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
 {
     public class HandlerResult : IHandlerResult
     {
-        public bool IsOk => IsFill && Results.Any(it => it.Ok);
+        public bool IsOk => IsFill && Results.All(it => it.Ok);
 
         public bool IsFill => Results != null && Results.Count() > 0;
 
