@@ -1,21 +1,28 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using TL.Crm.Data.Managers;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
+using TL.Integrations.Data.Entities.Telegram.Security;
+using TL.Integrations.Data.Managers;
 using TlUser = TL.Account.Data.Entities.Security.User;
 
-namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
+namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
 {
-    public abstract class Protection : CrmClientBotMessageHCommandMethod
+    public class Protection : CrmAdminBotMessageHCommandMethod
     {
         public override bool IsPrivate => true;
 
         public override bool IsBlocker => false;
 
         public override string Command => "";
+
+        public override int Priority => 10;
 
         public override bool IsRelevantMethod(Update update, params object[] args)
         {
@@ -38,18 +45,22 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
             {
                 if (args[1] is TlUser user)
                 {
-                    var leadManager = serviceProvider.GetService<ILeadManager>();
-                    var inviteManager = serviceProvider.GetService<IInviteManager>();
-                    var leadPhoneManager = serviceProvider.GetService<ILeadPhoneManager>();
-                    var contractorManager = serviceProvider.GetService<IContractorManager>();
+                    var tgUserManager = serviceProvider.GetService<ITgUserManager>();
+                    var tgRoleManager = serviceProvider.GetService<ITgRoleManager>();
 
-                    return await ExecuteProtectionAsync(message, serviceProvider, user, leadManager, inviteManager, leadPhoneManager, contractorManager);
+                    var tgUser = tgUserManager.Get(message.From.Id);
+                    if (tgUser.UserRoles.FirstOrDefault(e => e.RoleId == TgRole.Sa.Id) != null)
+                    {
+                        ContinueExecute();
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
 
             return new HandlerMethodResult(false, null, $"{new ArgumentException($"В {nameof(args)} переданы неверные аргументы.")}");
         }
-
-        protected abstract Task<IHandlerMethodResult> ExecuteProtectionAsync(global::Telegram.Bot.Types.Message message, IServiceProvider serviceProvider, TlUser user, ILeadManager leadManager, IInviteManager inviteManager, ILeadPhoneManager leadPhoneManager, IContractorManager contractorManager);
     }
 }

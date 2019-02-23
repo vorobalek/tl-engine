@@ -15,8 +15,6 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
     {
         public override int Priority => 20;
 
-        public override string Command => "";
-
         public override string Description => "Служебный слой проверки инвайта";
 
         protected override async Task<IHandlerMethodResult> ExecuteProtectionAsync(global::Telegram.Bot.Types.Message message, IServiceProvider serviceProvider, TlUser user, ILeadManager leadManager, IInviteManager inviteManager, ILeadPhoneManager leadPhoneManager, IContractorManager contractorManager)

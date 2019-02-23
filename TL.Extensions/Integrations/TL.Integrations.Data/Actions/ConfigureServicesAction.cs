@@ -13,6 +13,8 @@ namespace TL.Integrations.Data.Actions
         {
             serviceCollection.AddScoped<ITgBotManager, TgBotManager>();
             serviceCollection.AddScoped<ITgUserManager, TgUserManager>();
+            serviceCollection.AddScoped<ITgRoleManager, TgRoleManager>();
+            serviceCollection.AddScoped<ITgUserRoleManager, TgUserRoleManager>();
         }
     }
 }
