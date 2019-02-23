@@ -49,20 +49,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                             {
                                 MessageType = MessageType.Text,
                                 ChatId = callbackQuery.From.Id,
-
-                                IsCallbackAnswer = true,
-
-                                CallbackQueryId = callbackQuery.Id,
-                                CallbackAnswerText = $"‼️ Данные сброшены, начните занаво!",
-                                CallbackShowAlert = true,
-
-                            });
-
-                            await Bot.SendAsync(new TlMessage()
-                            {
-                                MessageType = MessageType.Text,
-                                ChatId = callbackQuery.From.Id,
-
+                                
                                 Text = $"‼️ <b>Данные сброшены, начните занаво!</b>",
                                 ReplyMarkup = new ReplyKeyboardMarkup(new[]
                                 {
@@ -72,6 +59,15 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                                     },
                                 }, resizeKeyboard: true, oneTimeKeyboard: true),
                                 ParseMode = ParseMode.Html,
+
+                                IsEditMessage = true,
+                                EditMessageId = callbackQuery.Message.MessageId,
+
+                                IsCallbackAnswer = true,
+
+                                CallbackQueryId = callbackQuery.Id,
+                                CallbackAnswerText = $"‼️ Данные сброшены, начните занаво!",
+                                CallbackShowAlert = true,
                             });
                         }
                         else
@@ -80,6 +76,12 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                             {
                                 MessageType = MessageType.Text,
                                 ChatId = callbackQuery.From.Id,
+
+                                Text = $"‼️ <b>Учетная карточка уже сущетвует, сброс данных невозможнен!</b>",
+                                ParseMode = ParseMode.Html,
+
+                                IsEditMessage = true,
+                                EditMessageId = callbackQuery.Message.MessageId,
 
                                 IsCallbackAnswer = true,
 
