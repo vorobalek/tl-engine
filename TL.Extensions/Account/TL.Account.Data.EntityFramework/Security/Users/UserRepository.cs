@@ -11,7 +11,7 @@ namespace TL.Account.Data.EntityFramework.Security.Users
     {
         public User GetByUsername(string username)
         {
-            return Load(dbSet.SingleOrDefault(obj => obj.Username == username));
+            return Load(dbSet.FirstOrDefault(obj => obj.Username == username));
         }
     }
 }

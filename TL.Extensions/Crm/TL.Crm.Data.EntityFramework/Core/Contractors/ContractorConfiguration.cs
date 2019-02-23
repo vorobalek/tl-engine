@@ -14,7 +14,8 @@ namespace TL.Crm.Data.EntityFramework.Core.Contractors
             builder
                 .HasMany(e => e.Leads)
                 .WithOne(e => e.Contractor)
-                .HasForeignKey(e => e.ContractorId);
+                .HasForeignKey(e => e.ContractorId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .HasMany(e => e.Invites)
@@ -26,6 +27,12 @@ namespace TL.Crm.Data.EntityFramework.Core.Contractors
                .WithMany(e => e.Dublicates)
                .HasForeignKey(e => e.OriginalId)
                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasData(new[]
+                {
+                    Contractor.System,
+                });
 
             builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Contractors");

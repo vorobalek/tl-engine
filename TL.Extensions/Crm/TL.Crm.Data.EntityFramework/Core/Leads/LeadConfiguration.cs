@@ -20,7 +20,8 @@ namespace TL.Crm.Data.EntityFramework.Core.Leads
             builder
                 .HasOne(e => e.Contractor)
                 .WithMany(e => e.Leads)
-                .HasForeignKey(e => e.ContractorId);
+                .HasForeignKey(e => e.ContractorId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .HasMany(e => e.Phones)
@@ -34,9 +35,10 @@ namespace TL.Crm.Data.EntityFramework.Core.Leads
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasOne(e => e.Invite)
-                .WithOne(e => e.Referral)
-                .HasForeignKey<Invite>(e => e.RefferalId);
+                .HasData(new[]
+                {
+                    Lead.System,
+                });
 
             builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Leads");

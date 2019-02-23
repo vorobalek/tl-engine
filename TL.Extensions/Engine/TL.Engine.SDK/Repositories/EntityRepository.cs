@@ -36,7 +36,7 @@ namespace TL.Engine.SDK.Repositories
 
         public virtual TEntity Get(Func<TEntity, bool> predicate)
         {
-            return Load(dbSet.SingleOrDefault(e => predicate(e)));
+            return Load(dbSet.FirstOrDefault(e => predicate(e)));
         }
 
         public virtual IEnumerable<TEntity> GetAll()

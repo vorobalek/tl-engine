@@ -11,12 +11,12 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsers
     {
         public IEnumerable<TgUser> GetByAccountId(Guid id)
         {
-            return dbSet.Where(e => e.UserId == id).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
+            return dbSet.Where(e => e.UserId == id).Select(e => Load(dbSet.FirstOrDefault(ee => ee.Id == e.Id)));
         }
 
         public TgUser GetByTgId(int id)
         {
-            return Load(dbSet.SingleOrDefault(e => e.TgId == id));
+            return Load(dbSet.FirstOrDefault(e => e.TgId == id));
         }
     }
 }

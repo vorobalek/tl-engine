@@ -11,12 +11,12 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
     {
         public TgBot GetByTokenAndType(string token, string type)
         {
-            return Load(dbSet.SingleOrDefault(it => it.Token == token && it.TypeName == type));
+            return Load(dbSet.FirstOrDefault(it => it.Token == token && it.TypeName == type));
         }
 
         public IEnumerable<TgBot> GetByUsername(string username)
         {
-            return dbSet.Where(e => e.Username == username).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
+            return dbSet.Where(e => e.Username == username).Select(e => Load(dbSet.FirstOrDefault(ee => ee.Id == e.Id)));
         }
     }
 }

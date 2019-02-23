@@ -6,17 +6,17 @@ namespace TL.Crm.Data.Extensions
 {
     public static class ContractorManagerExtensions
     {
-        public static Contractor GetOriginal(this IContractorManager contractorManager, Guid key)
+        public static Contractor GetOriginalContractor(this IContractorManager contractorManager, Guid key)
         {
-            return contractorManager.GetOriginal(e => e.Id == key);
+            return contractorManager.GetOriginalContractor(e => e.Id == key);
         }
 
-        public static Contractor GetOriginal(this IContractorManager contractorManager, Func<Contractor, bool> predicate)
+        public static Contractor GetOriginalContractor(this IContractorManager contractorManager, Func<Contractor, bool> predicate)
         {
             var contractor = contractorManager.Get(predicate);
             if (contractor?.Original != null)
             {
-                return contractorManager.GetOriginal(contractor.Original.Id);
+                return contractorManager.GetOriginalContractor(contractor.Original.Id);
             }
             else
             {

@@ -10,7 +10,7 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgRoles
     {
         public TgRole GetByName(string name)
         {
-            return Load(dbSet.SingleOrDefault(e => e.Name == name));
+            return Load(dbSet.FirstOrDefault(e => e.Name == name));
         }
     }
 }

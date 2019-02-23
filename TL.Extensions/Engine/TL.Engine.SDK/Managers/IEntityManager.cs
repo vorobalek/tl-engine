@@ -15,5 +15,6 @@ namespace TL.Engine.SDK.Managers
         TEntity GetOrCreate(Func<TEntity, bool> predicate, TEntity entity = null);
         TEntity Update(TEntity entity);
         void Delete(TEntity entity);
+        void Delete(Func<TEntity, bool> predicate);
     }
 }

@@ -13,6 +13,6 @@ namespace TL.Engine.Data.Entities.System
 
         public Guid AuthorId { get; set; }
 
-        public User Author { get; set; }
+        public virtual User Author { get; set; }
     }
 }

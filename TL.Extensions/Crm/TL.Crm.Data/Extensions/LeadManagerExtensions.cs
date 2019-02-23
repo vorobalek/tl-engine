@@ -6,17 +6,17 @@ namespace TL.Crm.Data.Extensions
 {
     public static class LeadManagerExtensions
     {
-        public static Lead GetOriginal(this ILeadManager leadManager, Guid key)
+        public static Lead GetOriginalLead(this ILeadManager leadManager, Guid key)
         {
-            return leadManager.GetOriginal(e => e.Id == key);
+            return leadManager.GetOriginalLead(e => e.Id == key);
         }
 
-        public static Lead GetOriginal(this ILeadManager leadManager, Func<Lead, bool> predicate)
+        public static Lead GetOriginalLead(this ILeadManager leadManager, Func<Lead, bool> predicate)
         {
             var lead = leadManager.Get(predicate);
             if (lead?.Original != null)
             {
-                return leadManager.GetOriginal(lead.Original.Id);
+                return leadManager.GetOriginalLead(lead.Original.Id);
             }
             else
             {

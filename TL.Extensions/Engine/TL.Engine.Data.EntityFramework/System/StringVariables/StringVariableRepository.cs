@@ -17,12 +17,12 @@ namespace TL.Engine.Data.EntityFramework.System.StringVariables
 
         public IEnumerable<StringVariable> GetByAuthorId(Guid guid)
         {
-            return dbSet.Where(obj => obj.AuthorId == guid).OrderBy(obj => obj.Name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id)));
+            return dbSet.Where(obj => obj.AuthorId == guid).OrderBy(obj => obj.Name).Select(e => Load(dbSet.FirstOrDefault(ee => ee.Id == e.Id)));
         }
 
         public IEnumerable<StringVariable> GetByName(string name)
         {
-            return dbSet.Where(obj => obj.Name == name).Select(e => Load(dbSet.Single(ee => ee.Id == e.Id))); ;
+            return dbSet.Where(obj => obj.Name == name).Select(e => Load(dbSet.FirstOrDefault(ee => ee.Id == e.Id))); ;
         }
     }
 }

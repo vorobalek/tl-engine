@@ -7,11 +7,11 @@ namespace TL.Crm.Data.Entities.Core
     {
         public Guid ReferrerId { get; set; }
 
-        public Contractor Referrer { get; set; }
+        public virtual Contractor Referrer { get; set; }
 
-        public Guid? RefferalId { get; set; }
+        public Guid? ReferralId { get; set; }
 
-        public Lead Referral { get; set; }
+        public virtual Lead Referral { get; set; }
 
         public bool IsActivated { get; set; }
     }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Repositories;
@@ -65,6 +66,23 @@ namespace TL.Engine.SDK.Managers
             try
             {
                 Storage.GetRepository<IEntityRepository<TEntity>>().Delete(entity);
+                Storage.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
+            }
+        }
+
+        public void Delete(Func<TEntity, bool> predicate)
+        {
+            try
+            {
+                var entities = GetAll(predicate).ToArray();
+                for (int i = 0; i < entities.Length; ++i)
+                {
+                    Storage.GetRepository<IEntityRepository<TEntity>>().Delete(entities[i]);
+                }
                 Storage.Save();
             }
             catch (Exception ex)

@@ -17,6 +17,7 @@ namespace TL.Engine.SDK.Extensions
                 {
                     results.Add(await method.TryExecuteAsync(update, args));
                     if (method.IsBlocker) break;
+                    if (!method.CanInvokeNext) break;
                 }
             }
             return results;

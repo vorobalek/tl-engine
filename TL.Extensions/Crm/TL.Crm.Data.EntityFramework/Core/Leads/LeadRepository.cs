@@ -11,7 +11,7 @@ namespace TL.Crm.Data.EntityFramework.Core.Leads
     {
         public Lead GetByUserId(Guid guid)
         {
-            return Load(dbSet.SingleOrDefault(e => e.UserId == guid));
+            return Load(dbSet.FirstOrDefault(e => e.UserId == guid));
         }
     }
 }

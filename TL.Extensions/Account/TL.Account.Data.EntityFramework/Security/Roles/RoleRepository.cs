@@ -11,7 +11,7 @@ namespace TL.Account.Data.EntityFramework.Security.Roles
     {
         public Role GetByName(string name)
         {
-            return Load(dbSet.SingleOrDefault(obj => obj.Name == name));
+            return Load(dbSet.FirstOrDefault(obj => obj.Name == name));
         }
     }
 }

@@ -8,18 +8,18 @@ namespace TL.Crm.Data.Extensions
 {
     public static class AccountUserExtensions
     {
-        public static Lead GetLead(this User user, IServiceProvider serviceProvider)
+        public static Lead GetOriginalLead(this User user, IServiceProvider serviceProvider)
         {
-            return serviceProvider.GetService<ILeadManager>().GetOriginal(e => e.UserId == user.Id);
+            return serviceProvider.GetService<ILeadManager>().GetOriginalLead(e => e.UserId == user.Id);
         }
 
-        public static Contractor GetContractor(this User user, IServiceProvider serviceProvider)
+        public static Contractor GetOriginalContractor(this User user, IServiceProvider serviceProvider)
         {
-            var lead = user.GetLead(serviceProvider);
-            if (lead.Contractor != null)
+            var lead = user.GetOriginalLead(serviceProvider);
+            if (lead?.Contractor != null)
             {
                 var contractorManager = serviceProvider.GetService<IContractorManager>();
-                return contractorManager.GetOriginal(lead.Contractor.Id);
+                return contractorManager.GetOriginalContractor(lead.Contractor.Id);
             }
             else
             {

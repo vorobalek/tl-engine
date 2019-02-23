@@ -27,6 +27,18 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
         public abstract bool IsRelevantMethod(Update update, params object[] args);
         public abstract bool IsPolicyAcceptable(Update update, params object[] args);
 
+        public virtual bool CanInvokeNext { get; private set; } = false;
+
+        protected void AbortExecute()
+        {
+            CanInvokeNext = false;
+        }
+
+        protected void ContinueExecute()
+        {
+            CanInvokeNext = true;
+        }
+
         public abstract Type BotType { get; }
         public Type HandlerType { get; }
 
@@ -37,6 +49,7 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
         {
             try
             {
+                CanInvokeNext = false;
                 return await ExecuteAsync(update, args);
             }
             catch (Exception ex)

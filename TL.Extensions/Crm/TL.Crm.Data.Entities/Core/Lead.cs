@@ -16,28 +16,35 @@ namespace TL.Crm.Data.Entities.Core
 
         public Guid? UserId { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         public Guid? ContractorId { get; set; }
 
-        public Contractor Contractor { get; set; }
+        public virtual Contractor Contractor { get; set; }
 
-        public IEnumerable<LeadPhone> Phones { get; set; }
+        public virtual IEnumerable<LeadPhone> Phones { get; set; }
 
         public Guid? OriginalId { get; set; }
 
-        public Lead Original { get; set; }
+        public virtual Lead Original { get; set; }
 
-        public IEnumerable<Lead> Dublicates { get; set; }
-
-        public Guid? InviteId { get; set; }
-
-        public Invite Invite { get; set; }
+        public virtual IEnumerable<Lead> Dublicates { get; set; }
 
         public Lead() : base()
         {
             Phones = new HashSet<LeadPhone>();
             Dublicates = new HashSet<Lead>();
         }
+
+        public static Lead System =>
+            new Lead()
+            {
+                Id = User.System.Id,
+                UserId = User.System.Id,
+                Firstname = "Автоматика",
+                Lastname = "Системы",
+                Middlename = "TL Engine",
+                ContractorId = Contractor.System.Id
+            };
     }
 }

@@ -15,6 +15,7 @@ namespace TL.Engine.SDK.Integrations.Telegram.Handlers
         string Command { get; }
         string Description { get; }
 
+        bool CanInvokeNext { get; }
         bool IsBlocker { get; }
         bool IsPrivate { get; }
         bool IsTerminated { get; }
