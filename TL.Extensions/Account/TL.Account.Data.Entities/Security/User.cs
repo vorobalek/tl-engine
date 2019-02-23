@@ -17,8 +17,6 @@ namespace TL.Account.Data.Entities.Security
 
         public bool IsClosed { get; set; } = false;
 
-        public bool IsDeleted { get; set; } = false;
-
         public Guid? ReferrerId { get; set; }
 
         public virtual User Referrer { get; set; }

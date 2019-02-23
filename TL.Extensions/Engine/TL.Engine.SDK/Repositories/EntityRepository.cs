@@ -36,7 +36,7 @@ namespace TL.Engine.SDK.Repositories
 
         public virtual TEntity Get(Func<TEntity, bool> predicate)
         {
-            return Load(dbSet.FirstOrDefault(e => predicate(e)));
+            return Load(dbSet.FirstOrDefault(e => predicate(e) && !e.IsDeleted));
         }
 
         public virtual IEnumerable<TEntity> GetAll()
@@ -46,7 +46,7 @@ namespace TL.Engine.SDK.Repositories
 
         public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate)
         {
-            return dbSet.Where(e => predicate(e)).Select(e => Load(e));
+            return dbSet.Where(e => predicate(e) && !e.IsDeleted).Select(e => Load(e));
         }
 
         public virtual TEntity Update(TEntity entity)
