@@ -4,7 +4,7 @@ using TL.Integrations.Telegram.Bots;
 
 namespace TL.Crm.Telegram.Bots
 {
-    [Bot("CRM.Администрирование")]
+    [Bot("CRM.Админ")]
     public class CrmAdminBot : BaseBot
     {
         public CrmAdminBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : base(serviceProvider, token, skipUpdates)

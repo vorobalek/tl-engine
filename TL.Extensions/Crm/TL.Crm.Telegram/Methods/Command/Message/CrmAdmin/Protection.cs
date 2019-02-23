@@ -24,6 +24,8 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
 
         public override int Priority => 10;
 
+        public override string Description => "";
+
         public override bool IsRelevantMethod(Update update, params object[] args)
         {
             return true;

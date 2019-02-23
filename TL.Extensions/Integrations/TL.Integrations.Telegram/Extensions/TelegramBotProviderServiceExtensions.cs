@@ -23,12 +23,12 @@ namespace TL.Integrations.Telegram.Extensions
                 {
                     Token = token,
                     TypeName = typeName,
-                    NativeName = nativeName,
-                    SkipUpdates = skipUpdates,
-                    AutoStart = autoStart
                 });
             }
 
+            tgBot.NativeName = nativeName;
+            tgBot.SkipUpdates = skipUpdates;
+            tgBot.AutoStart = autoStart;
             tgBot.State = TgBotState.Start;
             tgBotManager.Update(tgBot);
 
@@ -45,6 +45,9 @@ namespace TL.Integrations.Telegram.Extensions
             }
             else
             {
+                tgBot.State = TgBotState.Stop;
+                tgBotManager.Update(tgBot);
+
                 if (isNewBot)
                 {
                     tgBotManager.Delete(tgBot);

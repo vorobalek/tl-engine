@@ -4,5 +4,6 @@ namespace TL.Engine.SDK.Entities
 {
     public interface IEntity : ExtCoreEntity
     {
+        bool IsDeleted { get; set; }
     }
 }

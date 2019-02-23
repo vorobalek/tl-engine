@@ -30,7 +30,7 @@ namespace TL.Engine.SDK.Repositories
         {
             if (entity != null)
             {
-                dbSet.Remove(entity);
+                entity.IsDeleted = true;
             }
         }
 
