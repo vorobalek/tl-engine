@@ -59,6 +59,8 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
                     {
 
                     }
+
+                    return new HandlerMethodResult(true);
                 }
             }
 

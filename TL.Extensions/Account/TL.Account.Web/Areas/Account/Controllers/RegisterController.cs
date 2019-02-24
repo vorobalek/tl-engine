@@ -32,9 +32,10 @@ namespace TL.Account.Web.Areas.Account.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = UserManager.GetOrCreate(model.Username, model.Password);
-                if (user != null)
+                var user = UserManager.Get(model.Username);
+                if (user == null)
                 {
+                    user = UserManager.Create(model.Username, model.Password);
                     UserManager.Authenticate(user, HttpContext);
                     return Redirect(model.ReturnUrl);
                 }
