@@ -1,6 +1,6 @@
 ﻿@model TL.Engine.Web.ViewModels.Shared.LinksViewModel
 
-<nav class="nav flex-column nav-pills">
+<nav class="nav flex-column nav-pills h6">
     @foreach (var item in this.Model.Items)
     {
         <partial name="_SidebarItem" model="@item" />

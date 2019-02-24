@@ -106,41 +106,16 @@ namespace TL.Integrations.Telegram.Bots
             }
             else
             {
-                if (hresult.IsFill)
+                var exceptions = string.Join("\r\n", hresult.Results.Select(r => r.Exception));
+                SendAsync(new Message()
                 {
-                    var exceptions = string.Join("\r\n", hresult.Results.Select(r => r.Exception));
-                    SendAsync(new Message()
-                    {
-                        MessageType = MessageType.Text,
-                        ChatId = e.Update.GetSenderChatId(),
-                        Text = $"‼️ <b>Произошла одна или несколько ошибок!</b>\r\n\r\n" +
-                        $"<pre>{exceptions}</pre>",
-                        ParseMode = ParseMode.Html
-                    }).Wait();
-                    Logger.TLogError($"Произошла одна или несколько ошибок при обновлении {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}\r\n" +
-                        $"{exceptions}");
-                }
-                else
-                {
-                    var commands_arr = CommandHandler.Methods
-                        .Where(it => (!it.IsPrivate) && it.IsPolicyAcceptable(e.Update, ServiceProvider, user) && (it.UpdateType == UpdateType.Message))
-                        .OrderBy(it => it.Command)
-                        .Select(it => $"{it.Command} {it.Description}");
-
-                    var commands = string.Join("\r\n", commands_arr);
-
-                    SendAsync(new Message()
-                    {
-                        MessageType = MessageType.Text,
-                        ChatId = e.Update.GetSenderChatId(),
-                        Text = $"‼️ <b>Разработчики ещё не запилили это!</b>\r\n\r\n" +
-                        $"Нет, мы не ленивые, мы работаем. Если вы видите это сообщение, значит скоро тут появится новый функционал. (Разработчик №0)\r\n\r\n" +
-                        $"Тип взаимодействия <b>{e.Update.GetGenericTypeString()}</b> не поддерживается или для него не найден подходящий хэндлер.\r\n\r\n" +
-                        $"🖖🏻 <b>Я вас не понимаю, но вот список команд, которые я в состоянии понять</b>\r\n\r\n{commands}",
-                        ParseMode = ParseMode.Html
-                    }).Wait();
-                    Logger.TLogWarning($"Обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()} не поддерживается или для него не найден подходящий хэндлер.");
-                }
+                    MessageType = MessageType.Text,
+                    ChatId = e.Update.GetSenderChatId(),
+                    Text = $"‼️ <b>Произошла одна или несколько ошибок!</b>\r\n\r\n" +
+                    $"<pre>{exceptions}</pre>",
+                    ParseMode = ParseMode.Html
+                }).Wait();
+                Logger.TLogError($"Произошла одна или несколько ошибок при обновлении {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}\r\n{exceptions}");
             }
         }
 
