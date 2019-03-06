@@ -17,6 +17,9 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="TL.$saferootprojectname$.SDK.csproj" File="TL.Module.SDK.csproj" ReplaceParameters="true">
+      <Folder Name="Controllers" TargetFolderName="Controllers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Base$saferootprojectname$Controller.cs">BaseModuleController.cs</ProjectItem>
+      </Folder>
       <ProjectItem ReplaceParameters="true" TargetFileName="Metadata.cs">Metadata.cs</ProjectItem>
     </Project>
   </TemplateContent>

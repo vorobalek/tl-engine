@@ -56,13 +56,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-	<Content Include="TL.Module\**" />
-	<Content Include="TL.Module.Data\**" />
-	<Content Include="TL.Module.Data.Abstractions\**" />
-	<Content Include="TL.Module.Data.Entities\**" />
-	<Content Include="TL.Module.Data.EntityFramework\**" />
-	<Content Include="TL.Module.SDK\**" />
-	<Content Include="TL.Module.Web\**" />
+    <Content Include="TL.Module.SDK\Controllers\BaseModuleController.cs" />
+    <Content Include="TL.Module\**" />
+    <Content Include="TL.Module.Data\**" />
+    <Content Include="TL.Module.Data.Abstractions\**" />
+    <Content Include="TL.Module.Data.Entities\**" />
+    <Content Include="TL.Module.Data.EntityFramework\**" />
+    <Content Include="TL.Module.SDK\**" />
+    <Content Include="TL.Module.Web\Actions\UseMvcAction.cs" />
+    <Content Include="TL.Module.Web\Api\Module\HelloController.cs" />
+    <Content Include="TL.Module.Web\Api\Module\_ModuleApiController.cs" />
+    <Content Include="TL.Module.Web\Areas\Module\Controllers\HomeController.cs" />
+    <Content Include="TL.Module.Web\Areas\Module\Controllers\__ModuleController__.cs" />
+    <Content Include="TL.Module.Web\Areas\Module\ViewModels\Home\IndexViewModel.cs" />
+    <Content Include="TL.Module.Web\Areas\Module\ViewModels\Home\IndexViewModelFactory.cs" />
+    <Content Include="TL.Module.Web\Areas\Module\Views\Home\Index.cshtml" />
+    <Content Include="TL.Module.Web\Areas\Module\Views\_ViewImports.cshtml" />
+    <Content Include="TL.Module.Web\Areas\Module\Views\_ViewStart.cshtml" />
+    <Content Include="TL.Module.Web\Metadata.cs" />
+    <Content Include="TL.Module.Web\MyTemplate.vstemplate" />
+    <Content Include="TL.Module.Web\TL.Module.Web.csproj" />
+    <Content Include="TL.Module.Web\__PreviewImage.ico" />
+    <Content Include="TL.Module.Web\__TemplateIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="TL.Module.Template.vstemplate">

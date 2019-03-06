@@ -1,11 +1,9 @@
 ﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
-using TL.Engine.SDK.Controllers;
+using TL.$saferootprojectname$.SDK.Controllers;
 
 namespace $safeprojectname$.Areas.$saferootprojectname$.Controllers
 {
-    [Area("$saferootprojectname$")]
-    public abstract class __$saferootprojectname$Controller__ : BaseController
+    public abstract class __$saferootprojectname$Controller__ : Base$saferootprojectname$Controller
     {
         public __$saferootprojectname$Controller__(IStorage storage) : base(storage)
         {

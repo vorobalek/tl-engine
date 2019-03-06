@@ -20,12 +20,6 @@
       <Folder Name="Actions" TargetFolderName="Actions">
         <ProjectItem ReplaceParameters="true" TargetFileName="UseMvcAction.cs">UseMvcAction.cs</ProjectItem>
       </Folder>
-      <Folder Name="Api" TargetFolderName="Api">
-        <Folder Name="Module" TargetFolderName="$saferootprojectname$">
-          <ProjectItem ReplaceParameters="true" TargetFileName="_$saferootprojectname$ApiController.cs">_ModuleApiController.cs</ProjectItem>
-          <ProjectItem ReplaceParameters="true" TargetFileName="HelloController.cs">HelloController.cs</ProjectItem>
-        </Folder>
-      </Folder>
       <Folder Name="Areas" TargetFolderName="Areas">
         <Folder Name="Module" TargetFolderName="$saferootprojectname$">
           <Folder Name="Controllers" TargetFolderName="Controllers">

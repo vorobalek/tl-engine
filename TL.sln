@@ -25,19 +25,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{088D2108-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{77AA560D-4079-4C2B-8E29-3494704CC7AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Account.SDK", "TL.Extensions\Account\TL.Account.SDK\TL.Account.SDK.csproj", "{229C8253-FF3B-479B-B492-3FF3044E87D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.SDK", "TL.Extensions\Account\TL.Account.SDK\TL.Account.SDK.csproj", "{229C8253-FF3B-479B-B492-3FF3044E87D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Account.Data.Entities", "TL.Extensions\Account\TL.Account.Data.Entities\TL.Account.Data.Entities.csproj", "{DA4B327B-274D-47CF-82AB-14D83A9C9B92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.Data.Entities", "TL.Extensions\Account\TL.Account.Data.Entities\TL.Account.Data.Entities.csproj", "{DA4B327B-274D-47CF-82AB-14D83A9C9B92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Account.Data.Abstractions", "TL.Extensions\Account\TL.Account.Data.Abstractions\TL.Account.Data.Abstractions.csproj", "{8C976651-7FD5-4889-AE8A-395F5D8B9282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.Data.Abstractions", "TL.Extensions\Account\TL.Account.Data.Abstractions\TL.Account.Data.Abstractions.csproj", "{8C976651-7FD5-4889-AE8A-395F5D8B9282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Account.Data.EntityFramework", "TL.Extensions\Account\TL.Account.Data.EntityFramework\TL.Account.Data.EntityFramework.csproj", "{A899959E-A89C-4583-A983-43CDFCC0E171}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.Data.EntityFramework", "TL.Extensions\Account\TL.Account.Data.EntityFramework\TL.Account.Data.EntityFramework.csproj", "{A899959E-A89C-4583-A983-43CDFCC0E171}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Account.Data", "TL.Extensions\Account\TL.Account.Data\TL.Account.Data.csproj", "{778BA579-11C0-4F16-BE40-15FA77754F00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.Data", "TL.Extensions\Account\TL.Account.Data\TL.Account.Data.csproj", "{778BA579-11C0-4F16-BE40-15FA77754F00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Account.Web", "TL.Extensions\Account\TL.Account.Web\TL.Account.Web.csproj", "{8EAFCF27-E8AB-479D-88AF-48A864EC274A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account.Web", "TL.Extensions\Account\TL.Account.Web\TL.Account.Web.csproj", "{8EAFCF27-E8AB-479D-88AF-48A864EC274A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Account", "TL.Extensions\Account\TL.Account\TL.Account.csproj", "{FE6152B5-7FD9-4EE5-BD79-95BC466FE104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account", "TL.Extensions\Account\TL.Account\TL.Account.csproj", "{FE6152B5-7FD9-4EE5-BD79-95BC466FE104}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crm", "Crm", "{C3A6E132-371F-4F80-8A45-9C76002726C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.SDK", "TL.Extensions\Crm\TL.Crm.SDK\TL.Crm.SDK.csproj", "{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.Entities", "TL.Extensions\Crm\TL.Crm.Data.Entities\TL.Crm.Data.Entities.csproj", "{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.Abstractions", "TL.Extensions\Crm\TL.Crm.Data.Abstractions\TL.Crm.Data.Abstractions.csproj", "{B2E7EB8B-6C41-4C80-A1B8-668D32220D71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.EntityFramework", "TL.Extensions\Crm\TL.Crm.Data.EntityFramework\TL.Crm.Data.EntityFramework.csproj", "{BC9EFCB7-1286-4774-8E4D-8F453039416B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data", "TL.Extensions\Crm\TL.Crm.Data\TL.Crm.Data.csproj", "{656A3913-F43F-4538-B319-C6F8F6AA1BED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Web", "TL.Extensions\Crm\TL.Crm.Web\TL.Crm.Web.csproj", "{5289747E-4F40-4922-8947-0DA3984C50E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm", "TL.Extensions\Crm\TL.Crm\TL.Crm.csproj", "{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +117,34 @@ Global
 		{FE6152B5-7FD9-4EE5-BD79-95BC466FE104}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE6152B5-7FD9-4EE5-BD79-95BC466FE104}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE6152B5-7FD9-4EE5-BD79-95BC466FE104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E7EB8B-6C41-4C80-A1B8-668D32220D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E7EB8B-6C41-4C80-A1B8-668D32220D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2E7EB8B-6C41-4C80-A1B8-668D32220D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2E7EB8B-6C41-4C80-A1B8-668D32220D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9EFCB7-1286-4774-8E4D-8F453039416B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9EFCB7-1286-4774-8E4D-8F453039416B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9EFCB7-1286-4774-8E4D-8F453039416B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9EFCB7-1286-4774-8E4D-8F453039416B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{656A3913-F43F-4538-B319-C6F8F6AA1BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656A3913-F43F-4538-B319-C6F8F6AA1BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656A3913-F43F-4538-B319-C6F8F6AA1BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656A3913-F43F-4538-B319-C6F8F6AA1BED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5289747E-4F40-4922-8947-0DA3984C50E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5289747E-4F40-4922-8947-0DA3984C50E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5289747E-4F40-4922-8947-0DA3984C50E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5289747E-4F40-4922-8947-0DA3984C50E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +165,14 @@ Global
 		{778BA579-11C0-4F16-BE40-15FA77754F00} = {77AA560D-4079-4C2B-8E29-3494704CC7AE}
 		{8EAFCF27-E8AB-479D-88AF-48A864EC274A} = {77AA560D-4079-4C2B-8E29-3494704CC7AE}
 		{FE6152B5-7FD9-4EE5-BD79-95BC466FE104} = {77AA560D-4079-4C2B-8E29-3494704CC7AE}
+		{C3A6E132-371F-4F80-8A45-9C76002726C2} = {0B766231-C411-4BBA-9A38-3BC69CA83D56}
+		{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6} = {C3A6E132-371F-4F80-8A45-9C76002726C2}
+		{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB} = {C3A6E132-371F-4F80-8A45-9C76002726C2}
+		{B2E7EB8B-6C41-4C80-A1B8-668D32220D71} = {C3A6E132-371F-4F80-8A45-9C76002726C2}
+		{BC9EFCB7-1286-4774-8E4D-8F453039416B} = {C3A6E132-371F-4F80-8A45-9C76002726C2}
+		{656A3913-F43F-4538-B319-C6F8F6AA1BED} = {C3A6E132-371F-4F80-8A45-9C76002726C2}
+		{5289747E-4F40-4922-8947-0DA3984C50E1} = {C3A6E132-371F-4F80-8A45-9C76002726C2}
+		{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE} = {C3A6E132-371F-4F80-8A45-9C76002726C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DAD5B3A2-F0CE-4F86-AADC-8EFFB7195955}
