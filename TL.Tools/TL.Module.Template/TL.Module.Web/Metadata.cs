@@ -5,7 +5,7 @@ using TL.Engine.SDK.Modularity.Items;
 namespace $safeprojectname$
 {
     public class Metadata : BaseMetadataWeb
-{
+    {
         public override string Name => "$safeprojectname$";
 
         public override string Owner => "TL.$saferootprojectname$";
@@ -15,7 +15,7 @@ namespace $safeprojectname$
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/$saferootprojectname$", "$saferootprojectname$", 1000),
+            new LinkItem("/$lower_saferootprojectname$", "$saferootprojectname$", 1000),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]

@@ -13,6 +13,7 @@
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <CreateInPlace>true</CreateInPlace>
     <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.ico</PreviewImage>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="TL.$saferootprojectname$.Web.csproj" File="TL.Module.Web.csproj" ReplaceParameters="true">
@@ -31,7 +32,7 @@
             <ProjectItem ReplaceParameters="true" TargetFileName="__$saferootprojectname$Controller__.cs">__ModuleController__.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="HomeController.cs">HomeController.cs</ProjectItem>
           </Folder>
-           <Folder Name="ViewModels" TargetFolderName="ViewModels">
+          <Folder Name="ViewModels" TargetFolderName="ViewModels">
             <Folder Name="Home" TargetFolderName="Home">
               <ProjectItem ReplaceParameters="true" TargetFileName="IndexViewModel.cs">IndexViewModel.cs</ProjectItem>
               <ProjectItem ReplaceParameters="true" TargetFileName="IndexViewModelFactory.cs">IndexViewModelFactory.cs</ProjectItem>

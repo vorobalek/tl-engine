@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" Type="ProjectGroup" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
     <Name>Модуль системы TL Engine</Name>
-    <Description>Шаблон проектов, составляющих модуль системы TL Engine: Модуль, Data, Entities, Abstractions, EntityFramework, Web</Description>
+    <Description>Шаблон проектов, составляющих модуль системы TL Engine: SDK, Модуль, Data, Entities, Abstractions, EntityFramework, Web</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
@@ -11,10 +11,13 @@
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
-    <Icon>__TemplateIcon.ico</Icon>
+    <Icon>TL.Module.Template.ico</Icon>
   </TemplateData>
   <TemplateContent>
   <ProjectCollection>
+    <ProjectTemplateLink ProjectName="TL.$projectname$.SDK">
+      TL.Module.SDK\MyTemplate.vstemplate
+    </ProjectTemplateLink>
     <ProjectTemplateLink ProjectName="TL.$projectname$.Data.Entities">
         TL.Module.Data.Entities\MyTemplate.vstemplate
     </ProjectTemplateLink>

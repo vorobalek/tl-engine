@@ -13,6 +13,7 @@
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <CreateInPlace>true</CreateInPlace>
     <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.ico</PreviewImage>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="TL.$saferootprojectname$.csproj" File="TL.Module.csproj" ReplaceParameters="true">

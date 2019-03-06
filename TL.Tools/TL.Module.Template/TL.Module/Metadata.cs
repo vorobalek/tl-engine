@@ -3,7 +3,7 @@
 namespace $safeprojectname$
 {
     public class Metadata : BaseMetadata
-{
+    {
         public override string Name => "TL.$saferootprojectname$";
     }
 }

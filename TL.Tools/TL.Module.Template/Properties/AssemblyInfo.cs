@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TL.Module.Template")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Alex O. Vorob'ev")]
+[assembly: AssemblyCompany("TLCOM")]
 [assembly: AssemblyProduct("TL.Module.Template")]
-[assembly: AssemblyCopyright("Copyright © Alex O. Vorob'ev 2018")]
+[assembly: AssemblyCopyright("Copyright © TLCOM 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

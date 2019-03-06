@@ -15,7 +15,7 @@ namespace $safeprojectname$.Actions
                name: "$saferootprojectname$.Web",
                template: "$saferootprojectname$/{controller}/{action}/{id?}",
                constraints: new { area = "$saferootprojectname$" },
-               defaults: new { area= "$saferootprojectname$", controller = "Home", action = "Index" }
+               defaults: new { area = "$saferootprojectname$", controller = "Home", action = "Index" }
            );
         }
     }

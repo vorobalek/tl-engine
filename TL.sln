@@ -83,7 +83,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.Web", "TL.Extensions
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm", "TL.Extensions\Crm\TL.Crm\TL.Crm.csproj", "{6D8A4D93-D0FB-4743-AD81-A91A6E6EE63A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Telegram", "TL.Extensions\Crm\TL.Crm.Telegram\TL.Crm.Telegram.csproj", "{4C1D9E45-C7E7-4D08-A42D-077FC8B19D69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.Telegram", "TL.Extensions\Crm\TL.Crm.Telegram\TL.Crm.Telegram.csproj", "{4C1D9E45-C7E7-4D08-A42D-077FC8B19D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
