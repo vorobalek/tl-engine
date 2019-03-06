@@ -1,0 +1,11 @@
+﻿using TL.Engine.SDK.Modularity;
+
+namespace TL.Account.SDK
+{
+    public class Metadata : BaseMetadata
+    {
+        public override string Name => "TL.Account.SDK";
+
+        public override string Owner => "TL.Account";
+    }
+}

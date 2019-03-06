@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-	  <UseRazorBuildServer>false</UseRazorBuildServer>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -16,16 +15,14 @@
   <ItemGroup>
     <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="Areas\Account\Views\**;Areas\Account\Styles\**;Areas\Account\Scripts\**" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\TL.Account.Data\TL.Account.Data.csproj" />
   </ItemGroup>
-  
+
 </Project>

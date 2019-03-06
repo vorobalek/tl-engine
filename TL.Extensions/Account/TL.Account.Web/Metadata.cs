@@ -11,9 +11,7 @@ namespace TL.Account.Web
         public override string Owner => "TL.Account";
 
         public override string Description =>
-            $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
-
-        public override string Authors => "Alexey Vorobev";
+                $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {

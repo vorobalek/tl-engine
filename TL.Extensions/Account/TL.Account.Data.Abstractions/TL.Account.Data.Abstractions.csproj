@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <PackageReference Include="ExtCore.Data.Abstractions" Version="4.0.0" />
-    <PackageReference Include="ExtCore.Infrastructure" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
