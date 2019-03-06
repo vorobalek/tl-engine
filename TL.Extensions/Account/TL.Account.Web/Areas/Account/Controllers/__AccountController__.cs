@@ -1,12 +1,10 @@
 ﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
 using TL.Account.Data.Managers;
-using TL.Engine.SDK.Controllers;
+using TL.Account.SDK.Controllers;
 
 namespace TL.Account.Web.Areas.Account.Controllers
 {
-    [Area("Account")]
-    public abstract class __AccountController__ : BaseController
+    public abstract class __AccountController__ : BaseAccountController
     {
         public __AccountController__(IStorage storage, IUserManager userManager) : base(storage)
         {
