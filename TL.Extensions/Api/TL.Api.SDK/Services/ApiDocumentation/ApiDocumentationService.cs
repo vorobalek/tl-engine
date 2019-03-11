@@ -123,7 +123,8 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                 {
                     return new ApiFunctionModel()
                     {
-                        Name = $"{m.DeclaringType.FullName}:{m.Name}",
+                        Namespace = m.DeclaringType.FullName,
+                        Name = m.Name,
                         Description = (m.GetCustomAttributes(typePublicApiAttribute, false).FirstOrDefault() as PublicApiAttribute).Description,
                         ReturnableType = m.ReturnType.GetFullName(),
                         Properties = m.GetParameters().Select(p =>

@@ -49,7 +49,7 @@
                                 .appendTo($('#methods'));
                         });
                         $.each(data.result.functions, function (key, item) {
-                            $('<a class="nav-link" href="/apihelp/functions#' + item.name + '">' + item.name + '</a>')
+                            $('<a class="nav-link" href="/apihelp/functions#' + item.namespace + ':' + item.name + '">' + item.name + '</a>')
                                 .appendTo($('#functions'));
                         });
                         $.each(data.result.objects, function (key, item) {
