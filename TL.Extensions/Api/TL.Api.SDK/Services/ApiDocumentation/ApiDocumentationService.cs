@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using TL.Api.SDK.Attributes.Executable;
 using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Controllers;
 using TL.Api.SDK.Models;
@@ -43,6 +44,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
             var timeStrat = DateTime.Now;
             InitializeMethods();
             InitializeObjects();
+            InitializeFunctions();
             ApiDocumentationModel.LastUpdate = DateTime.Now;
             ApiDocumentationModel.IsRelevant = true;
             ApiDocumentationModel.CreationTime = DateTime.Now - timeStrat;
@@ -107,6 +109,34 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                     };
                 })
                 .OrderBy(o => o.Name)
+                .ToList();
+        }
+
+        private void InitializeFunctions()
+        {
+            var typePublicApiAttribute = typeof(PublicApiAttribute);
+            ApiDocumentationModel.Functions = ExtensionManager.Assemblies
+                .SelectMany(a => a.GetTypes())
+                .SelectMany(t => t.GetMethods())
+                .Where(m => m.GetCustomAttributes(typePublicApiAttribute, false).Length > 0)
+                .Select(m =>
+                {
+                    return new ApiFunctionModel()
+                    {
+                        Name = $"{m.DeclaringType.FullName}:{m.Name}",
+                        Description = (m.GetCustomAttributes(typePublicApiAttribute, false).FirstOrDefault() as PublicApiAttribute).Description,
+                        ReturnableType = m.ReturnType.GetFullName(),
+                        Properties = m.GetParameters().Select(p =>
+                        {
+                            return new ApiPropertyModel()
+                            {
+                                Type = p.ParameterType.GetFullName(),
+                                Name = p.Name,
+                            };
+                        })
+                        .ToList(),
+                    };
+                })
                 .ToList();
         }
     }

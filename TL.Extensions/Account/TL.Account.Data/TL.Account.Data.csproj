@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Api\TL.Api.SDK\TL.Api.SDK.csproj" />
     <ProjectReference Include="..\TL.Account.Data.EntityFramework\TL.Account.Data.EntityFramework.csproj" />
   </ItemGroup>
 

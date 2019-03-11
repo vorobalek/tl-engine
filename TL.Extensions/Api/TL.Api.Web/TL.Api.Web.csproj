@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -20,7 +20,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\ApiHelp\Views\**;Areas\ApiHelp\Styles\**;Areas\ApiHelp\Scripts\**" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\TL.Api.Data\TL.Api.Data.csproj" />
   </ItemGroup>

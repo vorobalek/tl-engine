@@ -8,6 +8,7 @@ using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Relationships;
 using TL.Account.Data.Entities.Security;
 using TL.Account.Data.Extensions;
+using TL.Api.SDK.Attributes.Executable;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
 
@@ -19,6 +20,7 @@ namespace TL.Account.Data.Managers
         {
         }
 
+        [PublicApi(Description = "Получить пользователя по имени")]
         public User Get(string username)
         {
             return username.GetUser(Storage);

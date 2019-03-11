@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "API Объекты";
+    ViewData["Title"] = "API Функции";
     Layout = "~/Areas/ApiHelp/Views/Shared/_Layout.cshtml";
 }
 
 <div class="col">
-    <h1>Объекты</h1>
-    <div id="contentObjects">
+    <h1>Функции</h1>
+    <div id="contentFunctions">
     </div>
 </div>
 
@@ -16,19 +16,19 @@
             $.getJSON(getHelpUri)
                 .done(function (data) {
                     if (data.ok) {
-                        formatResult(data.result).appendTo('#contentObjects')
+                        formatResult(data.result).appendTo('#contentFunctions')
                     }
                 })
                 .fail(function () {
                     alert(err + '! ' + alertMessage);
-                    $('#contentObjects').text(alertMessage);
+                    $('#contentFunctions').text(alertMessage);
                 })
         })
 
         function formatResult(result) {
             var divResult = $('<div>')
-            $.each(result.objects, function (key, object) {
-                formatObject(object).appendTo(divResult);
+            $.each(result.functions, function (key, func) {
+                formatFunction(func).appendTo(divResult);
             })
             divResult.append(relevantCheckDiv(result))
             return divResult;
@@ -62,16 +62,16 @@
                 )
         }
 
-        function formatObject(object) {
+        function formatFunction(func) {
             var tbody = $('<tbody>');
-            $.each(object.properties, function (key, property) {
+            $.each(func.properties, function (key, property) {
                 formatProperty(property).appendTo(tbody);
             })
             return $('<div>')
-                .append($('<h3 id="' + object.name + '">')
-                    .text(object.name)
+                .append($('<h3 id="' + func.name + '">')
+                    .text(func.returnableType + ' ' + func.name + '()')
                 )
-                .append($('<p>').text(object.description))
+                .append($('<p>').text(func.description))
                 .append($('<div>')
                     .addClass('table-responsive')
                     .append($('<table>')

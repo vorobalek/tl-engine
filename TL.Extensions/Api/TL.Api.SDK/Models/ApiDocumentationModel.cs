@@ -23,6 +23,8 @@ namespace TL.Api.SDK.Models
 
         public IList<ApiMethodModel> GetMethods() => Methods;
 
+        public IList<ApiFunctionModel> GetFunctions() => Functions;
+
         [JsonRequired]
         [JsonProperty(Order = 0)]
         public static bool IsRelevant { get; set; }
@@ -37,9 +39,12 @@ namespace TL.Api.SDK.Models
         public static IList<ApiMethodModel> Methods { get; set; }
 
         [JsonProperty(Order = 4)]
-        public static TimeSpan CreationTime { get; set; }
+        public static IList<ApiFunctionModel> Functions { get; set; }
 
         [JsonProperty(Order = 5)]
+        public static TimeSpan CreationTime { get; set; }
+
+        [JsonProperty(Order = 6)]
         public static DateTime LastUpdate { get; set; }
     }
 }

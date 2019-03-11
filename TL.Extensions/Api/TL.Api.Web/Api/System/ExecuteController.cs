@@ -1,4 +1,5 @@
 ﻿using ExtCore.Data.Abstractions;
+using ExtCore.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Extensions;
@@ -18,6 +19,10 @@ namespace TL.Api.Web.Api.System
         [ApiHttpGet("{method}", UsageDescription = "Этот метод требует указать имя метода как часть запроса", UsageSample = "/test", ReturnableType = typeof(object))]
         public IActionResult Get(string method)
         {
+            var m = method.Split(":");
+            var type = m[0];
+            var func = m[1];
+
             return this.JsonResponse(true, result: new { report = $"Execute HTTP GET whith method = {method}" });
         }
     }

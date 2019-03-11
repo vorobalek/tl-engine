@@ -8,6 +8,7 @@
             <nav class="nav">
                 <a class="nav-link" href="/apihelp">Введение</a>
                 <a class="nav-link" href="/apihelp/methods">Методы</a>
+                <a class="nav-link" href="/apihelp/functions">Функции</a>
                 <a class="nav-link" href="/apihelp/objects">Возвращаемые объекты</a>
             </nav>
         </div>
@@ -18,11 +19,15 @@
     <div class="col-md-3">
         <div class="row">
             <div class="col-md-12">
-                <h1>API</h1>
+                <h1>Methods</h1>
                 <nav id="methods" class="nav flex-column"></nav>
             </div>
             <div class="col-md-12">
-                <h1>Obj</h1>
+                <h1>Functions</h1>
+                <nav id="functions" class="nav flex-column"></nav>
+            </div>
+            <div class="col-md-12">
+                <h1>Objects</h1>
                 <nav id="objects" class="nav flex-column"></nav>
             </div>
         </div>
@@ -43,16 +48,16 @@
                             $('<a class="nav-link" href="/apihelp/methods#' + getId(item) + '">' + item.command + '</a>')
                                 .appendTo($('#methods'));
                         });
+                        $.each(data.result.functions, function (key, item) {
+                            $('<a class="nav-link" href="/apihelp/functions#' + item.name + '">' + item.name + '</a>')
+                                .appendTo($('#objects'));
+                        });
                         $.each(data.result.objects, function (key, item) {
                             $('<a class="nav-link" href="/apihelp/objects#' + item.name + '">' + item.name + '</a>')
                                 .appendTo($('#objects'));
                         });
                     }
                 })
-                .fail(function (jqXHR, textok, err) {
-                    alert(err + '! ' + alertMessage);
-                    $('#methods').text(alertMessage);
-                });
         });
 
         function getId(method) {
