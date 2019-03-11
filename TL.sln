@@ -41,35 +41,35 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Account", "TL.Extensions
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crm", "Crm", "{C3A6E132-371F-4F80-8A45-9C76002726C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.SDK", "TL.Extensions\Crm\TL.Crm.SDK\TL.Crm.SDK.csproj", "{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.SDK", "TL.Extensions\Crm\TL.Crm.SDK\TL.Crm.SDK.csproj", "{9D7417F2-1181-4D88-B1B2-C3ABBAD91FD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.Entities", "TL.Extensions\Crm\TL.Crm.Data.Entities\TL.Crm.Data.Entities.csproj", "{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.Data.Entities", "TL.Extensions\Crm\TL.Crm.Data.Entities\TL.Crm.Data.Entities.csproj", "{DE6936DE-FA0C-412C-AD50-FC24B8CCA5BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.Abstractions", "TL.Extensions\Crm\TL.Crm.Data.Abstractions\TL.Crm.Data.Abstractions.csproj", "{B2E7EB8B-6C41-4C80-A1B8-668D32220D71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.Data.Abstractions", "TL.Extensions\Crm\TL.Crm.Data.Abstractions\TL.Crm.Data.Abstractions.csproj", "{B2E7EB8B-6C41-4C80-A1B8-668D32220D71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data.EntityFramework", "TL.Extensions\Crm\TL.Crm.Data.EntityFramework\TL.Crm.Data.EntityFramework.csproj", "{BC9EFCB7-1286-4774-8E4D-8F453039416B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.Data.EntityFramework", "TL.Extensions\Crm\TL.Crm.Data.EntityFramework\TL.Crm.Data.EntityFramework.csproj", "{BC9EFCB7-1286-4774-8E4D-8F453039416B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Data", "TL.Extensions\Crm\TL.Crm.Data\TL.Crm.Data.csproj", "{656A3913-F43F-4538-B319-C6F8F6AA1BED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.Data", "TL.Extensions\Crm\TL.Crm.Data\TL.Crm.Data.csproj", "{656A3913-F43F-4538-B319-C6F8F6AA1BED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm.Web", "TL.Extensions\Crm\TL.Crm.Web\TL.Crm.Web.csproj", "{5289747E-4F40-4922-8947-0DA3984C50E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm.Web", "TL.Extensions\Crm\TL.Crm.Web\TL.Crm.Web.csproj", "{5289747E-4F40-4922-8947-0DA3984C50E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Crm", "TL.Extensions\Crm\TL.Crm\TL.Crm.csproj", "{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Crm", "TL.Extensions\Crm\TL.Crm\TL.Crm.csproj", "{CE8D1D1F-30F1-47D2-BD8C-EEAEBD425EAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{EDAD137E-CF8A-47F1-B415-0D68D01A4414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Api.SDK", "TL.Extensions\Api\TL.Api.SDK\TL.Api.SDK.csproj", "{E594ADD2-A635-4F69-AE73-CE13B8A6A6E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api.SDK", "TL.Extensions\Api\TL.Api.SDK\TL.Api.SDK.csproj", "{E594ADD2-A635-4F69-AE73-CE13B8A6A6E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Api.Data.Entities", "TL.Extensions\Api\TL.Api.Data.Entities\TL.Api.Data.Entities.csproj", "{2431F97E-A330-44D4-AEC1-38794FCA78A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api.Data.Entities", "TL.Extensions\Api\TL.Api.Data.Entities\TL.Api.Data.Entities.csproj", "{2431F97E-A330-44D4-AEC1-38794FCA78A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Api.Data.Abstractions", "TL.Extensions\Api\TL.Api.Data.Abstractions\TL.Api.Data.Abstractions.csproj", "{74C4546F-46CC-405F-ABA7-60BC89B06327}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api.Data.Abstractions", "TL.Extensions\Api\TL.Api.Data.Abstractions\TL.Api.Data.Abstractions.csproj", "{74C4546F-46CC-405F-ABA7-60BC89B06327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Api.Data.EntityFramework", "TL.Extensions\Api\TL.Api.Data.EntityFramework\TL.Api.Data.EntityFramework.csproj", "{2A010D77-3916-4320-9095-790257605164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api.Data.EntityFramework", "TL.Extensions\Api\TL.Api.Data.EntityFramework\TL.Api.Data.EntityFramework.csproj", "{2A010D77-3916-4320-9095-790257605164}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Api.Data", "TL.Extensions\Api\TL.Api.Data\TL.Api.Data.csproj", "{1DE41F76-68EB-4350-A621-98DAF93D69EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api.Data", "TL.Extensions\Api\TL.Api.Data\TL.Api.Data.csproj", "{1DE41F76-68EB-4350-A621-98DAF93D69EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Api.Web", "TL.Extensions\Api\TL.Api.Web\TL.Api.Web.csproj", "{DAEA0155-5D26-4589-B5EE-49232FB4083B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api.Web", "TL.Extensions\Api\TL.Api.Web\TL.Api.Web.csproj", "{DAEA0155-5D26-4589-B5EE-49232FB4083B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Api", "TL.Extensions\Api\TL.Api\TL.Api.csproj", "{E2B7A57D-EFCD-4E06-B391-4760E6CC647A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api", "TL.Extensions\Api\TL.Api\TL.Api.csproj", "{E2B7A57D-EFCD-4E06-B391-4760E6CC647A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

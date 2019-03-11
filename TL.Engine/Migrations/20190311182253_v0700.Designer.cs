@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TL.Engine.Migrations
 {
     [DbContext(typeof(StorageContext))]
-    [Migration("20190306115713_v0601-CRM")]
-    partial class v0601CRM
+    [Migration("20190311182253_v0700")]
+    partial class v0700
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -116,13 +116,9 @@ namespace TL.Engine.Migrations
 
                     b.Property<string>("PasswordHash");
 
-                    b.Property<Guid?>("ReferrerId");
-
                     b.Property<string>("Username");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReferrerId");
 
                     b.HasIndex("Username")
                         .IsUnique()
@@ -403,14 +399,6 @@ namespace TL.Engine.Migrations
                         .WithMany("Subscriptions")
                         .HasForeignKey("FromId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TL.Account.Data.Entities.Security.User", b =>
-                {
-                    b.HasOne("TL.Account.Data.Entities.Security.User", "Referrer")
-                        .WithMany("Referrals")
-                        .HasForeignKey("ReferrerId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TL.Account.Data.Entities.Security.UserRole", b =>

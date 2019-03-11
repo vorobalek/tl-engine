@@ -16,12 +16,6 @@ namespace TL.Account.Data.EntityFramework.Security.Users
                 .IsUnique();
 
             builder
-                .HasOne(e => e.Referrer)
-                .WithMany(e => e.Referrals)
-                .HasForeignKey(e => e.ReferrerId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
                 .HasMany(e => e.UserRoles)
                 .WithOne(e => e.User)
                 .HasForeignKey(e => e.UserId);
