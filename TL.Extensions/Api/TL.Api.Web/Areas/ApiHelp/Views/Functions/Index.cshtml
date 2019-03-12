@@ -69,7 +69,10 @@
             })
             return $('<div>')
                 .append($('<h3 id="' + func.namespace + ':' + func.name + '">')
-                    .text(func.returnableType + ' ' + func.namespace + ':' + func.name + '()')
+                    .click(function () {
+                        window.open('/api/system.Execute/' + func.namespace + ':' + func.name + '?');
+                    })
+                    .text(func.returnableType + ' ' + func.namespace + ':' + func.name)
                 )
                 .append($('<p>').text(func.description))
                 .append($('<div>')

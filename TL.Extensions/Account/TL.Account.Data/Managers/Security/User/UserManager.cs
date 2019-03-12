@@ -26,6 +26,7 @@ namespace TL.Account.Data.Managers
             return username.GetUser(Storage);
         }
 
+        [PublicApi(Description = "Создать пользователя с логином, паролем и описанием")]
         public User Create(string username, string password, string description = null)
         {
             User user = null;

@@ -5,7 +5,7 @@ using TL.Api.SDK.Objects;
 
 namespace TL.Api.SDK.Formats
 {
-    [JsonObject]
+    [JsonObject(ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
     public class JsonApiResponseFormat : JsonApiObject, IBaseApiResponseFormat
     {
         protected override string _Description => "Объект формата JSON ответа";
@@ -14,7 +14,7 @@ namespace TL.Api.SDK.Formats
         [JsonProperty(Order = 0)]
         public bool Ok { get; set; }
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Order = 1024)]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Order = 1024, ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
         public object Result { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Order = 2048)]
