@@ -49,8 +49,13 @@
                                 .appendTo($('#methods'));
                         });
                         $.each(data.result.functions, function (key, item) {
-                            $('<a class="nav-link" href="/apihelp/functions#' + item.namespace + ':' + item.name + '">' + item.name + '</a>')
-                                .appendTo($('#functions'));
+                            if (item.isPrivate) {
+                                $('<a class="nav-link" href="/apihelp/functions#' + item.namespace + ':' + item.name + '"><span class="glyphicon glyphicon-lock"></span>  ' + item.name + '</a>')
+                                    .appendTo($('#functions'));
+                            } else {
+                                $('<a class="nav-link" href="/apihelp/functions#' + item.namespace + ':' + item.name + '"><span class="glyphicon glyphicon-unlock"></span>  ' + item.name + '</a>')
+                                    .appendTo($('#functions'));
+                            }
                         });
                         $.each(data.result.objects, function (key, item) {
                             $('<a class="nav-link" href="/apihelp/objects#' + item.name + '">' + item.name + '</a>')

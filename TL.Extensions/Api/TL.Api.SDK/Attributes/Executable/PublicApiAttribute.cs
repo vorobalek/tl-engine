@@ -1,9 +1,6 @@
-﻿using System;
-
-namespace TL.Api.SDK.Attributes.Executable
+﻿namespace TL.Api.SDK.Attributes.Executable
 {
-    public class PublicApiAttribute : Attribute
+    public class PublicApiAttribute : PrivateApiAttribute
     {
-        public string Description { get; set; }
     }
 }

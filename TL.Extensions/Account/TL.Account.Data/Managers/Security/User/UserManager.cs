@@ -26,7 +26,7 @@ namespace TL.Account.Data.Managers
             return username.GetUser(Storage);
         }
 
-        [PublicApi(Description = "Создать пользователя с логином, паролем и описанием")]
+        [PrivateApi(Description = "Создать пользователя с логином, паролем и описанием")]
         public User Create(string username, string password, string description = null)
         {
             User user = null;
@@ -70,6 +70,7 @@ namespace TL.Account.Data.Managers
             return user;
         }
 
+        [PrivateApi(Description = "Получить существующего пользователя или создать нового")]
         public User GetOrCreate(string username, string password = null, string description = null)
         {
             var user = Get(username);
@@ -88,6 +89,12 @@ namespace TL.Account.Data.Managers
         public void Authenticate(User user, HttpContext httpContext)
         {
             user.Authenticate(Storage, httpContext);
+        }
+
+        [PublicApi(Description = "Получить всех пользователей")]
+        public IEnumerable<User> GetAll()
+        {
+            return base.GetAll(p => true);
         }
     }
 }

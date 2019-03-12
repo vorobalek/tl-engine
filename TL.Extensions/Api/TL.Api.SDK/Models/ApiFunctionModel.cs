@@ -24,5 +24,8 @@ namespace TL.Api.SDK.Models
 
         [JsonProperty(Order = 4)]
         public IList<ApiPropertyModel> Properties { get; set; }
+
+        [JsonProperty(Order = 5)]
+        public bool IsPrivate { get; set; }
     }
 }

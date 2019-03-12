@@ -115,17 +115,18 @@ namespace TL.Api.SDK.Services.ApiDocumentation
         private void InitializeFunctions()
         {
             var typePublicApiAttribute = typeof(PublicApiAttribute);
+            var typePrivateApiAttribute = typeof(PrivateApiAttribute);
             ApiDocumentationModel.Functions = ExtensionManager.Assemblies
                 .SelectMany(a => a.GetTypes())
                 .SelectMany(t => t.GetMethods())
-                .Where(m => m.GetCustomAttributes(typePublicApiAttribute, false).Length > 0)
+                .Where(m => m.GetCustomAttributes(typePrivateApiAttribute, true).Length > 0)
                 .Select(m =>
                 {
                     return new ApiFunctionModel()
                     {
                         Namespace = m.DeclaringType.FullName,
                         Name = m.Name,
-                        Description = (m.GetCustomAttributes(typePublicApiAttribute, false).FirstOrDefault() as PublicApiAttribute).Description,
+                        Description = (m.GetCustomAttributes(typePrivateApiAttribute, true).FirstOrDefault() as PrivateApiAttribute).Description,
                         ReturnableType = m.ReturnType.GetFullName(),
                         Properties = m.GetParameters().Select(p =>
                         {
@@ -134,8 +135,8 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                                 Type = p.ParameterType.GetFullName(),
                                 Name = p.Name,
                             };
-                        })
-                        .ToList(),
+                        }).ToList(),
+                        IsPrivate = m.GetCustomAttributes(typePublicApiAttribute, false).Count() > 0 ? false : true
                     };
                 })
                 .ToList();
