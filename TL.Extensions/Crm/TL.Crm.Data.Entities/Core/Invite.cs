@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Crm.Data.Entities.Core
@@ -10,7 +11,7 @@ namespace TL.Crm.Data.Entities.Core
 
         public DateTime TimeOut { get; set; } = DateTime.MaxValue;
 
-        public bool IsActivated { get; set; } = false;
+        public bool IsActivated => Referrals.Count() >= MaxMembersCount || TimeOut < DateTime.Now.ToUniversalTime();
 
         public Guid ReferrerId { get; set; } = Contractor.System.Id;
 

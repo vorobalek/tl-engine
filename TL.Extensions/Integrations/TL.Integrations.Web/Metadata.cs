@@ -23,11 +23,7 @@ namespace TL.Integrations.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/integrations", "Внешние интеграции", 1000, new string[] { "sa" }, new LinkItem[]
-            {
-                new LinkItem("/integrations/telegram", "Telegram Bots", 1000),
-                new LinkItem("/integrations/vk", "VK Bots", 1000),
-            }),
+            new LinkItem("/integrations/telegram", "Интеграция с Telegram", 1000, new[] { "sa" })
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

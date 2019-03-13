@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TL.Integrations.Data\TL.Integrations.Data.csproj" />
+    <ProjectReference Include="..\TL.Integrations.Telegram\TL.Integrations.Telegram.csproj" />
   </ItemGroup>
 
 </Project>

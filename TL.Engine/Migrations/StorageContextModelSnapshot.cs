@@ -256,17 +256,21 @@ namespace TL.Engine.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<bool>("IsActivated");
-
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<int>("MaxMembersCount");
+                    b.Property<int>("MaxMembersCount")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(1);
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ReferrerId");
+                    b.Property<Guid>("ReferrerId")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"));
 
-                    b.Property<DateTime>("TimeOut");
+                    b.Property<DateTime>("TimeOut")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified).AddTicks(9999));
 
                     b.HasKey("Id");
 
@@ -413,6 +417,160 @@ namespace TL.Engine.Migrations
                     b.ToTable("EngineStringVariables");
                 });
 
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Relationships.TgConnection", b =>
+                {
+                    b.Property<Guid>("BotId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.HasKey("BotId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IntegrationsTgConnections");
+                });
+
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Security.TgRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
+
+                    b.ToTable("IntegrationsTgRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "sa"
+                        },
+                        new
+                        {
+                            Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "user"
+                        },
+                        new
+                        {
+                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "system"
+                        });
+                });
+
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Security.TgUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<int>("TgId");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IntegrationsTgUsers");
+                });
+
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Security.TgUserRole", b =>
+                {
+                    b.Property<Guid>("UserId");
+
+                    b.Property<Guid>("RoleId");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("IntegrationsTgUsersRoles");
+                });
+
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.System.TgBot", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AutoStart");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsRelevant");
+
+                    b.Property<DateTime?>("LastStartDate");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("NativeName");
+
+                    b.Property<bool>("SkipUpdates");
+
+                    b.Property<int>("State")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("Token");
+
+                    b.Property<string>("TypeName");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Token", "TypeName")
+                        .IsUnique()
+                        .HasFilter("[Token] IS NOT NULL AND [TypeName] IS NOT NULL");
+
+                    b.ToTable("IntegrationsTgBots");
+                });
+
             modelBuilder.Entity("TL.Account.Data.Entities.Relationships.Subscription", b =>
                 {
                     b.HasOne("TL.Account.Data.Entities.Security.User", "From")
@@ -500,6 +658,40 @@ namespace TL.Engine.Migrations
                     b.HasOne("TL.Account.Data.Entities.Security.User", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Relationships.TgConnection", b =>
+                {
+                    b.HasOne("TL.Integrations.Data.Entities.Telegram.System.TgBot", "Bot")
+                        .WithMany("Connections")
+                        .HasForeignKey("BotId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TL.Integrations.Data.Entities.Telegram.Security.TgUser", "User")
+                        .WithMany("Connections")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Security.TgUser", b =>
+                {
+                    b.HasOne("TL.Account.Data.Entities.Security.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Security.TgUserRole", b =>
+                {
+                    b.HasOne("TL.Integrations.Data.Entities.Telegram.Security.TgRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TL.Integrations.Data.Entities.Telegram.Security.TgUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -1,9 +1,13 @@
 ﻿using ExtCore.Data.Abstractions;
-using TL.Integrations.SDK.Controllers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TL.Engine.SDK.Controllers;
 
 namespace TL.Integrations.Web.Areas.Integrations.Controllers
 {
-    public abstract class __IntegrationsController__ : BaseIntegrationsController
+    [Area("Integrations")]
+    [Authorize(Roles = "sa")]
+    public abstract class __IntegrationsController__ : BaseController
     {
         public __IntegrationsController__(IStorage storage) : base(storage)
         {
