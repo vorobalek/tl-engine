@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Collections.Generic;
 using TL.Crm.Data.Entities.Core;
 
 namespace TL.Crm.Data.EntityFramework.Core.Contractors
@@ -23,8 +24,8 @@ namespace TL.Crm.Data.EntityFramework.Core.Contractors
                 .HasForeignKey(e => e.ReferrerId);
 
             builder
-               .HasOne(e => e.Original)
-               .WithMany(e => e.Dublicates)
+               .HasOne(e => e.Original as Contractor)
+               .WithMany(e => e.Duplicates)
                .HasForeignKey(e => e.OriginalId)
                .OnDelete(DeleteBehavior.Restrict);
 

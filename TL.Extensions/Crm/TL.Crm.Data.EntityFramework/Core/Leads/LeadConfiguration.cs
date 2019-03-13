@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Collections.Generic;
 using TL.Crm.Data.Entities.Core;
 
 namespace TL.Crm.Data.EntityFramework.Core.Leads
@@ -29,10 +30,15 @@ namespace TL.Crm.Data.EntityFramework.Core.Leads
                 .HasForeignKey(e => e.LeadId);
 
             builder
-                .HasOne(e => e.Original)
-                .WithMany(e => e.Dublicates)
+                .HasOne(e => e.Original as Lead)
+                .WithMany(e => e.Duplicates)
                 .HasForeignKey(e => e.OriginalId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(e => e.Invite)
+                .WithMany(e => e.Referrals)
+                .HasForeignKey(e => e.InviteId);
 
             builder
                 .HasData(new[]

@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Collections;
 
 namespace TL.Engine.SDK.Entities
 {
     public interface IEntityDuplicate<TKey> : IEntityComparable<TKey>
-        where TKey : IComparable
+        where TKey : struct, IComparable
     {
-        TKey OriginalId { get; set; }
-
-        IEntityDuplicate<TKey> Original { get; set; }
+        TKey? OriginalId { get; set; }
     }
 }

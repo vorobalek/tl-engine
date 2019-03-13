@@ -6,7 +6,8 @@ using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.SDK.Managers
 {
-    public interface IEntityManager<TEntity> where TEntity : class, IEntity
+    public interface IEntityManager<TEntity>
+        where TEntity : class, IEntity
     {
         TEntity Create(TEntity entity);
         TEntity CreateEmpty();

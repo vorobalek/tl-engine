@@ -17,9 +17,9 @@ namespace TL.Crm.Data.EntityFramework.Core.Invites
                 .HasForeignKey(e => e.ReferrerId);
 
             builder
-                .HasOne(e => e.Referral)
-                .WithOne()
-                .HasForeignKey<Invite>(e => e.ReferralId);
+                .HasMany(e => e.Referrals)
+                .WithOne(e => e.Invite)
+                .HasForeignKey(e => e.InviteId);
 
             builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}Invites");

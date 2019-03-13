@@ -73,19 +73,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Api", "TL.Extensions\Api
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{D40FE039-CB94-49A3-883B-89F48670C39C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.SDK", "TL.Extensions\Integrations\TL.Integrations.SDK\TL.Integrations.SDK.csproj", "{4F393BF9-5A52-4471-AE71-95EA1C745A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.SDK", "TL.Extensions\Integrations\TL.Integrations.SDK\TL.Integrations.SDK.csproj", "{4F393BF9-5A52-4471-AE71-95EA1C745A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data.Entities", "TL.Extensions\Integrations\TL.Integrations.Data.Entities\TL.Integrations.Data.Entities.csproj", "{87988976-6BE9-4F80-8C0B-D5DC93DD5D02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data.Entities", "TL.Extensions\Integrations\TL.Integrations.Data.Entities\TL.Integrations.Data.Entities.csproj", "{87988976-6BE9-4F80-8C0B-D5DC93DD5D02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data.Abstractions", "TL.Extensions\Integrations\TL.Integrations.Data.Abstractions\TL.Integrations.Data.Abstractions.csproj", "{D41E1087-9891-4427-B0A7-1D5BD3BB4C71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data.Abstractions", "TL.Extensions\Integrations\TL.Integrations.Data.Abstractions\TL.Integrations.Data.Abstractions.csproj", "{D41E1087-9891-4427-B0A7-1D5BD3BB4C71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data.EntityFramework", "TL.Extensions\Integrations\TL.Integrations.Data.EntityFramework\TL.Integrations.Data.EntityFramework.csproj", "{25CE296A-F1E8-429B-B436-00FE6E6E1BF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data.EntityFramework", "TL.Extensions\Integrations\TL.Integrations.Data.EntityFramework\TL.Integrations.Data.EntityFramework.csproj", "{25CE296A-F1E8-429B-B436-00FE6E6E1BF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Data", "TL.Extensions\Integrations\TL.Integrations.Data\TL.Integrations.Data.csproj", "{2A0985D4-152B-4850-8DCF-0EA4992D797E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Data", "TL.Extensions\Integrations\TL.Integrations.Data\TL.Integrations.Data.csproj", "{2A0985D4-152B-4850-8DCF-0EA4992D797E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations.Web", "TL.Extensions\Integrations\TL.Integrations.Web\TL.Integrations.Web.csproj", "{0C7414A4-E4C5-4D5C-A186-4496BC536911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations.Web", "TL.Extensions\Integrations\TL.Integrations.Web\TL.Integrations.Web.csproj", "{0C7414A4-E4C5-4D5C-A186-4496BC536911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TL.Integrations", "TL.Extensions\Integrations\TL.Integrations\TL.Integrations.csproj", "{E258FABC-0033-485D-9C6B-D35A4D440720}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TL.Integrations", "TL.Extensions\Integrations\TL.Integrations\TL.Integrations.csproj", "{E258FABC-0033-485D-9C6B-D35A4D440720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

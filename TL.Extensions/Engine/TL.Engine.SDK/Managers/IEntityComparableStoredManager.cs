@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.SDK.Managers
 {
     public interface IEntityComparableStoredManager<TEntity, TKey> : IEntityManager<TEntity>
-        where TEntity : EntityComparableStored<TKey>
+        where TEntity : class, IEntityComparable<TKey>, IEntityStored
         where TKey : IComparable
     {
         TEntity Get(TKey key);

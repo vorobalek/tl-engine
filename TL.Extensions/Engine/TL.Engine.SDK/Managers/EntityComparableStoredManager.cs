@@ -6,7 +6,7 @@ using TL.Engine.SDK.Entities;
 namespace TL.Engine.SDK.Managers
 {
     public abstract class EntityComparableStoredManager<TEntity, TKey> : EntityManager<TEntity>, IEntityComparableStoredManager<TEntity, TKey>
-        where TEntity : EntityComparableStored<TKey>
+        where TEntity : class, IEntityComparable<TKey>, IEntityStored
         where TKey : IComparable
     {
         public EntityComparableStoredManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)

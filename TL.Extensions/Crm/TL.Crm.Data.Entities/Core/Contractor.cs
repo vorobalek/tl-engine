@@ -5,14 +5,8 @@ using TL.Engine.SDK.Entities;
 
 namespace TL.Crm.Data.Entities.Core
 {
-    public class Contractor : EntityComparableStored<Guid>
+    public class Contractor : EntityDuplicateComparableStored<Guid>
     {
-        public Guid? OriginalId { get; set; }
-
-        public virtual Contractor Original { get; set; }
-
-        public virtual IEnumerable<Contractor> Dublicates { get; set; }
-
         public virtual IEnumerable<Lead> Leads { get; set; }
 
         public virtual IEnumerable<Invite> Invites { get; set; }
@@ -21,8 +15,10 @@ namespace TL.Crm.Data.Entities.Core
         {
             Leads = new HashSet<Lead>();
             Invites = new HashSet<Invite>();
-            Dublicates = new HashSet<Contractor>();
+            Duplicates = new HashSet<Contractor>();
         }
+
+        public new IEnumerable<Contractor> Duplicates { get; set; }
 
         public static Contractor System =>
             new Contractor()

@@ -6,7 +6,7 @@ using TL.Engine.SDK.Entities;
 
 namespace TL.Crm.Data.Entities.Core
 {
-    public class Lead : EntityComparableStored<Guid>
+    public class Lead : EntityDuplicateComparableStored<Guid>
     {
         public string Firstname { get; set; }
 
@@ -22,19 +22,19 @@ namespace TL.Crm.Data.Entities.Core
 
         public virtual Contractor Contractor { get; set; }
 
+        public Guid? InviteId { get; set; }
+
+        public virtual Invite Invite { get; set; }
+
         public virtual IEnumerable<LeadPhone> Phones { get; set; }
-
-        public Guid? OriginalId { get; set; }
-
-        public virtual Lead Original { get; set; }
-
-        public virtual IEnumerable<Lead> Dublicates { get; set; }
 
         public Lead() : base()
         {
             Phones = new HashSet<LeadPhone>();
-            Dublicates = new HashSet<Lead>();
+            Duplicates = new HashSet<Lead>();
         }
+
+        public new IEnumerable<Lead> Duplicates { get; set; }
 
         public static Lead System =>
             new Lead()
