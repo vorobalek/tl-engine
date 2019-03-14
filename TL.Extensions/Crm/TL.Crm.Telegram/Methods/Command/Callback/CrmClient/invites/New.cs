@@ -15,7 +15,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.invites
 {
     public class New : CrmClientBotCallbackHCommandMethod
     {
-        public override string Command => "crm.invites.new";
+        public override string Command => "invites.new";
 
         public override string Description => "Отправить новый инвайт";
 
@@ -65,17 +65,17 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.invites
                         {
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("📝 Записаться", "crm.trainings.signup"),
-                                InlineKeyboardButton.WithCallbackData("🔖 Отправить инвайт", "crm.invites.new")
+                                InlineKeyboardButton.WithCallbackData("📝 Записаться", "trainings.signup"),
+                                InlineKeyboardButton.WithCallbackData("🔖 Отправить инвайт", "invites.new")
                             },
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("✏️ Изменить запись", "crm.trainings.edit"),
-                                InlineKeyboardButton.WithCallbackData("📞 Связаться с клубом", "crm.call.main"),
+                                InlineKeyboardButton.WithCallbackData("✏️ Изменить запись", "trainings.edit"),
+                                InlineKeyboardButton.WithCallbackData("📞 Связаться с клубом", "call.main"),
                             },
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("📆 Абонимент", "crm.subscribtions.main"),
+                                InlineKeyboardButton.WithCallbackData("📆 Абонимент", "subscribtions.main"),
                             }
                         }),
                         ParseMode = ParseMode.Html,

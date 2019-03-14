@@ -19,4 +19,8 @@
     <ProjectReference Include="..\TL.Crm.Data\TL.Crm.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Methods\Command\Callback\CrmClient\lk\" />
+  </ItemGroup>
+
 </Project>

@@ -157,23 +157,26 @@ namespace TL.Integrations.Telegram.Bots
                         }
                         else
                         {
-                            try
+                            if (!message.IsCallbackAnswer)
                             {
-                                Logger.TLogWarning($"Попытка отправить сообщение для {message.ChatId}");
-                                TgClient.SendTextMessageAsync(
-                                    message.ChatId,
-                                    message.Text,
-                                    message.ParseMode,
-                                    message.DisableWebPagePreview,
-                                    message.DisableNotification,
-                                    message.ReplyToMessageId,
-                                    message.ReplyMarkup,
-                                    message.CancellationToken).Wait();
-                                Logger.TLogWarning($"Успешно отправлено сообщение для {message.ChatId}");
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.TLogError($"Ошибка отправки сообщения для {message.ChatId}\r\n{ex}");
+                                try
+                                {
+                                    Logger.TLogWarning($"Попытка отправить сообщение для {message.ChatId}");
+                                    TgClient.SendTextMessageAsync(
+                                        message.ChatId,
+                                        message.Text,
+                                        message.ParseMode,
+                                        message.DisableWebPagePreview,
+                                        message.DisableNotification,
+                                        message.ReplyToMessageId,
+                                        message.ReplyMarkup,
+                                        message.CancellationToken).Wait();
+                                    Logger.TLogWarning($"Успешно отправлено сообщение для {message.ChatId}");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Logger.TLogError($"Ошибка отправки сообщения для {message.ChatId}\r\n{ex}");
+                                }
                             }
                         }
 

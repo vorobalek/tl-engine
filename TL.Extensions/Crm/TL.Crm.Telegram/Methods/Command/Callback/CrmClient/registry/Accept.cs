@@ -16,7 +16,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
 {
     public class Accept : CrmClientBotCallbackHCommandMethod
     {
-        public override string Command => "crm.registry.accept";
+        public override string Command => "registry.accept";
 
         public override string Description => "Зарегистрировать введенные данные";
 
@@ -66,7 +66,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                             {
                                 new[]
                                 {
-                                    InlineKeyboardButton.WithCallbackData("✅ Перейти в личный кабинет", "crm.lk.main")
+                                    InlineKeyboardButton.WithCallbackData("✅ Перейти в личный кабинет", "main")
                                 }
                             }),
                             ParseMode = ParseMode.Html,
@@ -75,10 +75,12 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                             EditMessageId = callbackQuery.Message.MessageId,
                         });
                     }
+
+                    return new HandlerMethodResult(true);
                 }
             }
 
-            return new HandlerMethodResult(true);
+            return new HandlerMethodResult(false, null, $"{new ArgumentException($"В {nameof(args)} переданы неверные аргументы.")}");
         }
     }
 }

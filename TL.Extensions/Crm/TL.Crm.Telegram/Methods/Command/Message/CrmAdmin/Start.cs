@@ -2,14 +2,13 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using TL.Crm.Data.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
 using TlUser = TL.Account.Data.Entities.Security.User;
 
-namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient
+namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
 {
-    public class Start : CrmClientBotMessageHCommandMethod
+    public class Start : CrmAdminBotMessageHCommandMethod
     {
         public override string Command => "/start";
 
@@ -21,22 +20,21 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient
             {
                 if (args[1] is TlUser user)
                 {
-                    var lead = user.GetOriginalLead(serviceProvider);
-
                     await Bot.SendAsync(new TlMessage()
                     {
                         MessageType = MessageType.Text,
                         ChatId = message.From.Id,
 
-                        Text = $"🖖🏻 <b>Добро пожаловать, {lead.Firstname}</b>",
+                        Text = $"🖖🏻 <b>Администратор, это Ваш личный кабинет</b>",
                         ReplyMarkup = new InlineKeyboardMarkup(new[]
                         {
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("✅ Перейти в личный кабинет", "main")
+                                InlineKeyboardButton.WithCallbackData("🔖 Инвайты", "invites.main"),
+                                InlineKeyboardButton.WithCallbackData("⚙️ Настройки", "setting.main"),
                             }
                         }),
-                        ParseMode = ParseMode.Html
+                        ParseMode = ParseMode.Html,
                     });
                 }
 

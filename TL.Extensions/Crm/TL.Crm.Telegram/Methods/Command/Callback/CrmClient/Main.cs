@@ -14,7 +14,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient
     {
         public override string Command => "main";
 
-        public override string Description => "Начать работу с ботом";
+        public override string Description => "Перейти в личный кабинет";
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
@@ -31,12 +31,22 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient
                         MessageType = MessageType.Text,
                         ChatId = callbackQuery.From.Id,
 
-                        Text = $"🖖🏻 <b>Добро пожаловать, {lead.Firstname}</b>",
+                        Text = $"🖖🏻 <b>{lead.Firstname}, это Ваш личный кабинет</b>",
                         ReplyMarkup = new InlineKeyboardMarkup(new[]
                         {
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("✅ Перейти в личный кабинет", "crm.lk.main")
+                                InlineKeyboardButton.WithCallbackData("📝 Записаться", "trainings.signup"),
+                                InlineKeyboardButton.WithCallbackData("🔖 Отправить инвайт", "invites.new")
+                            },
+                            new[]
+                            {
+                                InlineKeyboardButton.WithCallbackData("✏️ Изменить запись", "trainings.edit"),
+                                InlineKeyboardButton.WithCallbackData("📞 Связаться с клубом", "call.main"),
+                            },
+                            new[]
+                            {
+                                InlineKeyboardButton.WithCallbackData("📆 Абонимент", "subscribtions.main"),
                             }
                         }),
                         ParseMode = ParseMode.Html,

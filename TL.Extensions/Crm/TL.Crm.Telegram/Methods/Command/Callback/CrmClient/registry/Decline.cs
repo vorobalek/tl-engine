@@ -14,7 +14,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
 {
     public class Decline : CrmClientBotCallbackHCommandMethod
     {
-        public override string Command => "crm.registry.decline";
+        public override string Command => "registry.decline";
 
         public override string Description => "Сбросить введенные данные";
 
@@ -55,7 +55,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                                 {
                                     new[]
                                     {
-                                        InlineKeyboardButton.WithCallbackData("👌🏻 Ок", "crm.registry.next"),
+                                        InlineKeyboardButton.WithCallbackData("👌🏻 Ок", "registry.next"),
                                     },
                                 }),
                                 ParseMode = ParseMode.Html,

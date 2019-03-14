@@ -40,8 +40,8 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                     {
                         new[]
                         {
-                            InlineKeyboardButton.WithCallbackData("✅ Всё верно", "crm.registry.accept"),
-                            InlineKeyboardButton.WithCallbackData("❌ Начать сначала", "crm.registry.decline"),
+                            InlineKeyboardButton.WithCallbackData("✅ Всё верно", "registry.accept"),
+                            InlineKeyboardButton.WithCallbackData("❌ Начать сначала", "registry.decline"),
                         }
                     })
                 });

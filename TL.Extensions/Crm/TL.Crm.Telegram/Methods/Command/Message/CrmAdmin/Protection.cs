@@ -1,21 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
-using TL.Crm.Data.Managers;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
+using TL.Engine.Data.Entities.System;
+using TL.Engine.Data.Managers;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TL.Integrations.Data.Entities.Telegram.Security;
 using TL.Integrations.Data.Managers;
-using TlUser = TL.Account.Data.Entities.Security.User;
 using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
-using Telegram.Bot.Types.Enums;
-using TL.Engine.Data.Managers;
-using TL.Engine.Data.Entities.System;
-using Telegram.Bot.Types.ReplyMarkups;
+using TlUser = TL.Account.Data.Entities.Security.User;
 
 namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
 {
