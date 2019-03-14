@@ -67,7 +67,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         {
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("👌🏻 Продолжить!", "registry.next"),
+                                InlineKeyboardButton.WithCallbackData("👌🏻 Продолжить!", "nothing"),
                             }
                         }),
                     });

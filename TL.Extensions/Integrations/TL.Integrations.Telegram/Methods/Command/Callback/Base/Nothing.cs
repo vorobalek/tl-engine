@@ -4,15 +4,15 @@ using Telegram.Bot.Types.Enums;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
 
-namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
+namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 {
-    public class Next : CrmClientBotCallbackHCommandMethod
+    public class Nothing : BaseBotCallbackHCommandMethod
     {
-        public override string Command => "registry.next";
+        public override string Command => "nothing";
 
-        public override string Description => "Зарегистрировать введенные данные";
+        public override string Description => "";
 
-        public override int Priority => 0;
+        public override int Priority => int.MinValue;
 
         public override bool IsBlocker => false;
 

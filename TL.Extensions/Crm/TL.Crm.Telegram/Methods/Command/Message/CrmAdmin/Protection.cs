@@ -33,14 +33,15 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
             return true;
         }
 
-        protected override Task<IHandlerMethodResult> ExecuteAsync(Update update, params object[] args)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(Update update, params object[] args)
         {
             var message = update.Message ?? new global::Telegram.Bot.Types.Message()
             {
                 Text = "",
                 From = update.GetSenderUser(),
             };
-            return ExecuteAsync(message, args);
+
+            return await ExecuteAsync(message, args);
         }
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)

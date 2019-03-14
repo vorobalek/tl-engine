@@ -2,9 +2,11 @@
 using System;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 using TL.Crm.Data.Managers;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
+using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
 using TlUser = TL.Account.Data.Entities.Security.User;
 
 namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
@@ -22,14 +24,15 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
             return true;
         }
 
-        protected override Task<IHandlerMethodResult> ExecuteAsync(Update update, params object[] args)
+        protected override async Task<IHandlerMethodResult> ExecuteAsync(Update update, params object[] args)
         {
             var message = update.Message ?? new global::Telegram.Bot.Types.Message()
             {
                 Text = "",
                 From = update.GetSenderUser(),
             };
-            return ExecuteAsync(message, args);
+
+            return await ExecuteAsync(message, args);
         }
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(global::Telegram.Bot.Types.Message message, params object[] args)

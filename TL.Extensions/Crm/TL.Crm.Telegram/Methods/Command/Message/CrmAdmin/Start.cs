@@ -30,8 +30,18 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
                         {
                             new[]
                             {
+                                InlineKeyboardButton.WithCallbackData("🏋🏻️‍ Члены клуба", "contractors.main"),
+                                InlineKeyboardButton.WithCallbackData("🎫 Абонименты", "tickets.main"),
+                            },
+                            new[]
+                            {
+                                InlineKeyboardButton.WithCallbackData("📆 Расписание", "schedule.main"),
+                                InlineKeyboardButton.WithCallbackData("💰 Оплата", "payments.main"),
+                            },
+                            new[]
+                            {
                                 InlineKeyboardButton.WithCallbackData("🔖 Инвайты", "invites.main"),
-                                InlineKeyboardButton.WithCallbackData("⚙️ Настройки", "setting.main"),
+                                InlineKeyboardButton.WithCallbackData("⚙️ Настройки", "settings.main"),
                             }
                         }),
                         ParseMode = ParseMode.Html,

@@ -7,13 +7,13 @@ using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
 using TlUser = TL.Account.Data.Entities.Security.User;
 
-namespace TL.Crm.Telegram.Methods.Command.Callback.CrmAdmin
+namespace TL.Crm.Telegram.Methods.Command.Callback.CrmAdmin.settings
 {
     public class Main : CrmAdminBotCallbackHCommandMethod
     {
-        public override string Command => "main";
+        public override string Command => "settings.main";
 
-        public override string Description => "Личный кабинет администратора";
+        public override string Description => "Настройки консоли администратора";
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {
@@ -28,23 +28,17 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmAdmin
                         MessageType = MessageType.Text,
                         ChatId = callbackQuery.From.Id,
 
-                        Text = $"🖖🏻 <b>Администратор, это Ваш личный кабинет</b>",
+                        Text = $"⚙️ <b>Настройки</b>",
                         ReplyMarkup = new InlineKeyboardMarkup(new[]
                         {
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("🏋🏻️‍ Члены клуба", "contractors.main"),
-                                InlineKeyboardButton.WithCallbackData("🎫 Абонименты", "tickets.main"),
+                                InlineKeyboardButton.WithCallbackData("🔄 Сменить пароль", "password.change"),
+                                InlineKeyboardButton.WithCallbackData("🔐 Снять привелегии", "logout"),
                             },
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("📆 Расписание", "schedule.main"),
-                                InlineKeyboardButton.WithCallbackData("💰 Оплата", "payments.main"),
-                            },
-                            new[]
-                            {
-                                InlineKeyboardButton.WithCallbackData("🔖 Инвайты", "invites.main"),
-                                InlineKeyboardButton.WithCallbackData("⚙️ Настройки", "settings.main"),
+                                InlineKeyboardButton.WithCallbackData("⬅️ Назад", "main"),
                             }
                         }),
                         ParseMode = ParseMode.Html,
