@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Methods\Command\Callback\CrmAdmin\password\" />
+    <Folder Include="Methods\Command\Callback\CrmAdmin\contractors\" />
     <Folder Include="Methods\Command\Callback\CrmClient\lk\" />
   </ItemGroup>
 
