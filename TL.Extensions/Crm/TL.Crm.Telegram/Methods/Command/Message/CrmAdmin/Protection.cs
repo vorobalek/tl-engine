@@ -11,6 +11,11 @@ using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TL.Integrations.Data.Entities.Telegram.Security;
 using TL.Integrations.Data.Managers;
 using TlUser = TL.Account.Data.Entities.Security.User;
+using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
+using Telegram.Bot.Types.Enums;
+using TL.Engine.Data.Managers;
+using TL.Engine.Data.Entities.System;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
 {
@@ -51,13 +56,62 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
                     var tgRoleManager = serviceProvider.GetService<ITgRoleManager>();
 
                     var tgUser = tgUserManager.Get(message.From.Id);
-                    if (tgUser.UserRoles.FirstOrDefault(e => e.RoleId == TgRole.Sa.Id) != null)
+                    if (tgUser.UserRoles.FirstOrDefault(e => e.RoleId == TgRole.Admin.Id) != null)
                     {
                         ContinueExecute();
                     }
                     else
                     {
+                        var stringVariableManager = serviceProvider.GetService<IStringVariableManager>();
+                        var tgSaPassword = stringVariableManager.Get(e => e.Name == TG_CRM_STRING_VARIABLES.TG_ADMIN_PWD);
+                        if (tgSaPassword == null)
+                        {
+                            tgSaPassword = stringVariableManager.Create(new StringVariable(TG_CRM_STRING_VARIABLES.TG_ADMIN_PWD, "admin"));
+                        }
 
+                        if (message.Text == tgSaPassword.Value)
+                        {
+                            var userRoleManager = serviceProvider.GetService<ITgUserRoleManager>();
+                            var newUserRole = userRoleManager.GetOrCreate(e => e.UserId == tgUser.Id && e.RoleId == TgRole.Admin.Id,
+                                new TgUserRole()
+                                {
+                                    UserId = tgUser.Id,
+                                    RoleId = TgRole.Admin.Id,
+                                });
+
+                            await Bot.SendAsync(new TlMessage()
+                            {
+                                MessageType = MessageType.Text,
+                                ChatId = message.From.Id,
+                                Text = $"‼️ <b>Внимательно прочитайте это сообщение!</b>\r\n" +
+                                $"\r\n" +
+                                $"Вам назначены <b>привелегии администратора</b>. Эти привелегии бессрочные и будут привязаны к <b>этой</b> учетной записи." +
+                                $"Вы сможете отказаться от них в любой момент в свём личном кабинете. Рекомендуется регулярно менять пароль для доступа к этим привелегиям.\r\n" +
+                                $"\r\n" +
+                                $"<b>‼️ ОБЯЗАТЕЛЬНО</b> удалите из диалога своё сообщение с паролем, чтобы он не был скомпрометирован.",
+                                ParseMode = ParseMode.Html,
+
+                                ReplyMarkup = new InlineKeyboardMarkup(new[]
+                                {
+                                    new[]
+                                    {
+                                        InlineKeyboardButton.WithCallbackData("✅ Перейти в личный кабинет", "main")
+                                    }
+                                })
+                            });
+                        }
+                        else
+                        {
+                            await Bot.SendAsync(new TlMessage()
+                            {
+                                MessageType = MessageType.Text,
+                                ChatId = message.From.Id,
+                                Text = $"⛔️ <b>Отказано в доступе!</b>\r\n" +
+                                $"\r\n" +
+                                $"Для получения привелегий администратора отправьте пароль.",
+                                ParseMode = ParseMode.Html
+                            });
+                        }
                     }
 
                     return new HandlerMethodResult(true);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TL.Account.Data.Entities.Security;
 using TL.Engine.Data.Entities.System;
 
 namespace TL.Engine.Data.EntityFramework.System.StringVariables
@@ -13,6 +14,10 @@ namespace TL.Engine.Data.EntityFramework.System.StringVariables
 
             builder
                 .HasIndex(e => e.Name);
+
+            builder
+                .Property(e => e.AuthorId)
+                .HasDefaultValue(User.System.Id);
 
             builder
                 .HasOne(e => e.Author)

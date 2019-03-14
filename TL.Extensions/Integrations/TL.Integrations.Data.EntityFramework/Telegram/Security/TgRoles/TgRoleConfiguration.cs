@@ -27,6 +27,7 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgRoles
                 .HasData(new[]
                 {
                     TgRole.Sa,
+                    TgRole.Admin,
                     TgRole.User,
                     TgRole.System,
                 });

@@ -22,6 +22,13 @@ namespace TL.Integrations.Data.Entities.Telegram.Security
                 Name = "sa",
             };
 
+        public static TgRole Admin =>
+            new TgRole()
+            {
+                Id = Guid.Parse("dddddddd-dddd-dddd-dddd-dddddddddddd"),
+                Name = "admin",
+            };
+
         public static TgRole User =>
            new TgRole()
            {

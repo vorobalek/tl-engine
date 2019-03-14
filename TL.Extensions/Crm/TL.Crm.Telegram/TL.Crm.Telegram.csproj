@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Engine\TL.Engine.Data\TL.Engine.Data.csproj" />
     <ProjectReference Include="..\..\Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
     <ProjectReference Include="..\..\Integrations\TL.Integrations.Telegram\TL.Integrations.Telegram.csproj" />
     <ProjectReference Include="..\TL.Crm.Data\TL.Crm.Data.csproj" />
