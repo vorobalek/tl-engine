@@ -117,6 +117,11 @@ namespace TL.Engine.SDK.Managers
             return Storage.GetRepository<IEntityRepository<TEntity>>().Get(predicate);
         }
 
+        public virtual IEnumerable<TEntity> GetAll()
+        {
+            return GetAll(e => true);
+        }
+
         public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate)
         {
             IEnumerable<TEntity> entities = Storage.GetRepository<IEntityRepository<TEntity>>().GetAll(predicate);

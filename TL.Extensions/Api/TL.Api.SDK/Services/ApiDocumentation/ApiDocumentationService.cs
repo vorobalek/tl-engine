@@ -118,13 +118,14 @@ namespace TL.Api.SDK.Services.ApiDocumentation
             var typePrivateApiAttribute = typeof(PrivateApiAttribute);
             ApiDocumentationModel.Functions = ExtensionManager.Assemblies
                 .SelectMany(a => a.GetTypes())
+                .Where(t => !t.IsInterface && !t.IsAbstract)
                 .SelectMany(t => t.GetMethods())
                 .Where(m => m.GetCustomAttributes(typePrivateApiAttribute, true).Length > 0)
                 .Select(m =>
                 {
                     return new ApiFunctionModel()
                     {
-                        Namespace = m.DeclaringType.FullName,
+                        Namespace = m.DeclaringType.GetFullName(),
                         Name = m.Name,
                         Description = (m.GetCustomAttributes(typePrivateApiAttribute, true).FirstOrDefault() as PrivateApiAttribute).Description,
                         ReturnableType = m.ReturnType.GetFullName(),
