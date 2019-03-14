@@ -4,7 +4,7 @@ using TL.Integrations.Telegram.Bots;
 
 namespace TL.Crm.Telegram.Bots
 {
-    [Bot("CRM.Клиенты")]
+    [Bot("CLAN.Клиенты")]
     public class CrmClientBot : BaseBot
     {
         public CrmClientBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : base(serviceProvider, token, skipUpdates)

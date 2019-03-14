@@ -55,7 +55,7 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                                 {
                                     new[]
                                     {
-                                        InlineKeyboardButton.WithCallbackData("👌🏻 Ок", "protection.next"),
+                                        InlineKeyboardButton.WithCallbackData("👌🏻 Ок", "crm.registry.next"),
                                     },
                                 }),
                                 ParseMode = ParseMode.Html,

@@ -38,7 +38,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         Text = $"👌🏻 <b>Продолжим?</b>\r\n\r\n" +
                         $"Я сохранил ваши данные:\r\n" +
                         $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n\r\n" +
-                        $"Теперь отправьте мне своё имя, пожалуйста.",
+                        $"Теперь отправьте мне своё <b>имя</b>, пожалуйста.",
                         ParseMode = ParseMode.Html,
                         ReplyMarkup = new ReplyKeyboardRemove()
                     });
@@ -54,7 +54,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         $"Я сохранил ваши данные:\r\n" +
                         $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
                         $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n\r\n" +
-                        $"Теперь отправьте мне свою фамилию, пожалуйста.",
+                        $"Теперь отправьте мне свою <b>фамилию</b>, пожалуйста.",
                         ParseMode = ParseMode.Html,
                         ReplyMarkup = new ReplyKeyboardRemove()
                     });

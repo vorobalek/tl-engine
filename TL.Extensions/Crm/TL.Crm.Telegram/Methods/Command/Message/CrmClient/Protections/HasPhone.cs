@@ -58,7 +58,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         MessageType = MessageType.Text,
                         ChatId = message.From.Id,
                         Text = $"🖐🏻 <b>Приступим?</b>\r\n\r\n" +
-                        $"Для начала отправьте мне свой сотовый номер телефона или просто нажмите кнопку ниже.",
+                        $"Для начала отправьте мне свой сотовый <b>номер телефона</b> или просто нажмите кнопку ниже.",
                         ParseMode = ParseMode.Html,
                         ReplyMarkup = new ReplyKeyboardMarkup(new[]
                         {
@@ -79,7 +79,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         Text = $"👌🏻 <b>Продолжим?</b>\r\n\r\n" +
                         $"Я сохранил ваши данные:\r\n" +
                         $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n\r\n" +
-                        $"Теперь отправьте мне своё имя, пожалуйста.",
+                        $"Теперь отправьте мне своё <b>имя</b>, пожалуйста.",
                         ParseMode = ParseMode.Html,
                         ReplyMarkup = new ReplyKeyboardRemove()
                     });

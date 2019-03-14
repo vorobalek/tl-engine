@@ -40,7 +40,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                         $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
                         $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
                         $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n\r\n" +
-                        $"Теперь отправьте мне своё отчество, пожалуйста.",
+                        $"Теперь отправьте мне своё <b>отчество</b>, пожалуйста.",
                         ParseMode = ParseMode.Html,
                         ReplyMarkup = new ReplyKeyboardRemove()
                     });

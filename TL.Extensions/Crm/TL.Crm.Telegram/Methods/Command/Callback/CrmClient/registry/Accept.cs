@@ -48,46 +48,26 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                                 },
                             });
 
-                            await Bot.SendAsync(new TlMessage()
-                            {
-                                IsEditMessage = true,
-
-                                MessageType = MessageType.Text,
-                                ChatId = callbackQuery.From.Id,
-
-                                Text = $"🏅 <b>Поздравляем, вы зарегистрированы!</b>\r\n\r\n" +
-                                $"☑️ <b>Номер телефона:</b> {leadPhones.LastOrDefault().PhoneNumber}\r\n" +
-                                $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
-                                $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
-                                $"☑️ <b>Отчество:</b> {originalLead.Middlename}",
-                                ReplyMarkup = new ReplyKeyboardRemove(),
-                                ParseMode = ParseMode.Html,
-
-                                CallbackQueryId = callbackQuery.Id,
-                                EditMessageId = callbackQuery.Message.MessageId,
-                            });
+                            
                         }
-                        else
+                        await Bot.SendAsync(new TlMessage()
                         {
-                            await Bot.SendAsync(new TlMessage()
-                            {
-                                IsEditMessage = true,
+                            IsEditMessage = true,
 
-                                MessageType = MessageType.Text,
-                                ChatId = callbackQuery.From.Id,
+                            MessageType = MessageType.Text,
+                            ChatId = callbackQuery.From.Id,
 
-                                Text = $"🏅 <b>Поздравляем, вы зарегистрированы!</b>\r\n\r\n" +
+                            Text = $"🏅 <b>Поздравляем, вы зарегистрированы!</b>\r\n\r\n" +
                                 $"☑️ <b>Номер телефона:</b> {leadPhones.LastOrDefault().PhoneNumber}\r\n" +
                                 $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
                                 $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
                                 $"☑️ <b>Отчество:</b> {originalLead.Middlename}",
-                                ReplyMarkup = new ReplyKeyboardRemove(),
-                                ParseMode = ParseMode.Html,
+                            ReplyMarkup = new ReplyKeyboardRemove(),
+                            ParseMode = ParseMode.Html,
 
-                                CallbackQueryId = callbackQuery.Id,
-                                EditMessageId = callbackQuery.Message.MessageId,
-                            });
-                        }
+                            CallbackQueryId = callbackQuery.Id,
+                            EditMessageId = callbackQuery.Message.MessageId,
+                        });
                     }
                 }
             }
