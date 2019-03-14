@@ -6,7 +6,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Crm.Data.Managers
 {
-    public class ContractorManager : EntityComparableStoredManager<Contractor, Guid>, IContractorManager
+    public class ContractorManager : EntityDuplicateComparableStoredManager<Contractor, Guid>, IContractorManager
     {
         public ContractorManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
         {

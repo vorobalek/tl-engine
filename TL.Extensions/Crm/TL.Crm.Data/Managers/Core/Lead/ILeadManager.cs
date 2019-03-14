@@ -4,7 +4,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Crm.Data.Managers
 {
-    public interface ILeadManager : IEntityComparableStoredManager<Lead, Guid>
+    public interface ILeadManager : IEntityDuplicateComparableStoredManager<Lead, Guid>
     {
     }
 }

@@ -14,7 +14,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 
         public override string Description => "";
 
-        public override int Priority => 10000;
+        public override int Priority => int.MaxValue;
 
         protected override async Task<IHandlerMethodResult> ExecuteAsync(CallbackQuery callbackQuery, params object[] args)
         {

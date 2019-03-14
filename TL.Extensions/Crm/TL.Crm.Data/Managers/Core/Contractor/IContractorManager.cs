@@ -4,7 +4,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Crm.Data.Managers
 {
-    public interface IContractorManager : IEntityComparableStoredManager<Contractor, Guid>
+    public interface IContractorManager : IEntityDuplicateComparableStoredManager<Contractor, Guid>
     {
     }
 }

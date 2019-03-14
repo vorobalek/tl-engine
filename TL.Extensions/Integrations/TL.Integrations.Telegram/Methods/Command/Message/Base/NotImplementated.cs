@@ -14,7 +14,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 
         public override string Command => "";
 
-        public override int Priority => 1500;
+        public override int Priority => int.MaxValue - 1;
 
         public override bool IsRelevantMethod(Update update, params object[] args)
         {
@@ -30,7 +30,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 
         public override string Description => "";
 
-        public override int Priority => 10000;
+        public override int Priority => int.MaxValue;
 
         public override bool IsRelevantMethod(Update update, params object[] args)
         {

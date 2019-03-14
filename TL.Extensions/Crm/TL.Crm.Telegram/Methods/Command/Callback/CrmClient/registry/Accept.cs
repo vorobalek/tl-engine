@@ -62,7 +62,13 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                                 $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
                                 $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
                                 $"☑️ <b>Отчество:</b> {originalLead.Middlename}",
-                            ReplyMarkup = new ReplyKeyboardRemove(),
+                            ReplyMarkup = new InlineKeyboardMarkup(new[]
+                            {
+                                new[]
+                                {
+                                    InlineKeyboardButton.WithCallbackData("✅ Перейти в личный кабинет", "crm.lk.main")
+                                }
+                            }),
                             ParseMode = ParseMode.Html,
 
                             CallbackQueryId = callbackQuery.Id,
