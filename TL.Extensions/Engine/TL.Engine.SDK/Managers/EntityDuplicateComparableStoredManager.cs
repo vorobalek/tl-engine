@@ -13,17 +13,17 @@ namespace TL.Engine.SDK.Managers
         {
         }
 
-        public TEntity GetOriginal(TKey key)
+        public TEntity GetOriginal(TKey key, bool loadDeleted = false)
         {
-            return GetOriginal(e => e.Id.Equals(key));
+            return GetOriginal(e => e.Id.Equals(key), loadDeleted);
         }
 
-        public TEntity GetOriginal(Func<TEntity, bool> predicate)
+        public TEntity GetOriginal(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            var entity = Get(predicate);
+            var entity = Get(predicate, loadDeleted);
             if (entity.OriginalId.HasValue)
             {
-                return GetOriginal(entity.OriginalId.Value);
+                return GetOriginal(entity.OriginalId.Value, loadDeleted);
             }
             else
             {

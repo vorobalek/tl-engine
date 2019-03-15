@@ -13,14 +13,14 @@ namespace TL.Engine.SDK.Managers
         {
         }
 
-        public virtual TEntity Get(TKey key)
+        public virtual TEntity Get(TKey key, bool loadDeleted = false)
         {
-            return Get(e => e.Id.Equals(key));
+            return Get(e => e.Id.Equals(key), loadDeleted);
         }
 
-        public virtual TEntity GetOrCreate(TKey key, TEntity entity = null)
+        public virtual TEntity GetOrCreate(TKey key, bool loadDeleted = false, TEntity entity = null)
         {
-            return GetOrCreate(e => e.Id.Equals(key), entity);
+            return GetOrCreate(e => e.Id.Equals(key), loadDeleted, entity);
         }
 
         public virtual TEntity UpdateOrCreate(TKey key, TEntity entity = null)

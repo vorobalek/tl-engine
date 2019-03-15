@@ -7,7 +7,7 @@ namespace TL.Engine.SDK.Managers
         where TEntity : class, IEntityDuplicate<TKey>, IEntityComparable<TKey>, IEntityStored
         where TKey : struct, IComparable
     {
-        TEntity GetOriginal(TKey key);
-        TEntity GetOriginal(Func<TEntity, bool> predicate);
+        TEntity GetOriginal(TKey key, bool loadDeleted = false);
+        TEntity GetOriginal(Func<TEntity, bool> predicate, bool loadDeleted = false);
     }
 }

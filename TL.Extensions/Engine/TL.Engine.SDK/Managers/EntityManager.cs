@@ -112,25 +112,25 @@ namespace TL.Engine.SDK.Managers
             return returnableEntities;
         }
 
-        public virtual TEntity Get(Func<TEntity, bool> predicate)
+        public virtual TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            return Storage.GetRepository<IEntityRepository<TEntity>>().Get(predicate);
+            return Storage.GetRepository<IEntityRepository<TEntity>>().Get(predicate, loadDeleted);
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll(bool loadDeleted = false)
         {
-            return GetAll(e => true);
+            return GetAll(e => true, loadDeleted);
         }
 
-        public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate)
+        public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            IEnumerable<TEntity> entities = Storage.GetRepository<IEntityRepository<TEntity>>().GetAll(predicate);
+            IEnumerable<TEntity> entities = Storage.GetRepository<IEntityRepository<TEntity>>().GetAll(predicate, loadDeleted);
             return entities;
         }
 
-        public virtual TEntity GetOrCreate(Func<TEntity, bool> predicate, TEntity entity = null)
+        public virtual TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null)
         {
-            TEntity existedEntity = Get(predicate);
+            TEntity existedEntity = Get(predicate, loadDeleted);
             if (existedEntity == null)
             {
                 return Create(entity);

@@ -92,9 +92,9 @@ namespace TL.Account.Data.Managers
         }
 
         [PublicApi(Description = "Получить всех пользователей")]
-        public override IEnumerable<User> GetAll()
+        public override IEnumerable<User> GetAll(bool loadDeleted = false)
         {
-            return base.GetAll();
+            return base.GetAll(loadDeleted);
         }
     }
 }

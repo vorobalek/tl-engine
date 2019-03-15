@@ -71,6 +71,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmAdmin
                         {
                             var userRoleManager = serviceProvider.GetService<ITgUserRoleManager>();
                             var newUserRole = userRoleManager.GetOrCreate(e => e.UserId == tgUser.Id && e.RoleId == TgRole.Admin.Id,
+                                false,
                                 new TgUserRole()
                                 {
                                     UserId = tgUser.Id,

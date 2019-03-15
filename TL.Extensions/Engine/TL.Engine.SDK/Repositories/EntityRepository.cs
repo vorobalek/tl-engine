@@ -40,19 +40,19 @@ namespace TL.Engine.SDK.Repositories
             return Load(entity);
         }
 
-        public virtual TEntity Get(Func<TEntity, bool> predicate)
+        public virtual TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            return Load(dbSet.FirstOrDefault(e => predicate(e) && !e.IsDeleted));
+            return Load(dbSet.FirstOrDefault(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted)));
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll(bool loadDeleted = false)
         {
-            return GetAll(e => true);
+            return GetAll(e => true, loadDeleted);
         }
 
-        public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate)
+        public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            return dbSet.Where(e => predicate(e) && !e.IsDeleted).Select(e => Load(e));
+            return dbSet.Where(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted)).Select(e => Load(e));
         }
 
         public void Remove(TEntity entity)

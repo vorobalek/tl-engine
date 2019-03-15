@@ -10,9 +10,9 @@ namespace TL.Engine.SDK.Repositories
         TEntity Add(TEntity entity);
         TEntity Delete(TEntity entity);
         void Remove(TEntity entity);
-        TEntity Get(Func<TEntity, bool> predicate);
-        IEnumerable<TEntity> GetAll();
-        IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate);
+        TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false);
+        IEnumerable<TEntity> GetAll(bool loadDeleted = false);
+        IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false);
         TEntity Update(TEntity entity);
     }
 }

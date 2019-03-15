@@ -9,10 +9,10 @@ namespace TL.Engine.SDK.Managers
     {
         TEntity Create(TEntity entity);
         TEntity CreateEmpty();
-        TEntity Get(Func<TEntity, bool> predicate);
-        IEnumerable<TEntity> GetAll();
-        IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate);
-        TEntity GetOrCreate(Func<TEntity, bool> predicate, TEntity entity = null);
+        TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false);
+        IEnumerable<TEntity> GetAll(bool loadDeleted = false);
+        IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false);
+        TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null);
         TEntity Update(TEntity entity);
         TEntity Delete(TEntity entity);
         TEntity Delete(Func<TEntity, bool> predicate);
