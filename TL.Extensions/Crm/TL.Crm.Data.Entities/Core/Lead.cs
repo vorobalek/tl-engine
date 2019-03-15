@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using TL.Account.Data.Entities.Security;
 using TL.Crm.Data.Entities.Periphery;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Crm.Data.Entities.Core
 {
+    public enum SexType
+    {
+        [Display(Name = "Мужской")]
+        Male,
+
+        [Display(Name = "Женский")]
+        Female,
+    }
+
     public class Lead : EntityDuplicateComparableStored<Guid>
     {
         public string Firstname { get; set; }
@@ -13,6 +23,8 @@ namespace TL.Crm.Data.Entities.Core
         public string Lastname { get; set; }
 
         public string Middlename { get; set; }
+
+        public SexType? SexType { get; set; }
 
         public Guid? UserId { get; set; }
 

@@ -3,8 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using TL.Crm.Data.Entities.Core;
 using TL.Crm.Data.Extensions;
 using TL.Crm.Data.Managers;
+using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
 
@@ -47,25 +49,25 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                 }
                 else
                 {
-                    //запрашиваем подтверждение активации
+                    //запрашиваем пол
                     await Bot.SendAsync(new TlMessage()
                     {
                         MessageType = MessageType.Text,
                         ChatId = message.From.Id,
-                        Text = $"👌🏻 <b>Всё верно?</b>\r\n\r\n" +
-                        $"Я сохранил ваши данные:\r\n" +
-                        $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
-                        $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
-                        $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
-                        $"☑️ <b>Отчество:</b> {originalLead.Middlename}\r\n\r\n" +
-                        $"Всё верно? Или начнём сначала?",
+                        Text = $"👌🏻 <b>Продолжим?</b>\r\n\r\n" +
+                           $"Я сохранил ваши данные:\r\n" +
+                           $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
+                           $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
+                           $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
+                           $"☑️ <b>Отчество:</b> {originalLead.Middlename}\r\n\r\n" +
+                           $"Теперь выберите, пожалуйста свой <b>пол</b>.",
                         ParseMode = ParseMode.Html,
-                        ReplyMarkup = new InlineKeyboardMarkup(new[]
+                        ReplyMarkup = new ReplyKeyboardMarkup(new[]
                         {
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData("✅ Всё верно", "registry.accept"),
-                                InlineKeyboardButton.WithCallbackData("❌ Начать сначала", "registry.decline"),
+                                new KeyboardButton(SexType.Male.DisplayName()),
+                                new KeyboardButton(SexType.Female.DisplayName()),
                             }
                         })
                     });

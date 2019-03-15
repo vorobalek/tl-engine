@@ -8,6 +8,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 using TL.Crm.Data.Entities.Core;
 using TL.Crm.Data.Extensions;
 using TL.Crm.Data.Managers;
+using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
 using TlUser = TL.Account.Data.Entities.Security.User;
@@ -61,7 +62,8 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmClient.registry
                                 $"☑️ <b>Номер телефона:</b> {leadPhones.LastOrDefault().PhoneNumber}\r\n" +
                                 $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
                                 $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
-                                $"☑️ <b>Отчество:</b> {originalLead.Middlename}",
+                                $"☑️ <b>Отчество:</b> {originalLead.Middlename}\r\n" +
+                                $"☑️ <b>Пол:</b> {originalLead.SexType.DisplayName()}",
                             ReplyMarkup = new InlineKeyboardMarkup(new[]
                             {
                                 new[]

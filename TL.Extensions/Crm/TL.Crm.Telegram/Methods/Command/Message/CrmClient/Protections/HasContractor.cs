@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using TL.Crm.Data.Extensions;
 using TL.Crm.Data.Managers;
+using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Integrations.Telegram.Handlers;
 using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
 
@@ -33,7 +33,8 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                     $"☑️ <b>Номер телефона:</b> {leadPhone.PhoneNumber}\r\n" +
                     $"☑️ <b>Имя:</b> {originalLead.Firstname}\r\n" +
                     $"☑️ <b>Фамилия:</b> {originalLead.Lastname}\r\n" +
-                    $"☑️ <b>Отчество:</b> {originalLead.Middlename}\r\n\r\n" +
+                    $"☑️ <b>Отчество:</b> {originalLead.Middlename}\r\n" +
+                    $"☑️ <b>Пол:</b> {originalLead.SexType.DisplayName()}\r\n\r\n" +
                     $"Всё верно? Или начнём сначала?",
                     ParseMode = ParseMode.Html,
                     ReplyMarkup = new InlineKeyboardMarkup(new[]
