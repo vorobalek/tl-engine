@@ -57,8 +57,8 @@ namespace TL.Crm.Telegram.Methods.Command.Callback.CrmAdmin.invites
                         {
                             new[]
                             {
-                                InlineKeyboardButton.WithCallbackData($"{(invite.TimeOut < DateTime.Now.ToUniversalTime() ? "⌛️" : "⏳")} {localInviteTimeOut.Day}/{localInviteTimeOut.Month}/{localInviteTimeOut.Year} {localInviteTimeOut.Hour}:{localInviteTimeOut.Minute}:{localInviteTimeOut.Second}", "invites.change.time"),
-                                InlineKeyboardButton.WithCallbackData($"🙎🏼‍ Лимит {invite.Referrals.Count()} из {invite.MaxMembersCount}", "invites.change.count"),
+                                InlineKeyboardButton.WithCallbackData($"{(invite.TimeOut < DateTime.Now.ToUniversalTime() ? "⌛️" : "⏳")} {localInviteTimeOut.Day}/{localInviteTimeOut.Month}/{localInviteTimeOut.Year} {localInviteTimeOut.Hour}:{localInviteTimeOut.Minute}:{localInviteTimeOut.Second}", $"invites.change.time.{invite.Id}"),
+                                InlineKeyboardButton.WithCallbackData($"🙎🏼‍ Лимит {invite.Referrals.Count()} из {invite.MaxMembersCount}", $"invites.change.count.{invite.Id}"),
                             },
                             new[]
                             {
