@@ -69,7 +69,7 @@ namespace TL.Crm.Telegram.Methods.Command.Message.CrmClient.Protections
                                 new KeyboardButton(SexType.Male.DisplayName()),
                                 new KeyboardButton(SexType.Female.DisplayName()),
                             }
-                        })
+                        }, resizeKeyboard: true, oneTimeKeyboard: true)
                     });
                 }
             }
