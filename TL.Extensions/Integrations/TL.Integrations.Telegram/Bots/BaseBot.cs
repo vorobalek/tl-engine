@@ -44,7 +44,7 @@ namespace TL.Integrations.Telegram.Bots
             Logger.TLogWarning($"Бот {name} сконфигурирован.");
         }
 
-        public override async Task StartAsync()
+        public override async Task<bool> StartAsync()
         {
             try
             {
@@ -53,27 +53,28 @@ namespace TL.Integrations.Telegram.Bots
 
                 Username = (await TgClient.GetMeAsync(new CancellationTokenSource(CancelTimeout).Token)).Username;
                 Logger.TLogWarning($"@{Username} запущен.");
+                return true;
             }
             catch
             {
-                Logger.TLogWarning($"Запуск не удался - @{Username} Попытка повтора через {TimeSpan.FromMilliseconds(RetryPeriod).TotalSeconds} сек...");
-
-                await Task.Delay(RetryPeriod);
+                Logger.TLogWarning($"Запуск не удался - @{Username}");
                 await StopAsync();
-                await StartAsync();
+                return false;
             }
         }
 
-        public override async Task StopAsync()
+        public override async Task<bool> StopAsync()
         {
             try
             {
                 await base.StopAsync();
                 Logger.TLogWarning($"@{Username} остановлен.");
+                return true;
             }
             catch (Exception ex)
             {
                 Logger.LogCritical($"Остановка не удалась - @{Username}\r\n{ex}");
+                return false;
             }
         }
 

@@ -27,8 +27,8 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         Task SendAsync(IMessage message);
 
-        Task StartAsync();
+        Task<bool> StartAsync();
 
-        Task StopAsync();
+        Task<bool> StopAsync();
     }
 }

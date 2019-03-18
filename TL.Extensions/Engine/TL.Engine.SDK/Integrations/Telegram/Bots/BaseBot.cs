@@ -44,41 +44,57 @@ namespace TL.Engine.SDK.Integrations.Telegram.Bots
 
         public abstract Task SendAsync(IMessage message);
 
-        public virtual Task StartAsync()
+        public virtual Task<bool> StartAsync()
         {
             return Task.Run(() =>
             {
-                WorkThread = new Thread(WorkProcess)
+                try
                 {
-                    Name = Username
-                };
-                MessagesQueue = new ConcurrentQueue<IMessage>();
+                    WorkThread = new Thread(WorkProcess)
+                    {
+                        Name = Username
+                    };
+                    MessagesQueue = new ConcurrentQueue<IMessage>();
 
-                UpdatesSummaryCount = 0;
-                RequestsSummaryCount = 0;
-                RequestsSummaryCountTemp = 0;
-                RequestsSummaryTime = new TimeSpan[10];
+                    UpdatesSummaryCount = 0;
+                    RequestsSummaryCount = 0;
+                    RequestsSummaryCountTemp = 0;
+                    RequestsSummaryTime = new TimeSpan[10];
 
-                IsOnline = true;
-                WorkThread.Start();
-                TgClient.StartReceiving();
-                StartTime = DateTime.Now;
+                    IsOnline = true;
+                    WorkThread.Start();
+                    TgClient.StartReceiving();
+                    StartTime = DateTime.Now;
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             });
         }
 
-        public virtual Task StopAsync()
+        public virtual Task<bool> StopAsync()
         {
             return Task.Run(() =>
             {
-                TgClient.StopReceiving();
-                while (!MessagesQueue.IsEmpty)
+                try
                 {
-                    Thread.Sleep(1000);
+                    TgClient.StopReceiving();
+                    while (!MessagesQueue.IsEmpty)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    IsOnline = false;
+                    while (WorkThread.ThreadState == ThreadState.Running)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    return true;
                 }
-                IsOnline = false;
-                while (WorkThread.ThreadState == ThreadState.Running)
+                catch
                 {
-                    Thread.Sleep(1000);
+                    return false;
                 }
             });
         }

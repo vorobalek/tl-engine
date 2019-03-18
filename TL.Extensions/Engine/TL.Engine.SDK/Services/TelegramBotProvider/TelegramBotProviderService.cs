@@ -60,10 +60,13 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
             if (OnlineBots.FirstOrDefault(it => it.Token == bot.Token) == null && !CandidateBots.Contains(bot.Token))
             {
                 CandidateBots.Add(bot.Token);
-                bot.StartAsync().Wait();
-                OnlineBots.Add(bot);
+                var f = bot.StartAsync().GetAwaiter().GetResult();
+                if (f)
+                {
+                    OnlineBots.Add(bot);
+                }
                 CandidateBots.RemoveAll(it => it == bot.Token);
-                return true;
+                return f;
             }
             else
             {
@@ -88,10 +91,13 @@ namespace TL.Engine.SDK.Services.TelegramBotProvider
             if (!CandidateBots.Contains(bot.Token))
             {
                 CandidateBots.Add(bot.Token);
-                OnlineBots.RemoveAll(it => it.Token == bot.Token);
-                bot.StopAsync().Wait();
+                var f = bot.StopAsync().GetAwaiter().GetResult();
+                if (f)
+                {
+                    OnlineBots.RemoveAll(it => it.Token == bot.Token);
+                }
                 CandidateBots.RemoveAll(it => it == bot.Token);
-                return true;
+                return f;
             }
             else
             {
