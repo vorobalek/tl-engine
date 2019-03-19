@@ -1,7 +1,7 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TL.Api.Web.Areas.Api.Controllers
+namespace TL.Api.Web.Areas.ApiHelp.Controllers
 {
     public class ObjectsController : __ApiHelpController__
     {

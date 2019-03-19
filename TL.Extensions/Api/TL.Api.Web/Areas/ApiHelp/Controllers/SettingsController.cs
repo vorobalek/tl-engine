@@ -1,0 +1,89 @@
+﻿using ExtCore.Data.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using TL.Account.Data.Managers;
+using TL.Api.Data.Abstractions.Security;
+using TL.Api.Data.Entities.Security;
+using TL.Api.Data.Managers;
+using TL.Api.Web.Areas.ApiHelp.ViewModels.Settings;
+
+namespace TL.Api.Web.Areas.ApiHelp.Controllers
+{
+    [Authorize(Roles = "sa")]
+    public class SettingsController : __ApiHelpController__
+    {
+        public IUserManager UserManager { get; }
+
+        public ITokenManager TokenManager { get; }
+
+        public SettingsController(IUserManager userManager, ITokenManager tokenManager, IStorage storage) : base(storage)
+        {
+            UserManager = userManager;
+            TokenManager = tokenManager;
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View(new IndexViewModelFactory().Create(UserManager, TokenManager));
+        }
+
+        [HttpPost]
+        public IActionResult Add()
+        {
+            var user = UserManager.Get(User.Identity.Name);
+            var token = TokenManager.Create(new Token()
+            {
+                Owner = user
+            });
+
+            return Redirect("/apihelp/settings/");
+        }
+
+        [HttpPost]
+        public IActionResult Restore(IndexViewModel model)
+        {
+            var guid = model.BindModel.TokenId;
+            {
+                var token = TokenManager.Get(guid, true);
+                if (token != null)
+                {
+                    token.IsDeleted = false;
+                    TokenManager.Update(token);
+                }
+            }
+
+            return Redirect("/apihelp/settings/");
+        }
+
+        [HttpPost]
+        public IActionResult Remove(IndexViewModel model)
+        {
+            var guid = model.BindModel.TokenId;
+            {
+                var token = TokenManager.Get(guid, true);
+                if (token != null)
+                {
+                    Storage.GetRepository<ITokenRepository>().Remove(token);
+                    Storage.Save();
+                }
+            }
+            return Redirect("/apihelp/settings/");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(IndexViewModel model)
+        {
+            var guid = model.BindModel.TokenId;
+            {
+                var token = TokenManager.Get(guid, true);
+                if (token != null)
+                {
+                    TokenManager.Delete(token);
+                }
+            }
+            return Redirect("/apihelp/settings/");
+        }
+    }
+}

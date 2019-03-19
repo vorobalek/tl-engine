@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace TL.Engine.SDK.Modularity
 {
     public abstract class BaseMetadata
     {
-        private Version MinimalVersion => new Version(0, 5, 0, 3);
+        private Version MinimalVersion => new Version(0, 8, 0, 0);
 
         public abstract string Name { get; }
 
@@ -16,6 +17,10 @@ namespace TL.Engine.SDK.Modularity
         public virtual string Authors => "";
 
         public virtual string Owner => "";
+
+        public virtual IEnumerable<BaseMetadata> ReferencesModules { get; set; } = new List<BaseMetadata>();
+
+        public virtual IEnumerable<Assembly> ReferencesAssemblies { get; set; } = new List<Assembly>();
 
         public virtual IEnumerable<BaseMetadata> SubModules =>
             ExtensionManager.GetInstances<BaseMetadata>()

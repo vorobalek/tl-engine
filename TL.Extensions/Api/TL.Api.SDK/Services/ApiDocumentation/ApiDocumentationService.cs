@@ -75,7 +75,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                                 {
                                     Name = apiprotocol.HttpMethods.FirstOrDefault(),
                                     Description = apiprotocol.UsageDescription,
-                                    ReturnableType = apiprotocol?.ReturnableType.GetFullName(),
+                                    ReturnableType = apiprotocol?.ReturnableType.GetName(),
                                     Sample = $"{controller.Command}{apiprotocol.UsageSample}"
                                 };
                             })
@@ -102,7 +102,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                                 return new ApiPropertyModel()
                                 {
                                     Name = prop.Name,
-                                    Type = prop.PropertyType.GetFullName()
+                                    Type = prop.PropertyType.GetName()
                                 };
                             })
                             .ToList()
@@ -128,12 +128,12 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                         Namespace = m.DeclaringType.GetFullName(),
                         Name = m.Name,
                         Description = (m.GetCustomAttributes(typePrivateApiAttribute, true).FirstOrDefault() as PrivateApiAttribute).Description,
-                        ReturnableType = m.ReturnType.GetFullName(),
+                        ReturnableType = m.ReturnType.GetName(),
                         Properties = m.GetParameters().Select(p =>
                         {
                             return new ApiPropertyModel()
                             {
-                                Type = p.ParameterType.GetFullName(),
+                                Type = p.ParameterType.GetName(),
                                 Name = p.Name,
                             };
                         }).ToList(),

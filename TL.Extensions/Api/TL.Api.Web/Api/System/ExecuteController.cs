@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -59,7 +60,20 @@ namespace TL.Api.Web.Api.System
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
-            var args = existMethod.GetParameters().Select(p => HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value).Get(p.Name)).ToArray();
+            var listArgs = new List<object>();
+            foreach (var parameter in existMethod.GetParameters())
+            {
+                var stringValue = HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value).Get(parameter.Name);
+                if (!string.IsNullOrWhiteSpace(stringValue))
+                {
+                    listArgs.Add(Convert.ChangeType(stringValue, parameter.ParameterType));
+                }
+                else
+                {
+                    listArgs.Add(null);
+                }
+            }
+            var args = listArgs.ToArray();
 
             return this.JsonResponse(true, result: existMethod.Invoke(instance, args));
         }

@@ -24,6 +24,7 @@ namespace TL.Api.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
+            new LinkItem("/apihelp/settings", "Настройки API", 1010, new[] { "sa" }),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

@@ -1,0 +1,80 @@
+﻿@model TL.Api.Web.Areas.ApiHelp.ViewModels.Settings.IndexViewModel
+@{
+    ViewData["Title"] = "Настройки API";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Настройка токенов API</h1>
+<form asp-action="add" method="post">
+    <button class="btn btn-success">Создать новый токен</button>
+</form>
+<hr />
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-responsive-stack">
+        <thead class="thead-light">
+            <tr>
+                <th style="flex-basis: 40%">ID</th>
+                <th style="flex-basis: 30%">Автор</th>
+                <th style="flex-basis: 30%">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var token in Model.Tokens.OrderByDescending(t => t.CreationDate))
+                {
+                    <tr>
+                        <td>
+                            <div>
+                                @if (token.IsDeleted)
+                                {
+                                    <del><pre>@token.Id.ToString()</pre></del>
+                                }
+                                else
+                                {
+                                    <pre>@token.Id.ToString()</pre>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            @if (token.OwnerId.HasValue)
+                            {
+                                <a href="/account/profile/@token.Owner?.Username" target="_blank">@@@token.Owner?.Username</a>
+                            }
+                            else
+                            {
+                                <a href="/account/profile/system" target="_blank">@@system</a>
+                            }
+                        </td>
+                        <td>
+                            @if (token.IsDeleted)
+                            {
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <form asp-action="restore" method="post">
+                                                <input asp-for="@Model.BindModel.TokenId" value="@token.Id" hidden />
+                                                <button type="submit" class="btn btn-success">Подключить</button>
+                                            </form>
+                                        </div>
+                                        <div class="col">
+                                            <form asp-action="remove" method="post">
+                                                <input asp-for="@Model.BindModel.TokenId" value="@token.Id" hidden />
+                                                <button type="submit" class="btn btn-danger">Удалить</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <form asp-action="delete" method="post">
+                                    <input asp-for="@Model.BindModel.TokenId" value="@token.Id" hidden />
+                                    <button type="submit" class="btn btn-warning">Отключить</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
