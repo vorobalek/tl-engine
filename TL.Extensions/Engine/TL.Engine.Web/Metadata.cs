@@ -6,7 +6,9 @@ namespace TL.Engine.Web
 {
     public class Metadata : BaseMetadataWeb
     {
-        public override string Name => "TL.Engine";
+        public override string Name => "TL.Engine.Web";
+
+        public override string Owner => "TL.Engine";
 
         public override string Description => 
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";

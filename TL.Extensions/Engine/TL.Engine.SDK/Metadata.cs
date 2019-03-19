@@ -6,6 +6,6 @@ namespace TL.Engine.SDK
     {
         public override string Name => "TL.Engine.SDK";
 
-        public override string Owner => "";
+        public override string Owner => "TL.Engine";
     }
 }
