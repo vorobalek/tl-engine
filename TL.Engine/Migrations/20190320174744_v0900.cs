@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TL.Engine.Migrations
 {
-    public partial class v0800 : Migration
+    public partial class v0900 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -393,9 +393,9 @@ namespace TL.Engine.Migrations
                 columns: new[] { "Id", "CreationDate", "IsDeleted", "ModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 19, 11, 21, 50, 489, DateTimeKind.Utc).AddTicks(7315), false, new DateTime(2019, 3, 19, 11, 21, 50, 489, DateTimeKind.Utc).AddTicks(7333), "sa" },
-                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 3, 19, 11, 21, 50, 489, DateTimeKind.Utc).AddTicks(7369), false, new DateTime(2019, 3, 19, 11, 21, 50, 489, DateTimeKind.Utc).AddTicks(7371), "user" },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 489, DateTimeKind.Utc).AddTicks(7383), false, new DateTime(2019, 3, 19, 11, 21, 50, 489, DateTimeKind.Utc).AddTicks(7385), "system" }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 20, 17, 47, 43, 890, DateTimeKind.Utc).AddTicks(2912), false, new DateTime(2019, 3, 20, 17, 47, 43, 890, DateTimeKind.Utc).AddTicks(2933), "sa" },
+                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 3, 20, 17, 47, 43, 890, DateTimeKind.Utc).AddTicks(2973), false, new DateTime(2019, 3, 20, 17, 47, 43, 890, DateTimeKind.Utc).AddTicks(2975), "user" },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 890, DateTimeKind.Utc).AddTicks(2988), false, new DateTime(2019, 3, 20, 17, 47, 43, 890, DateTimeKind.Utc).AddTicks(2989), "system" }
                 });
 
             migrationBuilder.InsertData(
@@ -403,46 +403,46 @@ namespace TL.Engine.Migrations
                 columns: new[] { "Id", "CreationDate", "Description", "IsClosed", "IsDeleted", "ModifiedDate", "PasswordHash", "Username" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 19, 11, 21, 50, 481, DateTimeKind.Utc).AddTicks(5148), "Супер-пользователь системы TL Engine", false, false, new DateTime(2019, 3, 19, 11, 21, 50, 482, DateTimeKind.Utc).AddTicks(4861), null, "sa" },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 482, DateTimeKind.Utc).AddTicks(9857), "Автоматика системы TL Engine", true, false, new DateTime(2019, 3, 19, 11, 21, 50, 482, DateTimeKind.Utc).AddTicks(9866), null, "system" }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 20, 17, 47, 43, 881, DateTimeKind.Utc).AddTicks(3782), "Супер-пользователь системы TL Engine", false, false, new DateTime(2019, 3, 20, 17, 47, 43, 882, DateTimeKind.Utc).AddTicks(7542), null, "sa" },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 883, DateTimeKind.Utc).AddTicks(3774), "Автоматика системы TL Engine", true, false, new DateTime(2019, 3, 20, 17, 47, 43, 883, DateTimeKind.Utc).AddTicks(3788), null, "system" }
                 });
 
             migrationBuilder.InsertData(
                 table: "CrmContractors",
                 columns: new[] { "Id", "CreationDate", "IsDeleted", "ModifiedDate", "OriginalId" },
-                values: new object[] { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 538, DateTimeKind.Utc).AddTicks(68), false, new DateTime(2019, 3, 19, 11, 21, 50, 538, DateTimeKind.Utc).AddTicks(88), null });
+                values: new object[] { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 946, DateTimeKind.Utc).AddTicks(1952), false, new DateTime(2019, 3, 20, 17, 47, 43, 946, DateTimeKind.Utc).AddTicks(1973), null });
 
             migrationBuilder.InsertData(
                 table: "IntegrationsTgRoles",
                 columns: new[] { "Id", "CreationDate", "IsDeleted", "ModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 19, 11, 21, 50, 576, DateTimeKind.Utc).AddTicks(9521), false, new DateTime(2019, 3, 19, 11, 21, 50, 576, DateTimeKind.Utc).AddTicks(9542), "sa" },
-                    { new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"), new DateTime(2019, 3, 19, 11, 21, 50, 577, DateTimeKind.Utc).AddTicks(2311), false, new DateTime(2019, 3, 19, 11, 21, 50, 577, DateTimeKind.Utc).AddTicks(2321), "admin" },
-                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 3, 19, 11, 21, 50, 577, DateTimeKind.Utc).AddTicks(3252), false, new DateTime(2019, 3, 19, 11, 21, 50, 577, DateTimeKind.Utc).AddTicks(3260), "user" },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 577, DateTimeKind.Utc).AddTicks(4125), false, new DateTime(2019, 3, 19, 11, 21, 50, 577, DateTimeKind.Utc).AddTicks(4131), "system" }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 20, 17, 47, 43, 986, DateTimeKind.Utc).AddTicks(7814), false, new DateTime(2019, 3, 20, 17, 47, 43, 986, DateTimeKind.Utc).AddTicks(7838), "sa" },
+                    { new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"), new DateTime(2019, 3, 20, 17, 47, 43, 987, DateTimeKind.Utc).AddTicks(412), false, new DateTime(2019, 3, 20, 17, 47, 43, 987, DateTimeKind.Utc).AddTicks(421), "admin" },
+                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 3, 20, 17, 47, 43, 987, DateTimeKind.Utc).AddTicks(1352), false, new DateTime(2019, 3, 20, 17, 47, 43, 987, DateTimeKind.Utc).AddTicks(1359), "user" },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 987, DateTimeKind.Utc).AddTicks(2233), false, new DateTime(2019, 3, 20, 17, 47, 43, 987, DateTimeKind.Utc).AddTicks(2240), "system" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AccountSubscriptions",
                 columns: new[] { "FromId", "ToId", "CreationDate", "IsDeleted", "ModifiedDate", "Quiet" },
-                values: new object[] { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 491, DateTimeKind.Utc).AddTicks(3247), false, new DateTime(2019, 3, 19, 11, 21, 50, 491, DateTimeKind.Utc).AddTicks(3259), false });
+                values: new object[] { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 892, DateTimeKind.Utc).AddTicks(1353), false, new DateTime(2019, 3, 20, 17, 47, 43, 892, DateTimeKind.Utc).AddTicks(1374), false });
 
             migrationBuilder.InsertData(
                 table: "AccountUsersRoles",
                 columns: new[] { "UserId", "RoleId", "CreationDate", "IsDeleted", "ModifiedDate" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 3, 19, 11, 21, 50, 486, DateTimeKind.Utc).AddTicks(7573), false, new DateTime(2019, 3, 19, 11, 21, 50, 486, DateTimeKind.Utc).AddTicks(7594) },
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 19, 11, 21, 50, 487, DateTimeKind.Utc).AddTicks(3684), false, new DateTime(2019, 3, 19, 11, 21, 50, 487, DateTimeKind.Utc).AddTicks(3694) },
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 487, DateTimeKind.Utc).AddTicks(4709), false, new DateTime(2019, 3, 19, 11, 21, 50, 487, DateTimeKind.Utc).AddTicks(4710) },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 487, DateTimeKind.Utc).AddTicks(6761), false, new DateTime(2019, 3, 19, 11, 21, 50, 487, DateTimeKind.Utc).AddTicks(6768) }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 3, 20, 17, 47, 43, 887, DateTimeKind.Utc).AddTicks(4131), false, new DateTime(2019, 3, 20, 17, 47, 43, 887, DateTimeKind.Utc).AddTicks(4151) },
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 3, 20, 17, 47, 43, 887, DateTimeKind.Utc).AddTicks(9026), false, new DateTime(2019, 3, 20, 17, 47, 43, 887, DateTimeKind.Utc).AddTicks(9032) },
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 887, DateTimeKind.Utc).AddTicks(9996), false, new DateTime(2019, 3, 20, 17, 47, 43, 887, DateTimeKind.Utc).AddTicks(9998) },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 888, DateTimeKind.Utc).AddTicks(2090), false, new DateTime(2019, 3, 20, 17, 47, 43, 888, DateTimeKind.Utc).AddTicks(2096) }
                 });
 
             migrationBuilder.InsertData(
                 table: "CrmLeads",
                 columns: new[] { "Id", "ContractorId", "CreationDate", "Firstname", "InviteId", "IsDeleted", "Lastname", "Middlename", "ModifiedDate", "OriginalId", "SexType", "UserId" },
-                values: new object[] { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 19, 11, 21, 50, 527, DateTimeKind.Utc).AddTicks(3), "Автоматика", null, false, "Системы", "TL Engine", new DateTime(2019, 3, 19, 11, 21, 50, 527, DateTimeKind.Utc).AddTicks(26), null, null, new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee") });
+                values: new object[] { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 3, 20, 17, 47, 43, 933, DateTimeKind.Utc).AddTicks(3107), "Автоматика", null, false, "Системы", "TL Engine", new DateTime(2019, 3, 20, 17, 47, 43, 933, DateTimeKind.Utc).AddTicks(3130), null, null, new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountRoles_Name",
