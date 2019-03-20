@@ -27,24 +27,24 @@ namespace TL.Api.SDK.Models
 
         [JsonRequired]
         [JsonProperty(Order = 0)]
-        public static bool IsRelevant { get; set; }
+        public bool IsRelevant { get; set; }
 
         [JsonProperty(Order = 1)]
-        public static HostString Host { get; set; }
+        public HostString Host { get; set; }
 
         [JsonProperty(Order = 2)]
-        public static IList<ApiObjectModel> Objects { get; set; }
+        public IList<ApiObjectModel> Objects { get; set; } = new List<ApiObjectModel>();
 
         [JsonProperty(Order = 3)]
-        public static IList<ApiMethodModel> Methods { get; set; }
+        public IList<ApiMethodModel> Methods { get; set; } = new List<ApiMethodModel>();
 
         [JsonProperty(Order = 4)]
-        public static IList<ApiFunctionModel> Functions { get; set; }
+        public IList<ApiFunctionModel> Functions { get; set; } = new List<ApiFunctionModel>();
 
         [JsonProperty(Order = 5)]
-        public static TimeSpan CreationTime { get; set; }
+        public TimeSpan CreationTime { get; set; }
 
         [JsonProperty(Order = 6)]
-        public static DateTime LastUpdate { get; set; }
+        public DateTime LastUpdate { get; set; }
     }
 }

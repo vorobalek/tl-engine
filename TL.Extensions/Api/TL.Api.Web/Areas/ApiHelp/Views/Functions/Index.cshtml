@@ -67,18 +67,20 @@
             $.each(func.properties, function (key, property) {
                 formatProperty(property).appendTo(tbody);
             })
-            var span = $('<span>').addClass('glyphicon');
+            var span = $('<span title="' + (func.isPrivate ? 'Необходим токен-ключ' : '') + '">').addClass('glyphicon');
             if (func.isPrivate) {
                 span.addClass('glyphicon-lock');
             }
             return $('<div>')
                 .append($('<p>')
                     .append(span)
-                    .append($('<h3 id="' + func.namespace + ':' + func.name + '">')
-                        .click(function () {
-                            window.open('/api/system.Execute/' + (func.isPrivate ? '<TOKEN>/' : '') + func.namespace + ':' + func.name + '?');
-                        })
-                        .text(func.returnableType + ' ' + func.namespace + ':' + func.name)
+                    .append($('<code>')
+                        .append($('<h5 id="' + func.namespace + ':' + func.name + '">')
+                            .click(function () {
+                                window.open('/api/system.Execute/' + (func.isPrivate ? '<TOKEN>/' : '') + func.namespace + ':' + func.name + '?');
+                            })
+                            .text(func.returnableType + ' ' + func.namespace + ':' + func.name)
+                        )
                     )
                 )
                 .append($('<p>').text(func.description))

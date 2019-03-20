@@ -68,8 +68,10 @@
                 formatProtocol(protocol, method.command).appendTo(tbody);
             })
             return $('<div>')
-                .append($('<h3 id="' + method.command.split('.').join("") + '">')
-                    .text(method.command)
+                .append($('<code>')
+                    .append($('<h5 id="' + method.command.split('.').join("") + '">')
+                        .text(method.command)
+                    )
                 )
                 .append($('<p>').text(method.description))
                 .append($('<div>')

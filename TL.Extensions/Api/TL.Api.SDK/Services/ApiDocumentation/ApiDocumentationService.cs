@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TL.Api.SDK.Attributes.Executable;
 using TL.Api.SDK.Attributes.Http;
@@ -16,6 +17,20 @@ namespace TL.Api.SDK.Services.ApiDocumentation
     {
         public IServiceProvider ServiceProvider { get; }
 
+        private static bool IsRelevant { get; set; }
+
+        private static HostString Host { get; set; }
+
+        private static IList<ApiObjectModel> Objects { get; set; } = new List<ApiObjectModel>();
+
+        private static IList<ApiMethodModel> Methods { get; set; } = new List<ApiMethodModel>();
+
+        private static IList<ApiFunctionModel> Functions { get; set; } = new List<ApiFunctionModel>();
+
+        private static TimeSpan CreationTime { get; set; }
+
+        private static DateTime LastUpdate { get; set; }
+
         public ApiDocumentationService(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
@@ -23,37 +38,54 @@ namespace TL.Api.SDK.Services.ApiDocumentation
 
         public ApiDocumentationModel GetDocumentation()
         {
-            if (!ApiDocumentationModel.IsRelevant)
+            if (!IsRelevant)
             {
                 InitializeDocumentation();
             }
-            return new ApiDocumentationModel();
+            return new ApiDocumentationModel()
+            {
+                IsRelevant = IsRelevant,
+                Host = Host,
+                Objects = Objects,
+                Methods = Methods,
+                Functions = Functions,
+                CreationTime = CreationTime,
+                LastUpdate = LastUpdate,
+            };
         }
 
         public ApiDocumentationModel GetDocumentation(HostString host)
         {
-            if (!ApiDocumentationModel.IsRelevant)
+            if (!IsRelevant)
             {
                 InitializeDocumentation();
             }
-            return new ApiDocumentationModel(host);
+            Host = host;
+
+            var documentation = GetDocumentation();
+            documentation.Host = Host;
+
+            return documentation;
         }
 
         private void InitializeDocumentation()
         {
             var timeStrat = DateTime.Now;
+            IsRelevant = false;
+
             InitializeMethods();
             InitializeObjects();
             InitializeFunctions();
-            ApiDocumentationModel.LastUpdate = DateTime.Now;
-            ApiDocumentationModel.IsRelevant = true;
-            ApiDocumentationModel.CreationTime = DateTime.Now - timeStrat;
+
+            LastUpdate = DateTime.Now;
+            IsRelevant = true;
+            CreationTime = DateTime.Now - timeStrat;
         }
 
         private void InitializeMethods()
         {
             var typeApiHttpMethodAttribute = typeof(ApiHttpMethodAttribute);
-            ApiDocumentationModel.Methods = ExtensionManager.GetImplementations<IBaseApiController>()
+            Methods = ExtensionManager.GetImplementations<IBaseApiController>()
                 .Where(type => !type.IsAbstract && !type.IsInterface)
                 .Select(type => ActivatorUtilities.CreateInstance(ServiceProvider, type) as IBaseApiController)
                 .Select(controller =>
@@ -88,7 +120,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
 
         private void InitializeObjects()
         {
-            ApiDocumentationModel.Objects = ExtensionManager.GetInstances<IBaseApiObject>()
+            Objects = ExtensionManager.GetInstances<IBaseApiObject>()
                 .Select(obj =>
                 {
                     var type = obj.GetType();
@@ -116,7 +148,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
         {
             var typePublicApiAttribute = typeof(PublicApiAttribute);
             var typePrivateApiAttribute = typeof(PrivateApiAttribute);
-            ApiDocumentationModel.Functions = ExtensionManager.Assemblies
+            Functions = ExtensionManager.Assemblies
                 .SelectMany(a => a.GetTypes())
                 .Where(t => !t.IsInterface && !t.IsAbstract)
                 .SelectMany(t => t.GetMethods())
@@ -141,6 +173,13 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                     };
                 })
                 .ToList();
+        }
+
+        [PublicApi(Description = "UAD - Update API Documentation - обновить автоматическую API-документацию. Возвращает дату последнего обновления.")]
+        public DateTime UAD()
+        {
+            InitializeDocumentation();
+            return LastUpdate;
         }
     }
 }

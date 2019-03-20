@@ -22,7 +22,7 @@
                 foreach (var token in Model.Tokens.OrderByDescending(t => t.CreationDate))
                 {
                     <tr>
-                        <td>
+                        <td style="flex-basis: 40%">
                             <div>
                                 @if (token.IsDeleted)
                                 {
@@ -34,7 +34,7 @@
                                 }
                             </div>
                         </td>
-                        <td>
+                        <td style="flex-basis: 30%">
                             @if (token.OwnerId.HasValue)
                             {
                                 <a href="/account/profile/@token.Owner?.Username" target="_blank">@@@token.Owner?.Username</a>
@@ -44,7 +44,7 @@
                                 <a href="/account/profile/system" target="_blank">@@system</a>
                             }
                         </td>
-                        <td>
+                        <td style="flex-basis: 30%">
                             @if (token.IsDeleted)
                             {
                                 <div class="col">

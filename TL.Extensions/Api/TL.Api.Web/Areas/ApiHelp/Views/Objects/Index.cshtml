@@ -68,8 +68,10 @@
                 formatProperty(property).appendTo(tbody);
             })
             return $('<div>')
-                .append($('<h3 id="' + object.name + '">')
-                    .text(object.name)
+                .append($('<code>')
+                    .append($('<h5 id="' + object.name + '">')
+                        .text(object.name)
+                    )
                 )
                 .append($('<p>').text(object.description))
                 .append($('<div>')
