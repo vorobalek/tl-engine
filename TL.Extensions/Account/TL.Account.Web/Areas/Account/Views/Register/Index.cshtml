@@ -1,47 +1,51 @@
 ﻿@model TL.Account.Web.Areas.Account.ViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "Регистрация";
+    Layout = "~/Views/Shared/_LayoutNavbar.cshtml";
 }
+<div class="container shadow-lg p-3 rounded">
+    <h2>Регистрация в TL Engine</h2>
+    <div class="row">
+        <div class="col-auto">
+            <form asp-action="index" asp-controller="register" asp-anti-forgery="true" asp-route-returnUrl="@Model.ReturnUrl" class="needs-validation" novalidate>
+                <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+                <div class="form-group">
+                    <label asp-for="@Model.Username"></label>
+                    <input type="text" asp-for="@Model.Username" class="form-control" placeholder="Логин" required />
+                    <div class="valid-feedback">
+                        Ок
+                    </div>
+                    <div class="invalid-feedback">
+                        Введите логин
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Password"></label>
+                    <input asp-for="@Model.Password" class="form-control" placeholder="Пароль" required />
+                    <div class="valid-feedback">
+                        Ок
+                    </div>
+                    <div class="invalid-feedback">
+                        Введите пароль
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.ConfirmPassword"></label>
+                    <input asp-for="@Model.ConfirmPassword" class="form-control" placeholder="Повторите пароль" required
+                           data-val-equalto="Пароль введен неверно" data-val-equalto-other="*.Password" aria-required="true" />
+                    <div class="valid-feedback">
+                        Ок
+                    </div>
+                    <div class="invalid-feedback">
+                        Повторите пароль
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Регистрация" class="btn" />
+                </div>
+            </form>
 
-<h2>Регистрация</h2>
-<div class="row">
-    <div class="col-auto">
-        <form asp-action="index" asp-controller="register" asp-anti-forgery="true" asp-route-returnUrl="@Model.ReturnUrl" class="needs-validation" novalidate>
-            <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
-            <div class="form-group">
-                <label asp-for="@Model.Username"></label>
-                <input type="text" asp-for="@Model.Username" class="form-control" placeholder="Логин" required />
-                <div class="valid-feedback">
-                    Ок
-                </div>
-                <div class="invalid-feedback">
-                    Введите логин
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Password"></label>
-                <input asp-for="@Model.Password" class="form-control" placeholder="Пароль" required />
-                <div class="valid-feedback">
-                    Ок
-                </div>
-                <div class="invalid-feedback">
-                    Введите пароль
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.ConfirmPassword"></label>
-                <input asp-for="@Model.ConfirmPassword" class="form-control" placeholder="Повторите пароль" required
-                       data-val-equalto="Пароль введен неверно" data-val-equalto-other="*.Password" aria-required="true" />
-                <div class="valid-feedback">
-                    Ок
-                </div>
-                <div class="invalid-feedback">
-                    Повторите пароль
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Регистрация" class="btn" />
-            </div>
-        </form>
+            Или <a asp-action="index" asp-controller="login">войти</a> с существующей учетной записью
+        </div>
     </div>
 </div>

@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSafe.cshtml";
+}
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm rounded" style="position:absolute">
+    <a class="navbar-brand brandlabel col-auto" href="~/">
+        <img src="~/Styles/images/logo_tl.ico" width="40" height="40" class="d-inline-block align-top" alt="">
+    </a>
+    <button id="sidebarSupportedContentButton" class="btn btn-light navbar-toggler mr-0" type="button" data-toggle="collapse" data-target="#sidebarSupportedContent"
+            aria-controls="sidebarSupportedContent" aria-expanded="true" aria-label="Toggle sidebar">
+        <span id="btn_sidebarSupportedContent" class="glyphicon glyphicon-menu-down"></span>
+    </button>
+    <button id="navbarSupportedContentButton" class="btn btn-light navbar-toggler mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </button>
+    <button id="userNavbarSupportedContentButton" class="btn btn-light navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#userNavbarSupportedContent"
+            aria-controls="userNavbarSupportedContent" aria-expanded="false" aria-label="Toggle user navigation">
+        <span class="glyphicon glyphicon-user"></span>
+    </button>
+    <div class="collapse navbar-collapse col" id="navbarSupportedContent">
+        @await Component.InvokeAsync("Navbar")
+    </div>
+    <div class="collapse navbar-collapse col-auto" id="userNavbarSupportedContent">
+        @await Component.InvokeAsync("UserNavbar")
+    </div>
+</nav>
+<br />
+@RenderBody()
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
