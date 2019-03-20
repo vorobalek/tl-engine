@@ -28,7 +28,7 @@
 <div class="container-fluid body-content">
     <div class="row">
         <div class="col-12 col-md-auto dont-collapse-sm collapse" id="sidebarSupportedContent">
-            @await Component.InvokeAsync("Sidebar")
+            <div class="sidebar">@await Component.InvokeAsync("Sidebar")</div>
         </div>
         <div class="col-12 col-md shadow-lg p-3 rounded">
             @RenderBody()
@@ -71,6 +71,9 @@
                         .removeClass('glyphicon-menu-down')
                         .addClass('glyphicon-menu-up')
                 })
-        })
+            if ($('.sidebar').children().is(':empty')) {
+                $('.sidebar').parent().remove();
+            }
+        });
     </script>
 }
