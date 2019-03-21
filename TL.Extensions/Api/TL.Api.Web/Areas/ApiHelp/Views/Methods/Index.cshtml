@@ -18,11 +18,14 @@
                     if (data.ok) {
                         formatResult(data.result).appendTo('#contentMethods')
                     }
+                    $('html, body').animate({
+                        scrollTop: $(window.location.hash).offset().top
+                    }, 500);
                 })
                 .fail(function () {
                     alert(err + '! ' + alertMessage);
                     $('#contentMethods').text(alertMessage);
-                })
+                });
         })
 
         function formatResult(result) {
@@ -69,7 +72,7 @@
             })
             return $('<div>')
                 .append($('<code>')
-                    .append($('<h5 id="' + method.command.split('.').join("") + '">')
+                    .append($('<h5 id="' + getId(method.command) + '">')
                         .text(method.command)
                     )
                 )

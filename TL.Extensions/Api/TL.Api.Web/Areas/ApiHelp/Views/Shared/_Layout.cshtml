@@ -45,34 +45,28 @@
                 .done(function (data) {
                     if (data.ok) {
                         $.each(data.result.methods, function (key, item) {
-                            $('<a class="nav-link" href="/apihelp/methods#' + getId(item) + '">' + item.command + '</a>')
+                            $('<a class="nav-link" href="/apihelp/methods#' + getId(item.command) + '">' + item.command + '</a>')
                                 .appendTo($('#methods'));
                         });
                         $.each(data.result.functions, function (key, item) {
                             if (item.isPrivate) {
-                                $('<a class="nav-link" href="/apihelp/functions#' + item.namespace + ':' + item.name + '" title="' + item.description + '"><span class="glyphicon glyphicon-lock"></span>  ' + item.name + '</a>')
+                                $('<a class="nav-link" href="/apihelp/functions#' + getId(item.namespace + ':' + item.name) + '" title="' + item.description + '"><span class="glyphicon glyphicon-lock"></span>  ' + item.name + '</a>')
                                     .appendTo($('#functions'));
                             } else {
-                                $('<a class="nav-link" href="/apihelp/functions#' + item.namespace + ':' + item.name + '" title="' + item.description + '"><span class="glyphicon glyphicon-unlock"></span>  ' + item.name + '</a>')
+                                $('<a class="nav-link" href="/apihelp/functions#' + getId(item.namespace + ':' + item.name) + '" title="' + item.description + '"><span class="glyphicon glyphicon-unlock"></span>  ' + item.name + '</a>')
                                     .appendTo($('#functions'));
                             }
                         });
                         $.each(data.result.objects, function (key, item) {
-                            $('<a class="nav-link" href="/apihelp/objects#' + item.name + '">' + item.name + '</a>')
+                            $('<a class="nav-link" href="/apihelp/objects#' + getId(item.name) + '">' + item.name + '</a>')
                                 .appendTo($('#objects'));
                         });
                     }
                 })
         });
 
-        function getId(method) {
-            return (method.command.split('.').join(""));
-        }
-
-        window.onload = function () {
-            $('html, body').animate({
-                scrollTop: $(window.location.hash).offset().top
-            }, 500);
+        function getId(name) {
+            return (name.split(/[.,:]+/).join(""));
         }
     </script>
 }

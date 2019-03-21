@@ -18,11 +18,14 @@
                     if (data.ok) {
                         formatResult(data.result).appendTo('#contentFunctions')
                     }
+                    $('html, body').animate({
+                        scrollTop: $(window.location.hash).offset().top
+                    }, 500);
                 })
                 .fail(function () {
                     alert(err + '! ' + alertMessage);
                     $('#contentFunctions').text(alertMessage);
-                })
+                });
         })
 
         function formatResult(result) {
@@ -75,7 +78,7 @@
                 .append($('<p>')
                     .append(span)
                     .append($('<code>')
-                        .append($('<h5 id="' + func.namespace + ':' + func.name + '">')
+                        .append($('<h5 id="' + getId(func.namespace + ':' + func.name) + '">')
                             .click(function () {
                                 window.open('/api/system.Execute/' + (func.isPrivate ? '<TOKEN>/' : '') + func.namespace + ':' + func.name + '?');
                             })

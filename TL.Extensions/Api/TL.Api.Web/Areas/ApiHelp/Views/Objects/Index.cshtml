@@ -18,11 +18,14 @@
                     if (data.ok) {
                         formatResult(data.result).appendTo('#contentObjects')
                     }
+                    $('html, body').animate({
+                        scrollTop: $(window.location.hash).offset().top
+                    }, 500);
                 })
                 .fail(function () {
                     alert(err + '! ' + alertMessage);
                     $('#contentObjects').text(alertMessage);
-                })
+                });
         })
 
         function formatResult(result) {
