@@ -4,10 +4,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using TL.Engine.SDK.Extensions;
-using TL.Engine.SDK.Integrations.Telegram.Bots;
-using TL.Engine.SDK.Services.TelegramBotProvider;
 using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
+using TL.Integrations.SDK.Telegram.Bots;
+using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Telegram.Services
 {

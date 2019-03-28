@@ -1,7 +1,7 @@
 ﻿using ExtCore.Data.Abstractions;
 using System;
-using TL.Engine.SDK.Services.TelegramBotProvider;
 using TL.Integrations.Data.Abstractions.Telegram.System;
+using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared
 {

@@ -3,9 +3,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
-using TL.Engine.SDK.Services.TelegramBotProvider;
 using TL.Integrations.Data.Abstractions.Telegram.System;
 using TL.Integrations.Data.Entities.Telegram.System;
+using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Data.Managers
 {

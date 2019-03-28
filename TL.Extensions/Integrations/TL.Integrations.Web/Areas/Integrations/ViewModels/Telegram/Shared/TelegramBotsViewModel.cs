@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TL.Engine.SDK.Integrations.Telegram.Bots;
+using TL.Integrations.SDK.Telegram.Bots;
 using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared

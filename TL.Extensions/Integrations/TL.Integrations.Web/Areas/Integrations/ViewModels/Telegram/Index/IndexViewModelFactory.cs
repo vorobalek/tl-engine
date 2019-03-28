@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Reflection;
-using TL.Engine.SDK.Attributes.Bots;
-using TL.Engine.SDK.Services.TelegramBotProvider;
+using TL.Integrations.SDK.Telegram.Attributes;
+using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index
 {

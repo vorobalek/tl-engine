@@ -9,14 +9,15 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using TL.Account.Data.Managers;
 using TL.Engine.SDK.Extensions;
-using TL.Engine.SDK.Integrations.Telegram.Handlers;
-using TL.Engine.SDK.Integrations.Telegram.Messages;
+using TL.Integrations.SDK.Telegram.Extensions;
+using TL.Integrations.SDK.Telegram.Handlers;
+using TL.Integrations.SDK.Telegram.Messages;
 using TL.Integrations.Telegram.Extensions;
 using TL.Integrations.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Bots
 {
-    public abstract class BaseBot : Engine.SDK.Integrations.Telegram.Bots.BaseBot
+    public abstract class BaseBot : SDK.Telegram.Bots.BaseBot
     {
         public virtual IHandlerBase CommandHandler { get; protected set; }
 

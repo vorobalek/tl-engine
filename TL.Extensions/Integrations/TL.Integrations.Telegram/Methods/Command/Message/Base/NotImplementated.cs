@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using TL.Engine.SDK.Extensions;
-using TL.Engine.SDK.Integrations.Telegram.Handlers;
-using TgMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
+using TL.Integrations.SDK.Telegram.Extensions;
+using TL.Integrations.SDK.Telegram.Handlers;
+using TgMessage = TL.Integrations.SDK.Telegram.Messages.Message;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 {

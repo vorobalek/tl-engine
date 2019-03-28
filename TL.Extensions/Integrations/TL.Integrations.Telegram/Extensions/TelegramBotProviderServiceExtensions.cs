@@ -1,11 +1,11 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using TL.Engine.SDK.Integrations.Telegram.Bots;
-using TL.Engine.SDK.Services.TelegramBotProvider;
 using TL.Integrations.Data.Abstractions.Telegram.System;
 using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
+using TL.Integrations.SDK.Telegram.Bots;
+using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Telegram.Extensions
 {

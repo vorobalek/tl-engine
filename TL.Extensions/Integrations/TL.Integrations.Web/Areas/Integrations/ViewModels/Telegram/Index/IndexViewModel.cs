@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TL.Engine.SDK.Integrations.Telegram.Bots;
+using TL.Integrations.SDK.Telegram.Bots;
 
 namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index
 {

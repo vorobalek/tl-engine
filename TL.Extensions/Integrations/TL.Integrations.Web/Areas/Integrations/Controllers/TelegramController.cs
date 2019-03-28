@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using TL.Engine.SDK.Integrations.Telegram.Bots;
-using TL.Engine.SDK.Services.TelegramBotProvider;
 using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
+using TL.Integrations.SDK.Telegram.Bots;
+using TL.Integrations.SDK.Telegram.Services;
 using TL.Integrations.Telegram.Extensions;
 using TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Index;
 using TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared;

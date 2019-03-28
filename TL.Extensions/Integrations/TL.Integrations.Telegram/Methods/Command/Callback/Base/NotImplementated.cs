@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
-using TL.Engine.SDK.Integrations.Telegram.Handlers;
+using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 {
@@ -27,7 +27,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 
             var commands = string.Join("\r\n", commands_arr);
 
-            await Bot.SendAsync(new Engine.SDK.Integrations.Telegram.Messages.Message()
+            await Bot.SendAsync(new SDK.Telegram.Messages.Message()
             {
                 MessageType = global::Telegram.Bot.Types.Enums.MessageType.Text,
                 IsEditMessage = true,

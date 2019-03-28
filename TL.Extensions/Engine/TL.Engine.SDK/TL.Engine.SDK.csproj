@@ -18,9 +18,6 @@
     <PackageReference Include="ExtCore.Data.EntityFramework" Version="4.0.0" />
     <PackageReference Include="ExtCore.Infrastructure" Version="4.0.0" />
     <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
-    <PackageReference Include="Telegram.Bot" Version="14.10.0" />
-    <PackageReference Include="Telegram.Bot.Analyzers" Version="1.2.0" />
-    <PackageReference Include="Telegram.Bot.Extensions.Passport" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

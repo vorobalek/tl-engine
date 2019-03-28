@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
-using TL.Engine.SDK.Integrations.Telegram.Handlers;
+using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 {
@@ -22,7 +22,7 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 
             var commands = string.Join("\r\n", commands_arr);
 
-            await Bot.SendAsync(new Engine.SDK.Integrations.Telegram.Messages.Message()
+            await Bot.SendAsync(new SDK.Telegram.Messages.Message()
             {
                 MessageType = global::Telegram.Bot.Types.Enums.MessageType.Text,
                 ChatId = message.Chat,

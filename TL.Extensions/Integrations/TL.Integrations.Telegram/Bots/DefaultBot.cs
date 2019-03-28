@@ -1,8 +1,8 @@
 ﻿using System;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using TL.Engine.SDK.Integrations.Telegram.Messages;
-using TL.Engine.SDK.Attributes.Bots;
+using TL.Integrations.SDK.Telegram.Messages;
+using TL.Integrations.SDK.Telegram.Attributes;
 
 namespace TL.Integrations.Telegram.Bots
 {

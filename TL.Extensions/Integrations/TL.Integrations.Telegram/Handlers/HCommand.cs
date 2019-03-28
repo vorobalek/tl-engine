@@ -1,5 +1,5 @@
-﻿using TL.Engine.SDK.Integrations.Telegram.Bots;
-using TL.Engine.SDK.Integrations.Telegram.Handlers;
+﻿using TL.Integrations.SDK.Telegram.Bots;
+using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Handlers
 {

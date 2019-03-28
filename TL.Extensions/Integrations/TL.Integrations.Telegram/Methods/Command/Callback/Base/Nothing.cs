@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using TL.Engine.SDK.Integrations.Telegram.Handlers;
-using TlMessage = TL.Engine.SDK.Integrations.Telegram.Messages.Message;
+using TL.Integrations.SDK.Telegram.Handlers;
+using TlMessage = TL.Integrations.SDK.Telegram.Messages.Message;
 
 namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 {
