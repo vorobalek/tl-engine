@@ -32,7 +32,7 @@ namespace TL.Integrations.Data.Entities.Telegram.Security
         public static TgRole User =>
            new TgRole()
            {
-               Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+               Id = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
                Name = "user",
            };
 

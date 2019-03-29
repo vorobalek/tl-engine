@@ -36,7 +36,8 @@ namespace TL.Engine.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/home/exception", "Проверить исключения", 0, new string[] { "sa" })
+            new LinkItem("/welcome", "Добро пожаловать!", int.MinValue, new string[] { "user" }),
+            new LinkItem("/home/exception", "Проверить исключения", 1100, new string[] { "sa" })
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
@@ -48,7 +49,7 @@ namespace TL.Engine.Web
 
         public override IEnumerable<LinkItem> UserNavbarItems => new LinkItem[]
         {
-            new LinkItem("/modules", "Модули", int.MinValue, new string[] { "sa" }),
+            new LinkItem("/modules", "Модули", 1000, new string[] { "sa" }),
         };
     }
 }

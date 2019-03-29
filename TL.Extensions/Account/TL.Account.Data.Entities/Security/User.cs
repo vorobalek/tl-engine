@@ -19,11 +19,14 @@ namespace TL.Account.Data.Entities.Security
 
         public virtual IEnumerable<UserRole> UserRoles { get; set; }
 
+        public virtual IEnumerable<UserGroup> UserGroups { get; set; }
+
         public virtual IEnumerable<Subscription> Subscriptions { get; set; }
 
         public User() : base()
         {
             UserRoles = new HashSet<UserRole>();
+            UserGroups = new HashSet<UserGroup>();
             Subscriptions = new HashSet<Subscription>();
         }
 
@@ -33,6 +36,15 @@ namespace TL.Account.Data.Entities.Security
                 Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
                 Username = "sa",
                 Description = "Супер-пользователь системы TL Engine"
+            };
+
+        public static User DefaultUser =>
+            new User()
+            {
+                Id = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                Username = "user",
+                Description = "Шаблонный пользователь системы TL Engine",
+                IsClosed = true,
             };
 
         public static User System =>

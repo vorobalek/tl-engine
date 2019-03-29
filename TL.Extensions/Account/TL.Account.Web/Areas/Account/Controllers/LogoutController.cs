@@ -16,6 +16,12 @@ namespace TL.Account.Web.Areas.Account.Controllers
         public async Task<IActionResult> Index(string returnUrl = null)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            if (Request.Cookies["DefaultPage"] != null)
+            {
+                Response.Cookies.Delete("DefaultPage");
+            }
+
             var ReturnUrl = returnUrl ?? Request.Headers["Referer"].ToString();
             return Redirect(Url.IsLocalUrl(ReturnUrl) ? ReturnUrl : Url.Content("~/"));
         }

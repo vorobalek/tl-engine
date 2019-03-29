@@ -22,10 +22,10 @@ namespace TL.Account.Data.Entities.Security
                 Name = "sa",
             };
 
-        public static Role User =>
+        public static Role DefaultUser =>
            new Role()
            {
-               Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+               Id = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
                Name = "user",
            };
 

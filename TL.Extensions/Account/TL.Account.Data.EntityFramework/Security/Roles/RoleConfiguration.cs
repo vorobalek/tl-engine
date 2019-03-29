@@ -27,7 +27,7 @@ namespace TL.Account.Data.EntityFramework.Security.Roles
                 .HasData(new[]
                 {
                     Role.Sa,
-                    Role.User,
+                    Role.DefaultUser,
                     Role.System,
                 });
         }

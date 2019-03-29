@@ -18,7 +18,7 @@ namespace TL.Account.Data.Extensions
             var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username),
-                    new Claim(nameof(User.Id), user.Id.ToString())
+                    new Claim(nameof(User.Id), user.Id.ToString()),
                 };
 
             var roles = storage.GetRepository<IUserRoleRepository>().GetByUser(user);

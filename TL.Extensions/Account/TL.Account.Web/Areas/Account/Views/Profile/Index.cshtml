@@ -18,26 +18,29 @@ else
     <p>
         Подписчиков: @Model.FollowersCount
     </p>
-    @if (Model.IsFollower)
+    @if (Model.Username != User.Identity.Name)
     {
-        <p>
-            Подписан на Вас.
-        </p>
-    }
-    else
-    {
-        <p>
-            Не подписан на Вас.
-        </p>
-    }
-    <p>
-        @if (Model.IsSubscription)
+        @if (Model.IsFollower)
         {
-            <button type="button" class="btn btn-link"><span class="flaticon-alarm"></span>Отписаться</button>
+            <p>
+                Подписан на Вас.
+            </p>
         }
         else
         {
-            <button type="button" class="btn btn-link"><span class="flaticon-alarm-1"></span>Подписаться</button>
+            <p>
+                Не подписан на Вас.
+            </p>
         }
-    </p>
+        <p>
+            @if (Model.IsSubscription)
+            {
+                <button type="button" class="btn btn-link"><span class="flaticon-alarm"></span>Отписаться</button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-link"><span class="flaticon-alarm-1"></span>Подписаться</button>
+            }
+        </p>
+    }
 }

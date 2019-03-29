@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using TL.Account.Data.Abstractions.Security;
 using TL.Account.Data.Entities.Security;
 using TL.Account.Data.Managers;

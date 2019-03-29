@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TL.Extensions\Account\TL.Account\TL.Account.csproj" />
     <ProjectReference Include="..\TL.Extensions\Api\TL.Api\TL.Api.csproj" />
+    <ProjectReference Include="..\TL.Extensions\Blog\TL.Blog\TL.Blog.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Data.Abstractions\TL.Engine.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Data.Entities\TL.Engine.Data.Entities.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Data.EntityFramework\TL.Engine.Data.EntityFramework.csproj" />

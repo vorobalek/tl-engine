@@ -21,16 +21,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\**;Styles\**;Scripts\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Scripts\jquery.maskedinput.js" />
-    <None Remove="Views\Shared\Components\UserNavbar\Default.cshtml" />
-    <None Remove="Views\Shared\Components\Navbar\Default.cshtml" />
-    <None Remove="Views\Shared\_UserNavbar.cshtml" />
-    <None Remove="Views\Shared\_UserNavbarItem.cshtml" />
-    <None Remove="Views\Modules\Index.cshtml" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\TL.Engine.Data\TL.Engine.Data.csproj" />
   </ItemGroup>

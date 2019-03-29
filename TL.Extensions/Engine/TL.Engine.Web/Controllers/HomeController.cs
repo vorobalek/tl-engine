@@ -1,13 +1,10 @@
 ﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using TL.Engine.SDK.Controllers;
-using TL.Engine.Web.ViewModels.Home;
 
 namespace TL.Engine.Web.Controllers
 {
-    [Authorize]
     public class HomeController : BaseController
     {
         public HomeController(IStorage storage) : base(storage)
@@ -16,7 +13,31 @@ namespace TL.Engine.Web.Controllers
 
         public IActionResult Index()
         {
-            return View(new IndexViewModelFactory().Create());
+            string path = "/welcome";
+            if (Request.Cookies["DefaultPage"] != null)
+            {
+                path = Request.Cookies["DefaultPage"];
+            }
+            else
+            {
+                Response.Cookies.Append("DefaultPage", path);
+            }
+            return Redirect(path);
+        }
+
+        [HttpPost]
+        public IActionResult ChangePath(string path)
+        {
+            if (Request.Cookies["DefaultPage"] != null)
+            {
+                Response.Cookies.Delete("DefaultPage");
+                Response.Cookies.Append("DefaultPage", path);
+            }
+            else
+            {
+                Response.Cookies.Append("DefaultPage", path);
+            }
+            return Redirect(path);
         }
 
         public IActionResult Exception()

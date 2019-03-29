@@ -27,6 +27,7 @@ namespace TL.Account.Data.EntityFramework.Security.UsersRoles
 
             builder
                 .HasData(UserRole.Sa
+                .Concat(UserRole.DefaultUser)
                 .Concat(UserRole.System));
         }
     }

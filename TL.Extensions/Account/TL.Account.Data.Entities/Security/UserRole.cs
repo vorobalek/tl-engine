@@ -18,13 +18,13 @@ namespace TL.Account.Data.Entities.Security
             new UserRole()
             {
                 UserId = User.Sa.Id,
-                RoleId = Role.User.Id,
+                RoleId = Role.Sa.Id,
             },
 
             new UserRole()
             {
                 UserId = User.Sa.Id,
-                RoleId = Role.Sa.Id,
+                RoleId = Role.DefaultUser.Id,
             },
 
             new UserRole()
@@ -32,6 +32,15 @@ namespace TL.Account.Data.Entities.Security
                 UserId = User.Sa.Id,
                 RoleId = Role.System.Id,
             },
+        };
+
+        public static UserRole[] DefaultUser => new[]
+        {
+            new UserRole()
+            {
+                UserId = User.DefaultUser.Id,
+                RoleId = Role.DefaultUser.Id,
+            }
         };
 
         public static UserRole[] System => new[]

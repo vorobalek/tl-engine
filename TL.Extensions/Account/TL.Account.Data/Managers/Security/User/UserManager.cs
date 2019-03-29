@@ -46,7 +46,28 @@ namespace TL.Account.Data.Managers
                         new UserRole()
                         {
                             UserId = user_id,
-                            RoleId = Role.User.Id
+                            RoleId = Role.DefaultUser.Id
+                        }
+                    }),
+                    UserGroups = new HashSet<UserGroup>(new[]
+                    {
+                        new UserGroup()
+                        {
+                            UserId = user_id,
+                            GroupId = Group.All.Id,
+                        },
+                        new UserGroup()
+                        {
+                            UserId = user_id,
+                            GroupId = Group.DefaultUser.Id,
+                        },
+                        new UserGroup()
+                        {
+                            UserId = user_id,
+                            GroupId = Storage.GetRepository<IGroupRepository>().Add(new Group()
+                            {
+                                Name = user_id.ToString()
+                            }).Id,
                         }
                     }),
                     Subscriptions = new HashSet<Subscription>(new[]

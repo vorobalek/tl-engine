@@ -21,6 +21,11 @@ namespace TL.Account.Data.EntityFramework.Security.Users
                 .HasForeignKey(e => e.UserId);
 
             builder
+                .HasMany(e => e.UserGroups)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId);
+
+            builder
                 .HasMany(e => e.Subscriptions)
                 .WithOne(e => e.From)
                 .HasForeignKey(e => e.FromId);
@@ -32,6 +37,7 @@ namespace TL.Account.Data.EntityFramework.Security.Users
                 .HasData(new[]
                 {
                     User.Sa,
+                    User.DefaultUser,
                     User.System
                 });
         }

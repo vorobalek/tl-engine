@@ -27,6 +27,13 @@
                         @linePageGenerationTime
                         <strong>@((Finish - (Start ?? DateTime.MinValue)).TotalMilliseconds)</strong> @lineMs
                     </p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form asp-action="changepath" asp-controller="home" asp-area="" method="post">
+                            <input name="path" value="@Context.Request.Path" hidden />
+                            <button type="submit" class="btn-sm btn-outline-secondary">Сделать эту страницу главной</button>
+                        </form>
+                    }
                 </div>
             }
         </div>
