@@ -37,6 +37,7 @@ namespace TL.Engine.SDK.Managers
                 TEntity createdEntity = null;
                 try
                 {
+                    //Pre Create Entity
                     bool preCreate = true;
                     var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
                     foreach (var action in preCreateActions)
@@ -46,17 +47,51 @@ namespace TL.Engine.SDK.Managers
                     if (preCreate)
                     {
                         createdEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
-                    }
+                        
+                        //Post Create Entity
+                        bool postCreate = true;
+                        var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
+                        foreach (var action in postCreateActions)
+                        {
+                            postCreate = postCreate && action.Invoke(entity, ServiceProvider);
+                        }
+                        if (postCreate)
+                        {
+                            //Can Save Entity
+                            bool canSave = true;
+                            var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
+                            foreach (var action in canSaveActions)
+                            {
+                                canSave = canSave && action.Invoke(entity, ServiceProvider);
+                            }
+                            if (canSave)
+                            {
+                                //Pre Save Entity
+                                bool preSave = true;
+                                var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
+                                foreach (var action in preSaveActions)
+                                {
+                                    preSave = preSave && action.Invoke(entity, ServiceProvider);
+                                }
+                                if (preSave)
+                                {
+                                    //Save Entity
+                                    Storage.Save();
 
-                    bool postCreate = true;
-                    var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
-                    foreach (var action in postCreateActions)
-                    {
-                        postCreate = postCreate && action.Invoke(entity, ServiceProvider);
-                    }
-                    if (postCreate)
-                    {
-                        Storage.Save();
+                                    //Post Save Entity
+                                    bool postSave = true;
+                                    var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
+                                    foreach (var action in postSaveActions)
+                                    {
+                                        postSave = postSave && action.Invoke(entity, ServiceProvider);
+                                    }
+                                    if (postSave)
+                                    {
+                                        ;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -72,8 +107,19 @@ namespace TL.Engine.SDK.Managers
             TEntity createdEntity = null;
             try
             {
-                TEntity entity = ActivatorUtilities.CreateInstance(ServiceProvider, typeof(TEntity)) as TEntity;
-                return Create(entity);
+                var entity = ActivatorUtilities.CreateInstance(ServiceProvider, typeof(TEntity)) as TEntity;
+                
+                //Can Create Entity
+                bool canCreate = true;
+                var canCreateActions = ExtensionManager.GetInstances<IEntityActionCanCreate<TEntity>>();
+                foreach (var action in canCreateActions)
+                {
+                    canCreate = canCreate && action.Invoke(entity, ServiceProvider);
+                }
+                if (canCreate)
+                {
+                    return Create(entity);
+                }
             }
             catch (Exception ex)
             {
@@ -163,9 +209,74 @@ namespace TL.Engine.SDK.Managers
         {
             try
             {
-                TEntity updatedEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Update(entity);
-                Storage.Save();
-                return updatedEntity;
+                //Can Update Entity
+                bool canUpdate = true;
+                var canUpdateActions = ExtensionManager.GetInstances<IEntityActionCanUpdate<TEntity>>();
+                foreach (var action in canUpdateActions)
+                {
+                    canUpdate = canUpdate && action.Invoke(entity, ServiceProvider);
+                }
+                if (canUpdate)
+                {
+                    //Pre Update Entity
+                    bool preUpdate = true;
+                    var preUpdateActions = ExtensionManager.GetInstances<IEntityActionPreUpdate<TEntity>>();
+                    foreach (var action in preUpdateActions)
+                    {
+                        preUpdate = preUpdate && action.Invoke(entity, ServiceProvider);
+                    }
+                    if (preUpdate)
+                    {
+                        TEntity updatedEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Update(entity);
+                        
+                        //Post Update Entity
+                        bool postUpdate = true;
+                        var postUpdateActions = ExtensionManager.GetInstances<IEntityActionPostUpdate<TEntity>>();
+                        foreach (var action in postUpdateActions)
+                        {
+                            postUpdate = postUpdate && action.Invoke(entity, ServiceProvider);
+                        }
+                        if (postUpdate)
+                        {
+                            //Can Save Entity
+                            bool canSave = true;
+                            var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
+                            foreach (var action in canSaveActions)
+                            {
+                                canSave = canSave && action.Invoke(entity, ServiceProvider);
+                            }
+                            if (canSave)
+                            {
+                                //Pre Save Entity
+                                bool preSave = true;
+                                var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
+                                foreach (var action in preSaveActions)
+                                {
+                                    preSave = preSave && action.Invoke(entity, ServiceProvider);
+                                }
+                                if (preSave)
+                                {
+                                    //Save Entity
+                                    Storage.Save();
+
+                                    //Post Save Entity
+                                    bool postSave = true;
+                                    var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
+                                    foreach (var action in postSaveActions)
+                                    {
+                                        postSave = postSave && action.Invoke(entity, ServiceProvider);
+                                    }
+                                    if (postSave)
+                                    {
+                                        ;
+                                    }
+
+                                    return updatedEntity;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

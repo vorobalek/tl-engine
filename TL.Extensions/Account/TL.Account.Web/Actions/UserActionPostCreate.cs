@@ -23,7 +23,6 @@ namespace TL.Account.Web.Actions
                     From = entity,
                     ToId = User.System.Id,
                 });
-                storage.Save();
             }
 
             return true;

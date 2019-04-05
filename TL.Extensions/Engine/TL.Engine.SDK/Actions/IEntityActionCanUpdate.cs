@@ -2,7 +2,7 @@
 
 namespace TL.Engine.SDK.Actions
 {
-    public interface IEntityActionCheckUpdate<TEntity> : IEntityAction<TEntity>
+    public interface IEntityActionCanUpdate<TEntity> : IEntityAction<TEntity>
         where TEntity : class, IEntity
     {
     }
