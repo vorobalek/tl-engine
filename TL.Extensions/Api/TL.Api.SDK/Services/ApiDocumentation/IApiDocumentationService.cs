@@ -6,7 +6,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
 {
     public interface IApiDocumentationService
     {
-        DateTime UAD();
+        ApiDocumentationModel Update();
 
         ApiDocumentationModel GetDocumentation();
 

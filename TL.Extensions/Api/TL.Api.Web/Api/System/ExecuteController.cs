@@ -5,26 +5,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using TL.Api.Data.Entities.Security;
 using TL.Api.Data.Managers;
 using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Extensions;
+using TL.Engine.Data.Managers;
 using TL.Engine.SDK.Attributes.Api.Executable;
+
+using TlUser = TL.Engine.Data.Entities.Security.User;
 
 namespace TL.Api.Web.Api.System
 {
     public class ExecuteController : _SystemApiController
     {
-        public IServiceProvider ServiceProvider { get; set; }
+        IServiceProvider ServiceProvider { get; set; }
 
-        public ITokenManager TokenManager { get; set; }
+        ITokenManager TokenManager { get; set; }
 
-        public ExecuteController(IServiceProvider serviceProvider, ITokenManager tokenManager, IStorage storage) : base(storage)
+        ITokenLogManager TokenLogManager { get; set; }
+
+        IUserManager UserManager { get; set; }
+
+        public ExecuteController(IServiceProvider serviceProvider, ITokenManager tokenManager, ITokenLogManager tokenLogManager, IUserManager userManager, IStorage storage) : base(storage)
         {
             ServiceProvider = serviceProvider;
             TokenManager = tokenManager;
+            TokenLogManager = tokenLogManager;
+            UserManager = userManager;
         }
 
         public override string Command => "system.Execute";
@@ -82,25 +93,44 @@ namespace TL.Api.Web.Api.System
         [ApiHttpGet("{token}/{method}", UsageDescription = "Этот метод требует указать токен для выполнения защищенного метогда и имя защищенного метода как часть запроса", UsageSample = "/<TOKEN>/TL.Account.Data.Managers.UserManager:Create?username=tl-engine_user&password=test&description=Проверка работоспособности API", ReturnableType = typeof(object))]
         public IActionResult Get(string token, string method)
         {
-            bool f = Guid.TryParse(token, out Guid guidToken);
+            Token existToken = null;
+            TlUser existUser = null;
 
-            if (!f)
+            if (!Guid.TryParse(token, out Guid guidToken))
             {
                 return this.JsonResponse(false, error_code: StatusCodes.Status403Forbidden);
             }
             else
             {
-                var existToken = TokenManager.Get(guidToken);
+                existToken = TokenManager.Get(guidToken);
                 if (existToken == null)
                 {
                     return this.JsonResponse(false, error_code: StatusCodes.Status403Forbidden);
                 }
             }
 
+            if (!Guid.TryParse(User.Claims.FirstOrDefault(e => e.Type == nameof(TlUser.Id))?.Value ?? "", out Guid userId))
+            {
+                existUser = UserManager.Get(userId);
+            }
+
+            var tokenLog = new TokenLog()
+            {
+                Id = Guid.NewGuid(),
+                Token = existToken,
+                TokenId = existToken.Id,
+                User = existUser,
+                UserId = existUser?.Id,
+                Method = method,
+                Parameters = HttpContext.Request.QueryString.Value
+            };
+
             var m = method.Split(":");
 
             if (m.Length != 2)
             {
+                tokenLog.StatusCode = StatusCodes.Status400BadRequest;
+                TokenLogManager.Create(tokenLog);
                 return this.JsonResponse(false, error_code: StatusCodes.Status400BadRequest);
             }
 
@@ -111,6 +141,8 @@ namespace TL.Api.Web.Api.System
 
             if (existType == null)
             {
+                tokenLog.StatusCode = StatusCodes.Status404NotFound;
+                TokenLogManager.Create(tokenLog);
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
@@ -120,25 +152,41 @@ namespace TL.Api.Web.Api.System
 
             if (existMethod == null)
             {
+                tokenLog.StatusCode = StatusCodes.Status404NotFound;
+                TokenLogManager.Create(tokenLog);
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
-            var listArgs = new List<object>();
-            foreach (var parameter in existMethod.GetParameters())
+            try
             {
-                var stringValue = HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value).Get(parameter.Name);
-                if (!string.IsNullOrWhiteSpace(stringValue))
+                var listArgs = new List<object>();
+                foreach (var parameter in existMethod.GetParameters())
                 {
-                    listArgs.Add(Convert.ChangeType(stringValue, parameter.ParameterType));
+                    var stringValue = HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value).Get(parameter.Name);
+                    if (!string.IsNullOrWhiteSpace(stringValue))
+                    {
+                        listArgs.Add(TypeDescriptor.GetConverter(parameter.ParameterType).ConvertFromInvariantString(stringValue));
+                    }
+                    else
+                    {
+                        listArgs.Add(null);
+                    }
                 }
-                else
-                {
-                    listArgs.Add(null);
-                }
-            }
-            var args = listArgs.ToArray();
+                var args = listArgs.ToArray();
+                var result = existMethod.Invoke(instance, args);
 
-            return this.JsonResponse(true, result: existMethod.Invoke(instance, args));
+                tokenLog.StatusCode = StatusCodes.Status200OK;
+                TokenLogManager.Create(tokenLog);
+
+                return this.JsonResponse(true, result: result);
+            }
+            catch
+            {
+                tokenLog.StatusCode = StatusCodes.Status500InternalServerError;
+                TokenLogManager.Create(tokenLog);
+
+                return this.JsonResponse(false, error_code: StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

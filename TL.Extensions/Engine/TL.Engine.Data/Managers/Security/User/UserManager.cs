@@ -101,7 +101,7 @@ namespace TL.Engine.Data.Managers
             user.Authenticate(Storage, httpContext);
         }
 
-        [PublicApi(Description = "Получить всех пользователей")]
+        [PrivateApi(Description = "Получить всех пользователей")]
         public override IEnumerable<User> GetAll(bool loadDeleted = false)
         {
             return base.GetAll(loadDeleted);

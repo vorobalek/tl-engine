@@ -2,6 +2,6 @@
 {
     public static class EF_REGISTRATIONS
     {
-        public const string PREFIX = "";
+        public const string PREFIX = "_";
     }
 }

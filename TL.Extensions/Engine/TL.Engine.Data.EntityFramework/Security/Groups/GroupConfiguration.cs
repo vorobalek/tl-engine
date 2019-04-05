@@ -21,7 +21,7 @@ namespace TL.Engine.Data.EntityFramework.Security.Groups
                 .HasForeignKey(e => e.GroupId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}_Groups");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}Groups");
 
             builder
                 .HasData(new[]

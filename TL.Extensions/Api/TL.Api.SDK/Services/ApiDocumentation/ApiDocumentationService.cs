@@ -157,7 +157,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                 {
                     return new ApiFunctionModel()
                     {
-                        Namespace = m.DeclaringType.GetFullName(),
+                        Namespace = m.ReflectedType.GetFullName(),
                         Name = m.Name,
                         Description = (m.GetCustomAttributes(typePrivateApiAttribute, true).FirstOrDefault() as PrivateApiAttribute).Description,
                         ReturnableType = m.ReturnType.GetName(),
@@ -175,11 +175,11 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                 .ToList();
         }
 
-        [PublicApi(Description = "UAD - Update API Documentation - обновить автоматическую API-документацию. Возвращает дату последнего обновления.")]
-        public DateTime UAD()
+        [PublicApi(Description = "Обновить автоматическую API-документацию. Возвращает актуальную документацию.")]
+        public ApiDocumentationModel Update()
         {
             InitializeDocumentation();
-            return LastUpdate;
+            return GetDocumentation();
         }
     }
 }

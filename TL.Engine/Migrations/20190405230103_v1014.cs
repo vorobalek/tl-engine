@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TL.Engine.Migrations
 {
-    public partial class v1010 : Migration
+    public partial class v1014 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +56,7 @@ namespace TL.Engine.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Integrations_TgBots",
+                name: "IntegrationsTgBots",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -75,11 +75,11 @@ namespace TL.Engine.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Integrations_TgBots", x => x.Id);
+                    table.PrimaryKey("PK_IntegrationsTgBots", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Integrations_TgRoles",
+                name: "IntegrationsTgRoles",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -90,7 +90,7 @@ namespace TL.Engine.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Integrations_TgRoles", x => x.Id);
+                    table.PrimaryKey("PK_IntegrationsTgRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,6 +117,40 @@ namespace TL.Engine.Migrations
                         principalTable: "_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "_StaticFiles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    OriginalId = table.Column<Guid>(nullable: true),
+                    FileName = table.Column<string>(nullable: true),
+                    Extension = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true),
+                    DisplayName = table.Column<string>(nullable: true),
+                    LocalPath = table.Column<string>(nullable: true),
+                    AuthorId = table.Column<Guid>(nullable: true),
+                    Data = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__StaticFiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK__StaticFiles__Users_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "_Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK__StaticFiles__StaticFiles_OriginalId",
+                        column: x => x.OriginalId,
+                        principalTable: "_StaticFiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,7 +231,7 @@ namespace TL.Engine.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Account_Subscriptions",
+                name: "AccountSubscriptions",
                 columns: table => new
                 {
                     FromId = table.Column<Guid>(nullable: false),
@@ -209,9 +243,9 @@ namespace TL.Engine.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Account_Subscriptions", x => new { x.FromId, x.ToId });
+                    table.PrimaryKey("PK_AccountSubscriptions", x => new { x.FromId, x.ToId });
                     table.ForeignKey(
-                        name: "FK_Account_Subscriptions__Users_FromId",
+                        name: "FK_AccountSubscriptions__Users_FromId",
                         column: x => x.FromId,
                         principalTable: "_Users",
                         principalColumn: "Id",
@@ -219,7 +253,7 @@ namespace TL.Engine.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Api_Tokens",
+                name: "ApiTokens",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -230,9 +264,9 @@ namespace TL.Engine.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Api_Tokens", x => x.Id);
+                    table.PrimaryKey("PK_ApiTokens", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Api_Tokens__Users_OwnerId",
+                        name: "FK_ApiTokens__Users_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "_Users",
                         principalColumn: "Id",
@@ -240,7 +274,7 @@ namespace TL.Engine.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Integrations_TgUsers",
+                name: "IntegrationsTgUsers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -255,9 +289,9 @@ namespace TL.Engine.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Integrations_TgUsers", x => x.Id);
+                    table.PrimaryKey("PK_IntegrationsTgUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Integrations_TgUsers__Users_UserId",
+                        name: "FK_IntegrationsTgUsers__Users_UserId",
                         column: x => x.UserId,
                         principalTable: "_Users",
                         principalColumn: "Id",
@@ -265,7 +299,38 @@ namespace TL.Engine.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Integrations_TgConnections",
+                name: "ApiTokensLogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: true),
+                    TokenId = table.Column<Guid>(nullable: false),
+                    Method = table.Column<string>(nullable: true),
+                    Parameters = table.Column<string>(nullable: true),
+                    StatusCode = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiTokensLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApiTokensLogs_ApiTokens_TokenId",
+                        column: x => x.TokenId,
+                        principalTable: "ApiTokens",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ApiTokensLogs__Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "_Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IntegrationsTgConnections",
                 columns: table => new
                 {
                     BotId = table.Column<Guid>(nullable: false),
@@ -276,23 +341,23 @@ namespace TL.Engine.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Integrations_TgConnections", x => new { x.BotId, x.UserId });
+                    table.PrimaryKey("PK_IntegrationsTgConnections", x => new { x.BotId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_Integrations_TgConnections_Integrations_TgBots_BotId",
+                        name: "FK_IntegrationsTgConnections_IntegrationsTgBots_BotId",
                         column: x => x.BotId,
-                        principalTable: "Integrations_TgBots",
+                        principalTable: "IntegrationsTgBots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Integrations_TgConnections_Integrations_TgUsers_UserId",
+                        name: "FK_IntegrationsTgConnections_IntegrationsTgUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "Integrations_TgUsers",
+                        principalTable: "IntegrationsTgUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Integrations_TgUsersRoles",
+                name: "IntegrationsTgUsersRoles",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
@@ -303,30 +368,30 @@ namespace TL.Engine.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Integrations_TgUsersRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_IntegrationsTgUsersRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_Integrations_TgUsersRoles_Integrations_TgRoles_RoleId",
+                        name: "FK_IntegrationsTgUsersRoles_IntegrationsTgRoles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Integrations_TgRoles",
+                        principalTable: "IntegrationsTgRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Integrations_TgUsersRoles_Integrations_TgUsers_UserId",
+                        name: "FK_IntegrationsTgUsersRoles_IntegrationsTgUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "Integrations_TgUsers",
+                        principalTable: "IntegrationsTgUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "Integrations_TgRoles",
+                table: "IntegrationsTgRoles",
                 columns: new[] { "Id", "CreationDate", "IsDeleted", "ModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(4781), false, new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(4805), "sa" },
-                    { new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"), new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(7298), false, new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(7307), "admin" },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(8283), false, new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(8290), "user" },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(9120), false, new DateTime(2019, 4, 5, 15, 24, 24, 885, DateTimeKind.Utc).AddTicks(9127), "system" }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 23, 1, 2, 926, DateTimeKind.Utc).AddTicks(6061), false, new DateTime(2019, 4, 5, 23, 1, 2, 926, DateTimeKind.Utc).AddTicks(6080), "sa" },
+                    { new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"), new DateTime(2019, 4, 5, 23, 1, 2, 926, DateTimeKind.Utc).AddTicks(8570), false, new DateTime(2019, 4, 5, 23, 1, 2, 926, DateTimeKind.Utc).AddTicks(8579), "admin" },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 926, DateTimeKind.Utc).AddTicks(9450), false, new DateTime(2019, 4, 5, 23, 1, 2, 926, DateTimeKind.Utc).AddTicks(9458), "user" },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 927, DateTimeKind.Utc).AddTicks(272), false, new DateTime(2019, 4, 5, 23, 1, 2, 927, DateTimeKind.Utc).AddTicks(279), "system" }
                 });
 
             migrationBuilder.InsertData(
@@ -334,10 +399,10 @@ namespace TL.Engine.Migrations
                 columns: new[] { "Id", "CreationDate", "IsDeleted", "ModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7585), false, new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7601), "sa" },
-                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7627), false, new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7628), "all" },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7636), false, new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7638), "user" },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7644), false, new DateTime(2019, 4, 5, 15, 24, 24, 846, DateTimeKind.Utc).AddTicks(7645), "system" }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9609), false, new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9617), "sa" },
+                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9636), false, new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9637), "all" },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9645), false, new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9646), "user" },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9653), false, new DateTime(2019, 4, 5, 23, 1, 2, 890, DateTimeKind.Utc).AddTicks(9655), "system" }
                 });
 
             migrationBuilder.InsertData(
@@ -345,9 +410,9 @@ namespace TL.Engine.Migrations
                 columns: new[] { "Id", "CreationDate", "IsDeleted", "ModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 15, 24, 24, 844, DateTimeKind.Utc).AddTicks(9505), false, new DateTime(2019, 4, 5, 15, 24, 24, 844, DateTimeKind.Utc).AddTicks(9527), "sa" },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 844, DateTimeKind.Utc).AddTicks(9573), false, new DateTime(2019, 4, 5, 15, 24, 24, 844, DateTimeKind.Utc).AddTicks(9576), "user" },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 844, DateTimeKind.Utc).AddTicks(9590), false, new DateTime(2019, 4, 5, 15, 24, 24, 844, DateTimeKind.Utc).AddTicks(9593), "system" }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 23, 1, 2, 889, DateTimeKind.Utc).AddTicks(4313), false, new DateTime(2019, 4, 5, 23, 1, 2, 889, DateTimeKind.Utc).AddTicks(4321), "sa" },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 889, DateTimeKind.Utc).AddTicks(4342), false, new DateTime(2019, 4, 5, 23, 1, 2, 889, DateTimeKind.Utc).AddTicks(4344), "user" },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 889, DateTimeKind.Utc).AddTicks(4352), false, new DateTime(2019, 4, 5, 23, 1, 2, 889, DateTimeKind.Utc).AddTicks(4353), "system" }
                 });
 
             migrationBuilder.InsertData(
@@ -355,29 +420,33 @@ namespace TL.Engine.Migrations
                 columns: new[] { "Id", "CreationDate", "Description", "IsClosed", "IsDeleted", "ModifiedDate", "PasswordHash", "Username" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 15, 24, 24, 833, DateTimeKind.Utc).AddTicks(5619), "Супер-пользователь системы TL Engine", false, false, new DateTime(2019, 4, 5, 15, 24, 24, 833, DateTimeKind.Utc).AddTicks(5642), null, "sa" },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 833, DateTimeKind.Utc).AddTicks(8234), "Шаблонный пользователь системы TL Engine", true, false, new DateTime(2019, 4, 5, 15, 24, 24, 833, DateTimeKind.Utc).AddTicks(8252), null, "user" },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 833, DateTimeKind.Utc).AddTicks(8291), "Автоматика системы TL Engine", true, false, new DateTime(2019, 4, 5, 15, 24, 24, 833, DateTimeKind.Utc).AddTicks(8294), null, "system" }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 23, 1, 2, 880, DateTimeKind.Utc).AddTicks(2268), "Супер-пользователь системы TL Engine", false, false, new DateTime(2019, 4, 5, 23, 1, 2, 880, DateTimeKind.Utc).AddTicks(2292), null, "sa" },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 880, DateTimeKind.Utc).AddTicks(2330), "Шаблонный пользователь системы TL Engine", true, false, new DateTime(2019, 4, 5, 23, 1, 2, 880, DateTimeKind.Utc).AddTicks(2331), null, "user" },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 880, DateTimeKind.Utc).AddTicks(2340), "Автоматика системы TL Engine", true, false, new DateTime(2019, 4, 5, 23, 1, 2, 880, DateTimeKind.Utc).AddTicks(2342), null, "system" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Account_Subscriptions",
+                table: "AccountSubscriptions",
                 columns: new[] { "FromId", "ToId", "CreationDate", "IsDeleted", "ModifiedDate", "Quiet" },
-                values: new object[] { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 813, DateTimeKind.Utc).AddTicks(6993), false, new DateTime(2019, 4, 5, 15, 24, 24, 814, DateTimeKind.Utc).AddTicks(8108), false });
+                values: new object[,]
+                {
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 849, DateTimeKind.Utc).AddTicks(3180), false, new DateTime(2019, 4, 5, 23, 1, 2, 850, DateTimeKind.Utc).AddTicks(3770), false },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 851, DateTimeKind.Utc).AddTicks(6032), false, new DateTime(2019, 4, 5, 23, 1, 2, 851, DateTimeKind.Utc).AddTicks(6040), false }
+                });
 
             migrationBuilder.InsertData(
                 table: "_UsersGroups",
                 columns: new[] { "UserId", "GroupId", "CreationDate", "IsDeleted", "ModifiedDate" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(966), false, new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(982) },
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(4771), false, new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(4778) },
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(5706), false, new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(5708) },
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(6560), false, new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(6562) },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(9222), false, new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(9229) },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(9278), false, new DateTime(2019, 4, 5, 15, 24, 24, 842, DateTimeKind.Utc).AddTicks(9280) },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 15, 24, 24, 843, DateTimeKind.Utc).AddTicks(1442), false, new DateTime(2019, 4, 5, 15, 24, 24, 843, DateTimeKind.Utc).AddTicks(1449) },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 843, DateTimeKind.Utc).AddTicks(1479), false, new DateTime(2019, 4, 5, 15, 24, 24, 843, DateTimeKind.Utc).AddTicks(1481) }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 23, 1, 2, 886, DateTimeKind.Utc).AddTicks(6674), false, new DateTime(2019, 4, 5, 23, 1, 2, 886, DateTimeKind.Utc).AddTicks(6686) },
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(590), false, new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(597) },
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(1587), false, new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(1589) },
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(2442), false, new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(2443) },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(5086), false, new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(5095) },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(5184), false, new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(5185) },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(7392), false, new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(7399) },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(7432), false, new DateTime(2019, 4, 5, 23, 1, 2, 887, DateTimeKind.Utc).AddTicks(7433) }
                 });
 
             migrationBuilder.InsertData(
@@ -385,11 +454,11 @@ namespace TL.Engine.Migrations
                 columns: new[] { "UserId", "RoleId", "CreationDate", "IsDeleted", "ModifiedDate" },
                 values: new object[,]
                 {
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 15, 24, 24, 838, DateTimeKind.Utc).AddTicks(5147), false, new DateTime(2019, 4, 5, 15, 24, 24, 838, DateTimeKind.Utc).AddTicks(5173) },
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 838, DateTimeKind.Utc).AddTicks(9272), false, new DateTime(2019, 4, 5, 15, 24, 24, 838, DateTimeKind.Utc).AddTicks(9279) },
-                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 839, DateTimeKind.Utc).AddTicks(303), false, new DateTime(2019, 4, 5, 15, 24, 24, 839, DateTimeKind.Utc).AddTicks(305) },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 15, 24, 24, 839, DateTimeKind.Utc).AddTicks(2293), false, new DateTime(2019, 4, 5, 15, 24, 24, 839, DateTimeKind.Utc).AddTicks(2301) },
-                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 15, 24, 24, 839, DateTimeKind.Utc).AddTicks(3915), false, new DateTime(2019, 4, 5, 15, 24, 24, 839, DateTimeKind.Utc).AddTicks(3923) }
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new DateTime(2019, 4, 5, 23, 1, 2, 882, DateTimeKind.Utc).AddTicks(7765), false, new DateTime(2019, 4, 5, 23, 1, 2, 882, DateTimeKind.Utc).AddTicks(7785) },
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(3914), false, new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(3923) },
+                    { new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(5030), false, new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(5032) },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(7350), false, new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(7357) },
+                    { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(9000), false, new DateTime(2019, 4, 5, 23, 1, 2, 883, DateTimeKind.Utc).AddTicks(9008) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -427,6 +496,16 @@ namespace TL.Engine.Migrations
                 filter: "[Name] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX__StaticFiles_AuthorId",
+                table: "_StaticFiles",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX__StaticFiles_OriginalId",
+                table: "_StaticFiles",
+                column: "OriginalId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX__StringVariables_AuthorId",
                 table: "_StringVariables",
                 column: "AuthorId");
@@ -454,37 +533,47 @@ namespace TL.Engine.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Api_Tokens_OwnerId",
-                table: "Api_Tokens",
+                name: "IX_ApiTokens_OwnerId",
+                table: "ApiTokens",
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Integrations_TgBots_Token_TypeName",
-                table: "Integrations_TgBots",
+                name: "IX_ApiTokensLogs_TokenId",
+                table: "ApiTokensLogs",
+                column: "TokenId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApiTokensLogs_UserId",
+                table: "ApiTokensLogs",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IntegrationsTgBots_Token_TypeName",
+                table: "IntegrationsTgBots",
                 columns: new[] { "Token", "TypeName" },
                 unique: true,
                 filter: "[Token] IS NOT NULL AND [TypeName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Integrations_TgConnections_UserId",
-                table: "Integrations_TgConnections",
+                name: "IX_IntegrationsTgConnections_UserId",
+                table: "IntegrationsTgConnections",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Integrations_TgRoles_Name",
-                table: "Integrations_TgRoles",
+                name: "IX_IntegrationsTgRoles_Name",
+                table: "IntegrationsTgRoles",
                 column: "Name",
                 unique: true,
                 filter: "[Name] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Integrations_TgUsers_UserId",
-                table: "Integrations_TgUsers",
+                name: "IX_IntegrationsTgUsers_UserId",
+                table: "IntegrationsTgUsers",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Integrations_TgUsersRoles_RoleId",
-                table: "Integrations_TgUsersRoles",
+                name: "IX_IntegrationsTgUsersRoles_RoleId",
+                table: "IntegrationsTgUsersRoles",
                 column: "RoleId");
         }
 
@@ -492,6 +581,9 @@ namespace TL.Engine.Migrations
         {
             migrationBuilder.DropTable(
                 name: "_Reports");
+
+            migrationBuilder.DropTable(
+                name: "_StaticFiles");
 
             migrationBuilder.DropTable(
                 name: "_StringVariables");
@@ -503,16 +595,16 @@ namespace TL.Engine.Migrations
                 name: "_UsersRoles");
 
             migrationBuilder.DropTable(
-                name: "Account_Subscriptions");
+                name: "AccountSubscriptions");
 
             migrationBuilder.DropTable(
-                name: "Api_Tokens");
+                name: "ApiTokensLogs");
 
             migrationBuilder.DropTable(
-                name: "Integrations_TgConnections");
+                name: "IntegrationsTgConnections");
 
             migrationBuilder.DropTable(
-                name: "Integrations_TgUsersRoles");
+                name: "IntegrationsTgUsersRoles");
 
             migrationBuilder.DropTable(
                 name: "_Groups");
@@ -521,13 +613,16 @@ namespace TL.Engine.Migrations
                 name: "_Roles");
 
             migrationBuilder.DropTable(
-                name: "Integrations_TgBots");
+                name: "ApiTokens");
 
             migrationBuilder.DropTable(
-                name: "Integrations_TgRoles");
+                name: "IntegrationsTgBots");
 
             migrationBuilder.DropTable(
-                name: "Integrations_TgUsers");
+                name: "IntegrationsTgRoles");
+
+            migrationBuilder.DropTable(
+                name: "IntegrationsTgUsers");
 
             migrationBuilder.DropTable(
                 name: "_Users");

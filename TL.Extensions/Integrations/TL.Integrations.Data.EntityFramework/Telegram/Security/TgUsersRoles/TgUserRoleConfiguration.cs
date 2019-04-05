@@ -22,7 +22,7 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsersRoles
                 .HasForeignKey(e => e.UserId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}_TgUsersRoles");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}TgUsersRoles");
         }
     }
 }

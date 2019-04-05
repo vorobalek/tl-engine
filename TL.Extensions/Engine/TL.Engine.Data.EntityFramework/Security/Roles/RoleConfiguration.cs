@@ -21,7 +21,7 @@ namespace TL.Engine.Data.EntityFramework.Security.Roles
                 .HasForeignKey(e => e.RoleId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}_Roles");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}Roles");
 
             builder
                 .HasData(new[]

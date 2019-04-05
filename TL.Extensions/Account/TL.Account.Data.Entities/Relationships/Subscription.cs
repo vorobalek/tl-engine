@@ -20,5 +20,12 @@ namespace TL.Account.Data.Entities.Relationships
                 FromId  = User.Sa.Id,
                 ToId = User.System.Id
             };
+
+        public static Subscription DefaultUserToSystem =>
+            new Subscription()
+            {
+                FromId = User.DefaultUser.Id,
+                ToId = User.System.Id
+            };
     }
 }

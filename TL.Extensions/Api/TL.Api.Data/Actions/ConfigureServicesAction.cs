@@ -12,6 +12,7 @@ namespace TL.Api.Data.Actions
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
             serviceCollection.AddScoped<ITokenManager, TokenManager>();
+            serviceCollection.AddScoped<ITokenLogManager, TokenLogManager>();
         }
     }
 }
