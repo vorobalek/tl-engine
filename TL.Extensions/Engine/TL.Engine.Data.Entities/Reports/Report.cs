@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using TL.Account.Data.Entities.Security;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.Reports

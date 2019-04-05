@@ -14,8 +14,6 @@
 
   <ItemGroup>
     <PackageReference Include="ExtCore.Data" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TL.Account.Data.Entities.Security;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.Data.Entities.System;
 
 namespace TL.Engine.Data.EntityFramework.System.StringVariables
@@ -25,7 +25,7 @@ namespace TL.Engine.Data.EntityFramework.System.StringVariables
                 .HasForeignKey(e => e.AuthorId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}StringVariables");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}_StringVariables");
         }
     }
 }

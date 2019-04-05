@@ -1,0 +1,29 @@
+﻿using ExtCore.Data.Abstractions;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using TL.Engine.Data.Managers;
+
+namespace TL.Engine.Web.Areas.Account.Controllers
+{
+    public class LogoutController : __AccountController__
+    {
+        public LogoutController(IStorage storage, IUserManager userManager) : base(storage, userManager)
+        {
+        }
+
+        public async Task<IActionResult> Index(string returnUrl = null)
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            if (Request.Cookies["DefaultPage"] != null)
+            {
+                Response.Cookies.Delete("DefaultPage");
+            }
+
+            var ReturnUrl = returnUrl ?? Request.Headers["Referer"].ToString();
+            return Redirect(Url.IsLocalUrl(ReturnUrl) ? ReturnUrl : Url.Content("~/"));
+        }
+    }
+}

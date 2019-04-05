@@ -25,7 +25,7 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
                 .HasForeignKey(e => e.BotId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}TgBots");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}_TgBots");
         }
     }
 }

@@ -4,14 +4,14 @@ using System;
 using System.Linq;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using TL.Account.Data.Managers;
+using TL.Engine.Data.Managers;
 using TL.Integrations.Data.Abstractions.Telegram.Relationships;
 using TL.Integrations.Data.Abstractions.Telegram.Security;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 using TL.Integrations.Data.Managers;
 using TL.Integrations.SDK.Telegram.Bots;
 using TL.Integrations.SDK.Telegram.Extensions;
-using User = TL.Account.Data.Entities.Security.User;
+using User = TL.Engine.Data.Entities.Security.User;
 
 namespace TL.Integrations.Telegram.Extensions
 {

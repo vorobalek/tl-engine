@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TL.Account.Data.Abstractions.Relationships;
 using TL.Account.Data.Entities.Relationships;
-using TL.Account.Data.Entities.Security;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions

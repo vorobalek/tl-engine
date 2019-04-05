@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TL.Account.Data.Entities.Relationships;
-using TL.Account.Data.Entities.Security;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.Abstractions.Relationships

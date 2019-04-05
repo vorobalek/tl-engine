@@ -1,5 +1,5 @@
 ﻿using System;
-using TL.Account.Data.Entities.Security;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Account.Data.Entities.Relationships

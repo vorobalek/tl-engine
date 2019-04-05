@@ -1,15 +1,12 @@
 ﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
-using System.Linq;
-using TL.Account.Data.Abstractions.Security;
-using TL.Account.Data.Extensions;
 using TL.Engine.Data.Abstractions.Reports;
 using TL.Engine.Data.Entities.Reports;
+using TL.Engine.Data.Extensions;
 using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Engine\TL.Engine.Data\TL.Engine.Data.csproj" />
     <ProjectReference Include="..\TL.Account.SDK\TL.Account.SDK.csproj" />
   </ItemGroup>
 

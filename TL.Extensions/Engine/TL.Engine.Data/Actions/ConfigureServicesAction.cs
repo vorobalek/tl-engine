@@ -12,6 +12,7 @@ namespace TL.Engine.Data.Actions
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
             serviceCollection.AddScoped<IStringVariableManager, StringVariableManager>();
+            serviceCollection.AddScoped<IUserManager, UserManager>();
         }
     }
 }

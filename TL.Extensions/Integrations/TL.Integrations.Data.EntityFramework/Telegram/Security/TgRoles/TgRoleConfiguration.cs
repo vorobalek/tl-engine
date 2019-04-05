@@ -21,7 +21,7 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgRoles
                 .HasForeignKey(e => e.RoleId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}TgRoles");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}_TgRoles");
 
             builder
                 .HasData(new[]

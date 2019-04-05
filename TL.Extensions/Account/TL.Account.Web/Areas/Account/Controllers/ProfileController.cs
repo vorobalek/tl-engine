@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using TL.Account.Data.Extensions;
-using TL.Account.Data.Managers;
 using TL.Account.Web.Areas.Account.ViewModels;
+using TL.Engine.Data.Extensions;
+using TL.Engine.Data.Managers;
 
 namespace TL.Account.Web.Areas.Account.Controllers
 {
@@ -31,17 +32,17 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 return View(null);
             }
 
-            var user_followers = user.GetFollowers(Storage);
-            var user_subscriptions = user.GetSubscriptions(Storage);
-            var requster = User?.GetUser(Storage);
+            var user_followers = user.GetFollowersUids(Storage);
+            var user_subscriptions = user.GetSubscriptionsUids(Storage);
+            var requester = User?.GetUser(Storage);
 
             bool isF = false,
                 isS = false;
 
-            if (requster != null)
+            if (requester != null)
             {
-                isF = user_subscriptions.Contains(requster.Id);
-                isS = user_followers.Contains(requster.Id);
+                isF = user_subscriptions.Contains(requester.Id);
+                isS = user_followers.Contains(requester.Id);
             }
 
             return View(new ProfileViewModel()

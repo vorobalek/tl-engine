@@ -13,11 +13,11 @@ namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions
 
             builder
                 .HasOne(e => e.From)
-                .WithMany(e => e.Subscriptions)
+                .WithMany()
                 .HasForeignKey(e => e.FromId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}Subscriptions");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}_Subscriptions");
 
             builder
                 .HasData(new[]

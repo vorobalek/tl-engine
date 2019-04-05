@@ -1,9 +1,11 @@
 ﻿using ExtCore.Data.Abstractions;
+using ExtCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TL.Engine.SDK.Actions;
 using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Repositories;
@@ -35,8 +37,27 @@ namespace TL.Engine.SDK.Managers
                 TEntity createdEntity = null;
                 try
                 {
-                    createdEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
-                    Storage.Save();
+                    bool preCreate = true;
+                    var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
+                    foreach (var action in preCreateActions)
+                    {
+                        preCreate = preCreate && action.Invoke(entity, ServiceProvider);
+                    }
+                    if (preCreate)
+                    {
+                        createdEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
+                    }
+
+                    bool postCreate = true;
+                    var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
+                    foreach (var action in postCreateActions)
+                    {
+                        postCreate = postCreate && action.Invoke(entity, ServiceProvider);
+                    }
+                    if (postCreate)
+                    {
+                        Storage.Save();
+                    }
                 }
                 catch (Exception ex)
                 {
