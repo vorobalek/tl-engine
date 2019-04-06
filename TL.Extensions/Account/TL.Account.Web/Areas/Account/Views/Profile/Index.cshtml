@@ -9,9 +9,23 @@
 }
 else
 {
-    <h1>Профиль пользователя @Model.Username:</h1>
-    <hr />
+    <form id="form_user" class="invisible"><input asp-for="@Model.Id" class="invisible" value="@Model.Id" hidden /></form>
+    <h1 class="display-4">
+        @Model.Username
+        @if (Model.Username != User.Identity.Name)
+        {
+            @if (Model.IsSubscription)
+            {
+                <button title="Отписаться" type="submit" class="btn btn-outline-warning" onclick="server_alert('/account/profile/unsubscribe', '#form_user', true); setTimeout(function () { location.reload() }, 1000)"><span class="flaticon-star"></span></button>
+            }
+            else
+            {
+                <button title="Подписаться" type="submit" class="btn btn-outline-secondary" onclick="server_alert('/account/profile/subscribe', '#form_user', true);setTimeout(function () { location.reload() }, 1000)"><span class="flaticon-star"></span></button>
+            }
+        }
+    </h1>
     <h4>@Model.Description</h4>
+    <hr />
     <p>
         Подписок: @Model.SubscriptionsCount
     </p>
@@ -32,15 +46,5 @@ else
                 Не подписан на Вас.
             </p>
         }
-        <p>
-            @if (Model.IsSubscription)
-            {
-                <button type="button" class="btn btn-link"><span class="flaticon-alarm"></span>Отписаться</button>
-            }
-            else
-            {
-                <button type="button" class="btn btn-link"><span class="flaticon-alarm-1"></span>Подписаться</button>
-            }
-        </p>
     }
 }

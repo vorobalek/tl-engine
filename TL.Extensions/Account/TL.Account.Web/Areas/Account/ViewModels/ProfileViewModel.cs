@@ -1,7 +1,13 @@
-﻿namespace TL.Account.Web.Areas.Account.ViewModels
+﻿using System;
+
+namespace TL.Account.Web.Areas.Account.ViewModels
 {
     public class ProfileViewModel
     {
+        public string Message { get; set; }
+
+        public Guid Id { get; set; }
+
         public string Username { get; set; }
 
         public string Description { get; set; }
