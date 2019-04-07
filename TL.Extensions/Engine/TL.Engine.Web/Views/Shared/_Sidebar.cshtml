@@ -2,7 +2,7 @@
 
 @if (this.Model.Items.Count() > 0)
 {
-    <nav class="nav flex-column nav-pills h6">
+    <nav class="nav flex-column nav-pills h6 list-group shadow-sm rounded">
         @foreach (var item in this.Model.Items)
         {
             <partial name="_SidebarItem" model="@item" />
