@@ -5,7 +5,8 @@
         <button class="btn btn-link nav-link align-items-lg-center ml-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @if (User.Identity.IsAuthenticated)
             {
-                <strong>@User.Identity.Name&nbsp;&nbsp;</strong>
+                var name = User.Identity.Name.Length > 17 ? $"{User.Identity.Name.Substring(0, 17)}..." : User.Identity.Name;
+                <strong>@name&nbsp;&nbsp;</strong>
                 <img src="~/Styles/images/pack/png/user-3.png" alt="User Logo" width="auto" height="32px" class="shadow rounded-circle" />
             }
             else
@@ -17,7 +18,8 @@
         <div class="dropdown-menu shadow-sm rounded border" aria-labelledby="accountDropdownMenuLink" style="width:200px;">
             @if (User.Identity.IsAuthenticated)
             {
-                <a class="dropdown-item" href="/account"><strong>@User.Identity.Name</strong></a>
+                var name = User.Identity.Name.Length > 17 ? $"{User.Identity.Name.Substring(0, 17)}..." : User.Identity.Name;
+                <a class="dropdown-item" href="/account"><strong>@name</strong></a>
             }
 
             @foreach (var item in this.Model.Items)
