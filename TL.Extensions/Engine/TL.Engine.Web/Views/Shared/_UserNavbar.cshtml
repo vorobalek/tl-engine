@@ -14,7 +14,7 @@
                 <img src="~/Styles/images/pack/png/locked-6.png" alt="User Logo" width="auto" height="32px" class="rounded-circle" />
             }
         </button>
-        <div class="dropdown-menu" aria-labelledby="accountDropdownMenuLink">
+        <div class="dropdown-menu shadow-sm rounded border" aria-labelledby="accountDropdownMenuLink" style="width:200px;">
             @if (User.Identity.IsAuthenticated)
             {
                 <a class="dropdown-item" href="/account"><strong>@User.Identity.Name</strong></a>
@@ -32,7 +32,28 @@
             }
             else
             {
-                <a class="dropdown-item" href="/account/login">Вход</a>
+                var loginModel = new TL.Engine.Web.Areas.Account.ViewModels.LoginViewModel();
+                <form asp-action="index" asp-controller="login" asp-area="account"  asp-route-returnUrl="@Context.Request.Path"  method="post" asp-anti-forgery="true" class="p-3 needs-validation" novalidate>
+                    <div class="form-group">
+                        <input type="text" id="Username" name="Username" class="form-control" placeholder="Логин" required />
+                        <div class="valid-feedback">
+                            Ок
+                        </div>
+                        <div class="invalid-feedback">
+                            Введите логин
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input id="Password" name="Password" class="form-control" placeholder="Пароль" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Войти" class="form-control btn btn-outline-secondary" />
+                    </div>
+                    <div class="valid-feedback">
+                        Ок
+                    </div>
+                </form>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/account/register">Регистрация</a>
             }
         </div>

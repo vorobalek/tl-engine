@@ -19,7 +19,7 @@
                         formatResult(data.result).appendTo('#contentFunctions')
                     }
                     $('html, body').animate({
-                        scrollTop: $(window.location.hash).offset().top
+                        scrollTop: $(window.location.hash).offset().top - 74
                     }, 500);
                 })
                 .fail(function () {
