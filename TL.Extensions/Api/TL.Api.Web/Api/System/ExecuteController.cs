@@ -42,7 +42,7 @@ namespace TL.Api.Web.Api.System
 
         public override string Description => $"Используйте для выполнения метода API";
 
-        [ApiHttpGet("{method}", UsageDescription = "Этот метод требует указать имя метода как часть запроса", UsageSample = "/TL.Account.Data.Managers.UserManager:Get?username=system", ReturnableType = typeof(object))]
+        [ApiHttpGet("{method}", UsageDescription = "Этот метод требует указать имя метода как часть запроса", UsageSample = "/TL.Engine.Data.Managers.UserManager:Get?username=system", ReturnableType = typeof(object))]
         public IActionResult Get(string method)
         {
             var m = method.Split(":");
@@ -71,26 +71,20 @@ namespace TL.Api.Web.Api.System
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
-            var listArgs = new List<object>();
-            foreach (var parameter in existMethod.GetParameters())
+            try
             {
-                var stringValue = HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value).Get(parameter.Name);
-                if (!string.IsNullOrWhiteSpace(stringValue))
-                {
-                    listArgs.Add(Convert.ChangeType(stringValue, parameter.ParameterType));
-                }
-                else
-                {
-                    listArgs.Add(null);
-                }
-            }
-            var args = listArgs.ToArray();
+                var result = Exec(existMethod, instance);
 
-            return this.JsonResponse(true, result: existMethod.Invoke(instance, args));
+                return this.JsonResponse(true, result: result);
+            }
+            catch
+            {
+                return this.JsonResponse(false, error_code: StatusCodes.Status500InternalServerError);
+            }
         }
 
 
-        [ApiHttpGet("{token}/{method}", UsageDescription = "Этот метод требует указать токен для выполнения защищенного метогда и имя защищенного метода как часть запроса", UsageSample = "/<TOKEN>/TL.Account.Data.Managers.UserManager:Create?username=tl-engine_user&password=test&description=Проверка работоспособности API", ReturnableType = typeof(object))]
+        [ApiHttpGet("{token}/{method}", UsageDescription = "Этот метод требует указать токен для выполнения защищенного метогда и имя защищенного метода как часть запроса", UsageSample = "/<TOKEN>/TL.Engine.Data.Managers.UserManager:Create?username=tl-engine_user&password=test&description=Проверка работоспособности API", ReturnableType = typeof(object))]
         public IActionResult Get(string token, string method)
         {
             Token existToken = null;
@@ -159,21 +153,7 @@ namespace TL.Api.Web.Api.System
 
             try
             {
-                var listArgs = new List<object>();
-                foreach (var parameter in existMethod.GetParameters())
-                {
-                    var stringValue = HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value).Get(parameter.Name);
-                    if (!string.IsNullOrWhiteSpace(stringValue))
-                    {
-                        listArgs.Add(TypeDescriptor.GetConverter(parameter.ParameterType).ConvertFromInvariantString(stringValue));
-                    }
-                    else
-                    {
-                        listArgs.Add(null);
-                    }
-                }
-                var args = listArgs.ToArray();
-                var result = existMethod.Invoke(instance, args);
+                var result = Exec(existMethod, instance);
 
                 tokenLog.StatusCode = StatusCodes.Status200OK;
                 TokenLogManager.Create(tokenLog);
@@ -187,6 +167,25 @@ namespace TL.Api.Web.Api.System
 
                 return this.JsonResponse(false, error_code: StatusCodes.Status500InternalServerError);
             }
+        }
+
+        private object Exec(MethodInfo methodInfo, object instance)
+        {
+            var listArgs = new List<object>();
+            foreach (var parameter in methodInfo.GetParameters())
+            {
+                var stringValue = HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value).Get(parameter.Name);
+                if (!string.IsNullOrWhiteSpace(stringValue))
+                {
+                    listArgs.Add(TypeDescriptor.GetConverter(parameter.ParameterType).ConvertFromInvariantString(stringValue));
+                }
+                else
+                {
+                    listArgs.Add(null);
+                }
+            }
+            var args = listArgs.ToArray();
+            return methodInfo.Invoke(instance, args);
         }
     }
 }
