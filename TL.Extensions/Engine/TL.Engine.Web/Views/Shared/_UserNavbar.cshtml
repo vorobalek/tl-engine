@@ -36,6 +36,7 @@
             {
                 var loginModel = new TL.Engine.Web.Areas.Account.ViewModels.LoginViewModel();
                 <form asp-action="index" asp-controller="login" asp-area="account"  asp-route-returnUrl="@Context.Request.Path"  method="post" asp-anti-forgery="true" class="p-3 needs-validation" novalidate>
+                    <div class="text-danger validation" asp-validation-summary="All"></div>
                     <div class="form-group">
                         <input type="text" id="Username" name="Username" class="form-control" placeholder="Логин" required />
                         <div class="valid-feedback">
@@ -46,7 +47,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input id="Password" name="Password" class="form-control" placeholder="Пароль" />
+                        <input type="password" id="Password" name="Password" class="form-control" placeholder="Пароль" />
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Войти" class="form-control btn btn-outline-secondary" />
