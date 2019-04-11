@@ -26,16 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TL.Extensions\Account\TL.Account\TL.Account.csproj" />
-    <ProjectReference Include="..\TL.Extensions\Api\TL.Api\TL.Api.csproj" />
-    <ProjectReference Include="..\TL.Extensions\Blog\TL.Blog\TL.Blog.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Data.Abstractions\TL.Engine.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Data.Entities\TL.Engine.Data.Entities.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Data.EntityFramework\TL.Engine.Data.EntityFramework.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Data\TL.Engine.Data.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
     <ProjectReference Include="..\TL.Extensions\Engine\TL.Engine.Web\TL.Engine.Web.csproj" />
-    <ProjectReference Include="..\TL.Extensions\Integrations\TL.Integrations\TL.Integrations.csproj" />
   </ItemGroup>
 
   <ItemGroup>

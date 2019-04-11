@@ -12,10 +12,22 @@ namespace TL.Engine.Web.Actions
         public void Execute(IRouteBuilder routeBuilder, IServiceProvider serviceProvider)
         {
             routeBuilder.MapRoute(
-                name: "Engine.Web",
+                name: "Areas",
+                template: "{area}/{controller}/{action=index}"
+            );
+
+            routeBuilder.MapRoute(
+                name: "Web",
                 template: "{controller}/{action}/{id?}",
                 defaults: new { controller = "home", action = "index" }
             );
+
+            routeBuilder.MapRoute(
+               name: "Account",
+               template: "account/{controller}/{action}/{id?}",
+               constraints: new { area = "account" },
+               defaults: new { area = "account", controller = "login", action = "index" }
+           );
         }
     }
 }
