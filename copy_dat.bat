@@ -1,1 +1,0 @@
-xcopy ".\TL.Engine\Data" "..\TL Engine Developer\netcoreapp2.2\Data" /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_databases
