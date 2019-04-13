@@ -36,6 +36,12 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
                 return View("Index");
             }
 
+            if (url.Length > 1000)
+            {
+                ModelState.AddModelError("url", "Этот URL слишком длинный даже для нас");
+                return View("Index");
+            }
+
             var prefixs = new[]
                 {
                     "ftp",
