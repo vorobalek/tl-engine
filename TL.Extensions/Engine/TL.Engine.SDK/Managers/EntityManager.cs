@@ -42,7 +42,7 @@ namespace TL.Engine.SDK.Managers
                     var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
                     foreach (var action in preCreateActions)
                     {
-                        preCreate = preCreate && action.Invoke(entity, ServiceProvider);
+                        preCreate = preCreate && action.Invoke(ref entity, ServiceProvider);
                     }
                     if (preCreate)
                     {
@@ -53,7 +53,7 @@ namespace TL.Engine.SDK.Managers
                         var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
                         foreach (var action in postCreateActions)
                         {
-                            postCreate = postCreate && action.Invoke(entity, ServiceProvider);
+                            postCreate = postCreate && action.Invoke(ref entity, ServiceProvider);
                         }
                         if (postCreate)
                         {
@@ -62,7 +62,7 @@ namespace TL.Engine.SDK.Managers
                             var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
                             foreach (var action in canSaveActions)
                             {
-                                canSave = canSave && action.Invoke(entity, ServiceProvider);
+                                canSave = canSave && action.Invoke(ref entity, ServiceProvider);
                             }
                             if (canSave)
                             {
@@ -71,7 +71,7 @@ namespace TL.Engine.SDK.Managers
                                 var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
                                 foreach (var action in preSaveActions)
                                 {
-                                    preSave = preSave && action.Invoke(entity, ServiceProvider);
+                                    preSave = preSave && action.Invoke(ref entity, ServiceProvider);
                                 }
                                 if (preSave)
                                 {
@@ -83,7 +83,7 @@ namespace TL.Engine.SDK.Managers
                                     var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
                                     foreach (var action in postSaveActions)
                                     {
-                                        postSave = postSave && action.Invoke(entity, ServiceProvider);
+                                        postSave = postSave && action.Invoke(ref entity, ServiceProvider);
                                     }
                                     if (postSave)
                                     {
@@ -114,7 +114,7 @@ namespace TL.Engine.SDK.Managers
                 var canCreateActions = ExtensionManager.GetInstances<IEntityActionCanCreate<TEntity>>();
                 foreach (var action in canCreateActions)
                 {
-                    canCreate = canCreate && action.Invoke(entity, ServiceProvider);
+                    canCreate = canCreate && action.Invoke(ref entity, ServiceProvider);
                 }
                 if (canCreate)
                 {
@@ -214,7 +214,7 @@ namespace TL.Engine.SDK.Managers
                 var canUpdateActions = ExtensionManager.GetInstances<IEntityActionCanUpdate<TEntity>>();
                 foreach (var action in canUpdateActions)
                 {
-                    canUpdate = canUpdate && action.Invoke(entity, ServiceProvider);
+                    canUpdate = canUpdate && action.Invoke(ref entity, ServiceProvider);
                 }
                 if (canUpdate)
                 {
@@ -223,7 +223,7 @@ namespace TL.Engine.SDK.Managers
                     var preUpdateActions = ExtensionManager.GetInstances<IEntityActionPreUpdate<TEntity>>();
                     foreach (var action in preUpdateActions)
                     {
-                        preUpdate = preUpdate && action.Invoke(entity, ServiceProvider);
+                        preUpdate = preUpdate && action.Invoke(ref entity, ServiceProvider);
                     }
                     if (preUpdate)
                     {
@@ -234,7 +234,7 @@ namespace TL.Engine.SDK.Managers
                         var postUpdateActions = ExtensionManager.GetInstances<IEntityActionPostUpdate<TEntity>>();
                         foreach (var action in postUpdateActions)
                         {
-                            postUpdate = postUpdate && action.Invoke(entity, ServiceProvider);
+                            postUpdate = postUpdate && action.Invoke(ref entity, ServiceProvider);
                         }
                         if (postUpdate)
                         {
@@ -243,7 +243,7 @@ namespace TL.Engine.SDK.Managers
                             var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
                             foreach (var action in canSaveActions)
                             {
-                                canSave = canSave && action.Invoke(entity, ServiceProvider);
+                                canSave = canSave && action.Invoke(ref entity, ServiceProvider);
                             }
                             if (canSave)
                             {
@@ -252,7 +252,7 @@ namespace TL.Engine.SDK.Managers
                                 var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
                                 foreach (var action in preSaveActions)
                                 {
-                                    preSave = preSave && action.Invoke(entity, ServiceProvider);
+                                    preSave = preSave && action.Invoke(ref entity, ServiceProvider);
                                 }
                                 if (preSave)
                                 {
@@ -264,7 +264,7 @@ namespace TL.Engine.SDK.Managers
                                     var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
                                     foreach (var action in postSaveActions)
                                     {
-                                        postSave = postSave && action.Invoke(entity, ServiceProvider);
+                                        postSave = postSave && action.Invoke(ref entity, ServiceProvider);
                                     }
                                     if (postSave)
                                     {

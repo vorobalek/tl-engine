@@ -1,0 +1,30 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Линкер";
+}
+<div>
+    <h3>Укорачиватель ссылок от TL Engine</h3>
+    <br />
+    <form id="form" action="/" method="get">
+        <div class="form-row">
+            <div class="form-group col-md-10">
+                <input id="input" name="url" class="form-control" value="@Model" />
+            </div>
+            <div class="form-group col-md-2">
+                <button type="submit" class="btn form-control">Копировать</button>
+            </div>
+        </div>
+    </form>
+    <hr />
+    <center><a class="btn" href="/linker/"><h5>Добавить ещё одну ссылку</h5></a></center>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $('#form').submit(function () {
+            $('#input').select();
+            console.log($('#input').val());
+            document.execCommand("copy");
+            return false;
+        });
+    </script>
+}

@@ -10,11 +10,13 @@ namespace TL.Account.Web.Actions
 {
     public class UserActionPostCreate : IEntityActionPostCreate<User>
     {
-        public bool Invoke(User entity, IServiceProvider serviceProvider)
+        public bool Invoke(ref User entity, IServiceProvider serviceProvider)
         {
             var storage = serviceProvider.GetService<IStorage>();
             var repository = storage.GetRepository<ISubscriptionRepository>();
-            var item = repository.Get(e => e.FromId == entity.Id && e.ToId == User.System.Id);
+
+            var userId = entity.Id;
+            var item = repository.Get(e => e.FromId == userId && e.ToId == User.System.Id);
 
             if (item == null)
             {

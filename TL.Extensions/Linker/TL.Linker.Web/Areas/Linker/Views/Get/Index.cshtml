@@ -1,0 +1,33 @@
+﻿@model TL.Linker.Web.Areas.Linker.ViewModels.Get.IndexViewModel
+@{
+    ViewData["Title"] = "Линкер";
+}
+<div>
+    <h3>Укорачиватель ссылок от TL Engine</h3>
+    <br />
+    <form asp-action="index" asp-controller="get" asp-area="linker" method="post" class="needs-validation" novalidate>
+        <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+        <div class="form-row">
+            <div class="form-group col-md-10">
+                <input for="url" name="url" class="form-control" required placeholder="Ссылка... Такая обычная - такая длинная." />
+                <div class="valid-feedback">
+                    Ок
+                </div>
+                <div class="invalid-feedback">
+                    Ссылку, пожалуйста
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <button type="submit" class="btn form-control">Сократить!</button>
+            </div>
+        </div>
+    </form>
+    <p>
+        Довольно часто при общении в интернете люди пересылают друг другу ссылки. Иногда эти ссылки бывают длинными. Совсем иногда — очень длинными. Но почти всегда — слишком длинными. 
+        Для удобства работы с сервисом можно воспользоваться букмарклетом — перетащите вот эту ссылку 
+        (
+        <a href="javascript:location.href='https://@Context.Request.Host.Value/linker/get/fromurl?url='+encodeURIComponent(location.href)">Link It↑</a>
+        ) на панель вашего браузера. 
+        Нажимайте на эту закладку, когда хотите укоротить адрес просматриваемого вами сайта.
+    </p>
+</div>

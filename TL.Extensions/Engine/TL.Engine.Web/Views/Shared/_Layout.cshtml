@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutNavbar.cshtml";
 }
-<div class="container-fluid body-content">
+<div class="@(User.Identity.IsAuthenticated ? "container-fluid" : "container") body-content">
     <div class="row">
         <div class="col-12 col-md-auto dont-collapse-sm collapse" id="sidebarSupportedContent">
             <div class="sidebar sticky-top" style="top:74px;">@await Component.InvokeAsync("Sidebar")</div>
