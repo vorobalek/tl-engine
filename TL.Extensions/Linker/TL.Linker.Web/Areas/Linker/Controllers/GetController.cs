@@ -42,17 +42,11 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
                 return View("Index");
             }
 
-            var prefixs = new[]
-                {
-                    "ftp",
-                    "http",
-                    "https",
-                };
-
             var parts = url.Split("://");
             if (parts[parts.Length > 1 ? 1 : 0].StartsWith(HttpContext.Request.Host.Value))
             {
-                return View("Link", $"{UriHelper.GetDisplayUrl(Request)}");
+                ModelState.AddModelError("url", "Мы не можем сократить эту ссылку");
+                return View("Index");
             }
 
             var link = LinkManager.Create(url);
