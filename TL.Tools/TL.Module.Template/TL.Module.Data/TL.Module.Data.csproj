@@ -2,14 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
+    <OutputPath>..\..\..\TL.Engine\Extensions\$saferootprojectname$</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutputPath>..\..\..\TL.Engine\Extensions\$saferootprojectname$</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\..\TL.Engine\Extensions</OutputPath>
+    <OutputPath>..\..\..\TL.Engine\Extensions\$saferootprojectname$</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutputPath>..\..\..\TL.Engine\Extensions\$saferootprojectname$</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,1 +1,1 @@
-xcopy ".\TL.Engine\Extensions\netcoreapp2.2" "..\TL Engine Developer\netcoreapp2.2" /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_extensions
+xcopy ".\TL.Engine\Extensions" "..\TL Engine Developer\netcoreapp2.2\Extensions" /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_extensions

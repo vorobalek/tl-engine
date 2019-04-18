@@ -1,2 +1,1 @@
 xcopy ".\TL.Engine\bin\netcoreapp2.2" "..\TL Engine Developer\netcoreapp2.2" /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_bin
-xcopy ".\TL.Engine\Packages" "..\TL Engine Developer\netcoreapp2.2" /I /H /Y /C /R /S /EXCLUDE:.\.list_no_copy_packages
