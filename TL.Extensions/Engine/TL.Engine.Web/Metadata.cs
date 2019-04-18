@@ -27,6 +27,7 @@ namespace TL.Engine.Web
             new ScriptItem("//ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js", int.MinValue),
             new ScriptItem("//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js", int.MinValue),
             new ScriptItem("//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js", int.MinValue),
+            new ScriptItem("//cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js", int.MinValue),
 
             new ScriptItem("/Scripts/jquery.maskedinput.min.js", int.MinValue),
             new ScriptItem("/Scripts/tooltip.min.js", int.MinValue),
