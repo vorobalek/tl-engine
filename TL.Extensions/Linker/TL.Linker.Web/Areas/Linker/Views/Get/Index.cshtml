@@ -9,7 +9,7 @@
         <div class="text-danger validation" asp-validation-summary="All"></div>
         <div class="form-row">
             <div class="form-group col-md-10">
-                <input for="url" name="url" class="form-control" required placeholder="Ссылка... Такая обычная - такая длинная." />
+                <input id="linker_input" for="url" name="url" class="form-control" required placeholder="Ссылка... Такая обычная - такая длинная." tabindex="1"/>
                 <div class="valid-feedback">
                     Ок
                 </div>
@@ -31,3 +31,12 @@
         Нажимайте на эту закладку, когда хотите укоротить адрес просматриваемого вами сайта.
     </p>
 </div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $('#linker_input').focus();
+                $('#linker_input').select();
+            })
+    </script>
+}

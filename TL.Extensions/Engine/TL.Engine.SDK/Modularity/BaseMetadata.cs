@@ -27,7 +27,7 @@ namespace TL.Engine.SDK.Modularity
                 .Where(m => m.Owner == Name)
                 .OrderBy(sm => sm.Name);
 
-        public Version GetVersion()
+        public Version GetVersionSDK()
         {
             int compareValue = Version.CompareTo(MinimalVersion);
             if (compareValue < 0)
@@ -38,6 +38,11 @@ namespace TL.Engine.SDK.Modularity
             {
                 return Version;
             }
+        }
+
+        public Version GetVersion()
+        {
+            return Version;
         }
 
         protected virtual Version Version => new Version(0, 0, 0, 0);
