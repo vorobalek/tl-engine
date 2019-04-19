@@ -24,9 +24,7 @@ namespace TL.Engine.Web.Actions
 
             routeBuilder.MapRoute(
                name: "Account",
-               template: "account/{controller}/{action}/{id?}",
-               constraints: new { area = "account" },
-               defaults: new { area = "account", controller = "login", action = "index" }
+               template: "account/{controller}/{action}/{id?}"
            );
         }
     }
