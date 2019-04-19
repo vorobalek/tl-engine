@@ -5,7 +5,7 @@
     var id = string.Join("", Guid.NewGuid().ToString().Split('-'));
 
     <div class="btn-group dropright">
-        <a class="nav-link list-group-item" href="@Model.Url">@Model.Name</a>
+        <a class="nav-link" href="@Model.Url">@Model.Name</a>
         <button id="@id" type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu shadow-sm rounded" aria-labelledby="@id">
             @foreach (var item in this.Model.Items)
@@ -19,7 +19,7 @@
 }
 else
 {
-    <a class="nav-link list-group-item" href="@Model.Url">
+    <a class="nav-link" href="@Model.Url">
         @Model.Name
     </a>
 }
