@@ -25,8 +25,8 @@ namespace TL.Engine.Web
             new ScriptItem("//code.jquery.com/jquery-3.3.1.min.js", int.MinValue),
             new ScriptItem("//ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js", int.MinValue),
             new ScriptItem("//ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js", int.MinValue),
-            new ScriptItem("//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js", int.MinValue),
-            new ScriptItem("//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js", int.MinValue),
+            new ScriptItem("//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js", int.MinValue),
+            new ScriptItem("//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js", int.MinValue),
             new ScriptItem("//cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js", int.MinValue),
 
             new ScriptItem("/Scripts/jquery.maskedinput.min.js", int.MinValue),
@@ -43,7 +43,7 @@ namespace TL.Engine.Web
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
         {
-            new StyleItem("//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css", int.MinValue),
+            new StyleItem("//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", int.MinValue),
             new StyleItem("/Styles/css/site.min.css", int.MinValue),
             new StyleItem("/Styles/images/pack/font/flaticon.min.css", int.MinValue),
         };

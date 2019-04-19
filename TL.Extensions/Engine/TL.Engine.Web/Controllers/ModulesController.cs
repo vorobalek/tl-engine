@@ -1,8 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ExtCore.Infrastructure;
+using ExtCore.WebApplication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Reflection;
 using TL.Engine.Web.ViewModels.SystemActiveModules;
 
 namespace TL.Engine.Web.Controllers
@@ -12,21 +19,55 @@ namespace TL.Engine.Web.Controllers
     {
         IHostingEnvironment Environment { get; set; }
 
-        public ModulesController(IHostingEnvironment environment)
+        IConfiguration Configuration { get; set; }
+
+        IServiceProvider ServiceProvider { get; set; }
+
+        public ModulesController(IHostingEnvironment environment, IConfiguration configuration, IServiceProvider serviceProvider)
         {
             Environment = environment;
+            Configuration = configuration;
+            ServiceProvider = serviceProvider;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new SystemActiveModulesViewModelFactory().Create());
+            return View(new SystemActiveModulesViewModelFactory().Create(Environment, Configuration));
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(IFormFile package_file)
         {
-            return View(new SystemActiveModulesViewModelFactory().Create());
+            var parts = package_file.FileName.Split('.');
+            if (parts.Last() == "tle")
+            {
+                using (var package = new ZipArchive(package_file.OpenReadStream()))
+                {
+                    var path = Path.Combine(Environment.ContentRootPath, Configuration["Extensions:Path"], "Modules");
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    var name = package_file.FileName.Substring(0, package_file.FileName.Length - 4);
+
+                    if (package.GetEntry($"{name}/") != null)
+                    {
+                        package.ExtractToDirectory(path, true);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("package_file", "Пакет поврежден, либо не корректен");
+                    }
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("package_file", "Файл имел неверное расширение. Требуется .tle");
+            }
+            return View(new SystemActiveModulesViewModelFactory().Create(Environment, Configuration));
         }
     }
 }

@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Модули";
 
+    var waitModules = Model.Modules.Where(it => !Model.Extensions.Select(e => e.Name.Substring(3)).Contains(it));
+
     string globalModuleDivArea = "";
 
     string f(TL.Engine.SDK.Modularity.BaseMetadata module)
@@ -72,8 +74,8 @@
     }
 }
 <h4>Подключить модуль TL Engine:</h4>
-<form asp-action="index" asp-controller="modules"  class="needs-validation" asp-anti-forgery="true" method="post" enctype="multipart/form-data" novalidate>
-    <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+<form asp-action="index" asp-controller="modules" class="needs-validation" asp-anti-forgery="true" method="post" enctype="multipart/form-data" novalidate>
+    <div class="text-danger validation" asp-validation-summary="All"></div>
     <div class="form-row">
         <div class="col">
             <div class="custom-file">
@@ -94,11 +96,28 @@
         </div>
     </div>
 </form>
+@if (waitModules.Count() > 0)
+{
+    <hr />
+    <h4>Ожидают</h4>
+    <hr />
+    <ul class="list-group">
+        @foreach (var module in waitModules)
+        {
+            <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                    <div class="spinner-border mr-5" role="status" aria-hidden="true"></div>
+                    <strong>@module ожидает перезагрузки</strong>
+                </div>
+            </li>
+        }
+    </ul>
+}
 <hr />
 <h4>Список доступных модулей TL Engine:</h4>
 <hr />
 <ul class="list-group">
-    @foreach (var module in Model.Modules)
+    @foreach (var module in Model.Extensions)
     {
         <li class="list-group-item">
             @Html.Raw(f(module))
