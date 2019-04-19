@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Reference Include="Telegram.Bot">
-      <HintPath>Packages\Telegram.Bot.dll</HintPath>
+      <HintPath>Nuget\Telegram.Bot.dll</HintPath>
     </Reference>
   </ItemGroup>
 

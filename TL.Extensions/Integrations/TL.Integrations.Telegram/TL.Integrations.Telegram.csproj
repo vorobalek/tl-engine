@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <Reference Include="Telegram.Bot">
-      <HintPath>..\TL.Integrations.SDK\Packages\Telegram.Bot.dll</HintPath>
+      <HintPath>..\TL.Integrations.SDK\Nuget\Telegram.Bot.dll</HintPath>
     </Reference>
   </ItemGroup>
 
