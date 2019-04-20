@@ -1,4 +1,5 @@
 ﻿using ExtCore.Infrastructure.Actions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using TL.Linker.Data.Managers;
@@ -11,6 +12,7 @@ namespace TL.Linker.Data.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
+            serviceCollection.AddSingleton<IStartupFilter, LinkerSystemVariableStarupFilter>();
             serviceCollection.AddScoped<ILinkManager, LinkManager>();
         }
     }

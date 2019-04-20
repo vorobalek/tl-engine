@@ -2,27 +2,35 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using TL.Engine.Data.Managers;
 using TL.Engine.SDK.Attributes.Api.Executable;
 using TL.Engine.SDK.Managers;
 using TL.Linker.Data.Entities.Core;
 
 namespace TL.Linker.Data.Managers
 {
-    public class LinkManager : EntityComparableStoredManager<Link, int>, ILinkManager
+    public class LinkManager : EntityComparableStoredManager<Link, Guid>, ILinkManager
     {
-        public LinkManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
+        public const string NameOfMaskVariable = "LinkerMask";
+
+        public const string NameOfMaxLengthVariable = "LinkerMaxLength";
+
+        public IStringVariableManager StringVariableManager { get; set; }
+
+        public LinkManager(IStringVariableManager stringVariableManager, IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
         {
+            StringVariableManager = stringVariableManager;
+        }
+
+        public Link Get(ulong id)
+        {
+            return Get(e => e.Identifier == id);
         }
 
         [PublicApi]
         public string GetLinkUrl(string url)
         {
-            var link = Get(LinkParse(url));
-            if (link == null)
-            {
-                throw new ArgumentException($"Такого адреса не существует", nameof(url));
-            }
-            return link.Url;
+            return Get(LinkParse(url))?.Url;
         }
 
         public Link Create(string url)
@@ -35,8 +43,22 @@ namespace TL.Linker.Data.Managers
             var link = Get(e => e.Url == url);
             if (link == null)
             {
+                var random = new Random();
+
+                ulong identifier = 0;
+                if (int.TryParse(StringVariableManager.Get(NameOfMaxLengthVariable)?.Value, out int length))
+                {
+                    var mask = StringVariableManager.Get(NameOfMaskVariable)?.Value;
+                    for (int i = 0; i < length; ++i)
+                    {
+                        int digit = random.Next(mask.Length);
+                        identifier = identifier * (ulong)mask.Length + (ulong)digit;
+                    }
+                }
+
                 return Create(new Link()
                 {
+                    Identifier = identifier,
                     Url = url
                 });
             }
@@ -46,53 +68,61 @@ namespace TL.Linker.Data.Managers
             }
         }
 
-        static string Mask { get; } = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
         [PublicApi]
-        public string LinkConvert(int number)
+        public string LinkConvert(ulong number)
         {
-            if (number < 1)
+            return LinkConvert(number, StringVariableManager.Get(NameOfMaskVariable)?.Value);
+        }
+
+        private string LinkConvert(ulong number, string mask)
+        {
+            if (number < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(number), $"Число не может быть меньше 1");
+                throw new ArgumentOutOfRangeException(nameof(number), $"Число не может быть меньше 0");
             }
 
-            if (number > int.MaxValue)
+            if (number > ulong.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(number), $"Число не может быть больше 2147483647");
+                throw new ArgumentOutOfRangeException(nameof(number), $"Число не может быть больше {ulong.MaxValue}");
             }
 
             string ans = "";
 
             while (number > 0)
             {
-                var code = number % Mask.Length;
-                ans += Mask[code];
-                number /= Mask.Length;
+                var code = number % (ulong)mask.Length;
+                ans += mask[(int)code];
+                number /= (ulong)mask.Length;
             }
-            return new string (ans.ToCharArray().Reverse().ToArray());
+            return new string(ans.ToCharArray().Reverse().ToArray());
         }
 
         [PublicApi]
-        public int LinkParse(string code)
+        public ulong LinkParse(string code)
         {
-            int ans = 0;
+            return LinkParse(code, StringVariableManager.Get(NameOfMaskVariable)?.Value);
+        }
+
+        private ulong LinkParse(string code, string mask)
+        {
+            ulong ans = 0;
             foreach (var c in code)
             {
                 int i = 0;
-                for (; i < Mask.Length; ++i)
+                for (; i < mask.Length; ++i)
                 {
-                    if (Mask[i] == c)
+                    if (mask[i] == c)
                     {
                         break;
                     }
                 }
 
-                if (i == Mask.Length)
+                if (i == mask.Length)
                 {
                     throw new ArgumentException($"Входная строка имела неверный формат!", nameof(code));
                 }
 
-                ans = ans * Mask.Length + i;
+                ans = ans * (ulong)mask.Length + (ulong)i;
             }
             return ans;
         }

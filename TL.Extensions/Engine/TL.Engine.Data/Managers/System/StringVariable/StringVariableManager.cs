@@ -14,6 +14,11 @@ namespace TL.Engine.Data.Managers
         {
         }
 
+        public StringVariable Get(string name)
+        {
+            return Get(e => e.Name == name);
+        }
+
         [PrivateApi(Description = "Получить все строковые переменные")]
         public override IEnumerable<StringVariable> GetAll(bool loadDeleted = false)
         {

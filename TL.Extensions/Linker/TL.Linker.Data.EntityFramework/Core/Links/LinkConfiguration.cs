@@ -12,8 +12,8 @@ namespace TL.Linker.Data.EntityFramework.Core.Links
                 .HasKey(e => e.Id);
 
             builder
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd();
+                .HasIndex(e => e.Identifier)
+                .IsUnique();
 
             builder
                 .HasIndex(e => e.Url)

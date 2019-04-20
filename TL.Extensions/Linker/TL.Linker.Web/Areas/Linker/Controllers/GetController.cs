@@ -50,7 +50,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
             }
 
             var link = LinkManager.Create(url);
-            return View("Link", $"https://{HttpContext.Request.Host.Value}/lnk/{LinkManager.LinkConvert(link.Id)}");
+            return View("Link", $"https://{HttpContext.Request.Host.Value}/lnk/{LinkManager.LinkConvert(link.Identifier)}");
         }
 
         [HttpGet("lnk/{url}")]

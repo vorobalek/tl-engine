@@ -1,9 +1,10 @@
-﻿using TL.Engine.SDK.Repositories;
+﻿using System;
+using TL.Engine.SDK.Repositories;
 using TL.Linker.Data.Entities.Core;
 
 namespace TL.Linker.Data.Abstractions.Core
 {
-    public interface ILinkRepository : IEntityComparableStoredRepository<Link, int>
+    public interface ILinkRepository : IEntityComparableStoredRepository<Link, Guid>
     {
     }
 }
