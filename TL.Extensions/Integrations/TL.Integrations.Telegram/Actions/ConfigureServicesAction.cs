@@ -12,7 +12,7 @@ namespace TL.Integrations.Telegram.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
-            serviceCollection.AddSingleton<IStartupFilter, AutoStartBotServiceStartupFilter> ();
+            serviceCollection.AddScoped<IStartupFilter, AutoStartBotServiceStartupFilter> ();
         }
     }
 }
