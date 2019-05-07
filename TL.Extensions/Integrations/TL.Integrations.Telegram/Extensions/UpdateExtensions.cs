@@ -6,7 +6,6 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using TL.Engine.Data.Managers;
 using TL.Integrations.Data.Abstractions.Telegram.Relationships;
-using TL.Integrations.Data.Abstractions.Telegram.Security;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 using TL.Integrations.Data.Managers;
 using TL.Integrations.SDK.Telegram.Bots;
@@ -24,7 +23,9 @@ namespace TL.Integrations.Telegram.Extensions
                 var chatId = update.GetSenderChatId();
                 var fromId = update.GetSenderId();
 
-                var tgUser = serviceProvider.GetService<ITgUserManager>().GetOrCreate((int)fromId.Identifier, fromId.Username);
+                var tgUserManager = serviceProvider.GetService<ITgUserManager>();
+
+                var tgUser = tgUserManager.GetOrCreate((int)fromId.Identifier, fromId.Username);
 
                 if (chatId.Identifier == fromId.Identifier)
                 {
@@ -36,13 +37,13 @@ namespace TL.Integrations.Telegram.Extensions
                         var tgBot = serviceProvider.GetService<ITgBotManager>().Get(bot.Token, bot.GetType().Name);
                         if (!tgConnectionRepository.GetMembers(tgBot).Contains(tgUser.Id))
                         {
+                            tgConnectionRepository.Add(new TgConnection() { Bot = tgBot, User = tgUser });
+                            storage.Save();
+
                             tgUser.FirstName = update.Message.From.FirstName;
                             tgUser.LastName = update.Message.From.LastName;
                             tgUser.Username = update.Message.From.Username;
-                            storage.GetRepository<ITgUserRepository>().Update(tgUser);
-
-                            tgConnectionRepository.Add(new TgConnection() { Bot = tgBot, User = tgUser });
-                            storage.Save();
+                            tgUserManager.Update(tgUser);
                         }
                     }
 
