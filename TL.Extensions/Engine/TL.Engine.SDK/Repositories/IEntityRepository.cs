@@ -8,7 +8,6 @@ namespace TL.Engine.SDK.Repositories
         where TEntity : class, IEntity
     {
         TEntity Add(TEntity entity);
-        TEntity Delete(TEntity entity);
         void Remove(TEntity entity);
         TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false);
         IEnumerable<TEntity> GetAll(bool loadDeleted = false);

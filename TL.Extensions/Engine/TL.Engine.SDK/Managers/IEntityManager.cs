@@ -7,15 +7,15 @@ namespace TL.Engine.SDK.Managers
     public interface IEntityManager<TEntity>
         where TEntity : class, IEntity
     {
-        TEntity Create(TEntity entity);
+        TEntity Create(TEntity entity, bool cacheOnly = false);
         TEntity CreateEmpty();
         TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false);
         IEnumerable<TEntity> GetAll(bool loadDeleted = false);
         IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false);
-        TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null);
-        TEntity Update(TEntity entity);
-        TEntity Delete(TEntity entity);
-        TEntity Delete(Func<TEntity, bool> predicate);
-        IEnumerable<TEntity> DeleteAll(Func<TEntity, bool> predicate);
+        TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false);
+        TEntity Update(TEntity entity, bool cacheOnly = false);
+        TEntity Delete(TEntity entity, bool cacheOnly = false);
+        TEntity Delete(Func<TEntity, bool> predicate, bool cacheOnly = false);
+        IEnumerable<TEntity> DeleteAll(Func<TEntity, bool> predicate, bool cacheOnly = false);
     }
 }

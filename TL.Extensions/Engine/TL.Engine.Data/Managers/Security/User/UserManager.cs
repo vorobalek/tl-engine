@@ -28,6 +28,11 @@ namespace TL.Engine.Data.Managers
         [PrivateApi(Description = "Создать пользователя с логином, паролем и описанием")]
         public User Create(string username, string password, string description = null)
         {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentNullException(nameof(password), $"Запрещено создавать пользователей без пароля!");
+            }
+
             User user = null;
             try
             {
@@ -75,7 +80,7 @@ namespace TL.Engine.Data.Managers
             }
             catch (Exception ex)
             {
-                Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
+                Logger.TLogCritical($"Ошибка при создании экземпляра {typeof(User).GetFullName()}\r\n{ex}");
             }
             return user;
         }
@@ -86,11 +91,6 @@ namespace TL.Engine.Data.Managers
             var user = Get(username);
             if (user == null)
             {
-                if (password == null)
-                {
-                    throw new ArgumentNullException(nameof(password), $"Запрещено создавать пользователей без пароля!");
-                }
-
                 user = Create(username, password, description);
             }
             return user;

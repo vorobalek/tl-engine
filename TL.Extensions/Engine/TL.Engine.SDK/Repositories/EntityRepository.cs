@@ -26,20 +26,6 @@ namespace TL.Engine.SDK.Repositories
             }
         }
 
-        public virtual TEntity Delete(TEntity entity)
-        {
-            if (entity != null)
-            {
-                if (entity is IEntityStored entityStored)
-                {
-                    entityStored.ModifiedDate = DateTime.Now.ToUniversalTime();
-                    entity = entityStored as TEntity;
-                }
-                entity.IsDeleted = true;
-            }
-            return Load(entity);
-        }
-
         public virtual TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
             return Load(dbSet.FirstOrDefault(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted)));

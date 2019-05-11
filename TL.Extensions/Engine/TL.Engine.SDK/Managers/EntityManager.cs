@@ -26,7 +26,7 @@ namespace TL.Engine.SDK.Managers
         protected IServiceProvider ServiceProvider { get; }
         protected IStorage Storage { get; }
 
-        public virtual TEntity Create(TEntity entity)
+        public virtual TEntity Create(TEntity entity, bool cacheOnly = false)
         {
             if (entity == null)
             {
@@ -34,63 +34,45 @@ namespace TL.Engine.SDK.Managers
             }
             else
             {
-                TEntity createdEntity = null;
                 try
                 {
+                    Logger.TLogInformation($"Попытка создать сущность:\t{entity.GetType().GetFullName()}");
+
                     //Pre Create Entity
                     bool preCreate = true;
                     var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
                     foreach (var action in preCreateActions)
                     {
-                        preCreate = preCreate && action.Invoke(ref entity, ServiceProvider);
+                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        preCreate = preCreate && actionResult;
+                        Logger.TLogWarning($"Действия перед созданием сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
+
                     if (preCreate)
                     {
-                        createdEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
-                        
+                        //Create Entity
+                        Logger.TLogInformation($"Все действия перед созданием сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        var createdEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
+                        Logger.TLogInformation($"Создана сущность:\t{entity.GetType().GetFullName()}");
+
                         //Post Create Entity
                         bool postCreate = true;
                         var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
                         foreach (var action in postCreateActions)
                         {
-                            postCreate = postCreate && action.Invoke(ref entity, ServiceProvider);
+                            var actionResult = action.Invoke(ref createdEntity, ServiceProvider);
+                            postCreate = postCreate && actionResult;
+                            Logger.TLogWarning($"Действия после создания сущности:\t{createdEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
+
                         if (postCreate)
                         {
-                            //Can Save Entity
-                            bool canSave = true;
-                            var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
-                            foreach (var action in canSaveActions)
-                            {
-                                canSave = canSave && action.Invoke(ref entity, ServiceProvider);
-                            }
-                            if (canSave)
-                            {
-                                //Pre Save Entity
-                                bool preSave = true;
-                                var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
-                                foreach (var action in preSaveActions)
-                                {
-                                    preSave = preSave && action.Invoke(ref entity, ServiceProvider);
-                                }
-                                if (preSave)
-                                {
-                                    //Save Entity
-                                    Storage.Save();
-
-                                    //Post Save Entity
-                                    bool postSave = true;
-                                    var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
-                                    foreach (var action in postSaveActions)
-                                    {
-                                        postSave = postSave && action.Invoke(ref entity, ServiceProvider);
-                                    }
-                                    if (postSave)
-                                    {
-                                        ;
-                                    }
-                                }
-                            }
+                            Logger.TLogInformation($"Все действия после создания сущности успешно выполнены:\t{createdEntity.GetType().GetFullName()}");
+                            return Save(createdEntity, cacheOnly);
+                        }
+                        else
+                        {
+                            Logger.TLogError($"Не все действия после создания сущности успешно выполнены:\t{createdEntity.GetType().GetFullName()}");
                         }
                     }
                 }
@@ -98,15 +80,16 @@ namespace TL.Engine.SDK.Managers
                 {
                     Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
                 }
-                return createdEntity;
             }
+            return null;
         }
 
         public virtual TEntity CreateEmpty()
         {
-            TEntity createdEntity = null;
             try
             {
+                //Initialize Entity
+                Logger.TLogInformation($"Запрос создания сущности:\t{typeof(TEntity).GetFullName()}");
                 var entity = ActivatorUtilities.CreateInstance(ServiceProvider, typeof(TEntity)) as TEntity;
                 
                 //Can Create Entity
@@ -114,67 +97,114 @@ namespace TL.Engine.SDK.Managers
                 var canCreateActions = ExtensionManager.GetInstances<IEntityActionCanCreate<TEntity>>();
                 foreach (var action in canCreateActions)
                 {
-                    canCreate = canCreate && action.Invoke(ref entity, ServiceProvider);
+                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    canCreate = canCreate && actionResult;
+                    Logger.TLogWarning($"Проверка перед созданием сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
+
                 if (canCreate)
                 {
+                    Logger.TLogInformation($"Сущность может быть создана:\t{entity.GetType().GetFullName()}");
                     return Create(entity);
+                }
+                else
+                {
+                    Logger.TLogError($"Сущность не может быть создана:\t{entity.GetType().GetFullName()}");
                 }
             }
             catch (Exception ex)
             {
                 Logger.TLogCritical($"Не удалось создать пустой экземпляр сущности\r\n{ex}");
             }
-            return createdEntity;
+            return null;
         }
 
-        public virtual TEntity Delete(TEntity entity)
+        public virtual TEntity Delete(TEntity entity, bool cacheOnly = false)
         {
-            TEntity returnableEntity = null;
             try
             {
-                returnableEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Delete(entity);
-                Storage.Save();
+                //Can Delete Entity
+                Logger.TLogInformation($"Запрос удаления сущности:\t{typeof(TEntity).GetFullName()}");
+                bool canDelete = true;
+                var canDeleteActions = ExtensionManager.GetInstances<IEntityActionCanDelete<TEntity>>();
+                foreach (var action in canDeleteActions)
+                {
+                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    canDelete = canDelete && actionResult;
+                    Logger.TLogWarning($"Проверка перед удалением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                }
+
+                if (canDelete)
+                {
+                    //Pre Delete Entity
+                    Logger.TLogInformation($"Сущность может быть удалена:\t{entity.GetType().GetFullName()}");
+                    bool preDelete = true;
+                    var preDeleteActions = ExtensionManager.GetInstances<IEntityActionPreDelete<TEntity>>();
+                    foreach (var action in preDeleteActions)
+                    {
+                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        preDelete = preDelete && actionResult;
+                        Logger.TLogWarning($"Действия перед удалением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                    }
+
+                    if (preDelete)
+                    {
+                        //Delete Entity
+                        Logger.TLogInformation($"Все действия перед удалением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+
+                        entity.IsDeleted = true;
+                        var deletedEntity = Update(entity, true);
+
+                        Logger.TLogInformation($"Удалена сущность:\t{entity.GetType().GetFullName()}");
+
+                        //Post Delete Entity
+                        bool postDelete = true;
+                        var postDeleteActions = ExtensionManager.GetInstances<IEntityActionPostDelete<TEntity>>();
+                        foreach (var action in postDeleteActions)
+                        {
+                            var actionResult = action.Invoke(ref deletedEntity, ServiceProvider);
+                            postDelete = postDelete && actionResult;
+                            Logger.TLogWarning($"Действия после удаления сущности:\t{deletedEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                        }
+                        if (postDelete)
+                        {
+                            Logger.TLogInformation($"Все действия после удаления сущности успешно выполнены:\t{deletedEntity.GetType().GetFullName()}");
+                            return Save(deletedEntity, cacheOnly);
+                        }
+                        else
+                        {
+                            Logger.TLogError($"Не все действия после удаления сущности успешно выполнены:\t{deletedEntity.GetType().GetFullName()}");
+                        }
+                    }
+                    else
+                    {
+                        Logger.TLogError($"Не все действия перед удалением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    }
+                }
+                else
+                {
+                    Logger.TLogError($"Сущность не может быть удалена:\t{entity.GetType().GetFullName()}");
+                }
             }
             catch (Exception ex)
             {
                 Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
             }
-            return returnableEntity;
+            return null;
         }
 
-        public virtual TEntity Delete(Func<TEntity, bool> predicate)
+        public virtual TEntity Delete(Func<TEntity, bool> predicate, bool cacheOnly = false)
         {
-            TEntity entity = null;
-            try
-            {
-                var repository = Storage.GetRepository<IEntityRepository<TEntity>>();
-                entity = repository.Delete(repository.Get(predicate));
-                Storage.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
-            }
-            return entity;
+            return Delete(Get(predicate), cacheOnly);
         }
 
-        public IEnumerable<TEntity> DeleteAll(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> DeleteAll(Func<TEntity, bool> predicate, bool cacheOnly = false)
         {
             var returnableEntities = new List<TEntity>();
-            try
+            var entities = GetAll(predicate).ToArray();
+            for (int i = 0; i < entities.Length; ++i)
             {
-                var repository = Storage.GetRepository<IEntityRepository<TEntity>>();
-                var entities = GetAll(predicate).ToArray();
-                for (int i = 0; i < entities.Length; ++i)
-                {
-                    returnableEntities.Add(repository.Delete(entities[i]));
-                }
-                Storage.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
+                returnableEntities.Add(Delete(entities[i], cacheOnly));
             }
             return returnableEntities;
         }
@@ -195,87 +225,78 @@ namespace TL.Engine.SDK.Managers
             return entities;
         }
 
-        public virtual TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null)
+        public virtual TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false)
         {
             TEntity existedEntity = Get(predicate, loadDeleted);
             if (existedEntity == null)
             {
-                return Create(entity);
+                return Create(entity, cacheOnly);
             }
             return existedEntity;
         }
 
-        public virtual TEntity Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity, bool cacheOnly = false)
         {
             try
             {
                 //Can Update Entity
+                Logger.TLogInformation($"Запрос обновления сущности:\t{typeof(TEntity).GetFullName()}");
                 bool canUpdate = true;
                 var canUpdateActions = ExtensionManager.GetInstances<IEntityActionCanUpdate<TEntity>>();
                 foreach (var action in canUpdateActions)
                 {
-                    canUpdate = canUpdate && action.Invoke(ref entity, ServiceProvider);
+                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    canUpdate = canUpdate && actionResult;
+                    Logger.TLogWarning($"Проверка перед обновлением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
+
                 if (canUpdate)
                 {
                     //Pre Update Entity
+                    Logger.TLogInformation($"Сущность может быть обновлена:\t{entity.GetType().GetFullName()}");
                     bool preUpdate = true;
                     var preUpdateActions = ExtensionManager.GetInstances<IEntityActionPreUpdate<TEntity>>();
                     foreach (var action in preUpdateActions)
                     {
-                        preUpdate = preUpdate && action.Invoke(ref entity, ServiceProvider);
+                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        preUpdate = preUpdate && actionResult;
+                        Logger.TLogWarning($"Действия перед обновлением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
+
                     if (preUpdate)
                     {
-                        TEntity updatedEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Update(entity);
-                        
+                        //Update Entity
+                        Logger.TLogInformation($"Все действия перед обновлением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        var updatedEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Update(entity);
+                        Logger.TLogInformation($"Обновлена сущность:\t{entity.GetType().GetFullName()}");
+
                         //Post Update Entity
                         bool postUpdate = true;
                         var postUpdateActions = ExtensionManager.GetInstances<IEntityActionPostUpdate<TEntity>>();
                         foreach (var action in postUpdateActions)
                         {
-                            postUpdate = postUpdate && action.Invoke(ref entity, ServiceProvider);
+                            var actionResult = action.Invoke(ref updatedEntity, ServiceProvider);
+                            postUpdate = postUpdate && actionResult;
+                            Logger.TLogWarning($"Действия после обновления сущности:\t{updatedEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
                         if (postUpdate)
                         {
-                            //Can Save Entity
-                            bool canSave = true;
-                            var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
-                            foreach (var action in canSaveActions)
-                            {
-                                canSave = canSave && action.Invoke(ref entity, ServiceProvider);
-                            }
-                            if (canSave)
-                            {
-                                //Pre Save Entity
-                                bool preSave = true;
-                                var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
-                                foreach (var action in preSaveActions)
-                                {
-                                    preSave = preSave && action.Invoke(ref entity, ServiceProvider);
-                                }
-                                if (preSave)
-                                {
-                                    //Save Entity
-                                    Storage.Save();
-
-                                    //Post Save Entity
-                                    bool postSave = true;
-                                    var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
-                                    foreach (var action in postSaveActions)
-                                    {
-                                        postSave = postSave && action.Invoke(ref entity, ServiceProvider);
-                                    }
-                                    if (postSave)
-                                    {
-                                        ;
-                                    }
-
-                                    return updatedEntity;
-                                }
-                            }
+                            Logger.TLogInformation($"Все действия после обновления сущности успешно выполнены:\t{updatedEntity.GetType().GetFullName()}");
+                            return Save(updatedEntity, cacheOnly);
+                        }
+                        else
+                        {
+                            Logger.TLogError($"Не все действия после обновления сущности успешно выполнены:\t{updatedEntity.GetType().GetFullName()}");
                         }
                     }
+                    else
+                    {
+                        Logger.TLogError($"Не все действия перед обновлением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    }
+                }
+                else
+                {
+                    Logger.TLogError($"Сущность не может быть обновлена:\t{entity.GetType().GetFullName()}");
                 }
             }
             catch (Exception ex)
@@ -283,6 +304,73 @@ namespace TL.Engine.SDK.Managers
                 Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
             }
             return null;
+        }
+
+        protected TEntity Save(TEntity entity, bool cacheOnly = false)
+        {
+            //Can Save Entity
+            Logger.TLogInformation($"Попытка сохранить сущность:\t{entity.GetType().GetFullName()}");
+            bool canSave = true;
+            var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
+            foreach (var action in canSaveActions)
+            {
+                var actionResult = action.Invoke(ref entity, ServiceProvider);
+                canSave = canSave && actionResult;
+                Logger.TLogWarning($"Проверка условий сохранения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+            }
+
+            if (canSave)
+            {
+                //Pre Save Entity
+                Logger.TLogInformation($"Сущность может быть сохранена:\t{entity.GetType().GetFullName()}");
+                bool preSave = true;
+                var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
+                foreach (var action in preSaveActions)
+                {
+                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    preSave = preSave && actionResult;
+                    Logger.TLogWarning($"Действия перед сохранением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                }
+
+                if (preSave)
+                {
+                    //Save Entity
+                    Logger.TLogInformation($"Все действия перед сохранением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    if (!cacheOnly)
+                    {
+                        Logger.TLogWarning($"Сохранена сущность:\t{entity.GetType().GetFullName()}");
+                        Storage.Save();
+                    }
+
+                    //Post Save Entity
+                    bool postSave = true;
+                    var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
+                    foreach (var action in postSaveActions)
+                    {
+                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        postSave = postSave && actionResult;
+                        Logger.TLogWarning($"Действия после сохранения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                    }
+
+                    if (postSave)
+                    {
+                        Logger.TLogInformation($"Все действия после сохранения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    }
+                    else
+                    {
+                        Logger.TLogError($"Не все действия после сохранения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    }
+                }
+                else
+                {
+                    Logger.TLogError($"Не все действия перед сохранением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                }
+            }
+            else
+            {
+                Logger.TLogError($"Сущность не может быть сохранена:\t{entity.GetType().GetFullName()}");
+            }
+            return entity;
         }
     }
 }
