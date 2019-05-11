@@ -13,7 +13,7 @@ namespace TL.Engine.Data.EntityFramework.Security.UsersRoles
                .HasKey(e => new { e.UserId, e.RoleId });
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}UsersRoles");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.UsersRoles");
 
             builder
                 .HasOne(e => e.Role)

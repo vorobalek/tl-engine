@@ -25,7 +25,7 @@ namespace TL.Engine.Data.EntityFramework.System.StringVariables
                 .HasForeignKey(e => e.AuthorId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}StringVariables");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.StringVariables");
         }
     }
 }

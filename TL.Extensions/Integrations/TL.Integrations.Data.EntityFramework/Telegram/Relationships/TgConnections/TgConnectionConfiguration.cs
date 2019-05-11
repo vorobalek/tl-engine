@@ -22,7 +22,7 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnecti
                 .HasForeignKey(e => e.UserId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}TgConnections");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.TgConnections");
         }
     }
 }

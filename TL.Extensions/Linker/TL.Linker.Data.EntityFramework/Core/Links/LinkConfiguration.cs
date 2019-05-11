@@ -20,7 +20,7 @@ namespace TL.Linker.Data.EntityFramework.Core.Links
                 .IsUnique();
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}Links");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Links");
         }
     }
 }

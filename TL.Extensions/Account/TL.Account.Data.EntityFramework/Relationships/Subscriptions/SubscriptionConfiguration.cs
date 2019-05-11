@@ -17,7 +17,7 @@ namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions
                 .HasForeignKey(e => e.FromId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}Subscriptions");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Subscriptions");
 
             builder
                 .HasData(new[]
