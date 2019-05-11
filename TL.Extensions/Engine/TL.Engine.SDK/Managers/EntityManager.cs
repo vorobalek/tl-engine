@@ -30,7 +30,7 @@ namespace TL.Engine.SDK.Managers
         {
             if (entity == null)
             {
-                return CreateEmpty();
+                return CreateEmpty(cacheOnly);
             }
             else
             {
@@ -84,7 +84,7 @@ namespace TL.Engine.SDK.Managers
             return null;
         }
 
-        public virtual TEntity CreateEmpty()
+        public virtual TEntity CreateEmpty(bool cacheOnly = false)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace TL.Engine.SDK.Managers
                 if (canCreate)
                 {
                     Logger.TLogInformation($"Сущность может быть создана:\t{entity.GetType().GetFullName()}");
-                    return Create(entity);
+                    return Create(entity, cacheOnly);
                 }
                 else
                 {

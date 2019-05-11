@@ -19,37 +19,37 @@ namespace TL.Engine.SDK.Managers
             return Get(e => e.Id.Equals(key), loadDeleted);
         }
 
-        public virtual TEntity GetOrCreate(TKey key, bool loadDeleted = false, TEntity entity = null)
+        public virtual TEntity GetOrCreate(TKey key, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false)
         {
-            return GetOrCreate(e => e.Id.Equals(key), loadDeleted, entity);
+            return GetOrCreate(e => e.Id.Equals(key), loadDeleted, entity, cacheOnly);
         }
 
-        public virtual TEntity UpdateOrCreate(TKey key, TEntity entity = null)
+        public virtual TEntity UpdateOrCreate(TKey key, TEntity entity = null, bool cacheOnly = false)
         {
-            return UpdateOrCreate(e => e.Id.Equals(key), entity);
+            return UpdateOrCreate(e => e.Id.Equals(key), entity, cacheOnly);
         }
 
-        public virtual TEntity UpdateOrCreate(Func<TEntity, bool> predicate, TEntity entity = null)
+        public virtual TEntity UpdateOrCreate(Func<TEntity, bool> predicate, TEntity entity = null, bool cacheOnly = false)
         {
             TEntity existedEntity = Get(predicate);
             if (existedEntity == null)
             {
-                return Create(entity);
+                return Create(entity, cacheOnly);
             }
             else
             {
                 if (entity == null)
                 {
-                    entity = CreateEmpty();
+                    entity = CreateEmpty(cacheOnly);
                 }
                 entity.Id = existedEntity.Id;
-                return Update(existedEntity);
+                return Update(existedEntity, cacheOnly);
             }
         }
 
-        public virtual TEntity UpdateOrCreate(TEntity entity)
+        public virtual TEntity UpdateOrCreate(TEntity entity, bool cacheOnly = false)
         {
-            return UpdateOrCreate(e => e.Id.Equals(entity.Id), entity);
+            return UpdateOrCreate(e => e.Id.Equals(entity.Id), entity, cacheOnly);
         }
     }
 }

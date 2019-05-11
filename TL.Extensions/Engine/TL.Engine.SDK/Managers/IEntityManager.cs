@@ -8,7 +8,7 @@ namespace TL.Engine.SDK.Managers
         where TEntity : class, IEntity
     {
         TEntity Create(TEntity entity, bool cacheOnly = false);
-        TEntity CreateEmpty();
+        TEntity CreateEmpty(bool cacheOnly = false);
         TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false);
         IEnumerable<TEntity> GetAll(bool loadDeleted = false);
         IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false);
