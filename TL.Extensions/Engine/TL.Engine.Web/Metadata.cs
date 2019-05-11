@@ -38,7 +38,7 @@ namespace TL.Engine.Web
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
             new LinkItem("/welcome", "Добро пожаловать!", int.MinValue, new string[] { "user" }),
-            new LinkItem("#", "Система", 2000, new[] { "sa" }, new[]
+            new LinkItem("Система", 2000, new[] { "sa" }, new[]
             {
                 new LinkItem("/modules", "Управление модулями", 1000, new string[] { "sa" }),
                 new LinkItem("/home/exception", "Проверить исключения", 1100, new string[] { "sa" })
