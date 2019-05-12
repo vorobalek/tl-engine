@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TL.Engine.Data.Abstractions.Security;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.Data.Managers;
 using TL.Engine.Web.Areas.Account.ViewModels;
@@ -35,8 +34,7 @@ namespace TL.Engine.Web.Areas.Account.Controllers
 
             if (ModelState.IsValid)
             {
-                User user = Storage.GetRepository<IUserRepository>().GetByUsername(model.Username);
-                if (user != null && !user.IsClosed)
+                if (UserManager.Get(model.Username) is User user && !user.IsClosed)
                 {
                     if (user.HasPassword)
                     {
