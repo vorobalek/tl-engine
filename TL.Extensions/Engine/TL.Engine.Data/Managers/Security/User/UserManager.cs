@@ -98,7 +98,7 @@ namespace TL.Engine.Data.Managers
 
         public void Authenticate(User user, HttpContext httpContext)
         {
-            user.Authenticate(Storage, httpContext);
+            user.Authenticate(ServiceProvider, httpContext);
         }
 
         [PrivateApi(Description = "Получить всех пользователей")]

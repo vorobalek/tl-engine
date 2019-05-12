@@ -15,6 +15,7 @@ namespace TL.Engine.Web.Actions
             applicationBuilder.UseAuthentication();
             applicationBuilder.UseStatusCodePagesWithReExecute("/error/{0}");
             applicationBuilder.UseExceptionHandler("/fail");
+            applicationBuilder.UseCheckActivity();
         }
     }
 }

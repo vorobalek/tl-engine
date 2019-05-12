@@ -16,6 +16,10 @@ namespace TL.Engine.Data.Entities.Security
 
         public bool IsClosed { get; set; } = false;
 
+        public DateTime LastActivity { get; set; }
+
+        public DateTime LastLogon { get; set; }
+
         public virtual IEnumerable<UserRole> UserRoles { get; set; }
 
         public virtual IEnumerable<UserGroup> UserGroups { get; set; }

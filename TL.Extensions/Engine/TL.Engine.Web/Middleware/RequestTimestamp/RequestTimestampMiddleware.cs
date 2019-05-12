@@ -16,7 +16,6 @@ namespace TL.Engine.Web.Middleware
         public Task Invoke(HttpContext context)
         {
             context.Items.Add("RequestStartedOn", DateTime.Now);
-
             return _next(context);
         }
     }

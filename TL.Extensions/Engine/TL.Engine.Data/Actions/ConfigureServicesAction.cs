@@ -13,6 +13,7 @@ namespace TL.Engine.Data.Actions
         {
             serviceCollection.AddScoped<IStringVariableManager, StringVariableManager>();
             serviceCollection.AddScoped<IUserManager, UserManager>();
+            serviceCollection.AddScoped<IRoleManager, RoleManager>();
         }
     }
 }
