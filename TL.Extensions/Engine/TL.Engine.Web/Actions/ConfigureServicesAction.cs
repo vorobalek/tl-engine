@@ -1,5 +1,6 @@
 ﻿using ExtCore.Infrastructure.Actions;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Security.Claims;
@@ -30,6 +31,8 @@ namespace TL.Engine.Web.Actions
                 {
                     options.AddPolicy("SA", policy => policy.RequireClaim(ClaimsIdentity.DefaultRoleClaimType, Role.Sa.Id.ToString()));
                 });
+
+            serviceCollection.AddSingleton<IStartupFilter, EngineSystemStringVaribaleStartupFilter>();
         }
     }
 }

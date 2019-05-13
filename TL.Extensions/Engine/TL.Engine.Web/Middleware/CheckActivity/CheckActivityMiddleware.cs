@@ -5,12 +5,15 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TL.Engine.Data.Entities.Security;
+using TL.Engine.Data.Entities.System;
 using TL.Engine.Data.Managers;
 
 namespace TL.Engine.Web.Middleware
 {
     public class CheckActivityMiddleware
     {
+        public const string CheckActivityEnableVariable = "CheckActivityEnable";
+
         private readonly RequestDelegate _next;
 
         public CheckActivityMiddleware(RequestDelegate next)
@@ -18,29 +21,32 @@ namespace TL.Engine.Web.Middleware
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IUserManager userManager)
+        public async Task Invoke(HttpContext context, IUserManager userManager, IStringVariableManager stringVariableManager)
         {
-            if (context.User.Identity.IsAuthenticated)
+            if (stringVariableManager.Get(CheckActivityEnableVariable) is StringVariable variable && variable.Value == true.ToString())
             {
-                var claimUserId = context.User.Claims.FirstOrDefault(c => c.Type == nameof(User.Id));
-                if (claimUserId != null)
+                if (context.User.Identity.IsAuthenticated)
                 {
-                    if (Guid.TryParse(claimUserId.Value, out Guid userId))
+                    var claimUserId = context.User.Claims.FirstOrDefault(c => c.Type == nameof(User.Id));
+                    if (claimUserId != null)
                     {
-                        if (userManager.Get(userId) is User user && !user.IsClosed)
+                        if (Guid.TryParse(claimUserId.Value, out Guid userId))
                         {
-                            if (DateTime.Now - user.LastActivity < TimeSpan.FromDays(1)
-                                || DateTime.Now - user.LastLogon < TimeSpan.FromDays(1))
+                            if (userManager.Get(userId) is User user && !user.IsClosed)
                             {
-                                user.LastActivity = DateTime.Now.ToUniversalTime();
-                                userManager.Update(user);
-                                await _next(context);
-                                return;
+                                if (DateTime.Now - user.LastActivity < TimeSpan.FromDays(1)
+                                    || DateTime.Now - user.LastLogon < TimeSpan.FromDays(1))
+                                {
+                                    user.LastActivity = DateTime.Now.ToUniversalTime();
+                                    userManager.Update(user);
+                                    await _next(context);
+                                    return;
+                                }
                             }
                         }
                     }
+                    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 }
-                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
             await _next(context);
         }
