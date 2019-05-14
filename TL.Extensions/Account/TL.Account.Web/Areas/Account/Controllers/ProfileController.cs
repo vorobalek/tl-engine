@@ -45,10 +45,10 @@ namespace TL.Account.Web.Areas.Account.Controllers
                     var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);
                     if (item == null)
                     {
-                        var subsription = SubscriptionManager.CreateEmpty();
-                        subsription.From = user;
+                        var subsription = SubscriptionManager.CreateEmpty(cacheOnly: true);
+                        subsription.FromId = user.Id;
                         subsription.ToId = id;
-                        SubscriptionManager.Update(subsription);
+                        SubscriptionManager.Create(subsription);
 
                         message = $"Вы успешно подписались на этого пользователя";
                     }
@@ -75,8 +75,6 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 var user = UserManager.Get(userId);
                 if (user != null)
                 {
-                    var repository = Storage.GetRepository<ISubscriptionRepository>();
-
                     var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);
                     if (item != null)
                     {

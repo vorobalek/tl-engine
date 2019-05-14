@@ -33,7 +33,7 @@ namespace TL.Engine.Data.Managers
                 throw new ArgumentNullException(nameof(password), $"Запрещено создавать пользователей без пароля!");
             }
 
-            var user = CreateEmpty();
+            var user = CreateEmpty(cacheOnly: true);
             try
             {
                 var passwordHasher = new PasswordHasher<User>();
@@ -71,7 +71,7 @@ namespace TL.Engine.Data.Managers
                     }
                 });
 
-                return Update(user);
+                return Create(user);
             }
             catch (Exception ex)
             {

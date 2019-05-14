@@ -43,7 +43,7 @@ namespace TL.Engine.SDK.Managers
                     var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
                     foreach (var action in preCreateActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         preCreate = preCreate && actionResult;
                         Logger.TLogWarning($"Действия перед созданием сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -52,7 +52,11 @@ namespace TL.Engine.SDK.Managers
                     {
                         //Create Entity
                         Logger.TLogInformation($"Все действия перед созданием сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
-                        var createdEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
+
+                        if (!cacheOnly)
+                        {
+                            entity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
+                        }
                         Logger.TLogInformation($"Создана сущность:\t{entity.GetType().GetFullName()}");
 
                         //Post Create Entity
@@ -60,19 +64,19 @@ namespace TL.Engine.SDK.Managers
                         var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
                         foreach (var action in postCreateActions)
                         {
-                            var actionResult = action.Invoke(ref createdEntity, ServiceProvider);
+                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                             postCreate = postCreate && actionResult;
-                            Logger.TLogWarning($"Действия после создания сущности:\t{createdEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            Logger.TLogWarning($"Действия после создания сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
 
                         if (postCreate)
                         {
-                            Logger.TLogInformation($"Все действия после создания сущности успешно выполнены:\t{createdEntity.GetType().GetFullName()}");
-                            return Save(createdEntity, cacheOnly);
+                            Logger.TLogInformation($"Все действия после создания сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                            return Save(entity, cacheOnly);
                         }
                         else
                         {
-                            Logger.TLogError($"Не все действия после создания сущности успешно выполнены:\t{createdEntity.GetType().GetFullName()}");
+                            Logger.TLogError($"Не все действия после создания сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
                         }
                     }
                 }
@@ -91,13 +95,13 @@ namespace TL.Engine.SDK.Managers
                 //Initialize Entity
                 Logger.TLogInformation($"Запрос создания сущности:\t{typeof(TEntity).GetFullName()}");
                 var entity = ActivatorUtilities.CreateInstance(ServiceProvider, typeof(TEntity)) as TEntity;
-                
+
                 //Can Create Entity
                 bool canCreate = true;
                 var canCreateActions = ExtensionManager.GetInstances<IEntityActionCanCreate<TEntity>>();
                 foreach (var action in canCreateActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     canCreate = canCreate && actionResult;
                     Logger.TLogWarning($"Проверка перед созданием сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -129,7 +133,7 @@ namespace TL.Engine.SDK.Managers
                 var canDeleteActions = ExtensionManager.GetInstances<IEntityActionCanDelete<TEntity>>();
                 foreach (var action in canDeleteActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     canDelete = canDelete && actionResult;
                     Logger.TLogWarning($"Проверка перед удалением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -142,7 +146,7 @@ namespace TL.Engine.SDK.Managers
                     var preDeleteActions = ExtensionManager.GetInstances<IEntityActionPreDelete<TEntity>>();
                     foreach (var action in preDeleteActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         preDelete = preDelete && actionResult;
                         Logger.TLogWarning($"Действия перед удалением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -162,7 +166,7 @@ namespace TL.Engine.SDK.Managers
                         var postDeleteActions = ExtensionManager.GetInstances<IEntityActionPostDelete<TEntity>>();
                         foreach (var action in postDeleteActions)
                         {
-                            var actionResult = action.Invoke(ref deletedEntity, ServiceProvider);
+                            var actionResult = action.Invoke(ref deletedEntity, ServiceProvider, cacheOnly);
                             postDelete = postDelete && actionResult;
                             Logger.TLogWarning($"Действия после удаления сущности:\t{deletedEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
@@ -245,7 +249,7 @@ namespace TL.Engine.SDK.Managers
                 var canRemoveActions = ExtensionManager.GetInstances<IEntityActionCanRemove<TEntity>>();
                 foreach (var action in canRemoveActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     canRemove = canRemove && actionResult;
                     Logger.TLogWarning($"Проверка перед уничтожением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -258,7 +262,7 @@ namespace TL.Engine.SDK.Managers
                     var preRemoveActions = ExtensionManager.GetInstances<IEntityActionPreRemove<TEntity>>();
                     foreach (var action in preRemoveActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         preRemove = preRemove && actionResult;
                         Logger.TLogWarning($"Действия перед уничтожением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -267,7 +271,11 @@ namespace TL.Engine.SDK.Managers
                     {
                         //Remove Entity
                         Logger.TLogInformation($"Все действия перед уничтожением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
-                        var removedEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Remove(entity);
+
+                        if (!cacheOnly)
+                        {
+                            entity = Storage.GetRepository<IEntityRepository<TEntity>>().Remove(entity);
+                        }
                         Logger.TLogInformation($"Уничтожена сущность:\t{entity.GetType().GetFullName()}");
 
                         //Post Remove Entity
@@ -275,18 +283,18 @@ namespace TL.Engine.SDK.Managers
                         var postRemoveActions = ExtensionManager.GetInstances<IEntityActionPostRemove<TEntity>>();
                         foreach (var action in postRemoveActions)
                         {
-                            var actionResult = action.Invoke(ref removedEntity, ServiceProvider);
+                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                             postRemove = postRemove && actionResult;
-                            Logger.TLogWarning($"Действия после уничтожения сущности:\t{removedEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            Logger.TLogWarning($"Действия после уничтожения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
                         if (postRemove)
                         {
-                            Logger.TLogInformation($"Все действия после уничтожения сущности успешно выполнены:\t{removedEntity.GetType().GetFullName()}");
-                            return Save(removedEntity, cacheOnly);
+                            Logger.TLogInformation($"Все действия после уничтожения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                            return Save(entity, cacheOnly);
                         }
                         else
                         {
-                            Logger.TLogError($"Не все действия после уничтожения сущности успешно выполнены:\t{removedEntity.GetType().GetFullName()}");
+                            Logger.TLogError($"Не все действия после уничтожения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
                         }
                     }
                     else
@@ -332,7 +340,7 @@ namespace TL.Engine.SDK.Managers
                 var canUpdateActions = ExtensionManager.GetInstances<IEntityActionCanUpdate<TEntity>>();
                 foreach (var action in canUpdateActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     canUpdate = canUpdate && actionResult;
                     Logger.TLogWarning($"Проверка перед обновлением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -345,7 +353,7 @@ namespace TL.Engine.SDK.Managers
                     var preUpdateActions = ExtensionManager.GetInstances<IEntityActionPreUpdate<TEntity>>();
                     foreach (var action in preUpdateActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         preUpdate = preUpdate && actionResult;
                         Logger.TLogWarning($"Действия перед обновлением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -354,7 +362,11 @@ namespace TL.Engine.SDK.Managers
                     {
                         //Update Entity
                         Logger.TLogInformation($"Все действия перед обновлением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
-                        var updatedEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Update(entity);
+
+                        if (!cacheOnly)
+                        {
+                            entity = Storage.GetRepository<IEntityRepository<TEntity>>().Update(entity);
+                        }
                         Logger.TLogInformation($"Обновлена сущность:\t{entity.GetType().GetFullName()}");
 
                         //Post Update Entity
@@ -362,18 +374,18 @@ namespace TL.Engine.SDK.Managers
                         var postUpdateActions = ExtensionManager.GetInstances<IEntityActionPostUpdate<TEntity>>();
                         foreach (var action in postUpdateActions)
                         {
-                            var actionResult = action.Invoke(ref updatedEntity, ServiceProvider);
+                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                             postUpdate = postUpdate && actionResult;
-                            Logger.TLogWarning($"Действия после обновления сущности:\t{updatedEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            Logger.TLogWarning($"Действия после обновления сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
                         if (postUpdate)
                         {
-                            Logger.TLogInformation($"Все действия после обновления сущности успешно выполнены:\t{updatedEntity.GetType().GetFullName()}");
-                            return Save(updatedEntity, cacheOnly);
+                            Logger.TLogInformation($"Все действия после обновления сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                            return Save(entity, cacheOnly);
                         }
                         else
                         {
-                            Logger.TLogError($"Не все действия после обновления сущности успешно выполнены:\t{updatedEntity.GetType().GetFullName()}");
+                            Logger.TLogError($"Не все действия после обновления сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
                         }
                     }
                     else
@@ -401,7 +413,7 @@ namespace TL.Engine.SDK.Managers
             var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
             foreach (var action in canSaveActions)
             {
-                var actionResult = action.Invoke(ref entity, ServiceProvider);
+                var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                 canSave = canSave && actionResult;
                 Logger.TLogWarning($"Проверка условий сохранения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
             }
@@ -414,7 +426,7 @@ namespace TL.Engine.SDK.Managers
                 var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
                 foreach (var action in preSaveActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     preSave = preSave && actionResult;
                     Logger.TLogWarning($"Действия перед сохранением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -423,18 +435,19 @@ namespace TL.Engine.SDK.Managers
                 {
                     //Save Entity
                     Logger.TLogInformation($"Все действия перед сохранением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+
                     if (!cacheOnly)
                     {
-                        Logger.TLogWarning($"Сохранена сущность:\t{entity.GetType().GetFullName()}");
                         Storage.Save();
                     }
+                    Logger.TLogWarning($"Сохранена сущность:\t{entity.GetType().GetFullName()}");
 
                     //Post Save Entity
                     bool postSave = true;
                     var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
                     foreach (var action in postSaveActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         postSave = postSave && actionResult;
                         Logger.TLogWarning($"Действия после сохранения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }

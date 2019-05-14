@@ -1,8 +1,6 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using TL.Account.Data.Abstractions.Relationships;
-using TL.Account.Data.Entities.Relationships;
+using TL.Account.Data.Managers;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Actions;
 
@@ -10,21 +8,17 @@ namespace TL.Account.Web.Actions
 {
     public class UserActionPostCreate : IEntityActionPostCreate<User>
     {
-        public bool Invoke(ref User entity, IServiceProvider serviceProvider)
+        public bool Invoke(ref User entity, IServiceProvider serviceProvider, bool cacheOnly = false)
         {
-            var storage = serviceProvider.GetService<IStorage>();
-            var repository = storage.GetRepository<ISubscriptionRepository>();
-
+            var subscriptionManager = serviceProvider.GetService<ISubscriptionManager>();
             var userId = entity.Id;
-            var item = repository.Get(e => e.FromId == userId && e.ToId == User.System.Id);
-
+            var item = subscriptionManager.Get(e => e.FromId == userId && e.ToId == User.System.Id);
             if (item == null)
             {
-                repository.Add(new Subscription()
-                {
-                    From = entity,
-                    ToId = User.System.Id,
-                });
+                var subsription = subscriptionManager.CreateEmpty(cacheOnly: true);
+                subsription.FromId = userId;
+                subsription.ToId = User.System.Id;
+                subscriptionManager.Create(subsription, cacheOnly);
             }
 
             return true;
