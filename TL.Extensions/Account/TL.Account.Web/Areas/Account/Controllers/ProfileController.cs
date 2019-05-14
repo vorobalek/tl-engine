@@ -80,8 +80,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                     var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);
                     if (item != null)
                     {
-                        repository.Remove(item);
-                        Storage.Save();
+                        SubscriptionManager.Remove(item);
                         message = $"Вы успешно отписались от этого пользователя";
                     }
                     else

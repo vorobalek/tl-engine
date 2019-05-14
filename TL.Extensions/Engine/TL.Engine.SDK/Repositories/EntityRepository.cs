@@ -41,9 +41,14 @@ namespace TL.Engine.SDK.Repositories
             return dbSet.Where(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted)).Select(e => Load(e));
         }
 
-        public void Remove(TEntity entity)
+        public TEntity Remove(TEntity entity)
         {
-            dbSet.Remove(entity);
+            return Load(dbSet.Remove(entity).Entity);
+        }
+
+        public TEntity Remove(Func<TEntity, bool> predicate, bool loadDeleted = false)
+        {
+            return Remove(Load(dbSet.FirstOrDefault(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted))));
         }
 
         public virtual TEntity Update(TEntity entity)

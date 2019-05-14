@@ -235,6 +235,93 @@ namespace TL.Engine.SDK.Managers
             return existedEntity;
         }
 
+        public virtual TEntity Remove(TEntity entity, bool cacheOnly = false)
+        {
+            try
+            {
+                //Can Remove Entity
+                Logger.TLogInformation($"Запрос уничтожения сущности:\t{typeof(TEntity).GetFullName()}");
+                bool canRemove = true;
+                var canRemoveActions = ExtensionManager.GetInstances<IEntityActionCanRemove<TEntity>>();
+                foreach (var action in canRemoveActions)
+                {
+                    var actionResult = action.Invoke(ref entity, ServiceProvider);
+                    canRemove = canRemove && actionResult;
+                    Logger.TLogWarning($"Проверка перед уничтожением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                }
+
+                if (canRemove)
+                {
+                    ///Pre Remove Entity
+                    Logger.TLogInformation($"Сущность может быть уничтожена:\t{entity.GetType().GetFullName()}");
+                    bool preRemove = true;
+                    var preRemoveActions = ExtensionManager.GetInstances<IEntityActionPreRemove<TEntity>>();
+                    foreach (var action in preRemoveActions)
+                    {
+                        var actionResult = action.Invoke(ref entity, ServiceProvider);
+                        preRemove = preRemove && actionResult;
+                        Logger.TLogWarning($"Действия перед уничтожением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                    }
+
+                    if (preRemove)
+                    {
+                        //Remove Entity
+                        Logger.TLogInformation($"Все действия перед уничтожением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        var removedEntity = Storage.GetRepository<IEntityRepository<TEntity>>().Remove(entity);
+                        Logger.TLogInformation($"Уничтожена сущность:\t{entity.GetType().GetFullName()}");
+
+                        //Post Remove Entity
+                        bool postRemove = true;
+                        var postRemoveActions = ExtensionManager.GetInstances<IEntityActionPostRemove<TEntity>>();
+                        foreach (var action in postRemoveActions)
+                        {
+                            var actionResult = action.Invoke(ref removedEntity, ServiceProvider);
+                            postRemove = postRemove && actionResult;
+                            Logger.TLogWarning($"Действия после уничтожения сущности:\t{removedEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                        }
+                        if (postRemove)
+                        {
+                            Logger.TLogInformation($"Все действия после уничтожения сущности успешно выполнены:\t{removedEntity.GetType().GetFullName()}");
+                            return Save(removedEntity, cacheOnly);
+                        }
+                        else
+                        {
+                            Logger.TLogError($"Не все действия после уничтожения сущности успешно выполнены:\t{removedEntity.GetType().GetFullName()}");
+                        }
+                    }
+                    else
+                    {
+                        Logger.TLogError($"Не все действия перед уничтожением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    }
+                }
+                else
+                {
+                    Logger.TLogError($"Сущность не может быть уничтожена:\t{entity.GetType().GetFullName()}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.TLogCritical($"Не удалось завершить транзакцию в БД\r\n{ex}");
+            }
+            return null;
+        }
+
+        public virtual TEntity Remove(Func<TEntity, bool> predicate, bool loadDeleted = false, bool cacheOnly = false)
+        {
+            return Remove(Get(predicate, loadDeleted), cacheOnly);
+        }
+
+        public virtual IEnumerable<TEntity> RemoveAll(Func<TEntity, bool> predicate, bool loadDeleted = false, bool cacheOnly = false)
+        {
+            var returnableEntities = new List<TEntity>();
+            var entities = GetAll(predicate, loadDeleted).ToArray();
+            for (int i = 0; i < entities.Length; ++i)
+            {
+                returnableEntities.Add(Remove(entities[i], cacheOnly));
+            }
+            return returnableEntities;
+        }
+
         public virtual TEntity Update(TEntity entity, bool cacheOnly = false)
         {
             try

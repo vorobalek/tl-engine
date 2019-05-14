@@ -67,8 +67,7 @@ namespace TL.Api.Web.Areas.ApiHelp.Controllers
                 var token = TokenManager.Get(guid, true);
                 if (token != null)
                 {
-                    Storage.GetRepository<ITokenRepository>().Remove(token);
-                    Storage.Save();
+                    TokenManager.Remove(token);
                 }
             }
             return Redirect("/apihelp/settings/");

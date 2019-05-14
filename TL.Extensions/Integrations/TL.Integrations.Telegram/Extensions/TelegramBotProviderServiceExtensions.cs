@@ -52,9 +52,7 @@ namespace TL.Integrations.Telegram.Extensions
 
                 if (isNewBot)
                 {
-                    var storage = serviceProvider.GetService<IStorage>();
-                    storage.GetRepository<ITgBotRepository>().Remove(tgBot);
-                    storage.Save();
+                    tgBotManager.Remove(tgBot);
                 }
             }
             return false;
