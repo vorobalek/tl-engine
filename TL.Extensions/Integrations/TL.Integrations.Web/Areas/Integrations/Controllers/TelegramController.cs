@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using TL.Integrations.Data.Entities.Telegram.System;
@@ -20,7 +19,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
 
         ITgBotManager TgBotManager { get; }
 
-        public TelegramController(IStorage storage, ITelegramBotProviderService telegramBotProvider, IServiceProvider serviceProvider, ITgBotManager tgBotManager) : base(storage)
+        public TelegramController(ITelegramBotProviderService telegramBotProvider, IServiceProvider serviceProvider, ITgBotManager tgBotManager)
         {
             TelegramBotProvider = telegramBotProvider;
             ServiceProvider = serviceProvider;
@@ -35,7 +34,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         [HttpPost]
         public IActionResult Update()
         {
-            return PartialView("_TelegramBots", new TelegramBotsViewModelFactory().Create(Storage, TelegramBotProvider));
+            return PartialView("_TelegramBots", new TelegramBotsViewModelFactory().Create(TgBotManager, TelegramBotProvider));
         }
 
         [HttpPost]

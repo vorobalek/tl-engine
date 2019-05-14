@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Extensions;
@@ -8,10 +7,6 @@ namespace TL.Api.Web.Api.System
 {
     public class MeController : _SystemApiController
     {
-        public MeController(IStorage storage) : base(storage)
-        {
-        }
-
         public override string Command => "system.Me";
 
         public override string Description => "Используйте для получения информации о сервере";

@@ -7,10 +7,6 @@ namespace TL.Engine.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController(IStorage storage) : base(storage)
-        {
-        }
-
         public IActionResult Index()
         {
             string path = "/welcome";

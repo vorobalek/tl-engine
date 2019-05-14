@@ -14,6 +14,8 @@ namespace TL.Engine.Web.Middleware
     {
         public const string CheckActivityEnableVariable = "CheckActivityEnable";
 
+        public const string UpdateActivityEnableVariable = "UpdateActivityEnable";
+
         private readonly RequestDelegate _next;
 
         public CheckActivityMiddleware(RequestDelegate next)
@@ -23,7 +25,7 @@ namespace TL.Engine.Web.Middleware
 
         public async Task Invoke(HttpContext context, IUserManager userManager, IStringVariableManager stringVariableManager)
         {
-            if (stringVariableManager.Get(CheckActivityEnableVariable) is StringVariable variable && variable.Value == true.ToString())
+            if (stringVariableManager.Get(CheckActivityEnableVariable) is StringVariable checkActivity && checkActivity.Value == true.ToString())
             {
                 if (context.User.Identity.IsAuthenticated)
                 {
@@ -34,14 +36,18 @@ namespace TL.Engine.Web.Middleware
                         {
                             if (userManager.Get(userId) is User user && !user.IsClosed)
                             {
-                                if (DateTime.Now - user.LastActivity < TimeSpan.FromDays(1)
-                                    || DateTime.Now - user.LastLogon < TimeSpan.FromDays(1))
+                                if (stringVariableManager.Get(UpdateActivityEnableVariable) is StringVariable updateActivity && updateActivity.Value == true.ToString())
                                 {
-                                    user.LastActivity = DateTime.Now.ToUniversalTime();
-                                    userManager.Update(user);
-                                    await _next(context);
-                                    return;
+                                    if (DateTime.Now - user.LastActivity < TimeSpan.FromDays(1)
+                                        || DateTime.Now - user.LastLogon < TimeSpan.FromDays(1))
+                                    {
+                                        user.LastActivity = DateTime.Now.ToUniversalTime();
+                                        userManager.Update(user);
+                                    }
                                 }
+
+                                await _next(context);
+                                return;
                             }
                         }
                     }

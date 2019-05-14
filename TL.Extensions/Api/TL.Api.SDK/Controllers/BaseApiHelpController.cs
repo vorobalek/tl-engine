@@ -7,8 +7,5 @@ namespace TL.Api.SDK.Controllers
     [Area("ApiHelp")]
     public abstract class BaseApiHelpController : BaseController
     {
-        public BaseApiHelpController(IStorage storage) : base(storage)
-        {
-        }
     }
 }

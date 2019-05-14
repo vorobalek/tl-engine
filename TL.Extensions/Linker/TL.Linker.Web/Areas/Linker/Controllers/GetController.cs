@@ -1,6 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TL.Linker.Data.Managers;
 using TL.Linker.Web.Areas.Linker.ViewModels.Get;
@@ -11,7 +9,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
     {
         ILinkManager LinkManager { get; set; }
 
-        public GetController(ILinkManager linkManager, IStorage storage) : base(storage)
+        public GetController(ILinkManager linkManager)
         {
             LinkManager = linkManager;
         }

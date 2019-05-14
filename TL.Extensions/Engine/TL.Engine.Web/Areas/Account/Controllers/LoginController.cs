@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TL.Engine.Data.Entities.Security;
@@ -10,7 +9,7 @@ namespace TL.Engine.Web.Areas.Account.Controllers
 {
     public class LoginController : __AccountController__
     {
-        public LoginController(IStorage storage, IUserManager userManager) : base(storage, userManager)
+        public LoginController(IUserManager userManager) : base(userManager)
         {
         }
 

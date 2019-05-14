@@ -7,8 +7,5 @@ namespace TL.Account.SDK.Controllers
     [Area("Account")]
     public abstract class BaseAccountController : BaseController
     {
-        public BaseAccountController(IStorage storage) : base(storage)
-        {
-        }
     }
 }

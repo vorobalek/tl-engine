@@ -16,10 +16,13 @@ namespace TL.Api.Web.Areas.ApiHelp.Controllers
 
         public ITokenManager TokenManager { get; }
 
-        public SettingsController(IUserManager userManager, ITokenManager tokenManager, IStorage storage) : base(storage)
+        public IStorage Storage { get; }
+
+        public SettingsController(IUserManager userManager, ITokenManager tokenManager, IStorage storage)
         {
             UserManager = userManager;
             TokenManager = tokenManager;
+            Storage = storage;
         }
 
         [HttpGet]

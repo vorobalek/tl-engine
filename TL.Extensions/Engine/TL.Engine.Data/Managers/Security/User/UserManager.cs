@@ -22,7 +22,7 @@ namespace TL.Engine.Data.Managers
         [PublicApi(Description = "Получить пользователя по имени")]
         public User Get(string username)
         {
-            return username.GetUser(Storage);
+            return Get(e => e.Username == username);
         }
 
         [PrivateApi(Description = "Создать пользователя с логином, паролем и описанием")]
@@ -33,50 +33,45 @@ namespace TL.Engine.Data.Managers
                 throw new ArgumentNullException(nameof(password), $"Запрещено создавать пользователей без пароля!");
             }
 
-            User user = null;
+            var user = CreateEmpty();
             try
             {
                 var passwordHasher = new PasswordHasher<User>();
-                var user_id = Guid.NewGuid();
 
-                user = new User()
+                user.Username = username;
+                user.PasswordHash = passwordHasher.HashPassword(user, password);
+                user.Description = description;
+                user.UserRoles = new HashSet<UserRole>(new[]
                 {
-                    Id = user_id,
-                    Username = username,
-                    PasswordHash = passwordHasher.HashPassword(user, password),
-                    Description = description,
-                    UserRoles = new HashSet<UserRole>(new[]
+                    new UserRole()
                     {
-                        new UserRole()
-                        {
-                            UserId = user_id,
-                            RoleId = Role.DefaultUser.Id
-                        }
-                    }),
-                    UserGroups = new HashSet<UserGroup>(new[]
+                        UserId = user.Id,
+                        RoleId = Role.DefaultUser.Id
+                    }
+                });
+                user.UserGroups = new HashSet<UserGroup>(new[]
+                {
+                    new UserGroup()
                     {
-                        new UserGroup()
+                        UserId = user.Id,
+                        GroupId = Group.All.Id,
+                    },
+                    new UserGroup()
+                    {
+                        UserId = user.Id,
+                        GroupId = Group.DefaultUser.Id,
+                    },
+                    new UserGroup()
+                    {
+                        UserId = user.Id,
+                        GroupId = Storage.GetRepository<IGroupRepository>().Add(new Group()
                         {
-                            UserId = user_id,
-                            GroupId = Group.All.Id,
-                        },
-                        new UserGroup()
-                        {
-                            UserId = user_id,
-                            GroupId = Group.DefaultUser.Id,
-                        },
-                        new UserGroup()
-                        {
-                            UserId = user_id,
-                            GroupId = Storage.GetRepository<IGroupRepository>().Add(new Group()
-                            {
-                                Name = user_id.ToString()
-                            }).Id,
-                        }
-                    })
-                };
+                            Name = user.Id.ToString()
+                        }).Id,
+                    }
+                });
 
-                return Create(user);
+                return Update(user);
             }
             catch (Exception ex)
             {

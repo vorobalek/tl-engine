@@ -43,7 +43,7 @@
         <input asp-for="@Model.StatusCode" class="invisible" value="@Model.StatusCode" />
     </form>
     <div class="form-row">
-        <button id="submit" class="btn btn-outline-success form-control" onclick="server_alert('/fail', '#form-report', true)">
+        <button id="submit" class="btn btn-outline-success form-control" onclick="server_alert('/fail/report', '#form-report', true)">
             Отправить
         </button>
     </div>

@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Extensions;
 
@@ -7,10 +6,6 @@ namespace TL.Api.Web.Api.System
 {
     public class CheckController : _SystemApiController
     {
-        public CheckController(IStorage storage) : base(storage)
-        {
-        }
-
         public override string Command => "system.Check";
 
         public override string Description => "Используйте этот метод, чтобы проверить основные REST методы";

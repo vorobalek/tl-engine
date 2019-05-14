@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace TL.Engine.Web.Areas.Account.Controllers
 {
     public class LogoutController : __AccountController__
     {
-        public LogoutController(IStorage storage, IUserManager userManager) : base(storage, userManager)
+        public LogoutController(IUserManager userManager) : base(userManager)
         {
         }
 

@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Extensions;
@@ -8,10 +7,6 @@ namespace TL.Api.Web.Api.System
 {
     public class BadController : _SystemApiController
     {
-        public BadController(IStorage storage) : base(storage)
-        {
-        }
-
         public override string Command => "system.Bad";
 
         public override string Description => "Используйте для выполнения тестового неудачного запроса.";

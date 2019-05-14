@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using TL.Account.Web.Areas.Account.ViewModels;
@@ -11,16 +10,16 @@ namespace TL.Account.Web.Areas.Account.Controllers
     [Authorize]
     public class HomeController : __AccountController__
     {
-        public IHostingEnvironment HostingEnvironment { get; }
+        IHostingEnvironment HostingEnvironment { get; }
 
-        public HomeController(IStorage storage, IUserManager userManager, IHostingEnvironment appEnvironment) : base(storage, userManager)
+        public HomeController(IUserManager userManager, IHostingEnvironment appEnvironment) : base(userManager)
         {
             HostingEnvironment = appEnvironment;
         }
 
         public IActionResult Index()
         {
-            var user = User.GetUser(Storage);
+            var user = UserManager.GetByClaims(User);
             return View(new IndexViewModel()
             {
                 Username = user.Username,

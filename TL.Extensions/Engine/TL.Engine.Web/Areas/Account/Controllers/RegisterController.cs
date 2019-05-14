@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TL.Engine.Data.Managers;
 using TL.Engine.Web.Areas.Account.ViewModels;
@@ -8,7 +7,7 @@ namespace TL.Engine.Web.Areas.Account.Controllers
 {
     public class RegisterController : __AccountController__
     {
-        public RegisterController(IStorage storage, IUserManager userManager) : base(storage, userManager)
+        public RegisterController(IUserManager userManager) : base(userManager)
         {
         }
         

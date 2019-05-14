@@ -8,10 +8,6 @@ namespace TL.Api.SDK.Controllers
     [Route("api/[controller]")]
     public abstract class BaseApiController : BaseController, IBaseApiController
     {
-        public BaseApiController(IStorage storage) : base(storage)
-        {
-        }
-
         public abstract string Area { get; }
 
         public abstract string Command { get; }

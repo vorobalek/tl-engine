@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using ExtCore.Infrastructure;
+﻿using ExtCore.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +29,7 @@ namespace TL.Api.Web.Api.System
 
         IUserManager UserManager { get; set; }
 
-        public ExecuteController(IServiceProvider serviceProvider, ITokenManager tokenManager, ITokenLogManager tokenLogManager, IUserManager userManager, IStorage storage) : base(storage)
+        public ExecuteController(IServiceProvider serviceProvider, ITokenManager tokenManager, ITokenLogManager tokenLogManager, IUserManager userManager)
         {
             ServiceProvider = serviceProvider;
             TokenManager = tokenManager;

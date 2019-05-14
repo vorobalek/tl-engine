@@ -1,27 +1,25 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
-using TL.Engine.Data.Abstractions.Reports;
 using TL.Engine.Data.Entities.Reports;
 using TL.Engine.Data.Extensions;
+using TL.Engine.Data.Managers;
 using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers
 {
     public class FailController : Controller
     {
-        public FailController(IStorage storage, ILogger<FailController> logger)
+        public FailController(IReportManager reportManager, IUserManager userManager)
         {
-            Storage = storage;
-            Logger = logger;
+            ReportManager = reportManager;
+            UserManager = userManager;
         }
 
-        public IStorage Storage { get; }
+        IUserManager UserManager { get; }
 
-        public ILogger<FailController> Logger { get; }
+        IReportManager ReportManager { get; }
 
         [HttpGet]
         public IActionResult Index()
@@ -64,33 +62,31 @@ namespace TL.Engine.Web.Controllers
         [HttpPost]
         public IActionResult Report(ErrorViewModel model)
         {
-            string message = "";
-
             if (!string.IsNullOrWhiteSpace(model.StackTrace))
             {
                 model.StackTrace = string.Join("\r\n   ", model.StackTrace.Split("   "));
             }
+
+            string message;
             if (ModelState.IsValid)
             {
                 var date = DateTime.Now.ToUniversalTime();
-                var report = new Report()
-                {
-                    Author = model.Author,
-                    Description = model.Description,
-                    Priority = model.Priority as ReportPriority?,
-                    CreationDate = date,
-                    ModifiedDate = date,
-                    Message = model.Message,
-                    StackTrace = model.StackTrace
-                };
+                var report = ReportManager.CreateEmpty();
+
+                report.Author = model.Author;
+                report.Description = model.Description;
+                report.Priority = model.Priority as ReportPriority?;
+                report.CreationDate = date;
+                report.ModifiedDate = date;
+                report.Message = model.Message;
+                report.StackTrace = model.StackTrace;
 
                 if (User.Identity.IsAuthenticated)
                 {
-                    report.User = User.GetUser(Storage);
+                    report.User = UserManager.GetByClaims(User);
                 }
 
-                Storage.GetRepository<IReportRepository>().Add(report);
-                Storage.Save();
+                ReportManager.Update(report);
                 message = "Спасибо за ваш фидбек!";
             }
             else

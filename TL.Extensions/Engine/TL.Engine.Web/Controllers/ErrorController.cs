@@ -14,7 +14,7 @@ namespace TL.Engine.Web.Controllers
             Logger = logger;
         }
 
-        public ILogger<ErrorController> Logger { get; }
+        ILogger<ErrorController> Logger { get; }
 
         [HttpGet("{code}")]
         public IActionResult Index(int code)

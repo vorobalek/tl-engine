@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Extensions;
@@ -12,7 +11,7 @@ namespace TL.Api.Web.Api.System
     {
         private IApiDocumentationService ApiDocumentationService { get; }
 
-        public HelpController(IStorage storage, IApiDocumentationService apiDocumentationService) : base(storage)
+        public HelpController(IApiDocumentationService apiDocumentationService)
         {
             ApiDocumentationService = apiDocumentationService;
         }

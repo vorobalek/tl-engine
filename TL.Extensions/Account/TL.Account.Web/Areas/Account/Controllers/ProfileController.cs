@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using TL.Account.Data.Abstractions.Relationships;
-using TL.Account.Data.Entities.Relationships;
 using TL.Account.Data.Extensions;
+using TL.Account.Data.Managers;
 using TL.Account.Web.Areas.Account.ViewModels;
 using TL.Engine.Data.Extensions;
 using TL.Engine.Data.Managers;
@@ -16,8 +16,14 @@ namespace TL.Account.Web.Areas.Account.Controllers
 {
     public class ProfileController : __AccountController__
     {
-        public ProfileController(IStorage storage, IUserManager userManager) : base(storage, userManager)
+        ISubscriptionManager SubscriptionManager { get; }
+
+        IStorage Storage { get; }
+
+        public ProfileController(IStorage storage, ISubscriptionManager subscriptionManager, IUserManager userManager) : base(userManager)
         {
+            Storage = storage;
+            SubscriptionManager = subscriptionManager;
         }
 
         [Authorize]
@@ -36,16 +42,14 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 var user = UserManager.Get(userId);
                 if (user != null)
                 {
-                    var repository = Storage.GetRepository<ISubscriptionRepository>();
-                    var item = repository.Get(e => e.FromId == user.Id && e.ToId == id);
+                    var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);
                     if (item == null)
                     {
-                        repository.Add(new Subscription()
-                        {
-                            FromId = user.Id,
-                            ToId = id,
-                        });
-                        Storage.Save();
+                        var subsription = SubscriptionManager.CreateEmpty();
+                        subsription.From = user;
+                        subsription.ToId = id;
+                        SubscriptionManager.Update(subsription);
+
                         message = $"Вы успешно подписались на этого пользователя";
                     }
                     else
@@ -72,7 +76,8 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 if (user != null)
                 {
                     var repository = Storage.GetRepository<ISubscriptionRepository>();
-                    var item = repository.Get(e => e.FromId == user.Id && e.ToId == id);
+
+                    var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);
                     if (item != null)
                     {
                         repository.Remove(item);
@@ -95,7 +100,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
         [HttpGet("[area]/[controller]/{username}")]
         public IActionResult Index(string username)
         {
-            var user = username.GetUser(Storage);
+            var user = UserManager.Get(username);
 
             if (user == null)
             {
@@ -104,7 +109,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
 
             var user_followers = user.GetFollowersUids(Storage);
             var user_subscriptions = user.GetSubscriptionsUids(Storage);
-            var requester = User?.GetUser(Storage);
+            var requester = UserManager.GetByClaims(User);
 
             bool isF = false,
                 isS = false;

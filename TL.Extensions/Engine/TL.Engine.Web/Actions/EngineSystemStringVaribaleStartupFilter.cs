@@ -22,6 +22,10 @@ namespace TL.Engine.Web.Actions
             {
                 StringVariableManager.Create(new StringVariable(CheckActivityMiddleware.CheckActivityEnableVariable, true.ToString()));
             }
+            if (StringVariableManager.Get(CheckActivityMiddleware.UpdateActivityEnableVariable) == null)
+            {
+                StringVariableManager.Create(new StringVariable(CheckActivityMiddleware.UpdateActivityEnableVariable, false.ToString()));
+            }
 
             return next;
         }

@@ -1,6 +1,7 @@
 ﻿using ExtCore.Data.Abstractions;
 using System;
 using TL.Integrations.Data.Abstractions.Telegram.System;
+using TL.Integrations.Data.Managers;
 using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared
@@ -11,9 +12,9 @@ namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared
 
         private static DateTime LastUpdate { get; set; }
 
-        public TelegramBotsViewModel Create(IStorage storage, ITelegramBotProviderService telegramBotProvider)
+        public TelegramBotsViewModel Create(ITgBotManager tgBotManager, ITelegramBotProviderService telegramBotProvider)
         {
-            var savedBots = storage.GetRepository<ITgBotRepository>().GetAll();
+            var savedBots = tgBotManager.GetAll();
             var activeBots = telegramBotProvider.GetOnline();
 
             Model = new TelegramBotsViewModel()
