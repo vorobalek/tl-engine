@@ -1,7 +1,6 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TL.Api.Data.Abstractions.Security;
 using TL.Api.Data.Entities.Security;
 using TL.Api.Data.Managers;
 using TL.Api.Web.Areas.ApiHelp.ViewModels.Settings;

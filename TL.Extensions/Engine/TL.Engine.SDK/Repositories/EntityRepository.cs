@@ -28,7 +28,7 @@ namespace TL.Engine.SDK.Repositories
 
         public virtual TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            return Load(dbSet.FirstOrDefault(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted)));
+            return Load(dbSet.FirstOrDefault(e => predicate(Load(e)) && (loadDeleted || !loadDeleted && !e.IsDeleted)));
         }
 
         public virtual IEnumerable<TEntity> GetAll(bool loadDeleted = false)
@@ -38,7 +38,7 @@ namespace TL.Engine.SDK.Repositories
 
         public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            return dbSet.Where(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted)).Select(e => Load(e));
+            return dbSet.Where(e => predicate(Load(e)) && (loadDeleted || !loadDeleted && !e.IsDeleted)).Select(e => Load(e));
         }
 
         public TEntity Remove(TEntity entity)
@@ -48,7 +48,7 @@ namespace TL.Engine.SDK.Repositories
 
         public TEntity Remove(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
-            return Remove(Load(dbSet.FirstOrDefault(e => predicate(e) && (loadDeleted || !loadDeleted && !e.IsDeleted))));
+            return Remove(Load(dbSet.FirstOrDefault(e => predicate(Load(e)) && (loadDeleted || !loadDeleted && !e.IsDeleted))));
         }
 
         public virtual TEntity Update(TEntity entity)
@@ -68,7 +68,7 @@ namespace TL.Engine.SDK.Repositories
             }
         }
 
-        protected virtual TEntity Load(TEntity entity)
+        public virtual TEntity Load(TEntity entity)
         {
             try
             {

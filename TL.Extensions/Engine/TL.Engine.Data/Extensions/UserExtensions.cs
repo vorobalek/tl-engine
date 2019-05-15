@@ -14,27 +14,6 @@ namespace TL.Engine.Data.Extensions
 {
     public static class UserExtensions
     {
-        [Obsolete("Это расширение устарело и будет удалено в ближайших обновлениях", true)]
-        public static async void Authenticate(this User user, IStorage storage, HttpContext httpContext)
-        {
-            var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username),
-                    new Claim(nameof(User.Id), user.Id.ToString()),
-                };
-
-            var roles = storage.GetRepository<IUserRoleRepository>().GetByUser(user);
-            foreach (var userRole in roles)
-            {
-                var role = storage.GetRepository<IRoleRepository>().Get(userRole.RoleId);
-                claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.Name));
-            }
-
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-
-            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-        }
-
         public static async void Authenticate(this User user, IServiceProvider serviceProvider, HttpContext httpContext)
         {
             var storage = serviceProvider.GetService<IStorage>();
@@ -45,6 +24,7 @@ namespace TL.Engine.Data.Extensions
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username),
                     new Claim(nameof(User.Id), user.Id.ToString()),
+                    new Claim(nameof(User.WebTicket), user.WebTicket.ToString()),
                 };
 
             var roles = storage.GetRepository<IUserRoleRepository>().GetByUser(user);

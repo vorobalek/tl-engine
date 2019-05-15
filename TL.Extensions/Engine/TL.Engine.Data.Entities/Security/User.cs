@@ -16,6 +16,8 @@ namespace TL.Engine.Data.Entities.Security
 
         public bool IsClosed { get; set; } = false;
 
+        public Guid WebTicket { get; set; } = Guid.NewGuid();
+
         public DateTime LastActivity { get; set; }
 
         public DateTime LastLogon { get; set; }

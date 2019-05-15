@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
@@ -14,6 +15,8 @@ namespace TL.Engine.Web
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 
         public override string Authors => "Alexey Vorobev";
+
+        protected override Version Version => new Version(1, 3, 0, 0);
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {

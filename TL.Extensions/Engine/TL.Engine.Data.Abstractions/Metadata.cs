@@ -1,4 +1,5 @@
-﻿using TL.Engine.SDK.Modularity;
+﻿using System;
+using TL.Engine.SDK.Modularity;
 
 namespace TL.Engine.Data.Abstractions
 {
@@ -12,5 +13,7 @@ namespace TL.Engine.Data.Abstractions
             $"Модуль абстракций данных. Промежуточный слой интерфейсов, описывающих методы работы, допустимые с данными модуля {Owner}.";
 
         public override string Authors => "Alexey Vorobev";
+
+        protected override Version Version => new Version(1, 3, 0, 0);
     }
 }

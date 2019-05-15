@@ -1,4 +1,5 @@
-﻿using TL.Engine.SDK.Modularity;
+﻿using System;
+using TL.Engine.SDK.Modularity;
 
 namespace TL.Engine.Data
 {
@@ -12,5 +13,7 @@ namespace TL.Engine.Data
             $"Модуль работы с данными. Дополнительный слой для доступа к данным {Owner} из других модулей системы TL Engine.";
 
         public override string Authors => "Alexey Vorobev";
+
+        protected override Version Version => new Version(1, 3, 0, 0);
     }
 }

@@ -1,4 +1,5 @@
-﻿using TL.Engine.SDK.Modularity;
+﻿using System;
+using TL.Engine.SDK.Modularity;
 
 namespace TL.Engine.Data.EntityFramework
 {
@@ -12,5 +13,7 @@ namespace TL.Engine.Data.EntityFramework
             $"Модуль провайдера баз данных. Промежуточный слой, описывающий структуры таблиц в базе данных для сущностей {Owner}.";
 
         public override string Authors => "Alexey Vorobev";
+
+        protected override Version Version => new Version(1, 3, 0, 0);
     }
 }

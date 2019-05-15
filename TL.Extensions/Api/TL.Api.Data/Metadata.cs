@@ -1,4 +1,5 @@
-﻿using TL.Engine.SDK.Modularity;
+﻿using System;
+using TL.Engine.SDK.Modularity;
 
 namespace TL.Api.Data
 {
@@ -10,5 +11,7 @@ namespace TL.Api.Data
 
         public override string Description =>
                 $"Модуль работы с данными. Дополнительный слой для доступа к данным {Owner} из других модулей системы TL Engine.";
+
+        protected override Version Version => new Version(1, 3, 0, 0);
     }
 }

@@ -20,5 +20,6 @@ namespace TL.Engine.SDK.Managers
         TEntity Remove(TEntity entity, bool cacheOnly = false);
         TEntity Remove(Func<TEntity, bool> predicate, bool loadDeleted = false, bool cacheOnly = false);
         IEnumerable<TEntity> RemoveAll(Func<TEntity, bool> predicate, bool loadDeleted = false, bool cacheOnly = false);
+        TEntity Load(TEntity entity);
     }
 }

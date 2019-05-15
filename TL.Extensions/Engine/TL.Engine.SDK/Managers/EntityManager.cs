@@ -239,6 +239,11 @@ namespace TL.Engine.SDK.Managers
             return existedEntity;
         }
 
+        public TEntity Load(TEntity entity)
+        {
+            return Storage.GetRepository<IEntityRepository<TEntity>>().Load(entity);
+        }
+
         public virtual TEntity Remove(TEntity entity, bool cacheOnly = false)
         {
             try

@@ -127,6 +127,8 @@ namespace TL.Engine.Data.Managers
         {
             var passwordHasher = new PasswordHasher<User>();
             user.PasswordHash = passwordHasher.HashPassword(user, password);
+            user.WebTicket = Guid.NewGuid();
+
             return Update(user);
         }
     }

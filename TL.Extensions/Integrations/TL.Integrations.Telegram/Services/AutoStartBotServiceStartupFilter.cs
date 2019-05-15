@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Services;
+using TL.Engine.SDK.StartupFilers;
 using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
 using TL.Integrations.SDK.Telegram.Bots;
@@ -11,7 +12,7 @@ using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Telegram.Services
 {
-    public class AutoStartBotServiceStartupFilter : IStartupFilter
+    public class AutoStartBotServiceStartupFilter : BaseStartupFiler
     {
         ITgBotManager TgBotManager { get; }
 
@@ -19,14 +20,14 @@ namespace TL.Integrations.Telegram.Services
 
         ILogger Logger { get; }
 
-        public AutoStartBotServiceStartupFilter(ITelegramBotProviderService telegramBotProvider, ITgBotManager tgBotManager, ILoggerFactory loggerFactory)
+        public AutoStartBotServiceStartupFilter(ITelegramBotProviderService telegramBotProvider, ITgBotManager tgBotManager, ILoggerFactory loggerFactory, IStartupService startupService) : base(startupService)
         {
             TgBotManager = tgBotManager;
             TelegramBotProvider = telegramBotProvider;
             Logger = loggerFactory.CreateLogger(GetType());
         }
 
-        public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
+        protected override Action<IApplicationBuilder> Continue(Action<IApplicationBuilder> next)
         {
             try
             {

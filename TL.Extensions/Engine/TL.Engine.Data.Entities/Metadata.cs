@@ -1,4 +1,5 @@
-﻿using TL.Engine.SDK.Modularity;
+﻿using System;
+using TL.Engine.SDK.Modularity;
 
 namespace TL.Engine.Data.Entities
 {
@@ -12,5 +13,7 @@ namespace TL.Engine.Data.Entities
             $"Модуль сущностей данных. Основной слой, описывающий объекты модуля {Owner}, отображаемые в базу данных.";
 
         public override string Authors => "Alexey Vorobev";
+
+        protected override Version Version => new Version(1, 3, 0, 0);
     }
 }

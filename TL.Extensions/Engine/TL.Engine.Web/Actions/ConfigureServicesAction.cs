@@ -10,7 +10,7 @@ namespace TL.Engine.Web.Actions
 {
     public class ConfigureServicesAction : IConfigureServicesAction
     {
-        public int Priority => int.MinValue;
+        public int Priority => 0;
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {

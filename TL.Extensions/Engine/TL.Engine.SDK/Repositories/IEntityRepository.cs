@@ -14,5 +14,6 @@ namespace TL.Engine.SDK.Repositories
         IEnumerable<TEntity> GetAll(bool loadDeleted = false);
         IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false);
         TEntity Update(TEntity entity);
+        TEntity Load(TEntity entity);
     }
 }

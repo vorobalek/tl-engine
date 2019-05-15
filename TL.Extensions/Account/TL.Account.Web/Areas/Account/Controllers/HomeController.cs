@@ -49,6 +49,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                             if (!user.HasPassword || !UserManager.ValidatePassword(user, model.ChangePwd.NewPasword))
                             {
                                 UserManager.ChangePassword(user, model.ChangePwd.NewPasword);
+                                UserManager.Authenticate(user, HttpContext);
                                 model.StatusMessage = "Ваш пароль был успешно обновлен!";
                             }
                             else

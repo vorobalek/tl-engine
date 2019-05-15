@@ -1,4 +1,5 @@
-﻿using TL.Engine.SDK.Modularity;
+﻿using System;
+using TL.Engine.SDK.Modularity;
 
 namespace TL.Account.Data.Abstractions
 {
@@ -10,5 +11,7 @@ namespace TL.Account.Data.Abstractions
 
         public override string Description =>
                 $"Модуль абстракций данных. Промежуточный слой интерфейсов, описывающих методы работы, допустимые с данными модуля {Owner}.";
+
+        protected override Version Version => new Version(1, 3, 0, 0);
     }
 }

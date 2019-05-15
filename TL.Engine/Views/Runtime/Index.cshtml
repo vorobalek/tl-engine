@@ -1,0 +1,50 @@
+﻿@using TL.Engine.SDK.Services;
+@using TL.Engine.SDK.Extensions;
+@inject IStartupService StartupService
+@{
+    Layout = "_LayoutSafePage";
+    ViewData["Title"] = StartupService.IsOk ? "Лог запуска" : "Ошибка запуска";
+}
+@if (!StartupService.IsOk)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Внимание!</strong> Ядро системы TL Engine не может быть запущено, пока не устранены одна или несколько ошибок.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+else
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Внимание!</strong> Ядро системы TL Engine успешно запущено, эта страница доступна только системным администраторам.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-responsive-stack">
+        <thead class="thead-light">
+            <tr>
+                <th>Время</th>
+                <th>Вердикт</th>
+                <th>Сообщение</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var log in StartupService.Log)
+            {
+                <tr class="@(log.Ok ? "alert-success" : (log.IsFinal ? "alert-warning" : "alert-danger"))">
+
+                    <td>@log.Time.ToDetailedString()</td>
+                    <td>@log.Ok</td>
+                    <td>@log.Message</td>
+                    <td>@log.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

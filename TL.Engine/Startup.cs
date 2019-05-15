@@ -33,7 +33,7 @@ namespace TL.Engine
             services
                .Configure<StorageContextOptions>(options =>
                {
-                   options.ConnectionString = Configuration.GetConnectionString("SqlServer");
+                   options.ConnectionString = Configuration.GetConnectionString("Default");
                    options.MigrationsAssembly = typeof(DesignTimeStorageContextFactory).GetTypeInfo().Assembly.FullName;
                });
 

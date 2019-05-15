@@ -8,11 +8,11 @@ namespace TL.Integrations.Telegram.Actions
 {
     public class ConfigureServicesAction : IConfigureServicesAction
     {
-        public int Priority => int.MaxValue;
+        public int Priority => int.MaxValue - 1000;
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
-            serviceCollection.AddScoped<IStartupFilter, AutoStartBotServiceStartupFilter> ();
+            serviceCollection.AddScoped<IStartupFilter, AutoStartBotServiceStartupFilter>();
         }
     }
 }
