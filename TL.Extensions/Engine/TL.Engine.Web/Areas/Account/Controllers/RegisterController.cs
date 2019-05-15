@@ -31,15 +31,22 @@ namespace TL.Engine.Web.Areas.Account.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = UserManager.Get(model.Username);
-                if (user == null)
+                if (model.Password != model.ConfirmPassword)
                 {
-                    user = UserManager.Create(model.Username, model.Password);
-                    UserManager.Authenticate(user, HttpContext);
-                    return Redirect(model.ReturnUrl);
+                    ModelState.AddModelError("", $"Пароли не совпадают!");
                 }
                 else
-                    ModelState.AddModelError("", $"Похоже, что логин {model.Username} уже занят.");
+                {
+                    var user = UserManager.Get(model.Username);
+                    if (user == null)
+                    {
+                        user = UserManager.Create(model.Username, model.Password);
+                        UserManager.Authenticate(user, HttpContext);
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                        ModelState.AddModelError("", $"Похоже, что логин {model.Username} уже занят.");
+                }
             }
             return View(model);
         }

@@ -13,6 +13,10 @@ namespace TL.Engine.Data.Managers
 
         User GetOrCreate(string username, string password = null, string description = null);
 
+        bool ValidatePassword(User user, string password);
+
+        User ChangePassword(User user, string password);
+
         void Authenticate(User user, HttpContext httpContext);
     }
 }

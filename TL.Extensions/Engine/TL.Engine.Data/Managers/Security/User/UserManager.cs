@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using TL.Engine.Data.Abstractions.Security;
+using System.Linq;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.Data.Extensions;
 using TL.Engine.SDK.Attributes.Api.Executable;
@@ -15,8 +15,18 @@ namespace TL.Engine.Data.Managers
 {
     public class UserManager : EntityComparableStoredManager<User, Guid>, IUserManager
     {
-        public UserManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
+        IRoleManager RoleManager { get; }
+        IGroupManager GroupManager { get; }
+        IUserRoleManager UserRoleManager { get; }
+        IUserGroupManager UserGroupManager { get; }
+
+        public UserManager(IRoleManager roleManager, IGroupManager groupManager, IUserRoleManager userRoleManager, IUserGroupManager userGroupManager, IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory)
+            : base(serviceProvider, storage, loggerFactory)
         {
+            RoleManager = roleManager;
+            GroupManager = groupManager;
+            UserRoleManager = userRoleManager;
+            UserGroupManager = userGroupManager;
         }
 
         [PublicApi(Description = "Получить пользователя по имени")]
@@ -33,14 +43,21 @@ namespace TL.Engine.Data.Managers
                 throw new ArgumentNullException(nameof(password), $"Запрещено создавать пользователей без пароля!");
             }
 
-            var user = CreateEmpty(cacheOnly: true);
             try
             {
                 var passwordHasher = new PasswordHasher<User>();
-
-                user.Username = username;
+                var user = new User()
+                {
+                    Username = username,
+                    Description = description,
+                };
                 user.PasswordHash = passwordHasher.HashPassword(user, password);
-                user.Description = description;
+                user = Create(user);
+                var personalGroup = GroupManager.Create(new Group()
+                {
+                    Name = user.Id.ToString()
+                });
+
                 user.UserRoles = new HashSet<UserRole>(new[]
                 {
                     new UserRole()
@@ -48,7 +65,7 @@ namespace TL.Engine.Data.Managers
                         UserId = user.Id,
                         RoleId = Role.DefaultUser.Id
                     }
-                });
+                }.Select(ur => UserRoleManager.Create(ur)));
                 user.UserGroups = new HashSet<UserGroup>(new[]
                 {
                     new UserGroup()
@@ -64,20 +81,17 @@ namespace TL.Engine.Data.Managers
                     new UserGroup()
                     {
                         UserId = user.Id,
-                        GroupId = Storage.GetRepository<IGroupRepository>().Add(new Group()
-                        {
-                            Name = user.Id.ToString()
-                        }).Id,
+                        GroupId = personalGroup.Id,
                     }
-                });
+                }.Select(ug => UserGroupManager.Create(ug)));
 
-                return Create(user);
+                return Update(user);
             }
             catch (Exception ex)
             {
                 Logger.TLogCritical($"Ошибка при создании экземпляра {typeof(User).GetFullName()}\r\n{ex}");
             }
-            return user;
+            return null;
         }
 
         [PrivateApi(Description = "Получить существующего пользователя или создать нового")]
@@ -100,6 +114,20 @@ namespace TL.Engine.Data.Managers
         public override IEnumerable<User> GetAll(bool loadDeleted = false)
         {
             return base.GetAll(loadDeleted);
+        }
+
+        public bool ValidatePassword(User user, string password)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+            return result != PasswordVerificationResult.Failed;
+        }
+
+        public User ChangePassword(User user, string password)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            user.PasswordHash = passwordHasher.HashPassword(user, password);
+            return Update(user);
         }
     }
 }

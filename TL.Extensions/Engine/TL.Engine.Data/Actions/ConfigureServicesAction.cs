@@ -14,7 +14,10 @@ namespace TL.Engine.Data.Actions
             serviceCollection.AddScoped<IStringVariableManager, StringVariableManager>();
             serviceCollection.AddScoped<IUserManager, UserManager>();
             serviceCollection.AddScoped<IRoleManager, RoleManager>();
+            serviceCollection.AddScoped<IGroupManager, GroupManager>();
             serviceCollection.AddScoped<IReportManager, ReportManager>();
+            serviceCollection.AddScoped<IUserRoleManager, UserRoleManager>();
+            serviceCollection.AddScoped<IUserGroupManager, UserGroupManager>();
         }
     }
 }

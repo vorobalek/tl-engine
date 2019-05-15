@@ -36,48 +36,67 @@ namespace TL.Engine.SDK.Managers
             {
                 try
                 {
-                    Logger.TLogInformation($"Попытка создать сущность:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogInformation($"Запрос создания сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
-                    //Pre Create Entity
-                    bool preCreate = true;
-                    var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
-                    foreach (var action in preCreateActions)
+                    //Can Create Entity
+                    bool canCreate = true;
+                    var canCreateActions = ExtensionManager.GetInstances<IEntityActionCanCreate<TEntity>>();
+                    foreach (var action in canCreateActions)
                     {
                         var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
-                        preCreate = preCreate && actionResult;
-                        Logger.TLogWarning($"Действия перед созданием сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                        canCreate = canCreate && actionResult;
+                        Logger.TLogWarning($"Проверка перед созданием сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
 
-                    if (preCreate)
+                    if (canCreate)
                     {
-                        //Create Entity
-                        Logger.TLogInformation($"Все действия перед созданием сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Попытка создать сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
-                        if (!cacheOnly)
-                        {
-                            entity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
-                        }
-                        Logger.TLogInformation($"Создана сущность:\t{entity.GetType().GetFullName()}");
-
-                        //Post Create Entity
-                        bool postCreate = true;
-                        var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
-                        foreach (var action in postCreateActions)
+                        //Pre Create Entity
+                        bool preCreate = true;
+                        var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
+                        foreach (var action in preCreateActions)
                         {
                             var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
-                            postCreate = postCreate && actionResult;
-                            Logger.TLogWarning($"Действия после создания сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            preCreate = preCreate && actionResult;
+                            Logger.TLogWarning($"Действия перед созданием сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
 
-                        if (postCreate)
+                        if (preCreate)
                         {
-                            Logger.TLogInformation($"Все действия после создания сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
-                            return Save(entity, cacheOnly);
+                            //Create Entity
+                            Logger.TLogInformation($"Все действия перед созданием сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
+
+                            if (!cacheOnly)
+                            {
+                                entity = Storage.GetRepository<IEntityRepository<TEntity>>().Add(entity);
+                            }
+                            Logger.TLogInformation($"Создана сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
+
+                            //Post Create Entity
+                            bool postCreate = true;
+                            var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
+                            foreach (var action in postCreateActions)
+                            {
+                                var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                                postCreate = postCreate && actionResult;
+                                Logger.TLogWarning($"Действия после создания сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            }
+
+                            if (postCreate)
+                            {
+                                Logger.TLogInformation($"Все действия после создания сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
+                                return Save(entity, cacheOnly);
+                            }
+                            else
+                            {
+                                Logger.TLogError($"Не все действия после создания сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
+                            }
                         }
-                        else
-                        {
-                            Logger.TLogError($"Не все действия после создания сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
-                        }
+                    }
+                    else
+                    {
+                        Logger.TLogError($"Сущность не может быть создана:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     }
                 }
                 catch (Exception ex)
@@ -92,33 +111,14 @@ namespace TL.Engine.SDK.Managers
         {
             try
             {
-                //Initialize Entity
-                Logger.TLogInformation($"Запрос создания сущности:\t{typeof(TEntity).GetFullName()}");
-                var entity = ActivatorUtilities.CreateInstance(ServiceProvider, typeof(TEntity)) as TEntity;
-
-                //Can Create Entity
-                bool canCreate = true;
-                var canCreateActions = ExtensionManager.GetInstances<IEntityActionCanCreate<TEntity>>();
-                foreach (var action in canCreateActions)
+                if (ActivatorUtilities.CreateInstance(ServiceProvider, typeof(TEntity)) is TEntity entity)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
-                    canCreate = canCreate && actionResult;
-                    Logger.TLogWarning($"Проверка перед созданием сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
-                }
-
-                if (canCreate)
-                {
-                    Logger.TLogInformation($"Сущность может быть создана:\t{entity.GetType().GetFullName()}");
                     return Create(entity, cacheOnly);
-                }
-                else
-                {
-                    Logger.TLogError($"Сущность не может быть создана:\t{entity.GetType().GetFullName()}");
                 }
             }
             catch (Exception ex)
             {
-                Logger.TLogCritical($"Не удалось создать пустой экземпляр сущности\r\n{ex}");
+                Logger.TLogCritical($"Не удалось создать пустой экземпляр сущности\t{nameof(cacheOnly)}={cacheOnly}\r\n{ex}");
             }
             return null;
         }
@@ -128,66 +128,66 @@ namespace TL.Engine.SDK.Managers
             try
             {
                 //Can Delete Entity
-                Logger.TLogInformation($"Запрос удаления сущности:\t{typeof(TEntity).GetFullName()}");
+                Logger.TLogInformation($"Запрос удаления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool canDelete = true;
                 var canDeleteActions = ExtensionManager.GetInstances<IEntityActionCanDelete<TEntity>>();
                 foreach (var action in canDeleteActions)
                 {
                     var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     canDelete = canDelete && actionResult;
-                    Logger.TLogWarning($"Проверка перед удалением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                    Logger.TLogWarning($"Проверка перед удалением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
 
                 if (canDelete)
                 {
                     //Pre Delete Entity
-                    Logger.TLogInformation($"Сущность может быть удалена:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogInformation($"Сущность может быть удалена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     bool preDelete = true;
                     var preDeleteActions = ExtensionManager.GetInstances<IEntityActionPreDelete<TEntity>>();
                     foreach (var action in preDeleteActions)
                     {
                         var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         preDelete = preDelete && actionResult;
-                        Logger.TLogWarning($"Действия перед удалением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                        Logger.TLogWarning($"Действия перед удалением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
 
                     if (preDelete)
                     {
                         //Delete Entity
-                        Logger.TLogInformation($"Все действия перед удалением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Все действия перед удалением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                         entity.IsDeleted = true;
-                        var deletedEntity = Update(entity, true);
+                        entity = Update(entity, true);
 
-                        Logger.TLogInformation($"Удалена сущность:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Удалена сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                         //Post Delete Entity
                         bool postDelete = true;
                         var postDeleteActions = ExtensionManager.GetInstances<IEntityActionPostDelete<TEntity>>();
                         foreach (var action in postDeleteActions)
                         {
-                            var actionResult = action.Invoke(ref deletedEntity, ServiceProvider, cacheOnly);
+                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                             postDelete = postDelete && actionResult;
-                            Logger.TLogWarning($"Действия после удаления сущности:\t{deletedEntity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            Logger.TLogWarning($"Действия после удаления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
                         if (postDelete)
                         {
-                            Logger.TLogInformation($"Все действия после удаления сущности успешно выполнены:\t{deletedEntity.GetType().GetFullName()}");
-                            return Save(deletedEntity, cacheOnly);
+                            Logger.TLogInformation($"Все действия после удаления сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
+                            return Save(entity, cacheOnly);
                         }
                         else
                         {
-                            Logger.TLogError($"Не все действия после удаления сущности успешно выполнены:\t{deletedEntity.GetType().GetFullName()}");
+                            Logger.TLogError($"Не все действия после удаления сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                         }
                     }
                     else
                     {
-                        Logger.TLogError($"Не все действия перед удалением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogError($"Не все действия перед удалением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     }
                 }
                 else
                 {
-                    Logger.TLogError($"Сущность не может быть удалена:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogError($"Сущность не может быть удалена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 }
             }
             catch (Exception ex)
@@ -244,39 +244,39 @@ namespace TL.Engine.SDK.Managers
             try
             {
                 //Can Remove Entity
-                Logger.TLogInformation($"Запрос уничтожения сущности:\t{typeof(TEntity).GetFullName()}");
+                Logger.TLogInformation($"Запрос уничтожения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool canRemove = true;
                 var canRemoveActions = ExtensionManager.GetInstances<IEntityActionCanRemove<TEntity>>();
                 foreach (var action in canRemoveActions)
                 {
                     var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     canRemove = canRemove && actionResult;
-                    Logger.TLogWarning($"Проверка перед уничтожением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                    Logger.TLogWarning($"Проверка перед уничтожением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
 
                 if (canRemove)
                 {
                     ///Pre Remove Entity
-                    Logger.TLogInformation($"Сущность может быть уничтожена:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogInformation($"Сущность может быть уничтожена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     bool preRemove = true;
                     var preRemoveActions = ExtensionManager.GetInstances<IEntityActionPreRemove<TEntity>>();
                     foreach (var action in preRemoveActions)
                     {
                         var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         preRemove = preRemove && actionResult;
-                        Logger.TLogWarning($"Действия перед уничтожением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                        Logger.TLogWarning($"Действия перед уничтожением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
 
                     if (preRemove)
                     {
                         //Remove Entity
-                        Logger.TLogInformation($"Все действия перед уничтожением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Все действия перед уничтожением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                         if (!cacheOnly)
                         {
                             entity = Storage.GetRepository<IEntityRepository<TEntity>>().Remove(entity);
                         }
-                        Logger.TLogInformation($"Уничтожена сущность:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Уничтожена сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                         //Post Remove Entity
                         bool postRemove = true;
@@ -285,26 +285,26 @@ namespace TL.Engine.SDK.Managers
                         {
                             var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                             postRemove = postRemove && actionResult;
-                            Logger.TLogWarning($"Действия после уничтожения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            Logger.TLogWarning($"Действия после уничтожения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
                         if (postRemove)
                         {
-                            Logger.TLogInformation($"Все действия после уничтожения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                            Logger.TLogInformation($"Все действия после уничтожения сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                             return Save(entity, cacheOnly);
                         }
                         else
                         {
-                            Logger.TLogError($"Не все действия после уничтожения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                            Logger.TLogError($"Не все действия после уничтожения сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                         }
                     }
                     else
                     {
-                        Logger.TLogError($"Не все действия перед уничтожением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogError($"Не все действия перед уничтожением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     }
                 }
                 else
                 {
-                    Logger.TLogError($"Сущность не может быть уничтожена:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogError($"Сущность не может быть уничтожена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 }
             }
             catch (Exception ex)
@@ -335,39 +335,39 @@ namespace TL.Engine.SDK.Managers
             try
             {
                 //Can Update Entity
-                Logger.TLogInformation($"Запрос обновления сущности:\t{typeof(TEntity).GetFullName()}");
+                Logger.TLogInformation($"Запрос обновления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool canUpdate = true;
                 var canUpdateActions = ExtensionManager.GetInstances<IEntityActionCanUpdate<TEntity>>();
                 foreach (var action in canUpdateActions)
                 {
                     var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     canUpdate = canUpdate && actionResult;
-                    Logger.TLogWarning($"Проверка перед обновлением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                    Logger.TLogWarning($"Проверка перед обновлением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
 
                 if (canUpdate)
                 {
                     //Pre Update Entity
-                    Logger.TLogInformation($"Сущность может быть обновлена:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogInformation($"Сущность может быть обновлена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     bool preUpdate = true;
                     var preUpdateActions = ExtensionManager.GetInstances<IEntityActionPreUpdate<TEntity>>();
                     foreach (var action in preUpdateActions)
                     {
                         var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         preUpdate = preUpdate && actionResult;
-                        Logger.TLogWarning($"Действия перед обновлением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                        Logger.TLogWarning($"Действия перед обновлением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
 
                     if (preUpdate)
                     {
                         //Update Entity
-                        Logger.TLogInformation($"Все действия перед обновлением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Все действия перед обновлением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                         if (!cacheOnly)
                         {
                             entity = Storage.GetRepository<IEntityRepository<TEntity>>().Update(entity);
                         }
-                        Logger.TLogInformation($"Обновлена сущность:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Обновлена сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                         //Post Update Entity
                         bool postUpdate = true;
@@ -376,26 +376,26 @@ namespace TL.Engine.SDK.Managers
                         {
                             var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                             postUpdate = postUpdate && actionResult;
-                            Logger.TLogWarning($"Действия после обновления сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                            Logger.TLogWarning($"Действия после обновления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
                         if (postUpdate)
                         {
-                            Logger.TLogInformation($"Все действия после обновления сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                            Logger.TLogInformation($"Все действия после обновления сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                             return Save(entity, cacheOnly);
                         }
                         else
                         {
-                            Logger.TLogError($"Не все действия после обновления сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                            Logger.TLogError($"Не все действия после обновления сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                         }
                     }
                     else
                     {
-                        Logger.TLogError($"Не все действия перед обновлением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogError($"Не все действия перед обновлением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     }
                 }
                 else
                 {
-                    Logger.TLogError($"Сущность не может быть обновлена:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogError($"Сущность не может быть обновлена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 }
             }
             catch (Exception ex)
@@ -408,39 +408,39 @@ namespace TL.Engine.SDK.Managers
         protected TEntity Save(TEntity entity, bool cacheOnly = false)
         {
             //Can Save Entity
-            Logger.TLogInformation($"Попытка сохранить сущность:\t{entity.GetType().GetFullName()}");
+            Logger.TLogInformation($"Попытка сохранить сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
             bool canSave = true;
             var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
             foreach (var action in canSaveActions)
             {
                 var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                 canSave = canSave && actionResult;
-                Logger.TLogWarning($"Проверка условий сохранения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                Logger.TLogWarning($"Проверка условий сохранения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
             }
 
             if (canSave)
             {
                 //Pre Save Entity
-                Logger.TLogInformation($"Сущность может быть сохранена:\t{entity.GetType().GetFullName()}");
+                Logger.TLogInformation($"Сущность может быть сохранена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool preSave = true;
                 var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
                 foreach (var action in preSaveActions)
                 {
                     var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                     preSave = preSave && actionResult;
-                    Logger.TLogWarning($"Действия перед сохранением сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                    Logger.TLogWarning($"Действия перед сохранением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
 
                 if (preSave)
                 {
                     //Save Entity
-                    Logger.TLogInformation($"Все действия перед сохранением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogInformation($"Все действия перед сохранением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                     if (!cacheOnly)
                     {
                         Storage.Save();
                     }
-                    Logger.TLogWarning($"Сохранена сущность:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogWarning($"Сохранена сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                     //Post Save Entity
                     bool postSave = true;
@@ -449,26 +449,26 @@ namespace TL.Engine.SDK.Managers
                     {
                         var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
                         postSave = postSave && actionResult;
-                        Logger.TLogWarning($"Действия после сохранения сущности:\t{entity.GetType().GetFullName()}:\t{action.GetType().GetFullName()}\t{actionResult}");
+                        Logger.TLogWarning($"Действия после сохранения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
 
                     if (postSave)
                     {
-                        Logger.TLogInformation($"Все действия после сохранения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogInformation($"Все действия после сохранения сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     }
                     else
                     {
-                        Logger.TLogError($"Не все действия после сохранения сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                        Logger.TLogError($"Не все действия после сохранения сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     }
                 }
                 else
                 {
-                    Logger.TLogError($"Не все действия перед сохранением сущности успешно выполнены:\t{entity.GetType().GetFullName()}");
+                    Logger.TLogError($"Не все действия перед сохранением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 }
             }
             else
             {
-                Logger.TLogError($"Сущность не может быть сохранена:\t{entity.GetType().GetFullName()}");
+                Logger.TLogError($"Сущность не может быть сохранена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
             }
             return entity;
         }

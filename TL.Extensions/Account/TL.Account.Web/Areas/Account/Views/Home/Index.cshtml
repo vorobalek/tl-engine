@@ -1,14 +1,70 @@
 ﻿@model TL.Account.Web.Areas.Account.ViewModels.IndexViewModel
 @{
-    ViewData["Title"] = User.Identity.Name;
+    ViewData["Title"] = Model.User.Username;
 }
 
 <div class="row">
     <div class="col">
-        <h1>@User.Identity.Name, настройте свой профиль!</h1>
+        <h1>@Model.User.Username, настройте свой профиль!</h1>
     </div>
 </div>
-<div class="row">
-    <div class="col">
+<hr />
+@if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+{
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Внимание!</strong> @Model.StatusMessage
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
+<div class="content">
+    <div class="row">
+        <div class="col">
+            <form asp-action="index" asp-controller="home" asp-area="account" asp-anti-forgery="true" class="needs-validation" novalidate>
+                <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+                @if (Model.User.HasPassword)
+                {
+                    <div class="form-group row">
+                        <label asp-for="@Model.ChangePwd.OldPasword" class="col-sm-2 col-form-label">Старый пароль</label>
+                        <div class="col-sm-auto">
+                            <input type="password" asp-for="@Model.ChangePwd.OldPasword" class="form-control" placeholder="Старый пароль">
+                            <div class="valid-feedback">
+                                Ок
+                            </div>
+                            <div class="invalid-feedback">
+                                Введите старый пароль
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group row">
+                    <label asp-for="@Model.ChangePwd.NewPasword" class="col-sm-2 col-form-label">Новый пароль</label>
+                    <div class="col-sm-auto">
+                        <input type="password" asp-for="@Model.ChangePwd.NewPasword" class="form-control" placeholder="Новый пароль" required />
+                        <div class="valid-feedback">
+                            Ок
+                        </div>
+                        <div class="invalid-feedback">
+                            Введите новый пароль
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="@Model.ChangePwd.ConfirmNewPasword" class="col-sm-2 col-form-label">Повторите пароль</label>
+                    <div class="col-sm-auto">
+                        <input type="password" asp-for="@Model.ChangePwd.ConfirmNewPasword" class="form-control" placeholder="Новый пароль ещё раз" required
+                               data-val-equalto="Пароль введен неверно" data-val-equalto-other="*.NewPassword" aria-required="true" />
+                        <div class="valid-feedback">
+                            Ок
+                        </div>
+                        <div class="invalid-feedback">
+                            Повторите новый пароль
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
     </div>
 </div>
