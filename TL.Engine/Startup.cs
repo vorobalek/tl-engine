@@ -42,6 +42,10 @@ namespace TL.Engine
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (Configuration["Server:AllowHTTP"] != true.ToString())
+            {
+                app.UseHttpsRedirection();
+            }
             app.UseExtCore();
         }
     }
