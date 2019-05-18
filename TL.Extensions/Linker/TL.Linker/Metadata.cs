@@ -7,6 +7,6 @@ namespace TL.Linker
     {
         public override string Name => "TL.Linker";
 
-        protected override Version Version => new Version(1, 3, 0, 0);
+        protected override Version Version => new Version(1, 1, 0, 2);
     }
 }

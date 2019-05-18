@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TL.Api.Data.Entities.Security;
 using TL.Api.Data.Managers;
 using TL.Api.Web.Areas.ApiHelp.ViewModels.Settings;
+using TL.Engine.Data.Extensions;
 using TL.Engine.Data.Managers;
 
 namespace TL.Api.Web.Areas.ApiHelp.Controllers
@@ -33,10 +34,10 @@ namespace TL.Api.Web.Areas.ApiHelp.Controllers
         [HttpPost]
         public IActionResult Add()
         {
-            var user = UserManager.Get(User.Identity.Name);
+            var user = UserManager.GetByClaims(User);
             var token = TokenManager.Create(new Token()
             {
-                Owner = user
+                OwnerId = user.Id
             });
 
             return Redirect("/apihelp/settings/");

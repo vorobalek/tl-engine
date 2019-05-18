@@ -16,7 +16,7 @@ namespace TL.Engine.Web
 
         public override string Authors => "Alexey Vorobev";
 
-        protected override Version Version => new Version(1, 3, 0, 0);
+        protected override Version Version => new Version(1, 1, 0, 2);
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {

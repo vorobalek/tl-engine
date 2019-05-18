@@ -9,6 +9,6 @@ namespace TL.Engine.SDK
 
         public override string Owner => "TL.Engine";
 
-        protected override Version Version => new Version(1, 3, 0, 0);
+        protected override Version Version => new Version(1, 1, 0, 2);
     }
 }

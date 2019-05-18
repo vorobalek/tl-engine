@@ -9,6 +9,6 @@ namespace TL.Account.SDK
 
         public override string Owner => "TL.Account";
 
-        protected override Version Version => new Version(1, 3, 0, 0);
+        protected override Version Version => new Version(1, 1, 0, 2);
     }
 }

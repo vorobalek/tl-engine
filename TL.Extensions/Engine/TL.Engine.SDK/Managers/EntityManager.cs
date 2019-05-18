@@ -157,7 +157,7 @@ namespace TL.Engine.SDK.Managers
                         Logger.TLogInformation($"Все действия перед удалением сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
                         entity.IsDeleted = true;
-                        entity = Update(entity, true);
+                        entity = Update(entity);
 
                         Logger.TLogInformation($"Удалена сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
 
@@ -173,7 +173,7 @@ namespace TL.Engine.SDK.Managers
                         if (postDelete)
                         {
                             Logger.TLogInformation($"Все действия после удаления сущности успешно выполнены:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
-                            return Save(entity, cacheOnly);
+                            return entity;
                         }
                         else
                         {
