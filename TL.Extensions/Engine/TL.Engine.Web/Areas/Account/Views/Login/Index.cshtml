@@ -3,7 +3,8 @@
     ViewData["Title"] = "Вход";
     Layout = "~/Views/Shared/_LayoutSafePage.cshtml";
 }
-<h2>Авторизация в TL Engine</h2>
+<h5>Войти в аккаунт</h5>
+<br />
 <div class="row">
     <div class="col-auto">
         <form asp-action="index" asp-controller="login" asp-area="account" asp-anti-forgery="true" asp-route-returnUrl="@Model.ReturnUrl" class="needs-validation" novalidate>
