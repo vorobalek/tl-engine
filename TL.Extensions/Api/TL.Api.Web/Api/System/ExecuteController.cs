@@ -110,9 +110,7 @@ namespace TL.Api.Web.Api.System
             var tokenLog = new TokenLog()
             {
                 Id = Guid.NewGuid(),
-                Token = existToken,
                 TokenId = existToken.Id,
-                User = existUser,
                 UserId = existUser?.Id,
                 Method = method,
                 Parameters = HttpContext.Request.QueryString.Value

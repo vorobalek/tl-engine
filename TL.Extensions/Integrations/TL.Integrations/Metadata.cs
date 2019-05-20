@@ -7,6 +7,6 @@ namespace TL.Integrations
     {
         public override string Name => "TL.Integrations";
 
-        protected override Version Version => new Version(1, 1, 0, 2);
+        protected override Version Version => new Version(1, 1, 0, 4);
     }
 }

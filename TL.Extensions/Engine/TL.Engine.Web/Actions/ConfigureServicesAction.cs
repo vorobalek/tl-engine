@@ -1,6 +1,8 @@
 ﻿using ExtCore.Infrastructure.Actions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Security.Claims;
@@ -14,6 +16,8 @@ namespace TL.Engine.Web.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
+            var configuration = serviceProvider.GetService<IConfiguration>();
+
             serviceCollection
                 .AddAuthentication(options =>
                 {
@@ -21,7 +25,15 @@ namespace TL.Engine.Web.Actions
                 })
                 .AddCookie(options =>
                 {
-                    options.Cookie.Name = "TLE.Account";
+                    if (configuration["Server:AllowHTTP"] == true.ToString())
+                    {
+                        options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                    }
+                    else
+                    {
+                        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                    }
+                    options.Cookie.Name = "TL.Engine.Account";
                     options.LoginPath = "/account/login";
                     options.AccessDeniedPath = "/denied";
                 });
@@ -29,7 +41,7 @@ namespace TL.Engine.Web.Actions
             serviceCollection
                 .AddAuthorization(options =>
                 {
-                    options.AddPolicy("SA", policy => policy.RequireClaim(ClaimsIdentity.DefaultRoleClaimType, Role.Sa.Id.ToString()));
+                    options.AddPolicy("SA", policy => policy.RequireClaim(ClaimsIdentity.DefaultRoleClaimType, Role.Sa.Name));
                 });
 
             serviceCollection.AddSingleton<IStartupFilter, EngineSystemStringVaribaleStartupFilter>();

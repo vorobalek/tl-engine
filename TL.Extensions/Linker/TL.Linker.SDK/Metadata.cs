@@ -9,6 +9,6 @@ namespace TL.Linker.SDK
 
         public override string Owner => "TL.Linker";
 
-        protected override Version Version => new Version(1, 1, 0, 2);
+        protected override Version Version => new Version(1, 1, 0, 4);
     }
 }

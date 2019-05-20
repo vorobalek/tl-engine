@@ -70,23 +70,22 @@ namespace TL.Engine.Web.Controllers
             string message;
             if (ModelState.IsValid)
             {
-                var date = DateTime.Now.ToUniversalTime();
-                var report = ReportManager.CreateEmpty();
+                var report = new Report()
+                {
 
-                report.Author = model.Author;
-                report.Description = model.Description;
-                report.Priority = model.Priority as ReportPriority?;
-                report.CreationDate = date;
-                report.ModifiedDate = date;
-                report.Message = model.Message;
-                report.StackTrace = model.StackTrace;
+                    Author = model.Author,
+                    Description = model.Description,
+                    Priority = model.Priority as ReportPriority?,
+                    Message = model.Message,
+                    StackTrace = model.StackTrace,
+                };
 
                 if (User.Identity.IsAuthenticated)
                 {
-                    report.User = UserManager.GetByClaims(User);
+                    report.UserId = UserManager.GetByClaims(User)?.Id;
                 }
 
-                ReportManager.Update(report);
+                ReportManager.Create(report);
                 message = "Спасибо за ваш фидбек!";
             }
             else

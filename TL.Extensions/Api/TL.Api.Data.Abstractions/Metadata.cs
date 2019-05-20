@@ -12,6 +12,6 @@ namespace TL.Api.Data.Abstractions
         public override string Description =>
                 $"Модуль абстракций данных. Промежуточный слой интерфейсов, описывающих методы работы, допустимые с данными модуля {Owner}.";
 
-        protected override Version Version => new Version(1, 1, 0, 2);
+        protected override Version Version => new Version(1, 1, 0, 4);
     }
 }

@@ -7,6 +7,6 @@ namespace TL.Api
     {
         public override string Name => "TL.Api";
 
-        protected override Version Version => new Version(1, 1, 0, 2);
+        protected override Version Version => new Version(1, 1, 0, 4);
     }
 }
