@@ -29,7 +29,7 @@ namespace TL.Engine.Data.Managers
             UserGroupManager = userGroupManager;
         }
 
-        [PublicApi(Description = "Получить пользователя по имени")]
+        [PrivateApi(Description = "Получить пользователя по имени")]
         public User Get(string username)
         {
             return Get(e => e.Username == username);

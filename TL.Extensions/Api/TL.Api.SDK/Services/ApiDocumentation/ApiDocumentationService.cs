@@ -175,7 +175,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                 .ToList();
         }
 
-        [PublicApi(Description = "Обновить автоматическую API-документацию. Возвращает актуальную документацию.")]
+        [PrivateApi(Description = "Обновить автоматическую API-документацию. Возвращает актуальную документацию.")]
         public ApiDocumentationModel Update()
         {
             InitializeDocumentation();
