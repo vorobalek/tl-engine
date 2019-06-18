@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
 using TL.Api.SDK.Models;
 
 namespace TL.Api.SDK.Services.ApiDocumentation
@@ -8,8 +7,8 @@ namespace TL.Api.SDK.Services.ApiDocumentation
     {
         ApiDocumentationModel Update();
 
-        ApiDocumentationModel GetDocumentation();
+        ApiDocumentationModel Get();
 
-        ApiDocumentationModel GetDocumentation(HostString host);
+        ApiDocumentationModel Get(HostString host);
     }
 }

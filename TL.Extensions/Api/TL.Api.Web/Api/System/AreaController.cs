@@ -27,7 +27,7 @@ namespace TL.Api.Web.Api.System
             var dict = new Dictionary<string, IList<ApiMethodModel>>();
             var result = new List<ApiAreaModel>();
 
-            foreach (var method in ApiDocumentationService.GetDocumentation().GetMethods())
+            foreach (var method in ApiDocumentationService.Get().GetMethods())
             {
                 var area = method.Area.ToLowerInvariant();
                 if (method.Area.ToLowerInvariant() == area)
@@ -61,7 +61,7 @@ namespace TL.Api.Web.Api.System
             {
                 Name = name.ToLowerInvariant(),
                 Methods = ApiDocumentationService
-                    .GetDocumentation()
+                    .Get()
                     .GetMethods()
                     .Where(method => method.Area.ToLowerInvariant() == name.ToLowerInvariant()).ToList()
             };

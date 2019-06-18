@@ -23,7 +23,7 @@ namespace TL.Api.Web.Api.System
         [ApiHttpGet(UsageDescription = "Этот метод работает без параметров", ReturnableType = typeof(ApiDocumentationModel))]
         public IActionResult Get()
         {
-            var documentation = ApiDocumentationService.GetDocumentation(HttpContext.Request.Host);
+            var documentation = ApiDocumentationService.Get(HttpContext.Request.Host);
             if (!User.Identity.IsAuthenticated)
             {
                 var publicFunctions = documentation.Functions.Where(f => !f.IsPrivate).ToList();

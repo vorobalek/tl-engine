@@ -17,26 +17,26 @@ namespace TL.Api.SDK.Services.ApiDocumentation
     {
         public IServiceProvider ServiceProvider { get; }
 
-        private static bool IsRelevant { get; set; }
+        private bool IsRelevant { get; set; }
 
-        private static HostString Host { get; set; }
+        private HostString Host { get; set; }
 
-        private static IList<ApiObjectModel> Objects { get; set; } = new List<ApiObjectModel>();
+        private IList<ApiObjectModel> Objects { get; set; } = new List<ApiObjectModel>();
 
-        private static IList<ApiMethodModel> Methods { get; set; } = new List<ApiMethodModel>();
+        private IList<ApiMethodModel> Methods { get; set; } = new List<ApiMethodModel>();
 
-        private static IList<ApiFunctionModel> Functions { get; set; } = new List<ApiFunctionModel>();
+        private IList<ApiFunctionModel> Functions { get; set; } = new List<ApiFunctionModel>();
 
-        private static TimeSpan CreationTime { get; set; }
+        private TimeSpan CreationTime { get; set; }
 
-        private static DateTime LastUpdate { get; set; }
+        private DateTime LastUpdate { get; set; }
 
         public ApiDocumentationService(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }
 
-        public ApiDocumentationModel GetDocumentation()
+        public ApiDocumentationModel Get()
         {
             if (!IsRelevant)
             {
@@ -54,7 +54,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
             };
         }
 
-        public ApiDocumentationModel GetDocumentation(HostString host)
+        public ApiDocumentationModel Get(HostString host)
         {
             if (!IsRelevant)
             {
@@ -62,7 +62,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
             }
             Host = host;
 
-            var documentation = GetDocumentation();
+            var documentation = Get();
             documentation.Host = Host;
 
             return documentation;
@@ -179,7 +179,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
         public ApiDocumentationModel Update()
         {
             InitializeDocumentation();
-            return GetDocumentation();
+            return Get();
         }
     }
 }
