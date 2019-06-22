@@ -9,7 +9,9 @@ namespace TL.Engine.SDK.Structures
         SortedList<char, ITrieNode> Next { get; }
         HashSet<object> Targets { get; }
 
-        void Put(string source, object target = null);
+        void Add(string source, object target = null);
+        void Update(string oldSource, string newSource, object target = null);
+        void Remove(string source);
         IEnumerable<object> FindAll(string query, int count = 0);
         void AddTarget(object target);
     }

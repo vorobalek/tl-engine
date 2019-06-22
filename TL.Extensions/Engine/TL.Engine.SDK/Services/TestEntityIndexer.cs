@@ -3,22 +3,22 @@ using TL.Engine.SDK.Attributes.Api.Executable;
 
 namespace TL.Engine.SDK.Services
 {
-    public class StringIndexerService : IStringIndexerService
+    public class TestEntityIndexer
     {
         IEntityIndexerService EntityIndexer { get; }
 
-        public StringIndexerService(IEntityIndexerService entityIndexer)
+        public TestEntityIndexer(IEntityIndexerService entityIndexer)
         {
             EntityIndexer = entityIndexer;
         }
 
-        [PublicApi]
+        [PrivateApi]
         public IEnumerable<object> Find(string query)
         {
             return EntityIndexer.Find(query);
         }
 
-        [PublicApi]
+        [PrivateApi]
         public void Reset()
         {
             EntityIndexer.Reset();

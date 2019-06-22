@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TL.Engine.SDK.Structures
 {
@@ -13,7 +13,7 @@ namespace TL.Engine.SDK.Structures
 
         public HashSet<object> Targets { get; }
 
-        public void Put(string source, object target = null)
+        public void Add(string source, object target = null)
         {
             var root = this as ITrieNode;
             root.AddTarget(target);
@@ -28,6 +28,27 @@ namespace TL.Engine.SDK.Structures
                 root.AddTarget(target);
             }
             root.IsTerminal = true;
+        }
+
+        public void Update(string oldSource, string newSource, object target = null)
+        {
+            Remove(oldSource);
+            Add(newSource, target);
+        }
+
+        public void Remove(string source)
+        {
+            var root = this as ITrieNode;
+            Stack<ITrieNode> history = new Stack<ITrieNode>(new[] { root });
+
+            int i = 0;
+            for (; i < source.Length && root.Next.ContainsKey(source[i]); ++i)
+            {
+                root = root.Next[source[i]];
+                history.Push(root);
+            }
+
+            throw new NotImplementedException();
         }
 
         public IEnumerable<object> FindAll(string query, int count = 0)

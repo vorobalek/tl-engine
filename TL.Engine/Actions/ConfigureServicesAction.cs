@@ -12,7 +12,6 @@ namespace TL.Engine.Actions
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
             serviceCollection.AddSingleton<IStartupService, StartupService>();
-            serviceCollection.AddSingleton<IStringIndexerService, StringIndexerService>();
             serviceCollection.AddSingleton<IEntityIndexerService, EntityIndexerService>();
         }
     }

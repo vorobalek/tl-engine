@@ -1,9 +1,11 @@
 ﻿using ExtCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
@@ -13,21 +15,34 @@ namespace TL.Engine.SDK.Services
 {
     public class EntityIndexerService : IEntityIndexerService
     {
+        ILogger Logger { get; }
+
         IServiceProvider ServiceProvider { get; }
 
         ConcurrentDictionary<Type, Trie> Cache { get; set; }
 
-        public EntityIndexerService(IServiceProvider serviceProvider)
+        public EntityIndexerService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
+            Logger = loggerFactory.CreateLogger<EntityIndexerService>();
             ServiceProvider = serviceProvider;
         }
 
         public IEnumerable<object> Find(string query, int count = 0)
         {
             var result = new HashSet<EntityWithStringProperty>();
-            foreach (var type in Cache.Keys)
+            var tasks = Cache.Keys.Select(type =>
+                {
+                    return Task.Run(() =>
+                    {
+                        var typeResult = Cache[type].FindAll(query, count).Select(obj => (obj as EntityWithStringProperty));
+                        return typeResult;
+                    });
+                })
+                .ToArray();
+            Task.WaitAll(tasks);
+            foreach (var task in tasks)
             {
-                result.UnionWith(Cache[type].FindAll(query, count).Select(obj => (obj as EntityWithStringProperty)));
+                result.UnionWith(task.Result);
             }
             return result;
         }
@@ -43,11 +58,13 @@ namespace TL.Engine.SDK.Services
                 throw new ArgumentException($"{typeof(TEntity).GetFullName()} сущности не проиндексированы");
             }
 
-            return Cache[typeof(TEntity)].FindAll(query, count).Select(obj => obj as EntityWithStringProperty);
+            var result = Cache[typeof(TEntity)].FindAll(query, count).Select(obj => obj as EntityWithStringProperty);
+            return result;
         }
 
         public void Reset()
         {
+            Logger.TLogWarning($"Reset Service");
             var entityTypes = ExtensionManager
                 .GetImplementations<IEntity>()
                 .Where(t => !t.IsAbstract);
@@ -58,9 +75,10 @@ namespace TL.Engine.SDK.Services
                 .ToList()
                 .ForEach(entityType =>
                 {
+                    Logger.TLogInformation($"Indexing {entityType} running...");
                     var managerType = ExtensionManager
                             .GetImplementations<IEntityManager>()
-                            .FirstOrDefault(rt => !rt.IsAbstract 
+                            .FirstOrDefault(rt => !rt.IsAbstract
                             && ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, rt) is IEntityManager manager
                             && manager.TargetType == entityType);
                     if (managerType != null)
@@ -74,6 +92,7 @@ namespace TL.Engine.SDK.Services
                             }
                         }
                     }
+                    Logger.TLogInformation($"Indexing {entityType} finished...");
                 });
         }
 
@@ -113,17 +132,12 @@ namespace TL.Engine.SDK.Services
             {
                 if (stringProperty.Value is string value)
                 {
-                    Cache[entity.GetType()].Put(value, new EntityWithStringProperty(entity as IEntity, stringProperty));
+                    Cache[entity.GetType()].Add(value, new EntityWithStringProperty(entity as IEntity, stringProperty));
                 }
             }
         }
 
-        public void Update<TEntity>(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddOrUpdate<TEntity>(TEntity entity)
+        public void Update<TEntity>(TEntity oldEntity, TEntity newEntity)
         {
             throw new NotImplementedException();
         }

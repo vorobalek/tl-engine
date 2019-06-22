@@ -1,18 +1,23 @@
 ﻿using ExtCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Actions;
+using TL.Engine.SDK.Extensions;
 
 namespace TL.Engine.SDK.Services
 {
     public class StartupService : IStartupService
     {
+        ILogger Logger { get; }
+
         IServiceProvider ServiceProvider { get; }
 
-        public StartupService(IServiceProvider serviceProvider)
+        public StartupService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
+            Logger = loggerFactory.CreateLogger<StartupService>();
             ServiceProvider = serviceProvider;
             Init();
         }
@@ -51,11 +56,14 @@ namespace TL.Engine.SDK.Services
                 IStartupActionResult actionResult;
                 try
                 {
+                    Logger.TLogInformation($"{action.GetType().GetFullName()} running...");
                     actionResult = action.Invoke();
+                    Logger.TLogInformation($"{action.GetType().GetFullName()} finished...");
                 }
                 catch (Exception ex)
                 {
                     actionResult = StartupActionResult.Broken($"{ex}");
+                    Logger.TLogCritical($"{action.GetType().GetFullName()} broken...\r\n\t{ex}");
                 }
 
                 _checkLog.Add(actionResult);
