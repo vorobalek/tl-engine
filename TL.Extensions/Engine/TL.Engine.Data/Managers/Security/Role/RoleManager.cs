@@ -14,7 +14,6 @@ namespace TL.Engine.Data.Managers
         {
         }
 
-        [PublicApi(Description = "Получить роль по Id")]
         public override Role Get(Guid key, bool loadDeleted = false)
         {
             return base.Get(key, loadDeleted);

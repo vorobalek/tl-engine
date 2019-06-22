@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 using TL.Integrations.Data.Entities.Telegram.Relationships;
 
@@ -58,8 +59,10 @@ namespace TL.Integrations.Data.Entities.Telegram.System
     {
         public string Token { get; set; }
 
+        [StringIndex]
         public string Username { get; set; }
 
+        [StringIndex]
         public string NativeName { get; set; }
 
         public string TypeName { get; set; }

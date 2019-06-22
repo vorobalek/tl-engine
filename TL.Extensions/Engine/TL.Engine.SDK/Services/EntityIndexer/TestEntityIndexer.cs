@@ -13,13 +13,13 @@ namespace TL.Engine.SDK.Services
         }
 
         [PrivateApi]
-        public IEnumerable<object> Find(string query)
+        public IEnumerable<object> FindAll(string query)
         {
             return EntityIndexer.Find(query);
         }
 
         [PrivateApi]
-        public void Reset()
+        public void ResetEntityIndexer()
         {
             EntityIndexer.Reset();
         }

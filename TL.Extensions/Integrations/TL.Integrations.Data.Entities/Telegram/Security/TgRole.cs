@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Integrations.Data.Entities.Telegram.Security
 {
     public class TgRole : EntityComparableStored<Guid>
     {
+        [StringIndex]
         public string Name { get; set; }
 
         public virtual IEnumerable<TgUserRole> UserRoles { get; set; }

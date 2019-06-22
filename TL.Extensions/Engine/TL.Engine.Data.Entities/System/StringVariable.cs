@@ -1,11 +1,13 @@
 ﻿using System;
 using TL.Engine.Data.Entities.Security;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.System
 {
     public class StringVariable : EntityComparableStored<Guid>
     {
+        [StringIndex]
         public string Name { get; set; }
 
         public string Value { get; set; }

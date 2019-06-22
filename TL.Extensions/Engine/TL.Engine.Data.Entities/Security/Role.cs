@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.Security
 {
     public class Role : EntityComparableStored<Guid>
     {
+        [StringIndex]
         public string Name { get; set; }
 
         public virtual IEnumerable<UserRole> UserRoles { get; set; }

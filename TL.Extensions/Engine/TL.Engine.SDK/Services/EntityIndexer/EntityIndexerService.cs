@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
@@ -73,32 +74,40 @@ namespace TL.Engine.SDK.Services
                 .ToList()
                 .ForEach(entityType =>
                 {
-                    Logger.TLogInformation($"Indexing {entityType} running...");
-                    var managerType = Activator
-                            .GetImplementations<IEntityManager>()
-                            .FirstOrDefault(rt => !rt.IsAbstract
-                            && Activator.GetServiceOrCreateInstance(rt) is IEntityManager manager
-                            && manager.TargetType == entityType);
-                    if (managerType != null)
+                    if (entityType.GetFields().Where(fi => fi.GetCustomAttributes(typeof(StringIndexAttribute), inherit: true).Count() > 0).Count() > 0
+                    || entityType.GetProperties().Where(pi => pi.GetCustomAttributes(typeof(StringIndexAttribute), inherit: true).Count() > 0).Count() > 0)
                     {
-                        if (Activator.GetServiceOrCreateInstance(managerType.GetInterfaces().Last()) is IEntityManager managerInstance)
+                        Logger.TLogInformation($"Indexing {entityType} running...");
+                        var managerType = Activator
+                                .GetImplementations<IEntityManager>()
+                                .FirstOrDefault(rt => !rt.IsAbstract
+                                && Activator.GetServiceOrCreateInstance(rt) is IEntityManager manager
+                                && manager.TargetType == entityType);
+                        if (managerType != null)
                         {
-                            var entities = managerInstance.GetAll(loadDeleted: true);
-                            foreach (var entity in entities)
+                            if (Activator.GetServiceOrCreateInstance(managerType.GetInterfaces().Last()) is IEntityManager managerInstance)
                             {
-                                Add(entity);
+                                var entities = managerInstance.GetAll(loadDeleted: true);
+                                foreach (var entity in entities)
+                                {
+                                    Add(entity);
+                                }
                             }
                         }
+                        Logger.TLogInformation($"Indexing {entityType} finished...");
                     }
-                    Logger.TLogInformation($"Indexing {entityType} finished...");
+                    else
+                    {
+                        Logger.TLogWarning($"An entity of type {entityType.GetFullName()} does not contain indexed fields and properties");
+                    }
                 });
         }
 
-        internal class EntityStringProperty
+        internal class StringProperty
         {
             public string Name { get; }
             public string Value { get; }
-            public EntityStringProperty(string name, string value)
+            public StringProperty(string name, string value)
             {
                 Name = name;
                 Value = value;
@@ -109,8 +118,8 @@ namespace TL.Engine.SDK.Services
         {
             public IEntity Entity { get; }
             public string Type { get; }
-            public EntityStringProperty Property { get; }
-            public EntityWithStringProperty(IEntity entity, EntityStringProperty property)
+            public StringProperty Property { get; }
+            public EntityWithStringProperty(IEntity entity, StringProperty property)
             {
                 Entity = entity;
                 Type = entity.GetType().GetFullName();
@@ -118,29 +127,45 @@ namespace TL.Engine.SDK.Services
             }
         }
 
-        public void Add<TEntity>(TEntity entity)
+        public bool Add<TEntity>(TEntity entity)
         {
-            var stringProperties = entity
-                                    .GetType()
-                                    .GetProperties()
-                                    .Where(pi => pi.PropertyType == typeof(string) && pi.GetGetMethod() != null)
-                                    .Select(pi => new EntityStringProperty(pi.Name, pi.GetGetMethod().Invoke(entity, null) as string ?? ""));
+            var stringProperties = 
+                entity
+                    .GetType()
+                    .GetFields()
+                    .Where(fi => fi.FieldType == typeof(string)
+                    && fi.GetCustomAttributes(typeof(StringIndexAttribute), inherit: true).Count() > 0)
+                    .Select(fi => new StringProperty(fi.Name, fi.GetValue(entity) as string ?? ""))
+                    .Concat(
+                entity
+                    .GetType()
+                    .GetProperties()
+                    .Where(pi => pi.PropertyType == typeof(string)
+                    && pi.GetGetMethod() != null
+                    && pi.GetCustomAttributes(typeof(StringIndexAttribute), inherit: true).Count() > 0)
+                    .Select(pi => new StringProperty(pi.Name, pi.GetGetMethod().Invoke(entity, null) as string ?? "")));
 
-            foreach (var stringProperty in stringProperties)
+            if (stringProperties.Count() > 0)
             {
-                if (stringProperty.Value is string value)
+
+                foreach (var stringProperty in stringProperties)
                 {
-                    Cache[entity.GetType()].Add(value, new EntityWithStringProperty(entity as IEntity, stringProperty));
+                    if (stringProperty.Value is string value)
+                    {
+                        Cache[entity.GetType()].Add(value, new EntityWithStringProperty(entity as IEntity, stringProperty));
+                    }
                 }
+                return true;
             }
+            return false;
         }
 
-        public void Update<TEntity>(TEntity oldEntity, TEntity newEntity)
+        public bool Update<TEntity>(TEntity oldEntity, TEntity newEntity)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove<TEntity>(TEntity entity)
+        public bool Remove<TEntity>(TEntity entity)
         {
             throw new NotImplementedException();
         }

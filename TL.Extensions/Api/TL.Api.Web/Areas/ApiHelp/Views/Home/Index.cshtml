@@ -57,9 +57,15 @@
     <h3>Пример работы с функциями</h3>
     <p>
         Запрос:
-        <pre><kbd>GET https://<code id="host4"></code><code id="sampleFunctionRequest"></code></kbd></pre>
+        <pre><kbd>GET https://<code id="host4"></code><code id="sampleFunctionRequest1"></code></kbd></pre>
         Ответ:
-        <pre class="alert-success"><code id="sampleFunctionResponse"></code></pre>
+        <pre class="alert-success"><code id="sampleFunctionResponse1"></code></pre>
+    </p>
+    <p>
+        Запрос:
+        <pre><kbd>GET https://<code id="host5"></code><code id="sampleFunctionRequest2"></code></kbd></pre>
+        Ответ:
+        <pre class="alert-success"><code id="sampleFunctionResponse2"></code></pre>
     </p>
 </div>
 
@@ -67,13 +73,15 @@
     <script>
         var sampleGoodUri = '/api/system.Me';
         var sampleBadUri = '/api/system.Bad';
-        var sampleFunctionUri = '/api/system.Execute/TL.Engine.Data.Managers.RoleManager:Get?key=bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb&loadDeleted=false'
+        var sampleFunctionUri1 = '/api/system.Execute/TL.Linker.Data.Managers.LinkManager:LinkConvert?number=387070645064022132'
+        var sampleFunctionUri2 = '/api/system.Execute/TL.Linker.Data.Managers.LinkManager:LinkParse?code=SampleLink'
         var apiGetHostUri = '/api/system.Host';
         var alertMessage = 'В данный момент мы испытываем неполадки в работе системы API, данные на стрнице могут отображаться некорректно!';
         $(document).ready(function () {
             $('#sampleGoodRequest').text(sampleGoodUri);
             $('#sampleBadRequest').text(sampleBadUri);
-            $('#sampleFunctionRequest').text(sampleFunctionUri);
+            $('#sampleFunctionRequest1').text(sampleFunctionUri1);
+            $('#sampleFunctionRequest2').text(sampleFunctionUri2);
 
             $.getJSON(sampleGoodUri)
                 .done(function (data) {
@@ -92,14 +100,25 @@
                         .text(JSON.stringify(data.responseJSON, null, 2))
                 });
 
-            $.getJSON(sampleFunctionUri)
+            $.getJSON(sampleFunctionUri1)
                 .done(function (data) {
-                    $('#sampleFunctionResponse')
+                    $('#sampleFunctionResponse1')
                         .text(JSON.stringify(data, null, 2))
                 })
                 .fail(function (jqXHR, textok, err) {
                     alert(err + '! ' + alertMessage);
-                    $('#sampleFunctionResponse')
+                    $('#sampleFunctionResponse1')
+                        .text(alertMessage)
+                });
+
+            $.getJSON(sampleFunctionUri2)
+                .done(function (data) {
+                    $('#sampleFunctionResponse2')
+                        .text(JSON.stringify(data, null, 2))
+                })
+                .fail(function (jqXHR, textok, err) {
+                    alert(err + '! ' + alertMessage);
+                    $('#sampleFunctionResponse2')
                         .text(alertMessage)
                 });
 
@@ -110,6 +129,7 @@
                         $('#host2').text(data.result.value);
                         $('#host3').text(data.result.value);
                         $('#host4').text(data.result.value);
+                        $('#host5').text(data.result.value);
                     }
                 })
                 .fail(function (jqXHR, textok, err) {
@@ -118,6 +138,7 @@
                     $('#host2').text(alertMessage);
                     $('#host3').text(alertMessage);
                     $('#host4').text(alertMessage);
+                    $('#host5').text(alertMessage);
                 });
         });
     </script>

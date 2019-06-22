@@ -1,4 +1,5 @@
 ﻿using System;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Linker.Data.Entities.Core
@@ -7,6 +8,7 @@ namespace TL.Linker.Data.Entities.Core
     {
         public ulong Identifier { get; set; }
         
+        [StringIndex]
         public string Url { get; set; }
     }
 }

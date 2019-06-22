@@ -28,10 +28,10 @@ namespace TL.Linker.Data.Managers
             return Get(e => e.Identifier == id);
         }
 
-        [PublicApi]
-        public string GetLinkUrl(string url)
+        [PublicApi(Description = "Получить URL оригинальной ссылки по линку")]
+        public string GetLinkUrl(string link)
         {
-            return Get(LinkParse(url))?.Url;
+            return Get(LinkParse(link))?.Url;
         }
 
         public Link Create(string url)
@@ -69,7 +69,7 @@ namespace TL.Linker.Data.Managers
             }
         }
 
-        [PublicApi]
+        [PublicApi(Description = "Преобразовать идентефикатор в линк")]
         public string LinkConvert(ulong number)
         {
             return LinkConvert(number, StringVariableManager.Get(NameOfMaskVariable)?.Value);
@@ -98,7 +98,7 @@ namespace TL.Linker.Data.Managers
             return new string(ans.ToCharArray().Reverse().ToArray());
         }
 
-        [PublicApi]
+        [PublicApi(Description = "Преобразовать линк в идентификатор")]
         public ulong LinkParse(string code)
         {
             return LinkParse(code, StringVariableManager.Get(NameOfMaskVariable)?.Value);

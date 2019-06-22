@@ -6,9 +6,9 @@ namespace TL.Engine.SDK.Services
     {
         IEnumerable<object> Find(string query, int count = 0);
         IEnumerable<object> Find<TEntity>(string query, int count = 0);
-        void Add<TEntity>(TEntity entity);
-        void Update<TEntity>(TEntity oldEntity, TEntity newEntity);
-        void Remove<TEntity>(TEntity entity);
+        bool Add<TEntity>(TEntity entity);
+        bool Update<TEntity>(TEntity oldEntity, TEntity newEntity);
+        bool Remove<TEntity>(TEntity entity);
         void Reset();
     }
 }

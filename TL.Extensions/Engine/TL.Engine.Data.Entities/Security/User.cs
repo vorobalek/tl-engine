@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.Security
 {
     public class User : EntityComparableStored<Guid>
     {
+        [StringIndex]
         public string Username { get; set; }
 
+        [StringIndex]
         public string Description { get; set; }
 
         public bool HasPassword { get => !string.IsNullOrWhiteSpace(PasswordHash); }

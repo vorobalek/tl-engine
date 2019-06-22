@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using TL.Engine.Data.Entities.Security;
+using TL.Engine.SDK.Attributes.EntityIndexer;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.Reports
@@ -26,12 +27,16 @@ namespace TL.Engine.Data.Entities.Reports
 
         public virtual User User { get; set; }
 
+        [StringIndex]
         public string Author { get; set; }
 
+        [StringIndex]
         public string Description { get; set; }
 
+        [StringIndex]
         public string Message { get; set; }
 
+        [StringIndex]
         public string StackTrace { get; set; }
 
         public ReportPriority? Priority { get; set; }
