@@ -4,13 +4,19 @@ using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.SDK.Managers
 {
-    public interface IEntityManager<TEntity>
+    public interface IEntityManager
+    {
+        Type TargetType { get; }
+        IEnumerable<object> GetAll(bool loadDeleted = false);
+    }
+
+    public interface IEntityManager<TEntity> : IEntityManager
         where TEntity : class, IEntity
     {
         TEntity Create(TEntity entity, bool cacheOnly = false);
         TEntity CreateEmpty(bool cacheOnly = false);
         TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false);
-        IEnumerable<TEntity> GetAll(bool loadDeleted = false);
+        new IEnumerable<TEntity> GetAll(bool loadDeleted = false);
         IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false);
         TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false);
         TEntity Update(TEntity entity, bool cacheOnly = false);

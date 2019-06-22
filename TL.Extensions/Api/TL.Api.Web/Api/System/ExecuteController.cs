@@ -61,7 +61,7 @@ namespace TL.Api.Web.Api.System
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
-            var instance = ActivatorUtilities.CreateInstance(ServiceProvider, existType);
+            var instance = ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, existType);
 
             var existMethod = existType.GetMethods().Where(mt => mt.GetCustomAttributes<PublicApiAttribute>(true).Count() > 0 && mt.Name == func).FirstOrDefault();
 
@@ -137,7 +137,7 @@ namespace TL.Api.Web.Api.System
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
-            var instance = ActivatorUtilities.CreateInstance(ServiceProvider, existType);
+            var instance = ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, existType);
 
             var existMethod = existType.GetMethods().Where(mt => mt.GetCustomAttributes<PrivateApiAttribute>(true).Count() > 0 && mt.Name == func).FirstOrDefault();
 

@@ -22,6 +22,8 @@ namespace TL.Engine.SDK.Managers
             Storage = storage;
         }
 
+        public Type TargetType => typeof(TEntity);
+
         protected ILogger Logger { get; }
         protected IServiceProvider ServiceProvider { get; }
         protected IStorage Storage { get; }
@@ -476,6 +478,11 @@ namespace TL.Engine.SDK.Managers
                 Logger.TLogError($"Сущность не может быть сохранена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
             }
             return entity;
+        }
+
+        IEnumerable<object> IEntityManager.GetAll(bool loadDeleted)
+        {
+            return GetAll(loadDeleted);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Trie : TrieNode
     {
-        public Trie(char? symbol = null, bool isTerminal = false) : base(symbol, isTerminal)
+        public Trie(char? symbol = null, object target = null, bool isTerminal = false) : base(symbol, target, isTerminal)
         {
         }
 

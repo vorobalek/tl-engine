@@ -1,25 +1,27 @@
-﻿using TL.Engine.SDK.Structures;
+﻿using System.Collections.Generic;
+using TL.Engine.SDK.Attributes.Api.Executable;
 
 namespace TL.Engine.SDK.Services
 {
     public class StringIndexerService : IStringIndexerService
     {
-        private Trie Trie { get; }
+        IEntityIndexerService EntityIndexer { get; }
 
-        public StringIndexerService()
+        public StringIndexerService(IEntityIndexerService entityIndexer)
         {
-            Trie = Trie.Create();
+            EntityIndexer = entityIndexer;
         }
 
-        public bool Add(string source)
+        [PublicApi]
+        public IEnumerable<object> Find(string query)
         {
-            Trie.Put(source);
-            return true;
+            return EntityIndexer.Find(query);
         }
 
-        public bool Find(string source)
+        [PublicApi]
+        public void Reset()
         {
-            return Trie.Find(source);
+            EntityIndexer.Reset();
         }
     }
 }

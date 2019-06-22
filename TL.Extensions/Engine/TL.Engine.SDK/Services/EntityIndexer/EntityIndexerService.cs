@@ -1,0 +1,136 @@
+﻿using ExtCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using TL.Engine.SDK.Entities;
+using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Managers;
+using TL.Engine.SDK.Structures;
+
+namespace TL.Engine.SDK.Services
+{
+    public class EntityIndexerService : IEntityIndexerService
+    {
+        IServiceProvider ServiceProvider { get; }
+
+        ConcurrentDictionary<Type, Trie> Cache { get; set; }
+
+        public EntityIndexerService(IServiceProvider serviceProvider)
+        {
+            ServiceProvider = serviceProvider;
+        }
+
+        public IEnumerable<object> Find(string query, int count = 0)
+        {
+            var result = new HashSet<EntityWithStringProperty>();
+            foreach (var type in Cache.Keys)
+            {
+                result.UnionWith(Cache[type].FindAll(query, count).Select(obj => (obj as EntityWithStringProperty)));
+            }
+            return result;
+        }
+
+        public IEnumerable<object> Find<TEntity>(string query, int count = 0)
+        {
+            if (!typeof(TEntity).GetInterfaces().Contains(typeof(IEntity)))
+            {
+                throw new ArgumentException($"{typeof(TEntity).GetFullName()} не является производным от {typeof(IEntity).GetFullName()}");
+            }
+            if (!Cache.ContainsKey(typeof(TEntity)))
+            {
+                throw new ArgumentException($"{typeof(TEntity).GetFullName()} сущности не проиндексированы");
+            }
+
+            return Cache[typeof(TEntity)].FindAll(query, count).Select(obj => obj as EntityWithStringProperty);
+        }
+
+        public void Reset()
+        {
+            var entityTypes = ExtensionManager
+                .GetImplementations<IEntity>()
+                .Where(t => !t.IsAbstract);
+
+            Cache = new ConcurrentDictionary<Type, Trie>(entityTypes.Select(t => new KeyValuePair<Type, Trie>(t, Trie.Create())));
+
+            entityTypes
+                .ToList()
+                .ForEach(entityType =>
+                {
+                    var managerType = ExtensionManager
+                            .GetImplementations<IEntityManager>()
+                            .FirstOrDefault(rt => !rt.IsAbstract 
+                            && ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, rt) is IEntityManager manager
+                            && manager.TargetType == entityType);
+                    if (managerType != null)
+                    {
+                        if (ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, managerType.GetInterfaces().Last()) is IEntityManager managerInstance)
+                        {
+                            var entities = managerInstance.GetAll(loadDeleted: true);
+                            foreach (var entity in entities)
+                            {
+                                Add(entity);
+                            }
+                        }
+                    }
+                });
+        }
+
+        internal class EntityStringProperty
+        {
+            public string Name { get; }
+            public string Value { get; }
+            public EntityStringProperty(string name, string value)
+            {
+                Name = name;
+                Value = value;
+            }
+        }
+
+        internal class EntityWithStringProperty
+        {
+            public IEntity Entity { get; }
+            public string Type { get; }
+            public EntityStringProperty Property { get; }
+            public EntityWithStringProperty(IEntity entity, EntityStringProperty property)
+            {
+                Entity = entity;
+                Type = entity.GetType().GetFullName();
+                Property = property;
+            }
+        }
+
+        public void Add<TEntity>(TEntity entity)
+        {
+            var stringProperties = entity
+                                    .GetType()
+                                    .GetProperties()
+                                    .Where(pi => pi.PropertyType == typeof(string) && pi.GetGetMethod() != null)
+                                    .Select(pi => new EntityStringProperty(pi.Name, pi.GetGetMethod().Invoke(entity, null) as string ?? ""));
+
+            foreach (var stringProperty in stringProperties)
+            {
+                if (stringProperty.Value is string value)
+                {
+                    Cache[entity.GetType()].Put(value, new EntityWithStringProperty(entity as IEntity, stringProperty));
+                }
+            }
+        }
+
+        public void Update<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddOrUpdate<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
