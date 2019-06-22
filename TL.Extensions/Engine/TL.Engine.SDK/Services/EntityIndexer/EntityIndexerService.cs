@@ -1,6 +1,4 @@
-﻿using ExtCore.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -17,14 +15,14 @@ namespace TL.Engine.SDK.Services
     {
         ILogger Logger { get; }
 
-        IServiceProvider ServiceProvider { get; }
+        IActivatorService Activator { get; }
 
         ConcurrentDictionary<Type, Trie> Cache { get; set; }
 
-        public EntityIndexerService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
+        public EntityIndexerService(ILoggerFactory loggerFactory, IActivatorService activator)
         {
             Logger = loggerFactory.CreateLogger<EntityIndexerService>();
-            ServiceProvider = serviceProvider;
+            Activator = activator;
         }
 
         public IEnumerable<object> Find(string query, int count = 0)
@@ -65,7 +63,7 @@ namespace TL.Engine.SDK.Services
         public void Reset()
         {
             Logger.TLogWarning($"Reset Service");
-            var entityTypes = ExtensionManager
+            var entityTypes = Activator
                 .GetImplementations<IEntity>()
                 .Where(t => !t.IsAbstract);
 
@@ -76,14 +74,14 @@ namespace TL.Engine.SDK.Services
                 .ForEach(entityType =>
                 {
                     Logger.TLogInformation($"Indexing {entityType} running...");
-                    var managerType = ExtensionManager
+                    var managerType = Activator
                             .GetImplementations<IEntityManager>()
                             .FirstOrDefault(rt => !rt.IsAbstract
-                            && ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, rt) is IEntityManager manager
+                            && Activator.GetServiceOrCreateInstance(rt) is IEntityManager manager
                             && manager.TargetType == entityType);
                     if (managerType != null)
                     {
-                        if (ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, managerType.GetInterfaces().Last()) is IEntityManager managerInstance)
+                        if (Activator.GetServiceOrCreateInstance(managerType.GetInterfaces().Last()) is IEntityManager managerInstance)
                         {
                             var entities = managerInstance.GetAll(loadDeleted: true);
                             foreach (var entity in entities)

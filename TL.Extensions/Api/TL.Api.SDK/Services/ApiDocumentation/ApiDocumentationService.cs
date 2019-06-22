@@ -10,6 +10,7 @@ using TL.Api.SDK.Models;
 using TL.Api.SDK.Objects;
 using TL.Engine.SDK.Attributes.Api.Executable;
 using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Services;
 
 namespace TL.Api.SDK.Services.ApiDocumentation
 {
@@ -31,9 +32,12 @@ namespace TL.Api.SDK.Services.ApiDocumentation
 
         private DateTime LastUpdate { get; set; }
 
-        public ApiDocumentationService(IServiceProvider serviceProvider)
+        IActivatorService Activator { get; }
+
+        public ApiDocumentationService(IServiceProvider serviceProvider, IActivatorService activator)
         {
             ServiceProvider = serviceProvider;
+            Activator = activator;
         }
 
         public ApiDocumentationModel Get()
@@ -85,9 +89,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
         private void InitializeMethods()
         {
             var typeApiHttpMethodAttribute = typeof(ApiHttpMethodAttribute);
-            Methods = ExtensionManager.GetImplementations<IBaseApiController>()
-                .Where(type => !type.IsAbstract && !type.IsInterface)
-                .Select(type => ActivatorUtilities.CreateInstance(ServiceProvider, type) as IBaseApiController)
+            Methods = Activator.GetInstances<IBaseApiController>()
                 .Select(controller =>
                 {
                     return new ApiMethodModel()
@@ -120,7 +122,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
 
         private void InitializeObjects()
         {
-            Objects = ExtensionManager.GetInstances<IBaseApiObject>()
+            Objects = Activator.GetInstances<IBaseApiObject>()
                 .Select(obj =>
                 {
                     var type = obj.GetType();

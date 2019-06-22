@@ -1,8 +1,8 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
-using TL.Engine.SDK.Attributes.Api.Executable;
 using TL.Engine.SDK.Entities;
+using TL.Engine.SDK.Services;
 
 namespace TL.Engine.SDK.Managers
 {
@@ -10,7 +10,7 @@ namespace TL.Engine.SDK.Managers
         where TEntity : class, IEntityComparable<TKey>, IEntityStored
         where TKey : IComparable
     {
-        public EntityComparableStoredManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
+        public EntityComparableStoredManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {
         }
 

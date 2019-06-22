@@ -5,6 +5,7 @@ using System.Linq;
 using TL.Engine.Data.Managers;
 using TL.Engine.SDK.Attributes.Api.Executable;
 using TL.Engine.SDK.Managers;
+using TL.Engine.SDK.Services;
 using TL.Linker.Data.Entities.Core;
 
 namespace TL.Linker.Data.Managers
@@ -17,7 +18,7 @@ namespace TL.Linker.Data.Managers
 
         public IStringVariableManager StringVariableManager { get; set; }
 
-        public LinkManager(IStringVariableManager stringVariableManager, IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
+        public LinkManager(IStringVariableManager stringVariableManager, IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {
             StringVariableManager = stringVariableManager;
         }

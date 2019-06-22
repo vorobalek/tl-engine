@@ -1,6 +1,4 @@
-﻿using ExtCore.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +11,12 @@ namespace TL.Engine.SDK.Services
     {
         ILogger Logger { get; }
 
-        IServiceProvider ServiceProvider { get; }
+        IActivatorService Activator { get; }
 
-        public StartupService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
+        public StartupService(ILoggerFactory loggerFactory, IActivatorService activator)
         {
             Logger = loggerFactory.CreateLogger<StartupService>();
-            ServiceProvider = serviceProvider;
+            Activator = activator;
             Init();
         }
 
@@ -46,9 +44,7 @@ namespace TL.Engine.SDK.Services
         {
             _checkLog = new List<IStartupActionResult>();
 
-            var actions = ExtensionManager.GetImplementations<IStartupAction>()
-                .Where(im => !im.IsAbstract)
-                .Select(im => ActivatorUtilities.CreateInstance(ServiceProvider, im) as IStartupAction)
+            var actions = Activator.GetInstances<IStartupAction>()
                 .OrderBy(a => a.Priority);
 
             foreach (var action in actions)

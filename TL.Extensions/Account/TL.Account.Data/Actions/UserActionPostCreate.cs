@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using TL.Account.Data.Managers;
+﻿using TL.Account.Data.Managers;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Actions;
 
@@ -8,17 +6,23 @@ namespace TL.Account.Web.Actions
 {
     public class UserActionPostCreate : IEntityActionPostCreate<User>
     {
-        public bool Invoke(ref User entity, IServiceProvider serviceProvider, bool cacheOnly = false)
+        ISubscriptionManager SubscriptionManager { get; }
+
+        public UserActionPostCreate(ISubscriptionManager subscriptionManager)
         {
-            var subscriptionManager = serviceProvider.GetService<ISubscriptionManager>();
+            SubscriptionManager = subscriptionManager;
+        }
+
+        public bool Invoke(ref User entity, bool cacheOnly = false)
+        {
             var userId = entity.Id;
-            var item = subscriptionManager.Get(e => e.FromId == userId && e.ToId == User.System.Id);
+            var item = SubscriptionManager.Get(e => e.FromId == userId && e.ToId == User.System.Id);
             if (item == null)
             {
-                var subsription = subscriptionManager.CreateEmpty(cacheOnly: true);
+                var subsription = SubscriptionManager.CreateEmpty(cacheOnly: true);
                 subsription.FromId = userId;
                 subsription.ToId = User.System.Id;
-                subscriptionManager.Create(subsription, cacheOnly);
+                SubscriptionManager.Create(subsription, cacheOnly);
             }
 
             return true;

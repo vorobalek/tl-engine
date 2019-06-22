@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using TL.Engine.SDK.Entities;
+using TL.Engine.SDK.Services;
 
 namespace TL.Engine.SDK.Managers
 {
@@ -9,7 +10,7 @@ namespace TL.Engine.SDK.Managers
         where TEntity : class, IEntityDuplicate<TKey>, IEntityComparable<TKey>, IEntityStored
         where TKey : struct, IComparable
     {
-        public EntityDuplicateComparableStoredManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory) : base(serviceProvider, storage, loggerFactory)
+        public EntityDuplicateComparableStoredManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {
         }
 

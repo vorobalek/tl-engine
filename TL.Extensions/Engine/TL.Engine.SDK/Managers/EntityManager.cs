@@ -1,6 +1,4 @@
 ﻿using ExtCore.Data.Abstractions;
-using ExtCore.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,23 +7,25 @@ using TL.Engine.SDK.Actions;
 using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Repositories;
+using TL.Engine.SDK.Services;
 
 namespace TL.Engine.SDK.Managers
 {
     public abstract class EntityManager<TEntity> : IEntityManager<TEntity>
         where TEntity : class, IEntity
     {
-        public EntityManager(IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory)
+        IActivatorService Activator { get; }
+
+        public EntityManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage)
         {
+            Activator = activator;
             Logger = loggerFactory.CreateLogger(GetType());
-            ServiceProvider = serviceProvider;
             Storage = storage;
         }
 
         public Type TargetType => typeof(TEntity);
 
         protected ILogger Logger { get; }
-        protected IServiceProvider ServiceProvider { get; }
         protected IStorage Storage { get; }
 
         public virtual TEntity Create(TEntity entity, bool cacheOnly = false)
@@ -42,10 +42,10 @@ namespace TL.Engine.SDK.Managers
 
                     //Can Create Entity
                     bool canCreate = true;
-                    var canCreateActions = ExtensionManager.GetInstances<IEntityActionCanCreate<TEntity>>();
+                    var canCreateActions = Activator.GetInstances<IEntityActionCanCreate<TEntity>>();
                     foreach (var action in canCreateActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                        var actionResult = action.Invoke(ref entity, cacheOnly);
                         canCreate = canCreate && actionResult;
                         Logger.TLogWarning($"Проверка перед созданием сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -56,10 +56,10 @@ namespace TL.Engine.SDK.Managers
 
                         //Pre Create Entity
                         bool preCreate = true;
-                        var preCreateActions = ExtensionManager.GetInstances<IEntityActionPreCreate<TEntity>>();
+                        var preCreateActions = Activator.GetInstances<IEntityActionPreCreate<TEntity>>();
                         foreach (var action in preCreateActions)
                         {
-                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                            var actionResult = action.Invoke(ref entity, cacheOnly);
                             preCreate = preCreate && actionResult;
                             Logger.TLogWarning($"Действия перед созданием сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
@@ -77,10 +77,10 @@ namespace TL.Engine.SDK.Managers
 
                             //Post Create Entity
                             bool postCreate = true;
-                            var postCreateActions = ExtensionManager.GetInstances<IEntityActionPostCreate<TEntity>>();
+                            var postCreateActions = Activator.GetInstances<IEntityActionPostCreate<TEntity>>();
                             foreach (var action in postCreateActions)
                             {
-                                var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                                var actionResult = action.Invoke(ref entity, cacheOnly);
                                 postCreate = postCreate && actionResult;
                                 Logger.TLogWarning($"Действия после создания сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                             }
@@ -113,7 +113,7 @@ namespace TL.Engine.SDK.Managers
         {
             try
             {
-                if (ActivatorUtilities.CreateInstance(ServiceProvider, typeof(TEntity)) is TEntity entity)
+                if (Activator.GetServiceOrCreateInstance<TEntity>() is TEntity entity)
                 {
                     return Create(entity, cacheOnly);
                 }
@@ -132,10 +132,10 @@ namespace TL.Engine.SDK.Managers
                 //Can Delete Entity
                 Logger.TLogInformation($"Запрос удаления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool canDelete = true;
-                var canDeleteActions = ExtensionManager.GetInstances<IEntityActionCanDelete<TEntity>>();
+                var canDeleteActions = Activator.GetInstances<IEntityActionCanDelete<TEntity>>();
                 foreach (var action in canDeleteActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                    var actionResult = action.Invoke(ref entity, cacheOnly);
                     canDelete = canDelete && actionResult;
                     Logger.TLogWarning($"Проверка перед удалением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -145,10 +145,10 @@ namespace TL.Engine.SDK.Managers
                     //Pre Delete Entity
                     Logger.TLogInformation($"Сущность может быть удалена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     bool preDelete = true;
-                    var preDeleteActions = ExtensionManager.GetInstances<IEntityActionPreDelete<TEntity>>();
+                    var preDeleteActions = Activator.GetInstances<IEntityActionPreDelete<TEntity>>();
                     foreach (var action in preDeleteActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                        var actionResult = action.Invoke(ref entity, cacheOnly);
                         preDelete = preDelete && actionResult;
                         Logger.TLogWarning($"Действия перед удалением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -165,10 +165,10 @@ namespace TL.Engine.SDK.Managers
 
                         //Post Delete Entity
                         bool postDelete = true;
-                        var postDeleteActions = ExtensionManager.GetInstances<IEntityActionPostDelete<TEntity>>();
+                        var postDeleteActions = Activator.GetInstances<IEntityActionPostDelete<TEntity>>();
                         foreach (var action in postDeleteActions)
                         {
-                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                            var actionResult = action.Invoke(ref entity, cacheOnly);
                             postDelete = postDelete && actionResult;
                             Logger.TLogWarning($"Действия после удаления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
@@ -253,10 +253,10 @@ namespace TL.Engine.SDK.Managers
                 //Can Remove Entity
                 Logger.TLogInformation($"Запрос уничтожения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool canRemove = true;
-                var canRemoveActions = ExtensionManager.GetInstances<IEntityActionCanRemove<TEntity>>();
+                var canRemoveActions = Activator.GetInstances<IEntityActionCanRemove<TEntity>>();
                 foreach (var action in canRemoveActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                    var actionResult = action.Invoke(ref entity, cacheOnly);
                     canRemove = canRemove && actionResult;
                     Logger.TLogWarning($"Проверка перед уничтожением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -266,10 +266,10 @@ namespace TL.Engine.SDK.Managers
                     ///Pre Remove Entity
                     Logger.TLogInformation($"Сущность может быть уничтожена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     bool preRemove = true;
-                    var preRemoveActions = ExtensionManager.GetInstances<IEntityActionPreRemove<TEntity>>();
+                    var preRemoveActions = Activator.GetInstances<IEntityActionPreRemove<TEntity>>();
                     foreach (var action in preRemoveActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                        var actionResult = action.Invoke(ref entity, cacheOnly);
                         preRemove = preRemove && actionResult;
                         Logger.TLogWarning($"Действия перед уничтожением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -287,10 +287,10 @@ namespace TL.Engine.SDK.Managers
 
                         //Post Remove Entity
                         bool postRemove = true;
-                        var postRemoveActions = ExtensionManager.GetInstances<IEntityActionPostRemove<TEntity>>();
+                        var postRemoveActions = Activator.GetInstances<IEntityActionPostRemove<TEntity>>();
                         foreach (var action in postRemoveActions)
                         {
-                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                            var actionResult = action.Invoke(ref entity, cacheOnly);
                             postRemove = postRemove && actionResult;
                             Logger.TLogWarning($"Действия после уничтожения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
@@ -344,10 +344,10 @@ namespace TL.Engine.SDK.Managers
                 //Can Update Entity
                 Logger.TLogInformation($"Запрос обновления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool canUpdate = true;
-                var canUpdateActions = ExtensionManager.GetInstances<IEntityActionCanUpdate<TEntity>>();
+                var canUpdateActions = Activator.GetInstances<IEntityActionCanUpdate<TEntity>>();
                 foreach (var action in canUpdateActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                    var actionResult = action.Invoke(ref entity, cacheOnly);
                     canUpdate = canUpdate && actionResult;
                     Logger.TLogWarning($"Проверка перед обновлением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -357,10 +357,10 @@ namespace TL.Engine.SDK.Managers
                     //Pre Update Entity
                     Logger.TLogInformation($"Сущность может быть обновлена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                     bool preUpdate = true;
-                    var preUpdateActions = ExtensionManager.GetInstances<IEntityActionPreUpdate<TEntity>>();
+                    var preUpdateActions = Activator.GetInstances<IEntityActionPreUpdate<TEntity>>();
                     foreach (var action in preUpdateActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                        var actionResult = action.Invoke(ref entity, cacheOnly);
                         preUpdate = preUpdate && actionResult;
                         Logger.TLogWarning($"Действия перед обновлением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }
@@ -378,10 +378,10 @@ namespace TL.Engine.SDK.Managers
 
                         //Post Update Entity
                         bool postUpdate = true;
-                        var postUpdateActions = ExtensionManager.GetInstances<IEntityActionPostUpdate<TEntity>>();
+                        var postUpdateActions = Activator.GetInstances<IEntityActionPostUpdate<TEntity>>();
                         foreach (var action in postUpdateActions)
                         {
-                            var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                            var actionResult = action.Invoke(ref entity, cacheOnly);
                             postUpdate = postUpdate && actionResult;
                             Logger.TLogWarning($"Действия после обновления сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                         }
@@ -417,10 +417,10 @@ namespace TL.Engine.SDK.Managers
             //Can Save Entity
             Logger.TLogInformation($"Попытка сохранить сущность:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
             bool canSave = true;
-            var canSaveActions = ExtensionManager.GetInstances<IEntityActionCanSave<TEntity>>();
+            var canSaveActions = Activator.GetInstances<IEntityActionCanSave<TEntity>>();
             foreach (var action in canSaveActions)
             {
-                var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                var actionResult = action.Invoke(ref entity, cacheOnly);
                 canSave = canSave && actionResult;
                 Logger.TLogWarning($"Проверка условий сохранения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
             }
@@ -430,10 +430,10 @@ namespace TL.Engine.SDK.Managers
                 //Pre Save Entity
                 Logger.TLogInformation($"Сущность может быть сохранена:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]");
                 bool preSave = true;
-                var preSaveActions = ExtensionManager.GetInstances<IEntityActionPreSave<TEntity>>();
+                var preSaveActions = Activator.GetInstances<IEntityActionPreSave<TEntity>>();
                 foreach (var action in preSaveActions)
                 {
-                    var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                    var actionResult = action.Invoke(ref entity, cacheOnly);
                     preSave = preSave && actionResult;
                     Logger.TLogWarning($"Действия перед сохранением сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                 }
@@ -451,10 +451,10 @@ namespace TL.Engine.SDK.Managers
 
                     //Post Save Entity
                     bool postSave = true;
-                    var postSaveActions = ExtensionManager.GetInstances<IEntityActionPostSave<TEntity>>();
+                    var postSaveActions = Activator.GetInstances<IEntityActionPostSave<TEntity>>();
                     foreach (var action in postSaveActions)
                     {
-                        var actionResult = action.Invoke(ref entity, ServiceProvider, cacheOnly);
+                        var actionResult = action.Invoke(ref entity, cacheOnly);
                         postSave = postSave && actionResult;
                         Logger.TLogWarning($"Действия после сохранения сущности:\t{entity.GetType().GetFullName()}[{nameof(cacheOnly)}={cacheOnly}]:\t{action.GetType().GetFullName()}\t{actionResult}");
                     }

@@ -10,6 +10,7 @@ using TL.Engine.Data.Extensions;
 using TL.Engine.SDK.Attributes.Api.Executable;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
+using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
@@ -19,14 +20,24 @@ namespace TL.Engine.Data.Managers
         IGroupManager GroupManager { get; }
         IUserRoleManager UserRoleManager { get; }
         IUserGroupManager UserGroupManager { get; }
+        IServiceProvider ServiceProvider { get; }
 
-        public UserManager(IRoleManager roleManager, IGroupManager groupManager, IUserRoleManager userRoleManager, IUserGroupManager userGroupManager, IServiceProvider serviceProvider, IStorage storage, ILoggerFactory loggerFactory)
-            : base(serviceProvider, storage, loggerFactory)
+        public UserManager(
+            IRoleManager roleManager,
+            IGroupManager groupManager,
+            IUserRoleManager userRoleManager,
+            IUserGroupManager userGroupManager,
+            IServiceProvider serviceProvider,
+            IActivatorService activator,
+            ILoggerFactory loggerFactory,
+            IStorage storage)
+            : base(activator, loggerFactory, storage)
         {
             RoleManager = roleManager;
             GroupManager = groupManager;
             UserRoleManager = userRoleManager;
             UserGroupManager = userGroupManager;
+            ServiceProvider = serviceProvider;
         }
 
         [PrivateApi(Description = "Получить пользователя по имени")]
