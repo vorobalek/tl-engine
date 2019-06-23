@@ -13,6 +13,7 @@ namespace TL.Engine.Actions
         {
             serviceCollection.AddSingleton<IStartupService, StartupService>();
             serviceCollection.AddSingleton<IEntityIndexerService, EntityIndexerService>();
+            serviceCollection.AddSingleton<IStringIndexerService, StringIndexerService>();
 
             serviceCollection.AddTransient<IActivatorService, ActivatorService>();
         }

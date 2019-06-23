@@ -28,6 +28,7 @@ namespace TL.Engine.SDK.Services
 
         public IEnumerable<object> Find(string query, int count = 0)
         {
+            query = string.IsNullOrWhiteSpace(query) ? "" : query.ToLowerInvariant();
             var result = new HashSet<EntityWithStringProperty>();
             var tasks = Cache.Keys.Select(type =>
                 {
@@ -48,6 +49,7 @@ namespace TL.Engine.SDK.Services
 
         public IEnumerable<object> Find<TEntity>(string query, int count = 0)
         {
+            query = string.IsNullOrWhiteSpace(query) ? "" : query.ToLowerInvariant();
             if (!typeof(TEntity).GetInterfaces().Contains(typeof(IEntity)))
             {
                 throw new ArgumentException($"{typeof(TEntity).GetFullName()} не является производным от {typeof(IEntity).GetFullName()}");
@@ -135,7 +137,7 @@ namespace TL.Engine.SDK.Services
                     .GetFields()
                     .Where(fi => fi.FieldType == typeof(string)
                     && fi.GetCustomAttributes(typeof(StringIndexAttribute), inherit: true).Count() > 0)
-                    .Select(fi => new StringProperty(fi.Name, fi.GetValue(entity) as string ?? ""))
+                    .Select(fi => new StringProperty(fi.Name, (fi.GetValue(entity) as string ?? "").ToLowerInvariant()))
                     .Concat(
                 entity
                     .GetType()
@@ -143,7 +145,7 @@ namespace TL.Engine.SDK.Services
                     .Where(pi => pi.PropertyType == typeof(string)
                     && pi.GetGetMethod() != null
                     && pi.GetCustomAttributes(typeof(StringIndexAttribute), inherit: true).Count() > 0)
-                    .Select(pi => new StringProperty(pi.Name, pi.GetGetMethod().Invoke(entity, null) as string ?? "")));
+                    .Select(pi => new StringProperty(pi.Name, (pi.GetGetMethod().Invoke(entity, null) as string ?? "").ToLowerInvariant())));
 
             if (stringProperties.Count() > 0)
             {
