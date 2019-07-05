@@ -99,7 +99,10 @@
 @if (waitModules.Count() > 0)
 {
     <hr />
-    <h4>Ожидают</h4>
+    <h4>
+        Ожидают
+        <button class="btn btn-link" onclick="server_alert('/runtime/restart')">Перезагрузить сейчас</button>
+    </h4>
     <hr />
     <ul class="list-group">
         @foreach (var module in waitModules)

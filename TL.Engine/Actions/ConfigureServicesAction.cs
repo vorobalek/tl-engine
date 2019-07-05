@@ -1,7 +1,9 @@
 ﻿using ExtCore.Infrastructure.Actions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using TL.Engine.SDK.Services;
+using TL.Engine.StartupFilters;
 
 namespace TL.Engine.Actions
 {
@@ -16,6 +18,7 @@ namespace TL.Engine.Actions
             serviceCollection.AddSingleton<IStringIndexerService, StringIndexerService>();
 
             serviceCollection.AddTransient<IActivatorService, ActivatorService>();
+            serviceCollection.AddSingleton<IStartupFilter, CoreStartupFilter>();
         }
     }
 }

@@ -1,0 +1,49 @@
+﻿@using TL.Engine.SDK.Services;
+@inject IStartupService StartupService
+@{
+    Layout = "_LayoutSafePage";
+    if (StartupService.IsOk)
+    {
+        ViewData["Title"] = "Лог запуска";
+    }
+    else if (!StartupService.IsReady)
+    {
+        ViewData["Title"] = "Запуск...";
+    }
+    else
+    {
+        ViewData["Title"] = "Ошибка!";
+    }
+}
+<div id="log">
+    @if (StartupService.IsReady)
+    {
+        <partial name="_Progress" />
+    }
+    else
+    {
+        @section Scripts {
+            <script type="text/javascript">
+
+                update = function () {
+                    if ($('#progress').hasClass('final')) location.reload();
+                    $.ajax({
+                        url: '/runtime/update',
+                        type: 'post',
+                        success: function (result) {
+                            $(document).find('#log').html(result);
+                        }
+                    })
+                }
+
+                $(document).ready(function () {
+                    if (!($('#progress').hasClass('final'))) {
+                        update();
+                        var hupdate = setInterval('update()', 1000);
+                    }
+                })
+
+            </script>
+        }
+    }
+</div>

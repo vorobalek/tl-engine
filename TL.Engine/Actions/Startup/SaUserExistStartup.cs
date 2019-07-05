@@ -31,7 +31,7 @@ namespace TL.Engine.Actions.Startup
                 var users = userRoles.Select(ur => UserManager.Get(ur.UserId));
                 if (users.Count() > 0)
                 {
-                    return StartupActionResult.Good(description: $"Администратор(-ы) системы обнаружен(-ы):\r\n{string.Join("\r\n", users.Select(u => u.Username))}");
+                    return StartupActionResult.Good(description: Description);
                 }
             }
             return StartupActionResult.Bad("Fail", "В системе не зарегистрировано ни одного пользователя с привилегиями администратора");

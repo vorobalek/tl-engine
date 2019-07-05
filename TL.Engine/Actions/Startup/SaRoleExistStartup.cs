@@ -23,7 +23,7 @@ namespace TL.Engine.Actions.Startup
         {
             if (RoleManager.Get(r => r.Name == Role.Sa.Name) is Role role)
             {
-                return StartupActionResult.Good(description: "Роль администратора системы существует.");
+                return StartupActionResult.Good(description: Description);
             }
 
             return StartupActionResult.Bad("Fail", "В системе не существует роли системного администратора");

@@ -16,7 +16,7 @@ namespace TL.Engine.Actions.Startup
             var context = DesignTimeStorageContextFactory.StorageContext;
             if (context.Database.CanConnect())
             {
-                return StartupActionResult.Good(description: $"Подключение к базе данных установлено.");
+                return StartupActionResult.Good(description: Description);
             }
             return StartupActionResult.Bad("Fail", Description);
         }

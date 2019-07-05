@@ -12,7 +12,6 @@ namespace TL.Integrations.Telegram.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
-            serviceCollection.AddScoped<IStartupFilter, AutoStartBotServiceStartupFilter>();
         }
     }
 }

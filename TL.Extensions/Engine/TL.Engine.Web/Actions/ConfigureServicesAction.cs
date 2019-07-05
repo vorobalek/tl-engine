@@ -43,8 +43,6 @@ namespace TL.Engine.Web.Actions
                 {
                     options.AddPolicy("SA", policy => policy.RequireClaim(ClaimsIdentity.DefaultRoleClaimType, Role.Sa.Name));
                 });
-
-            serviceCollection.AddSingleton<IStartupFilter, EngineSystemStringVaribaleStartupFilter>();
         }
     }
 }

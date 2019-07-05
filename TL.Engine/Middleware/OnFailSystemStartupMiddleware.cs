@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Threading.Tasks;
 using TL.Engine.SDK.Services;
 
@@ -15,9 +16,11 @@ namespace TL.Engine.Middleware
 
         public Task Invoke(HttpContext context, IStartupService startupService)
         {
-            if (!context.Request.Path.StartsWithSegments("/Styles") && !context.Request.Path.StartsWithSegments("/Scripts"))
+            if (!context.Request.Path.StartsWithSegments("/Styles", StringComparison.InvariantCultureIgnoreCase) &&
+                !context.Request.Path.StartsWithSegments("/Scripts", StringComparison.InvariantCultureIgnoreCase) &&
+                !context.Request.Path.StartsWithSegments("/Runtime", StringComparison.InvariantCultureIgnoreCase))
             {
-                if (!startupService.IsOk)
+                if (!startupService.IsReady || !startupService.IsOk)
                 {
                     context.Request.Path = startupService.RedirectUrl;
                 }

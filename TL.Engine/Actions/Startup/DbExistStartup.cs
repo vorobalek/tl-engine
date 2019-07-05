@@ -26,7 +26,7 @@ namespace TL.Engine.Actions.Startup
             var context = DesignTimeStorageContextFactory.StorageContext;
             if (context.Database.GetService<IRelationalDatabaseCreator>().Exists())
             {
-                return StartupActionResult.Good("Ok", "База данных существует.");
+                return StartupActionResult.Good(description: Description);
             }
             else
             {

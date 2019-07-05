@@ -17,38 +17,23 @@ namespace TL.Engine.SDK.Services
         {
             Logger = loggerFactory.CreateLogger<StartupService>();
             Activator = activator;
-            Init();
         }
 
         public bool IsReady { get; private set; } = false;
 
-        private List<IStartupActionResult> _checkLog = new List<IStartupActionResult>();
+        public List<IStartupActionResult> Log { get; private set; } = new List<IStartupActionResult>();
 
-        public List<IStartupActionResult> Log
+        public void Init()
         {
-            get
-            {
-                if (IsReady)
-                {
-                    return _checkLog;
-                }
-                else
-                {
-                    Init();
-                    return _checkLog;
-                }
-            }
-        }
-
-        private void Init()
-        {
-            _checkLog = new List<IStartupActionResult>();
+            Log = new List<IStartupActionResult>();
 
             var actions = Activator.GetInstances<IStartupAction>()
                 .OrderBy(a => a.Priority);
 
+            int number = 0, count = actions.Count();
             foreach (var action in actions)
             {
+                Progress = number / (double)count * 100;
                 IStartupActionResult actionResult;
                 try
                 {
@@ -62,18 +47,25 @@ namespace TL.Engine.SDK.Services
                     Logger.TLogCritical($"{action.GetType().GetFullName()} broken...\r\n\t{ex}");
                 }
 
-                _checkLog.Add(actionResult);
+                Log.Add(actionResult);
+
+                ++number;
+                Progress = number / (double)count * 100;
+
                 if (!actionResult.Ok && action.IsBlocker)
                 {
                     break;
                 }
             }
 
+            IsOk = Log.All(e => e.Ok);
             IsReady = true;
         }
 
-        public bool IsOk => Log.All(e => e.Ok);
+        public bool IsOk { get; private set; } = false;
 
         public string RedirectUrl => Log.LastOrDefault()?.RedurectUrl ?? "/";
+
+        public double Progress { get; private set; } = 0.0;
     }
 }

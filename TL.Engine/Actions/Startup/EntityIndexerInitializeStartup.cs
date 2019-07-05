@@ -30,7 +30,7 @@ namespace TL.Engine.Actions.Startup
             {
                 return StartupActionResult.Broken($"{ex}", "Не удалость инициализировать сервис полнотекстовой индексации сущностей");
             }
-            return StartupActionResult.Good(description: $"Время инициализации: {DateTime.Now - dt}");
+            return StartupActionResult.Good(description: Description);
         }
     }
 }

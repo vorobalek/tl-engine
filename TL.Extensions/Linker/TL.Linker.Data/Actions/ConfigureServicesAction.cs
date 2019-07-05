@@ -12,7 +12,6 @@ namespace TL.Linker.Data.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
-            serviceCollection.AddSingleton<IStartupFilter, LinkerSystemVariableStarupFilter>();
             serviceCollection.AddScoped<ILinkManager, LinkManager>();
         }
     }

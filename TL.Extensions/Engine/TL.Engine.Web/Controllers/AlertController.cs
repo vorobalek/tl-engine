@@ -1,5 +1,4 @@
-﻿using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TL.Engine.SDK.Controllers;
 
 namespace TL.Engine.Web.Controllers
