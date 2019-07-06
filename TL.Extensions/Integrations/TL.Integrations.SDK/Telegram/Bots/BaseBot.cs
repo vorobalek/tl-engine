@@ -52,7 +52,8 @@ namespace TL.Integrations.SDK.Telegram.Bots
                 {
                     WorkThread = new Thread(WorkProcess)
                     {
-                        Name = Username
+                        Name = Username,
+                        IsBackground = true
                     };
                     MessagesQueue = new ConcurrentQueue<IMessage>();
 
