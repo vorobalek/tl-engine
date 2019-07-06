@@ -18,6 +18,8 @@
 <div id="log">
     @if (StartupService.IsReady)
     {
+        <button class="btn btn-link" onclick="server_alert('/runtime/restart')">Перезапустить сервер</button>
+        <hr />
         <partial name="_Progress" />
     }
     else

@@ -44,6 +44,7 @@ namespace TL.Engine.Web
             new LinkItem("Система", 2000, new[] { "sa" }, new[]
             {
                 new LinkItem("/modules", "Управление модулями", 1000, new string[] { "sa" }),
+                new LinkItem("/runtime", "Диспетчер системы", 1005, new string[] { "sa" }),
                 new LinkItem("/home/exception", "Проверить исключения", 1100, new string[] { "sa" })
             })
         };

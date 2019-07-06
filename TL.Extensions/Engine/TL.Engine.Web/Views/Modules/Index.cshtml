@@ -8,11 +8,16 @@
 
     string f(TL.Engine.SDK.Modularity.BaseMetadata module)
     {
+        var name = $"{module.Name}";
+        if (Model.Modules.Contains(module.Name.Substring(3)))
+        {
+            name += $"<button class=\"btn btn-link\" onclick=\"server_alert(\'/modules/remove?name={module.Name}\')\">Удалить</button>";
+        }
         var moduleId = string.Join("_", module.Name.Split("."));
         var r = $"<span class=\"row align-items-center\">" +
                     $"<span class=\"col-auto\"><img src=\"/Styles/images/base_package.png\" alt=\"Logo\"></span>" +
                     $"<button type=\"button\" class=\"btn btn-link\" data-toggle=\"modal\" data-target=\"#{moduleId}Modal\"><span class=\"glyphicon glyphicon-info-sign\"></span></button>" +
-                    $"<h6>{module.Name}</h6>" +
+                    $"<h6>{name}</h6>" +
                     $"</span>";
         var modal = GetModal(module);
         globalModuleDivArea += modal;
@@ -101,7 +106,7 @@
     <hr />
     <h4>
         Ожидают
-        <button class="btn btn-link" onclick="server_alert('/runtime/restart')">Перезагрузить сейчас</button>
+        <button class="btn btn-link" onclick="server_alert('/runtime/restart')">Перезапустить сервер</button>
     </h4>
     <hr />
     <ul class="list-group">
@@ -110,7 +115,7 @@
             <li class="list-group-item">
                 <div class="d-flex align-items-center">
                     <div class="spinner-border mr-5" role="status" aria-hidden="true"></div>
-                    <strong>@module ожидает перезагрузки</strong>
+                    <strong>@module ожидает перезагрузапуска сервера</strong>
                 </div>
             </li>
         }

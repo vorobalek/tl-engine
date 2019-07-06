@@ -69,5 +69,19 @@ namespace TL.Engine.Web.Controllers
             }
             return View(new SystemActiveModulesViewModelFactory().Create(Environment, Configuration));
         }
+
+        [HttpPost]
+        public IActionResult Remove(string name)
+        {
+            var dirName = name.Substring(3);
+            var path = Path.Combine(Environment.ContentRootPath, Configuration["Extensions:Path"], "Modules", dirName);
+            if (!Directory.Exists(path))
+            {
+                return PartialView("_StatusMessage", $"Модуль {name} нельзя удалить");
+            }
+
+            Directory.Delete(path, true);
+            return PartialView("_StatusMessage", $"Модуль {name} удалён. Перезапустите систему!");
+        }
     }
 }
