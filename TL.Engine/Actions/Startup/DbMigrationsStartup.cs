@@ -8,8 +8,6 @@ namespace TL.Engine.Actions.Startup
 {
     public class DbMigrationsStartup : IStartupAction
     {
-        public bool IsBlocker => true;
-
         public int Priority => 400;
 
         public string Description => $"Проверка миграций в БД.";
@@ -23,7 +21,7 @@ namespace TL.Engine.Actions.Startup
             {
                 return StartupActionResult.Good(description: Description);
             }
-            return StartupActionResult.Bad($"Обновлений структуры БД: {migrations.Count}", $"{string.Join("\r\n", migrations)}");
+            return StartupActionResult.Broken($"Обновлений структуры БД: {migrations.Count}", $"{string.Join("\r\n", migrations)}");
         }
     }
 }

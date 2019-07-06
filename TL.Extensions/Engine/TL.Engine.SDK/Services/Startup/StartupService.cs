@@ -38,12 +38,13 @@ namespace TL.Engine.SDK.Services
                 try
                 {
                     Logger.TLogInformation($"{action.GetType().GetFullName()} running...");
+                    Message = action.Description;
                     actionResult = action.Invoke();
                     Logger.TLogInformation($"{action.GetType().GetFullName()} finished...");
                 }
                 catch (Exception ex)
                 {
-                    actionResult = StartupActionResult.Broken($"{ex}");
+                    actionResult = StartupActionResult.Broken($"{ex}", action.Description);
                     Logger.TLogCritical($"{action.GetType().GetFullName()} broken...\r\n\t{ex}");
                 }
 
@@ -52,13 +53,13 @@ namespace TL.Engine.SDK.Services
                 ++number;
                 Progress = number / (double)count * 100;
 
-                if (!actionResult.Ok && action.IsBlocker)
+                if (!actionResult.IsFinal)
                 {
                     break;
                 }
             }
 
-            IsOk = Log.All(e => e.Ok);
+            IsOk = Log.All(e => e.IsFinal);
             IsReady = true;
         }
 
@@ -67,5 +68,7 @@ namespace TL.Engine.SDK.Services
         public string RedirectUrl => Log.LastOrDefault()?.RedurectUrl ?? "/";
 
         public double Progress { get; private set; } = 0.0;
+
+        public string Message { get; private set; }
     }
 }

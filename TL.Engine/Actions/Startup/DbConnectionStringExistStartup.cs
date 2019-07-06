@@ -5,8 +5,6 @@ namespace TL.Engine.Actions.Startup
 {
     public class DbConnectionStringExistStartup : IStartupAction
     {
-        public bool IsBlocker => true;
-
         public int Priority => 100;
 
         public string Description => "Проверка существования строки подключения к БД.";

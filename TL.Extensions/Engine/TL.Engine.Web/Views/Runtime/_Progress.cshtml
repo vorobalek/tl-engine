@@ -19,6 +19,9 @@ else if (!StartupService.IsReady)
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    <center>
+        <strong>@StartupService.Message</strong>
+    </center>
 }
 else
 {
@@ -29,7 +32,8 @@ else
         </button>
     </div>
 }
-<div id="progress" class="progress@(StartupService.IsReady && StartupService.IsOk ? " final" : "")" style="height: 1px;">
+<br />
+<div id="progress" class="progress@(StartupService.IsReady ? " final" : "")" style="height: 1px;">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@StartupService.Progress" aria-valuemin="0" aria-valuemax="100" style="width: @StartupService.Progress%">
     </div>
 </div>

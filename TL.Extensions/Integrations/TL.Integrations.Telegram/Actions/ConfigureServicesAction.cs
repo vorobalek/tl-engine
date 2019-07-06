@@ -1,8 +1,6 @@
 ﻿using ExtCore.Infrastructure.Actions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using TL.Integrations.Telegram.Services;
 
 namespace TL.Integrations.Telegram.Actions
 {

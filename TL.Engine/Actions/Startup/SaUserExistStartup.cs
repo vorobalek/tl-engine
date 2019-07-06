@@ -7,8 +7,6 @@ namespace TL.Engine.Actions.Startup
 {
     public class SaUserExistStartup : IStartupAction
     {
-        public bool IsBlocker => false;
-
         public int Priority => 600;
 
         public string Description => "Проверка существования администратора.";
@@ -34,7 +32,7 @@ namespace TL.Engine.Actions.Startup
                     return StartupActionResult.Good(description: Description);
                 }
             }
-            return StartupActionResult.Bad("Fail", "В системе не зарегистрировано ни одного пользователя с привилегиями администратора");
+            return StartupActionResult.Broken("Fail", "В системе не зарегистрировано ни одного пользователя с привилегиями администратора");
         }
     }
 }

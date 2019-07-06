@@ -6,8 +6,6 @@ namespace TL.Engine.Actions.Startup
 {
     public class EntityIndexerInitialiseStartup : IStartupAction
     {
-        public bool IsBlocker => true;
-
         public int Priority => 1000;
 
         public string Description => "Инициализация сервиса полнотекстовой индексации сущностей";

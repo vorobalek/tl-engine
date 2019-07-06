@@ -40,13 +40,11 @@ namespace TL.Engine.Data.Managers
             ServiceProvider = serviceProvider;
         }
 
-        [PrivateApi(Description = "Получить пользователя по имени")]
         public User Get(string username)
         {
             return Get(e => e.Username == username);
         }
 
-        [PrivateApi(Description = "Создать пользователя с логином, паролем и описанием")]
         public User Create(string username, string password, string description = null)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -105,7 +103,6 @@ namespace TL.Engine.Data.Managers
             return null;
         }
 
-        [PrivateApi(Description = "Получить существующего пользователя или создать нового")]
         public User GetOrCreate(string username, string password = null, string description = null)
         {
             var user = Get(username);
@@ -121,7 +118,6 @@ namespace TL.Engine.Data.Managers
             user.Authenticate(ServiceProvider, httpContext);
         }
 
-        [PrivateApi(Description = "Получить всех пользователей")]
         public override IEnumerable<User> GetAll(bool loadDeleted = false)
         {
             return base.GetAll(loadDeleted);

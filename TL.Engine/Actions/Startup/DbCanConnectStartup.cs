@@ -5,8 +5,6 @@ namespace TL.Engine.Actions.Startup
 {
     public class DbCanConnectStartup : IStartupAction
     {
-        public bool IsBlocker => false;
-
         public int Priority => 300;
 
         public string Description => "Проверка подключения к БД.";
@@ -18,7 +16,7 @@ namespace TL.Engine.Actions.Startup
             {
                 return StartupActionResult.Good(description: Description);
             }
-            return StartupActionResult.Bad("Fail", Description);
+            return StartupActionResult.Broken("Fail", Description);
         }
     }
 }

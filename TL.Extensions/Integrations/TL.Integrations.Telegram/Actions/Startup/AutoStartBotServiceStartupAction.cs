@@ -7,7 +7,7 @@ using TL.Integrations.Data.Managers;
 using TL.Integrations.SDK.Telegram.Bots;
 using TL.Integrations.SDK.Telegram.Services;
 
-namespace TL.Integrations.Telegram.Services
+namespace TL.Integrations.Telegram.Actions
 {
     public class AutoStartBotServiceStartupAction : IStartupAction
     {
@@ -16,8 +16,6 @@ namespace TL.Integrations.Telegram.Services
         ITelegramBotProviderService TelegramBotProvider { get; }
 
         ILogger Logger { get; }
-
-        public bool IsBlocker => false;
 
         public int Priority => 10000;
 
@@ -32,6 +30,7 @@ namespace TL.Integrations.Telegram.Services
 
         public IStartupActionResult Invoke()
         {
+            bool ok = true;
             var tgBots = TgBotManager.GetAll(e => e.AutoStart || e.State == TgBotState.Restart || e.State == TgBotState.Start || e.State == TgBotState.Run).ToArray();
 
             for (int i = 0; i < tgBots.Length; ++i)
@@ -52,13 +51,13 @@ namespace TL.Integrations.Telegram.Services
                 else
                 {
                     Logger.TLogWarning($"Отказ запуска бота @{tgBot.Username} на {tgBot.TypeName}");
-
+                    ok = false;
                     tgBot.State = TgBotState.Stop;
                 }
                 TgBotManager.Update(tgBot);
             }
 
-            return StartupActionResult.Good(description: Description);
+            return ok ? StartupActionResult.Good(description: Description) : StartupActionResult.Bad("Fail", description: Description);
         }
     }
 }

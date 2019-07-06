@@ -6,8 +6,6 @@ namespace TL.Engine.Actions.Startup
 {
     public class SaRoleExistStartup : IStartupAction
     {
-        public bool IsBlocker => false;
-
         public int Priority => 500;
 
         public string Description => "Проверка существования роли администратора.";
@@ -26,7 +24,7 @@ namespace TL.Engine.Actions.Startup
                 return StartupActionResult.Good(description: Description);
             }
 
-            return StartupActionResult.Bad("Fail", "В системе не существует роли системного администратора");
+            return StartupActionResult.Broken("Fail", "В системе не существует роли системного администратора");
         }
     }
 }

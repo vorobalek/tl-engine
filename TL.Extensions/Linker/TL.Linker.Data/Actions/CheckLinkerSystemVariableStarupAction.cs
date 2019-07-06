@@ -12,8 +12,6 @@ namespace TL.Linker.Data.Actions
 
         ILogger<CheckLinkerSystemVariableStarupAction> Logger { get; set; }
 
-        public bool IsBlocker => true;
-
         public int Priority => 10000;
 
         public string Description => "Проверка системных переменных модуля Linker";

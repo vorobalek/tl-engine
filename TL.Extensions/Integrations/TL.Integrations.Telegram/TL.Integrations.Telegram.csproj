@@ -22,6 +22,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Engine\TL.Engine.SDK\TL.Engine.SDK.csproj" />
     <ProjectReference Include="..\TL.Integrations.Data\TL.Integrations.Data.csproj" />
   </ItemGroup>

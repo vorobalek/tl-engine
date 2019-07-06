@@ -9,8 +9,6 @@ namespace TL.Engine.Web.Actions
     {
         IStringVariableManager StringVariableManager { get; set; }
 
-        public bool IsBlocker => true;
-
         public int Priority => 1000;
 
         public string Description => "Проверка системных переменных ядра";

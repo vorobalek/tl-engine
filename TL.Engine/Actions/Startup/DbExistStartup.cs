@@ -15,8 +15,6 @@ namespace TL.Engine.Actions.Startup
             Storage = storage;
         }
 
-        public bool IsBlocker => true;
-
         public int Priority => 200;
 
         public string Description => $"Проверка существования БД";
@@ -30,7 +28,7 @@ namespace TL.Engine.Actions.Startup
             }
             else
             {
-                return StartupActionResult.Bad("Отсутствует подключение к базе данных.");
+                return StartupActionResult.Broken("Отсутствует подключение к базе данных.");
             }
         }
     }

@@ -152,7 +152,6 @@ namespace TL.Api.SDK.Services.ApiDocumentation
             var typePrivateApiAttribute = typeof(PrivateApiAttribute);
             Functions = ExtensionManager.Assemblies
                 .SelectMany(a => a.GetTypes())
-                .Where(t => !t.IsInterface && !t.IsAbstract)
                 .SelectMany(t => t.GetMethods())
                 .Where(m => m.GetCustomAttributes(typePrivateApiAttribute, true).Length > 0)
                 .Select(m =>
@@ -177,7 +176,6 @@ namespace TL.Api.SDK.Services.ApiDocumentation
                 .ToList();
         }
 
-        [PrivateApi(Description = "Обновить автоматическую API-документацию. Возвращает актуальную документацию.")]
         public ApiDocumentationModel Update()
         {
             InitializeDocumentation();

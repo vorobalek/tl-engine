@@ -11,5 +11,6 @@ namespace TL.Engine.SDK.Services
         bool IsReady { get; }
         bool IsOk { get; }
         double Progress { get; }
+        string Message { get; }
     }
 }
