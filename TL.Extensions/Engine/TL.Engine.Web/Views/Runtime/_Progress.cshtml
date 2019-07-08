@@ -1,7 +1,12 @@
 ﻿@using TL.Engine.SDK.Services;
 @using TL.Engine.SDK.Extensions;
 @inject IStartupService StartupService
+@{
+    System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+    customCulture.NumberFormat.NumberDecimalSeparator = ".";
 
+    System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
+}
 @if (StartupService.IsOk)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -14,13 +19,21 @@
 else if (!StartupService.IsReady)
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Внимание!</strong> Ядро системы TL Engine запускается. Пожалуйста, подождите.
+        <strong>Внимание!</strong> Ядро системы TL Engine запускается
+        @if (StartupService.IsDebugMode)
+        {
+            <span>в режиме отладки. Чтобы пропустить пошаговую проверку нажмите Skip All.</span>
+        }
+        else
+        {
+            <span>.  Пожалуйста, подождите.</span>
+        }
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <center>
-        <strong>@StartupService.Message</strong>
+        <strong>Выполняется: @StartupService.Message</strong>
     </center>
 }
 else
@@ -34,7 +47,8 @@ else
 }
 <br />
 <div id="progress" class="progress@(StartupService.IsReady ? " final" : "")" style="height: 1px;">
-    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@StartupService.Progress" aria-valuemin="0" aria-valuemax="100" style="width: @StartupService.Progress%">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@string.Format("{0:0.##}", StartupService.Progress)"
+         aria-valuemin="0" aria-valuemax="100" style="width: @string.Format("{0:0.##}", StartupService.Progress)%">
     </div>
 </div>
 <br />

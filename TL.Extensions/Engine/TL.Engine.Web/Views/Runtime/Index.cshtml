@@ -15,37 +15,56 @@
         ViewData["Title"] = "Ошибка!";
     }
 }
-<div id="log">
-    @if (StartupService.IsReady)
+@if (StartupService.IsDebugMode && !StartupService.IsReady)
+{
+<br />
+<center>
+    <button class="btn-sm btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="@StartupService.NextDescription"
+            onclick="server_alert('/runtime/movenext'); setTimeout(function () { location.reload() }, 1000);"><strong>Следующий шаг &gt;</strong></button>
+    @if (!StartupService.SkipAll)
     {
-        <button class="btn btn-link" onclick="server_alert('/runtime/restart')">Перезапустить сервер</button>
-        <hr />
-        <partial name="_Progress" />
+    <button class="btn-sm btn-outline-secondary" 
+            onclick="server_alert('/runtime/skipall'); setTimeout(function () { location.reload() }, 1000);"><strong>Пропустить &raquo;</strong></button>
     }
     else
     {
-        @section Scripts {
-            <script type="text/javascript">
+    <button class="btn-sm btn-outline-secondary" 
+            onclick="server_alert('/runtime/stopskipall'); setTimeout(function () { location.reload() }, 1000);"><strong>Возобновить &times;</strong></button>
+    }
+</center>
+<br />
+}
+<div id="log">
+    @if (StartupService.IsReady)
+    {
+    <button class="btn btn-link" onclick="server_alert('/runtime/restart')">Перезапустить сервер</button>
+    <hr />
+    <partial name="_Progress" />
+    }
+    else
+    {
+    @section Scripts {
+    <script type="text/javascript">
 
-                update = function () {
-                    if ($('#progress').hasClass('final')) location.reload();
-                    $.ajax({
-                        url: '/runtime/update',
-                        type: 'post',
-                        success: function (result) {
-                            $(document).find('#log').html(result);
-                        }
-                    })
+        update = function () {
+            if ($('#progress').hasClass('final')) location.reload();
+            $.ajax({
+                url: '/runtime/update',
+                type: 'post',
+                success: function (result) {
+                    $(document).find('#log').html(result);
                 }
-
-                $(document).ready(function () {
-                    if (!($('#progress').hasClass('final'))) {
-                        update();
-                        var hupdate = setInterval('update()', 500);
-                    }
-                })
-
-            </script>
+            })
         }
+
+        $(document).ready(function () {
+            if (!($('#progress').hasClass('final'))) {
+                update();
+                var hupdate = setInterval('update()', 500);
+            }
+        })
+
+    </script>
+    }
     }
 </div>

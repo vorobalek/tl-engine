@@ -5,6 +5,12 @@ namespace TL.Engine.SDK.Services
 {
     public interface IStartupService
     {
+        bool SkipAll { get; set; }
+        bool CanMoveNext { get; set; }
+        bool IsDebugMode { get; }
+
+        string NextDescription { get; }
+
         void Init();
         string RedirectUrl { get; }
         List<IStartupActionResult> Log { get; }

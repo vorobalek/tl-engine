@@ -27,8 +27,47 @@ namespace TL.Engine.Web.Controllers
         [HttpPost]
         public IActionResult Update()
         {
-            return PartialView("_Progress");
+            if (!StartupService.IsReady || User.IsInRole("sa"))
+            {
+                return PartialView("_Progress");
+            }
+            return PartialView("_StatusMessage", "Отказано в доступе!");
         }
+
+#if DEBUG
+        [HttpPost]
+        public IActionResult MoveNext()
+        {
+            if (!StartupService.IsReady || User.IsInRole("sa"))
+            {
+                StartupService.CanMoveNext = true;
+                return PartialView("_StatusMessage", "Next iteration");
+            }
+            return PartialView("_StatusMessage", "Отказано в доступе!");
+        }
+
+        [HttpPost]
+        public IActionResult SkipAll()
+        {
+            if (!StartupService.IsReady || User.IsInRole("sa"))
+            {
+                StartupService.SkipAll = true;
+                return PartialView("_StatusMessage", "All iterations will be skipped");
+            }
+            return PartialView("_StatusMessage", "Отказано в доступе!");
+        }
+
+        [HttpPost]
+        public IActionResult StopSkipAll()
+        {
+            if (!StartupService.IsReady || User.IsInRole("sa"))
+            {
+                StartupService.SkipAll = false;
+                return PartialView("_StatusMessage", "Skipping iterations stopped");
+            }
+            return PartialView("_StatusMessage", "Отказано в доступе!");
+        }
+#endif
 
         [Authorize(Roles = "sa")]
         [HttpPost]
