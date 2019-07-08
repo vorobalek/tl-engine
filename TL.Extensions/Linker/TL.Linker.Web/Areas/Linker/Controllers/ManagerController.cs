@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using TL.Linker.Data.Managers;
 using TL.Linker.Web.Areas.Linker.ViewModels.Manager;
 
@@ -17,6 +18,27 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet("linker/manager/edit/{id}")]
+        public IActionResult Edit(Guid id)
+        {
+            var link = LinkManager.Get(id);
+            var model = new EditViewModelFactory().Create(new LinkViewModelFactory().Create(LinkManager, link));
+            model.ReturnUrl = Request.Headers["Referer"].ToString();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditViewModel model)
+        {
+            var link = LinkManager.Get(model.InputModel.Id);
+            link.Identifier = LinkManager.LinkParse(model.InputModel.Path);
+            link.Url = model.InputModel.OriginalPath;
+            LinkManager.Update(link);
+            var newModel = new EditViewModelFactory().Create(new LinkViewModelFactory().Create(LinkManager, link), "Линк успешно обновлён!");
+            newModel.ReturnUrl = model.ReturnUrl;
+            return View(newModel);
         }
 
         [HttpPost]

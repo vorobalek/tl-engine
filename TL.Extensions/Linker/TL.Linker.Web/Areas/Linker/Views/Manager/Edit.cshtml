@@ -1,0 +1,32 @@
+﻿@model TL.Linker.Web.Areas.Linker.ViewModels.Manager.EditViewModel
+@{
+    ViewData["Title"] = "Редактировать ссылку";
+}
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Внимание!</strong> @Model.Message
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<form asp-action="edit" asp-controller="manager" asp-area="linker" method="post">
+    <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="@Model.InputModel.Path">Ссылка</label>
+        <input asp-for="@Model.InputModel.Path" class="form-control" value="@Model.InputModel.Path" />
+        <span asp-validation-for="@Model.InputModel.Path" class="text-danger validation" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.InputModel.OriginalPath">Оригинал</label>
+        <input asp-for="@Model.InputModel.OriginalPath" class="form-control" value="@Model.InputModel.OriginalPath" />
+        <span asp-validation-for="@Model.InputModel.OriginalPath" class="text-danger validation" />
+    </div>
+
+    <input asp-for="@Model.InputModel.Id" type="hidden" class="invisible" value="@Model.InputModel.Id" />
+    <input asp-for="@Model.ReturnUrl" type="hidden" class="invisible" value="@Model.ReturnUrl" />
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a href="@Url.Content(Model.ReturnUrl)" role="button" class="btn btn-warning">&laquo; Назад</a>
+</form>

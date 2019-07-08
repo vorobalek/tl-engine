@@ -52,7 +52,7 @@ namespace TL.Engine.Web.Controllers
             if (!StartupService.IsReady || User.IsInRole("sa"))
             {
                 StartupService.SkipAll = true;
-                return PartialView("_StatusMessage", "All iterations will be skipped");
+                return PartialView("_StatusMessage", "Пропускаем отладку.");
             }
             return PartialView("_StatusMessage", "Отказано в доступе!");
         }

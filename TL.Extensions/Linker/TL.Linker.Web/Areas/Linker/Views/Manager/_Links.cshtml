@@ -1,11 +1,11 @@
 ﻿@model TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel
 @{
     var maxLength = 30;
-    var pathName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.Path);
-    var originalPathName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.OriginalPath);
-    var creationDateName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.CreationDate);
-    var modifiedDateName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.ModifiedDate);
-    var isDeletedName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.IsDeleted);
+    var pathName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.Path);
+    var originalPathName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.OriginalPath);
+    var creationDateName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.CreationDate);
+    var modifiedDateName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.ModifiedDate);
+    var isDeletedName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.IsDeleted);
 }
 <div class="table-responsive">
     <h3>Все доступные ссылки TL Engine Linker</h3>
@@ -46,7 +46,7 @@
                             </div>
                         </td>
                         <td style="flex-basis: 25%">
-                            <pre data-toggle="tooltip" data-placement="bottom" title="@link.OriginalPath">@originalPath</pre>
+                            <pre><span data-toggle="tooltip" data-placement="bottom" title="@link.OriginalPath">@originalPath</span></pre>
                         </td>
                         <td style="flex-basis: 10%">
                             @link.CreationDate
