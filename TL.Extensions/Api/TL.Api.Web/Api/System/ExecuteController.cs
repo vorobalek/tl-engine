@@ -41,7 +41,7 @@ namespace TL.Api.Web.Api.System
 
         public override string Description => $"Используйте для выполнения метода API";
 
-        [ApiHttpGet("{method}", UsageDescription = "Этот метод требует указать имя метода как часть запроса", UsageSample = "/TL.Engine.Data.Managers.UserManager:Get?username=system", ReturnableType = typeof(object))]
+        [ApiHttpGet("{method}", UsageDescription = "Этот метод требует указать имя метода как часть запроса", UsageSample = "/TL.Linker.Data.Managers.ILinkManager:LinkParse?code=SampleLink", ReturnableType = typeof(object))]
         public IActionResult Get(string method)
         {
             var m = method.Split(":");
@@ -83,7 +83,7 @@ namespace TL.Api.Web.Api.System
         }
 
 
-        [ApiHttpGet("{token}/{method}", UsageDescription = "Этот метод требует указать токен для выполнения защищенного метогда и имя защищенного метода как часть запроса", UsageSample = "/<TOKEN>/TL.Engine.Data.Managers.UserManager:Create?username=tl-engine_user&password=test&description=Проверка работоспособности API", ReturnableType = typeof(object))]
+        [ApiHttpGet("{token}/{method}", UsageDescription = "Этот метод требует указать токен для выполнения защищенного метогда и имя защищенного метода как часть запроса", UsageSample = "/<TOKEN>/TL.Engine.Data.Managers.IUserManager:Get?username=user", ReturnableType = typeof(object))]
         public IActionResult Get(string token, string method)
         {
             Token existToken = null;
