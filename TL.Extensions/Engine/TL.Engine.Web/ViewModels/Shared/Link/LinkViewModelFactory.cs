@@ -11,6 +11,7 @@ namespace TL.Engine.Web.ViewModels.Shared
             {
                 Url = linkItem.Url,
                 Name = linkItem.Name,
+                Description = linkItem.Description,
                 Items = linkItem.Items.Select(li => new LinkViewModelFactory().Create(li))
             };
         }

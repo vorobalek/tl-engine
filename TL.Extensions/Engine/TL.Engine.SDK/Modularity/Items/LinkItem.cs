@@ -24,17 +24,24 @@ namespace TL.Engine.SDK.Modularity.Items
         public string Name { get; set; }
         public IEnumerable<LinkItem> Items { get; set; }
         public int Position { get; set; }
+        public string Description { get; set; }
         public IEnumerable<string> Roles { get; set; }
+
+        public LinkItem(string url, string name, int position, IEnumerable<string> roles = null, IEnumerable<LinkItem> items = null)
+            : this(url, name, null, position, roles, items)
+        {
+        }
 
         public LinkItem(string name, int position, IEnumerable<string> roles = null, IEnumerable<LinkItem> items = null)
             : this(null, name, position, roles, items)
         {
         }
 
-        public LinkItem(string url, string name, int position, IEnumerable<string> roles = null, IEnumerable<LinkItem> items = null)
+        public LinkItem(string url, string name, string description, int position, IEnumerable<string> roles = null, IEnumerable<LinkItem> items = null)
         {
             Url = url;
             Name = name;
+            Description = description;
             Position = position;
             Roles = roles;
             Items = items;

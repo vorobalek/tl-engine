@@ -18,7 +18,7 @@ namespace TL.Api.Web
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/apihelp", "API", 1000),
+            new LinkItem("/apihelp", "API", "Документация для интеграции с внешними сервисами.", 1000),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
@@ -27,7 +27,7 @@ namespace TL.Api.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/apihelp/settings", "Настройки API", 1010, new[] { "sa" }),
+            new LinkItem("/apihelp/settings", "Настройки API", "Приватные токен-ключи, логи, статистика, критерии доступа.", 1010, new[] { "sa" }),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

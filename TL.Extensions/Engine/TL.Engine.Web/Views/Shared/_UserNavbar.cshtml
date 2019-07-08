@@ -19,7 +19,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 var name = User.Identity.Name.Length > 17 ? $"{User.Identity.Name.Substring(0, 17)}..." : User.Identity.Name;
-                <a class="dropdown-item" href="/account">
+                <a class="dropdown-item" href="/account" data-toggle="tooltip" data-placement="left" title="Настройки учётной записи">
                     <div class="row justify-content-between">
                         <div class="col-auto">
                             <img src="~/Styles/images/pack/png/settings-4.png" alt="User Logo" width="auto" height="24px" class="rounded-circle" />
