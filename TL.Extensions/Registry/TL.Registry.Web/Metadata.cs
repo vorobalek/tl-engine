@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
-namespace TL.Linker.Web
+namespace TL.Registry.Web
 {
     public class Metadata : BaseMetadataWeb
     {
-        public override string Name => "TL.Linker.Web";
+        public override string Name => "TL.Registry.Web";
 
-        public override string Owner => "TL.Linker";
+        public override string Owner => "TL.Registry";
 
         public override string Description =>
                 $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 
-        protected override Version Version => new Version(1, 1, 0, 5);
-
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/linker", "Линкер", 1000, items: new[]
-            {
-                new LinkItem("/linker/manager", "Менеджер", "Управление активными ссылками, сохранёнными в системе.", 1000, new string[] { "sa" })
-            }),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
@@ -30,6 +23,10 @@ namespace TL.Linker.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
+            new LinkItem("/registry", "Репозитории", "Файловые репозитории системы", 1000, new string[] { "user" }, new[]
+            {
+                new LinkItem("/registry/files", "Все файлы", "Показать все файлы без привязки к репозиториям", 1000, new string[] { "sa" })
+            }),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

@@ -11,6 +11,7 @@ namespace TL.Engine.Data.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
+            serviceCollection.AddScoped<IStaticFileManager, StaticFileManager>();
             serviceCollection.AddScoped<IStringVariableManager, StringVariableManager>();
             serviceCollection.AddScoped<IUserManager, UserManager>();
             serviceCollection.AddScoped<IRoleManager, RoleManager>();
