@@ -1,0 +1,107 @@
+﻿@model TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel
+@{
+    var maxLength = 30;
+    var pathName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.Path);
+    var originalPathName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.OriginalPath);
+    var creationDateName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.CreationDate);
+    var modifiedDateName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.ModifiedDate);
+    var isDeletedName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.IsDeleted);
+}
+<div class="table-responsive">
+    <h3>Все доступные ссылки TL Engine Linker</h3>
+    <br />
+    <table class="table table-bordered table-hover table-responsive-stack">
+        <thead class="thead-light">
+            <tr>
+                <th style="flex-basis: 5%">#</th>
+                <th style="flex-basis: 15%" onclick="update('@pathName', '@(Model.OrderedBy == pathName ? !Model.DescOrder : false)')">Ссылка</th>
+                <th style="flex-basis: 25%" onclick="update('@originalPathName', '@(Model.OrderedBy == originalPathName ? !Model.DescOrder : false)')">Оригинал</th>
+                <th style="flex-basis: 10%" onclick="update('@creationDateName', '@(Model.OrderedBy == creationDateName ? !Model.DescOrder : false)')">Создана</th>
+                <th style="flex-basis: 10%" onclick="update('@modifiedDateName', '@(Model.OrderedBy == modifiedDateName ? !Model.DescOrder : false)')">Изменена</th>
+                <th style="flex-basis: 10%" onclick="update('@isDeletedName', '@(Model.OrderedBy == isDeletedName ? !Model.DescOrder : false)')">Состояние</th>
+                <th style="flex-basis: 25%">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var link in Model.Links)
+                {
+                    var originalPath = link.OriginalPath.Length > maxLength - 3 ? $"{link.OriginalPath.Substring(0, maxLength - 3)}..." : link.OriginalPath;
+                    <tr>
+                        <td style="flex-basis: 5%">
+                            <a href="/linker/manager/edit/@link.Id">
+                                <img src="/Styles/images/pack/svg/edit.svg" alt="Edit" width="auto" height="24px" data-toggle="tooltip" data-placement="bottom" title="Редактировать" />
+                            </a>
+                        </td>
+                        <td style="flex-basis: 15%">
+                            <div>
+                                @if (link.IsDeleted)
+                                {
+                                    <del><pre><a href="/lnk/@link.Path" target="_blank">@Context.Request.Host/lnk/@link.Path</a></pre></del>
+                                }
+                                else
+                                {
+                                    <pre><a href="/lnk/@link.Path" target="_blank">@Context.Request.Host/lnk/@link.Path</a></pre>
+                                }
+                            </div>
+                        </td>
+                        <td style="flex-basis: 25%">
+                            <pre data-toggle="tooltip" data-placement="bottom" title="@link.OriginalPath">@originalPath</pre>
+                        </td>
+                        <td style="flex-basis: 10%">
+                            @link.CreationDate
+                        </td>
+
+                        <td style="flex-basis: 10%">
+                            @link.ModifiedDate
+                        </td>
+                        <td style="flex-basis: 10%">
+                            @if (link.IsDeleted)
+                            {
+                                <span>Отключена</span>
+                            }
+                            else
+                            {
+                                <span>Активна</span>
+                            }
+                        </td>
+                        <td style="flex-basis: 25%">
+                            @if (link.IsDeleted)
+                            {
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <form asp-action="restore" method="post">
+                                                <input asp-for="@Model.BindModel.LinkId" value="@link.Id" hidden />
+                                                <button type="submit" class="btn-sm btn-success">Подключить</button>
+                                            </form>
+                                        </div>
+                                        <div class="col">
+                                            <form asp-action="remove" method="post">
+                                                <input asp-for="@Model.BindModel.LinkId" value="@link.Id" hidden />
+                                                <button type="submit" class="btn-sm btn-danger">Удалить</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <form asp-action="delete" method="post">
+                                                <input asp-for="@Model.BindModel.LinkId" value="@link.Id" hidden />
+                                                <button type="submit" class="btn-sm btn-warning">Отключить</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

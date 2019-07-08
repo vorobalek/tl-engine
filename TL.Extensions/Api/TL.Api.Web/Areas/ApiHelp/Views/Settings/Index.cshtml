@@ -52,13 +52,13 @@
                                         <div class="col">
                                             <form asp-action="restore" method="post">
                                                 <input asp-for="@Model.BindModel.TokenId" value="@token.Id" hidden />
-                                                <button type="submit" class="btn btn-success">Подключить</button>
+                                                <button type="submit" class="btn-sm btn-success">Подключить</button>
                                             </form>
                                         </div>
                                         <div class="col">
                                             <form asp-action="remove" method="post">
                                                 <input asp-for="@Model.BindModel.TokenId" value="@token.Id" hidden />
-                                                <button type="submit" class="btn btn-danger">Удалить</button>
+                                                <button type="submit" class="btn-sm btn-danger">Удалить</button>
                                             </form>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                             {
                                 <form asp-action="delete" method="post">
                                     <input asp-for="@Model.BindModel.TokenId" value="@token.Id" hidden />
-                                    <button type="submit" class="btn btn-warning">Отключить</button>
+                                    <button type="submit" class="btn-sm btn-warning">Отключить</button>
                                 </form>
                             }
                         </td>

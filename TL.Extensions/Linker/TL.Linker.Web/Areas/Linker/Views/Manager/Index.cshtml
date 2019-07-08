@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Менеджер ссылок";
+}
+<div id="links"></div>
+@section Scripts {
+    <script type="text/javascript">
+
+        update = function (orderBy, desc) {
+            $.ajax({
+                url: '/linker/manager/getall?orderBy='+orderBy+'&desc='+desc,
+                type: 'post',
+                success: function (result) {
+                    $(document).find('#links').html(result);
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            update('@nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel.LinkViewModel.OriginalPath)', 'False');
+        })
+
+    </script>
+}
