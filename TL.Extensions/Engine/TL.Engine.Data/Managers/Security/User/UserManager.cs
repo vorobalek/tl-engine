@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.Data.Extensions;
-using TL.Engine.SDK.Attributes.Api.Executable;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
 using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    public class UserManager : EntityComparableStoredManager<User, Guid>, IUserManager
+    internal class UserManager : EntityComparableStoredManager<User, Guid>, IUserManager
     {
         IRoleManager RoleManager { get; }
         IGroupManager GroupManager { get; }

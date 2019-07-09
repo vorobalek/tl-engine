@@ -11,6 +11,11 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.SDK.Managers
 {
+    /// <summary>
+    /// Абстрактная реализация менеджера элементарных сущностей <typeparamref name="TEntity"/>.
+    /// </summary>
+    /// <typeparam name="TEntity">Тип сущности.</typeparam>
+    /// <seealso cref="IEntityManager{TEntity}" />
     public abstract class EntityManager<TEntity> : IEntityManager<TEntity>
         where TEntity : class, IEntity
     {
@@ -23,11 +28,22 @@ namespace TL.Engine.SDK.Managers
             Storage = storage;
         }
 
+        /// <summary>
+        /// Целевой тип.
+        /// </summary>
         public Type TargetType => typeof(TEntity);
 
         protected ILogger Logger { get; }
         protected IStorage Storage { get; }
 
+        /// <summary>
+        /// Создать экземпляр сущности типа <typeparamref name="TEntity" /> в хранилище.
+        /// </summary>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity Create(TEntity entity, bool cacheOnly = false)
         {
             if (entity == null)
@@ -109,6 +125,13 @@ namespace TL.Engine.SDK.Managers
             return null;
         }
 
+        /// <summary>
+        /// Создать экземпляр пустой сущности типа <typeparamref name="TEntity" /> в хранилище.
+        /// </summary>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity CreateEmpty(bool cacheOnly = false)
         {
             try
@@ -125,6 +148,14 @@ namespace TL.Engine.SDK.Managers
             return null;
         }
 
+        /// <summary>
+        /// Удалить экземпляр сущности типа <typeparamref name="TEntity" /> в хранилище.
+        /// </summary>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity Delete(TEntity entity, bool cacheOnly = false)
         {
             try
@@ -199,11 +230,27 @@ namespace TL.Engine.SDK.Managers
             return null;
         }
 
+        /// <summary>
+        /// Удалить экземпляр сущности типа <typeparamref name="TEntity" />, удовлетворяющей предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity Delete(Func<TEntity, bool> predicate, bool cacheOnly = false)
         {
             return Delete(Get(predicate), cacheOnly);
         }
 
+        /// <summary>
+        /// Удалить все сущности типа <typeparamref name="TEntity" />, удовлетворяющие предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Коллекция экземпляров отслеживаемых сущностей.
+        /// </returns>
         public IEnumerable<TEntity> DeleteAll(Func<TEntity, bool> predicate, bool cacheOnly = false)
         {
             var returnableEntities = new List<TEntity>();
@@ -215,22 +262,55 @@ namespace TL.Engine.SDK.Managers
             return returnableEntities;
         }
 
+        /// <summary>
+        /// Получить экземпляр сущности типа <typeparamref name="TEntity" />, удовлетворяющей предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity Get(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
             return Storage.GetRepository<IEntityRepository<TEntity>>().Get(predicate, loadDeleted);
         }
 
+        /// <summary>
+        /// Получить все сущности типа <typeparamref name="TEntity" />.
+        /// </summary>
+        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
+        /// <returns>
+        /// Коллекция экземпляров отслеживаемых сущностей.
+        /// </returns>
         public virtual IEnumerable<TEntity> GetAll(bool loadDeleted = false)
         {
             return GetAll(e => true, loadDeleted);
         }
 
+        /// <summary>
+        /// Получить все сущности типа <typeparamref name="TEntity" />, удовлетворяющие предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
+        /// <returns>
+        /// Коллекция экземпляров отслеживаемых сущностей.
+        /// </returns>
         public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate, bool loadDeleted = false)
         {
             IEnumerable<TEntity> entities = Storage.GetRepository<IEntityRepository<TEntity>>().GetAll(predicate, loadDeleted);
             return entities;
         }
 
+        /// <summary>
+        /// Получить экземпляр сущности типа <typeparamref name="TEntity" />, удовлетворяющей предикату или создать новый в хранилище.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity GetOrCreate(Func<TEntity, bool> predicate, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false)
         {
             TEntity existedEntity = Get(predicate, loadDeleted);
@@ -241,11 +321,24 @@ namespace TL.Engine.SDK.Managers
             return existedEntity;
         }
 
+        /// <summary>
+        /// Получить и отслеживать сущность из хранилища.
+        /// </summary>
+        /// <param name="entity">Сущность.</param>
+        /// <returns></returns>
         public TEntity Load(TEntity entity)
         {
             return Storage.GetRepository<IEntityRepository<TEntity>>().Load(entity);
         }
 
+        /// <summary>
+        /// Уничтожить экземпляр сущности типа <typeparamref name="TEntity" /> в хранилище.
+        /// </summary>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity Remove(TEntity entity, bool cacheOnly = false)
         {
             try
@@ -321,11 +414,29 @@ namespace TL.Engine.SDK.Managers
             return null;
         }
 
+        /// <summary>
+        /// Уничтожить экземпляр сущности типа <typeparamref name="TEntity" />, удовлетворяющей предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity Remove(Func<TEntity, bool> predicate, bool loadDeleted = false, bool cacheOnly = false)
         {
             return Remove(Get(predicate, loadDeleted), cacheOnly);
         }
 
+        /// <summary>
+        /// Уничтожить все сущности типа <typeparamref name="TEntity" />, удовлетворяющие предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Коллекция экземпляров отслеживаемых сущностей.
+        /// </returns>
         public virtual IEnumerable<TEntity> RemoveAll(Func<TEntity, bool> predicate, bool loadDeleted = false, bool cacheOnly = false)
         {
             var returnableEntities = new List<TEntity>();
@@ -337,6 +448,14 @@ namespace TL.Engine.SDK.Managers
             return returnableEntities;
         }
 
+        /// <summary>
+        /// Обновить экземпляр сущности типа <typeparamref name="TEntity" /> в хранилище.
+        /// </summary>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns>
+        /// Экземпляр отслеживаемой сущности.
+        /// </returns>
         public virtual TEntity Update(TEntity entity, bool cacheOnly = false)
         {
             try
@@ -412,6 +531,12 @@ namespace TL.Engine.SDK.Managers
             return null;
         }
 
+        /// <summary>
+        /// Сохранить сущность в хранилище.
+        /// </summary>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="cacheOnly">Если <c>true</c> изменения не будут отсылаться в хранилище.</param>
+        /// <returns></returns>
         protected TEntity Save(TEntity entity, bool cacheOnly = false)
         {
             //Can Save Entity
@@ -480,6 +605,11 @@ namespace TL.Engine.SDK.Managers
             return entity;
         }
 
+        /// <summary>
+        /// Получить все сущности типа <see cref="TargetType" />
+        /// </summary>
+        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
+        /// <returns>Коллекция экземпляров отслеживаемых сущностей.</returns>
         IEnumerable<object> IEntityManager.GetAll(bool loadDeleted)
         {
             return GetAll(loadDeleted);

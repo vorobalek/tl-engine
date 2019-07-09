@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace TL.Engine.SDK.Extensions
 {
+    /// <summary>
+    /// Расширения типа <see cref="Type"/>.
+    /// </summary>
     public static class TypeExtensions
     {
+        /// <summary>
+        /// Получить имя производного типа.
+        /// </summary>
+        /// <param name="type">Тип.</param>
+        /// <returns></returns>
         public static string GetName(this Type type)
         {
             if (type?.IsGenericType ?? false)
@@ -21,6 +29,11 @@ namespace TL.Engine.SDK.Extensions
             return type?.Name;
         }
 
+        /// <summary>
+        /// Получить полное имя производного типа.
+        /// </summary>
+        /// <param name="type">Тип.</param>
+        /// <returns></returns>
         public static string GetFullName(this Type type)
         {
             if (type?.IsGenericType ?? false)

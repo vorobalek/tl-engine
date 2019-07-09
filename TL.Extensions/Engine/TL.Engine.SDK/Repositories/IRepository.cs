@@ -2,6 +2,10 @@
 
 namespace TL.Engine.SDK.Repositories
 {
+    /// <summary>
+    /// Интерфейс репозитория элементарных сущностей.
+    /// </summary>
+    /// <seealso cref="ExtCore.Data.Abstractions.IRepository" />
     public interface IRepository : IExtCoreRepository
     {
     }

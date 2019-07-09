@@ -1,10 +1,33 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
+using TL.Engine.SDK.Extensions;
 
-namespace TL.Engine.SDK.Extensions
+namespace Microsoft.Extensions.Logging
 {
+    /// <summary>
+    /// Расширения типа <see cref="ILogger"/>.
+    /// </summary>
     public static class LoggerExtensions
     {
+        public static void TLog(this ILogger logger, LogLevel logLevel, Exception exception, string message, params object[] args)
+        {
+            logger.Log(logLevel, exception, message.AddDateTimeMs(), args);
+        }
+
+        public static void TLog(this ILogger logger, LogLevel logLevel, EventId eventId, string message, params object[] args)
+        {
+            logger.Log(logLevel, eventId, message.AddDateTimeMs(), args);
+        }
+
+        public static void TLog(this ILogger logger, LogLevel logLevel, string message, params object[] args)
+        {
+            logger.Log(logLevel, message.AddDateTimeMs(), args);
+        }
+
+        public static void TLog(this ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, string message, params object[] args)
+        {
+            logger.Log(logLevel, eventId, exception, message.AddDateTimeMs(), args);
+        }
+
         public static void TLogInformation(this ILogger logger, string message, params object[] args)
         {
             logger.LogInformation(message.AddDateTimeMs(), args);

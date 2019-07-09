@@ -3,8 +3,22 @@ using System.Reflection;
 
 namespace TL.Engine.SDK.Extensions
 {
+    /// <summary>
+    /// Расширения типа <see cref="object"/>.
+    /// </summary>
     public static class ObjectExtensions
     {
+        /// <summary>
+        /// Копировать объект 
+        /// </summary>
+        /// <param name="source">Исходный объект.</param>
+        /// <param name="destination">Назначение.</param>
+        /// <exception cref="ArgumentNullException">
+        /// source
+        /// or
+        /// destination
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static void Copy(object source, object destination)
         {
             if (source == null)
@@ -49,11 +63,21 @@ namespace TL.Engine.SDK.Extensions
             }
         }
 
+        /// <summary>
+        /// Копировать объект из источника.
+        /// </summary>
+        /// <param name="destination">Назначение.</param>
+        /// <param name="source">Источник.</param>
         public static void CopyFrom(this object destination, object source)
         {
             Copy(source, destination);
         }
 
+        /// <summary>
+        /// Копировать источник в объект.
+        /// </summary>
+        /// <param name="source">Источник.</param>
+        /// <param name="destination">Назначение.</param>
         public static void CopyTo(this object source, object destination)
         {
             Copy(source, destination);

@@ -6,7 +6,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    public class UserGroupManager : EntityManager<UserGroup>, IUserGroupManager
+    internal class UserGroupManager : EntityManager<UserGroup>, IUserGroupManager
     {
         public UserGroupManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

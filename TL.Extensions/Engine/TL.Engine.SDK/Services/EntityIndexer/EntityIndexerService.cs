@@ -12,7 +12,10 @@ using TL.Engine.SDK.Structures;
 
 namespace TL.Engine.SDK.Services
 {
-    public class EntityIndexerService : IEntityIndexerService
+    /// <summary>
+    /// Сервис полнотекстовой индексации сущностей.
+    /// </summary>
+    internal class EntityIndexerService : IEntityIndexerService
     {
         ILogger Logger { get; }
 
@@ -26,6 +29,12 @@ namespace TL.Engine.SDK.Services
             Activator = activator;
         }
 
+        /// <summary>
+        /// Найти все сущности, содержащую хоты бы в одном из индексируемых строковых полей заданную подстроку.
+        /// </summary>
+        /// <param name="query">Поисковый запрос.</param>
+        /// <param name="count">Максимальное количество возвращаемых объектов.</param>
+        /// <returns></returns>
         public IEnumerable<object> Find(string query, int count = 0)
         {
             query = string.IsNullOrWhiteSpace(query) ? "" : query.ToLowerInvariant();
@@ -47,6 +56,15 @@ namespace TL.Engine.SDK.Services
             return result;
         }
 
+        /// <summary>
+        /// Найти все экземпляры сущности <typeparamref name="TEntity" />, содержащую хоты бы в одном из индексируемых строковых полей заданную подстроку.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип искомой сущности.</typeparam>
+        /// <param name="query">Поисковый запрос.</param>
+        /// <param name="count">Максимальное количество возвращаемых объектов.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">
+        /// </exception>
         public IEnumerable<object> Find<TEntity>(string query, int count = 0)
         {
             query = string.IsNullOrWhiteSpace(query) ? "" : query.ToLowerInvariant();
@@ -63,6 +81,9 @@ namespace TL.Engine.SDK.Services
             return result;
         }
 
+        /// <summary>
+        /// Сбросить сервис и инициализировать заново.
+        /// </summary>
         public void Reset()
         {
             Logger.TLogWarning($"Reset Service");
@@ -105,10 +126,21 @@ namespace TL.Engine.SDK.Services
                 });
         }
 
+        /// <summary>
+        /// Вспомогательный класс для хранения индексируемого свойства.
+        /// </summary>
         internal class StringProperty
         {
+            /// <summary>
+            /// Имя свойства.
+            /// </summary>
             public string Name { get; }
+
+            /// <summary>
+            /// Значение свойства.
+            /// </summary>
             public string Value { get; }
+
             public StringProperty(string name, string value)
             {
                 Name = name;
@@ -116,11 +148,26 @@ namespace TL.Engine.SDK.Services
             }
         }
 
+        /// <summary>
+        /// Вспомогательный класс для хранения индексируемой сущности.
+        /// </summary>
         internal class EntityWithStringProperty
         {
+            /// <summary>
+            /// Ссылка на экземпляр сущности.
+            /// </summary>
             public IEntity Entity { get; }
+
+            /// <summary>
+            /// Имя типа сущности <see cref="Entity"/>.
+            /// </summary>
             public string Type { get; }
+
+            /// <summary>
+            /// Индексируемое свойство.
+            /// </summary>
             public StringProperty Property { get; }
+
             public EntityWithStringProperty(IEntity entity, StringProperty property)
             {
                 Entity = entity;
@@ -129,6 +176,12 @@ namespace TL.Engine.SDK.Services
             }
         }
 
+        /// <summary>
+        /// Добавить экземпляр сущности <typeparamref name="TEntity" /> в индекс.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <param name="entity">Экземпляр сущности.</param>
+        /// <returns></returns>
         public bool Add<TEntity>(TEntity entity)
         {
             var stringProperties = 
@@ -162,11 +215,26 @@ namespace TL.Engine.SDK.Services
             return false;
         }
 
+        /// <summary>
+        /// Обновить экземпляр сущности <typeparamref name="TEntity" /> в индексе.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <param name="oldEntity">Старый экземпляр сущности.</param>
+        /// <param name="newEntity">Новый экземпляр сущности.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public bool Update<TEntity>(TEntity oldEntity, TEntity newEntity)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Удалить экземпляр сущности <typeparamref name="TEntity" /> из индекса.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <param name="entity">Экземпляр сущности.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public bool Remove<TEntity>(TEntity entity)
         {
             throw new NotImplementedException();

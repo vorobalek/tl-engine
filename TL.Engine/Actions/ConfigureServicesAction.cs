@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using TL.Engine.SDK.Services;
 using TL.Engine.StartupFilters;
 
 namespace TL.Engine.Actions
@@ -13,11 +12,6 @@ namespace TL.Engine.Actions
 
         public void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
-            serviceCollection.AddSingleton<IStartupService, StartupService>();
-            serviceCollection.AddSingleton<IEntityIndexerService, EntityIndexerService>();
-            serviceCollection.AddSingleton<IStringIndexerService, StringIndexerService>();
-
-            serviceCollection.AddTransient<IActivatorService, ActivatorService>();
             serviceCollection.AddSingleton<IStartupFilter, CoreStartupFilter>();
         }
     }

@@ -41,7 +41,7 @@ namespace TL.Engine.Web.Controllers
             if (!StartupService.IsReady || User.IsInRole("sa"))
             {
                 StartupService.CanMoveNext = true;
-                return PartialView("_StatusMessage", "Next iteration");
+                return PartialView("_StatusMessage", $"Переходим к шагу: \"{StartupService.NextDescription}\"");
             }
             return PartialView("_StatusMessage", "Отказано в доступе!");
         }
@@ -63,7 +63,7 @@ namespace TL.Engine.Web.Controllers
             if (!StartupService.IsReady || User.IsInRole("sa"))
             {
                 StartupService.SkipAll = false;
-                return PartialView("_StatusMessage", "Skipping iterations stopped");
+                return PartialView("_StatusMessage", "Возобновляем отладку.");
             }
             return PartialView("_StatusMessage", "Отказано в доступе!");
         }

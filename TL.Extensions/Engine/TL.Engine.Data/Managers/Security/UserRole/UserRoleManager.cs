@@ -6,7 +6,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    public class UserRoleManager : EntityManager<UserRole>, IUserRoleManager
+    internal class UserRoleManager : EntityManager<UserRole>, IUserRoleManager
     {
         public UserRoleManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

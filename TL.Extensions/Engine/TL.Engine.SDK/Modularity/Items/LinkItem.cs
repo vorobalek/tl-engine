@@ -3,10 +3,16 @@ using System.Linq;
 
 namespace TL.Engine.SDK.Modularity.Items
 {
+    /// <summary>
+    /// Веб-ссылка.
+    /// </summary>
     public class LinkItem
     {
         private string _url;
 
+        /// <summary>
+        /// URL адрес.
+        /// </summary>
         public string Url
         {
             get
@@ -21,10 +27,30 @@ namespace TL.Engine.SDK.Modularity.Items
 
             set => _url = value;
         }
+
+        /// <summary>
+        /// Псевдоним, отображаемый в веб.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Дочерние элементы <see cref="LinkItem"/>
+        /// </summary>
         public IEnumerable<LinkItem> Items { get; set; }
+
+        /// <summary>
+        /// Позиция для упорядочивания в интерфейсе.
+        /// </summary>
         public int Position { get; set; }
+
+        /// <summary>
+        /// Подсказка для ссылки.
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Роли, для которых разрешено отображать ссылку.
+        /// </summary>
         public IEnumerable<string> Roles { get; set; }
 
         public LinkItem(string url, string name, int position, IEnumerable<string> roles = null, IEnumerable<LinkItem> items = null)

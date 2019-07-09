@@ -3,16 +3,36 @@ using System.Collections.Generic;
 
 namespace TL.Engine.SDK.Structures
 {
+    /// <summary>
+    /// Реализация ноды структуры данных БОР
+    /// </summary>
     public class TrieNode : ITrieNode
     {
+        /// <summary>
+        /// Символ текущей ноды.
+        /// </summary>
         public char? Symbol { get; }
 
+        /// <summary>
+        /// Признак конца "слова".
+        /// </summary>
         public bool IsTerminal { get; set; }
 
+        /// <summary>
+        /// Список смежных нод.
+        /// </summary>
         public SortedList<char, ITrieNode> Next { get; }
 
+        /// <summary>
+        /// Список целевых объектов текущей ноды.
+        /// </summary>
         public HashSet<object> Targets { get; }
 
+        /// <summary>
+        /// Добавить слово в поддерево текущей ноды.
+        /// </summary>
+        /// <param name="source">Слово.</param>
+        /// <param name="target">Целевой объект.</param>
         public void Add(string source, object target = null)
         {
             var root = this as ITrieNode;
@@ -30,12 +50,23 @@ namespace TL.Engine.SDK.Structures
             root.IsTerminal = true;
         }
 
+        /// <summary>
+        /// Заменить слово на новое.
+        /// </summary>
+        /// <param name="oldSource">Старое слово.</param>
+        /// <param name="newSource">Новое слово.</param>
+        /// <param name="target">Целевой объект.</param>
         public void Update(string oldSource, string newSource, object target = null)
         {
             Remove(oldSource);
             Add(newSource, target);
         }
 
+        /// <summary>
+        /// Удалить слово.
+        /// </summary>
+        /// <param name="source">Слово.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Remove(string source)
         {
             var root = this as ITrieNode;
@@ -51,6 +82,12 @@ namespace TL.Engine.SDK.Structures
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Найти все целевые объекты, привязанные к словам, содержащие запрос как подстроку.
+        /// </summary>
+        /// <param name="query">Строка-запрос.</param>
+        /// <param name="count">Максимальное количсетво объектов в выборке. Если <c>0</c>, будут выбраны все результаты.</param>
+        /// <returns></returns>
         public IEnumerable<object> FindAll(string query, int count = 0)
         {
             query = query ?? "";
@@ -87,6 +124,10 @@ namespace TL.Engine.SDK.Structures
             AddTarget(target);
         }
 
+        /// <summary>
+        /// Добавить целевой объект к текущей ноде.
+        /// </summary>
+        /// <param name="target">Целевой объект.</param>
         public void AddTarget(object target)
         {
             if (target != null)
