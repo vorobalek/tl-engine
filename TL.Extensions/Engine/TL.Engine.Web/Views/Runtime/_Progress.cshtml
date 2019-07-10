@@ -7,10 +7,11 @@
 
     System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 }
+
 @if (StartupService.IsOk)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Внимание!</strong> Ядро системы TL Engine успешно запущено, эта страница доступна только системным администраторам.
+        <strong>Внимание!</strong> Ядро системы TL Engine успешно запущено, подробный лог запуска доступен только системным администраторам.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -19,22 +20,19 @@
 else if (!StartupService.IsReady)
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Внимание!</strong> Ядро системы TL Engine запускается
+        <strong>Внимание!</strong>
         @if (StartupService.IsDebugMode)
         {
-            <span>в режиме отладки. Чтобы пропустить пошаговую проверку нажмите <strong>Пропустить</strong>.</span>
+            <span> Ядро системы TL Engine запускается в режиме отладки. Чтобы пропустить пошаговую проверку нажмите <strong>Пропустить</strong>.</span>
         }
         else
         {
-            <span>.  Пожалуйста, подождите.</span>
+            <span> Ядро системы TL Engine запускается.  Пожалуйста, подождите.</span>
         }
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <center>
-        <strong>Выполняется: @StartupService.Message</strong>
-    </center>
 }
 else
 {
@@ -45,34 +43,52 @@ else
         </button>
     </div>
 }
+
+<center>
+    @if (!StartupService.IsReady)
+    {
+        <strong>
+            @StartupService.Message
+        </strong>
+    }
+    else
+    {
+        <strong>
+            Добро пожаловать в систему TL Engine!
+        </strong>
+    }
+</center>
 <br />
 <div id="progress" class="progress@(StartupService.IsReady ? " final" : "")" style="height: 1px;">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@string.Format("{0:0.##}", StartupService.Progress)"
          aria-valuemin="0" aria-valuemax="100" style="width: @string.Format("{0:0.##}", StartupService.Progress)%">
     </div>
 </div>
-<br />
-<div class="table-responsive">
-    <table class="table table-bordered table-hover table-responsive-stack">
-        <thead class="thead-light">
-            <tr>
-                <th>Время</th>
-                <th>Вердикт</th>
-                <th>Сообщение</th>
-                <th>Описание</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var log in StartupService.Log)
-            {
-                <tr class="@(log.Ok ? "alert-success" : (log.IsFinal ? "alert-warning" : "alert-danger"))">
-
-                    <td>@log.Time.ToDetailedString()</td>
-                    <td>@log.Ok</td>
-                    <td>@log.Message</td>
-                    <td>@log.Description</td>
+@if (User.IsInRole("sa"))
+{
+    <br />
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-responsive-stack">
+            <thead class="thead-light">
+                <tr>
+                    <th>Время</th>
+                    <th>Вердикт</th>
+                    <th>Сообщение</th>
+                    <th>Описание</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var log in StartupService.Log)
+                {
+                    <tr class="@(log.Ok ? "alert-success" : (log.IsFinal ? "alert-warning" : "alert-danger"))">
+
+                        <td>@log.Time.ToDetailedString()</td>
+                        <td>@log.Ok</td>
+                        <td>@log.Message</td>
+                        <td>@log.Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

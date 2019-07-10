@@ -62,5 +62,11 @@ namespace TL.Engine.SDK.Services
         /// Сообщение системы запуска на текущий момент.
         /// </summary>
         string Message { get; }
+
+        /// <summary>
+        /// Задает длительность перехода между точками <see cref="IStartupAction"/> в мс.
+        /// </summary>
+        /// <param name="duration">Время в мс.</param>
+        void SetDuration(int duration);
     }
 }

@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.CommandLineUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.Services;
+using TL.Engine.SDK.Services;
 
 namespace TL.Engine
 {
@@ -28,16 +30,21 @@ namespace TL.Engine
                 "Check the status of entity framework migrations",
                 CommandOptionType.NoValue);
 
+            var startupDuration = commandLineApplication.Option(
+                "--startup-duration",
+                "Sets the duration of the transition between engine start points",
+                CommandOptionType.SingleValue);
+
             commandLineApplication.HelpOption("-? | -h | --help");
             commandLineApplication.OnExecute(() =>
             {
-                ExecuteApp(args, doMigrate, verifyMigrate);
+                ExecuteApp(args, doMigrate, verifyMigrate, startupDuration);
                 return 0;
             });
             commandLineApplication.Execute(args);
         }
 
-        private static void ExecuteApp(string[] args, CommandOption doMigrate, CommandOption verifyMigrate)
+        private static void ExecuteApp(string[] args, CommandOption doMigrate, CommandOption verifyMigrate, CommandOption startupDuration)
         {
             Console.WriteLine("Loading web host");
             var webHost = CreateWebHostBuilder(args).Build();
@@ -51,7 +58,7 @@ namespace TL.Engine
             if (verifyMigrate.HasValue())
             {
                 Console.WriteLine("Validating status of Entity Framework migrations");
-                DesignTimeStorageContextFactory.Initialize(webHost.Services.GetService(typeof(IServiceProvider)) as IServiceProvider);
+                DesignTimeStorageContextFactory.Initialize(webHost.Services);
                 using (var context = DesignTimeStorageContextFactory.StorageContext)
                 {
                     var pendingMigrations = context.Database.GetPendingMigrations();
@@ -75,12 +82,21 @@ namespace TL.Engine
             if (doMigrate.HasValue())
             {
                 Console.WriteLine("Applyting Entity Framework migrations");
-                DesignTimeStorageContextFactory.Initialize(webHost.Services.GetService(typeof(IServiceProvider)) as IServiceProvider);
+                DesignTimeStorageContextFactory.Initialize(webHost.Services);
                 using (var context = DesignTimeStorageContextFactory.StorageContext)
                 {
                     context.Database.Migrate();
                     Console.WriteLine("All done, closing app");
                     Environment.Exit(0);
+                }
+            }
+
+            if (startupDuration.HasValue())
+            {
+                if (int.TryParse(startupDuration.Value(), out int duration))
+                {
+                    var startupService = webHost.Services.GetService<IStartupService>();
+                    startupService.SetDuration(duration);
                 }
             }
 

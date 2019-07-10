@@ -27,11 +27,7 @@ namespace TL.Engine.Web.Controllers
         [HttpPost]
         public IActionResult Update()
         {
-            if (!StartupService.IsReady || User.IsInRole("sa"))
-            {
-                return PartialView("_Progress");
-            }
-            return PartialView("_StatusMessage", "Отказано в доступе!");
+            return PartialView("_Progress");
         }
 
 #if DEBUG

@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if DEBUG
 using System.Threading;
-#endif
 using TL.Engine.SDK.Actions;
 using TL.Engine.SDK.Extensions;
 
@@ -75,6 +73,10 @@ namespace TL.Engine.SDK.Services
             int number = 0, count = actions.Count();
             for (; number < count; )
             {
+                if (_duration > 0)
+                {
+                    Thread.Sleep(_duration);
+                }
                 var action = actions[number];
                 NextDescription = number < count - 1 ? actions[number + 1].Description : _defaultNextDescription;
                 Progress = number / (double)count * 100;
@@ -87,7 +89,7 @@ namespace TL.Engine.SDK.Services
                     CanMoveNext = SkipAll;
                     while (!CanMoveNext && !SkipAll)
                     {
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
                     }
 #endif
                     actionResult = action.Invoke();
@@ -112,6 +114,17 @@ namespace TL.Engine.SDK.Services
 
             IsOk = Log.All(e => e.IsFinal);
             IsReady = true;
+        }
+
+        private int _duration = 0;
+
+        /// <summary>
+        /// Задает длительность перехода между точками <see cref="IStartupAction"/> в мс.
+        /// </summary>
+        /// <param name="duration">Время в мс.</param>
+        public void SetDuration(int duration)
+        {
+            _duration = duration;
         }
 
         /// <summary>
