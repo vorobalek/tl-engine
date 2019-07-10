@@ -23,7 +23,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         [HttpGet("linker/manager/edit/{id}")]
         public IActionResult Edit(Guid id)
         {
-            var link = LinkManager.Get(id);
+            var link = LinkManager.Get(id, loadDeleted: true);
             var model = new EditViewModelFactory().Create(new LinkViewModelFactory().Create(LinkManager, link));
             model.ReturnUrl = Request.Headers["Referer"].ToString();
             return View(model);
@@ -32,7 +32,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         [HttpPost]
         public IActionResult Edit(EditViewModel model)
         {
-            var link = LinkManager.Get(model.InputModel.Id);
+            var link = LinkManager.Get(model.InputModel.Id, loadDeleted: true);
             link.Identifier = LinkManager.LinkParse(model.InputModel.Path);
             link.Url = model.InputModel.OriginalPath;
             LinkManager.Update(link);
@@ -52,7 +52,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid, true);
+                var token = LinkManager.Get(guid, loadDeleted: true);
                 if (token != null)
                 {
                     token.IsDeleted = false;
@@ -68,7 +68,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid, true);
+                var token = LinkManager.Get(guid, loadDeleted: true);
                 if (token != null)
                 {
                     LinkManager.Remove(token);
@@ -82,7 +82,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid, true);
+                var token = LinkManager.Get(guid, loadDeleted: true);
                 if (token != null)
                 {
                     LinkManager.Delete(token);

@@ -6,7 +6,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.StartupFilters
 {
-    public class CoreStartupFilter : IStartupFilter
+    internal class CoreStartupFilter : IStartupFilter
     {
         protected IStartupService StartupService { get; }
 

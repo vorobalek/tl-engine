@@ -6,7 +6,7 @@ using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.Managers
 {
-    public class TgUserRoleManager : EntityManager<TgUserRole>, ITgUserRoleManager
+    internal class TgUserRoleManager : EntityManager<TgUserRole>, ITgUserRoleManager
     {
         public TgUserRoleManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

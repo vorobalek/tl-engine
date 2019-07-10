@@ -1,7 +1,6 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
-using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
 using TL.Engine.SDK.Services;
 using TL.Integrations.Data.Abstractions.Telegram.System;
@@ -10,7 +9,7 @@ using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Data.Managers
 {
-    public class TgBotManager : EntityComparableStoredManager<TgBot, Guid>, ITgBotManager
+    internal class TgBotManager : EntityComparableStoredManager<TgBot, Guid>, ITgBotManager
     {
         public TgBotManager(ITelegramBotProviderService telegramBotProvider, IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

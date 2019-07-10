@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using TL.Engine.Data.Managers;
-using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Managers;
 using TL.Engine.SDK.Services;
 using TL.Integrations.Data.Abstractions.Telegram.Security;
@@ -12,7 +11,7 @@ using TL.Integrations.Data.Extensions;
 
 namespace TL.Integrations.Data.Managers
 {
-    public class TgUserManager : EntityComparableStoredManager<TgUser, Guid>,  ITgUserManager
+    internal class TgUserManager : EntityComparableStoredManager<TgUser, Guid>,  ITgUserManager
     {
         public TgUserManager(IUserManager userManager, IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

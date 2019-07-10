@@ -6,7 +6,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Account.Data.Managers
 {
-    public class SubscriptionManager : EntityManager<Subscription>, ISubscriptionManager
+    internal class SubscriptionManager : EntityManager<Subscription>, ISubscriptionManager
     {
         public SubscriptionManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

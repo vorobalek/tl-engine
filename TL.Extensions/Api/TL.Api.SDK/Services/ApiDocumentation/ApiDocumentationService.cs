@@ -1,6 +1,5 @@
 ﻿using ExtCore.Infrastructure;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Api.SDK.Services.ApiDocumentation
 {
-    public class ApiDocumentationService : IApiDocumentationService
+    internal class ApiDocumentationService : IApiDocumentationService
     {
         public IServiceProvider ServiceProvider { get; }
 

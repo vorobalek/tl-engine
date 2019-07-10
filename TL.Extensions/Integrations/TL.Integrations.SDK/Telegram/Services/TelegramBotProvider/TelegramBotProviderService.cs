@@ -3,12 +3,11 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TL.Engine.SDK.Extensions;
 using TL.Integrations.SDK.Telegram.Bots;
 
 namespace TL.Integrations.SDK.Telegram.Services
 {
-    public class TelegramBotProviderService : ITelegramBotProviderService
+    internal class TelegramBotProviderService : ITelegramBotProviderService
     {
         ILogger Logger { get; }
 
