@@ -10,7 +10,8 @@ namespace TL.Linker.Web.Areas.Linker.ViewModels.Manager
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
-        public LinkViewModel(Guid id, string path, string originalPath, DateTime creationDate, DateTime modifiedDate, bool isDeleted)
+        public bool IsActual { get; set; }
+        public LinkViewModel(Guid id, string path, string originalPath, DateTime creationDate, DateTime modifiedDate, bool isDeleted, bool isActual)
         {
             Id = id;
             Path = path;
@@ -18,6 +19,7 @@ namespace TL.Linker.Web.Areas.Linker.ViewModels.Manager
             CreationDate = creationDate;
             ModifiedDate = modifiedDate;
             IsDeleted = isDeleted;
+            IsActual = isActual;
         }
         public LinkViewModel()
         {

@@ -10,5 +10,11 @@ namespace TL.Linker.Data.Entities.Core
         
         [StringIndex]
         public string Url { get; set; }
+
+        public int LifetimeSeconds { get; set; } = int.MaxValue;
+
+        public TimeSpan Lifetime => TimeSpan.FromSeconds(LifetimeSeconds);
+
+        public bool IsActual => CreationDate + Lifetime > DateTime.Now;
     }
 }

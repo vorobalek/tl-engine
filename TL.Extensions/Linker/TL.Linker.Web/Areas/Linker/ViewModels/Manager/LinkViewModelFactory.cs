@@ -13,7 +13,8 @@ namespace TL.Linker.Web.Areas.Linker.ViewModels.Manager
                     originalPath: link.Url,
                     creationDate: link.CreationDate,
                     modifiedDate: link.ModifiedDate,
-                    isDeleted: link.IsDeleted);
+                    isDeleted: link.IsDeleted,
+                    isActual: link.IsActual);
         }
     }
 }

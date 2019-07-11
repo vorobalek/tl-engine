@@ -1,6 +1,8 @@
 ﻿using ExtCore.Data.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using TL.Engine.SDK.Actions;
 using TL.Engine.Services;
 
@@ -28,7 +30,15 @@ namespace TL.Engine.Actions.Startup
             }
             else
             {
-                return StartupActionResult.Broken("Отсутствует подключение к базе данных.");
+                try
+                {
+                    context.Database.Migrate();
+                    return StartupActionResult.Good(description: "База данных создана автоматически согласно строке подключения.");
+                }
+                catch (Exception ex)
+                {
+                    return StartupActionResult.Broken($"База данных не обнаружена. Попытка создать базу данных автоматически завершена с ошибкой {ex}");
+                }
             }
         }
     }

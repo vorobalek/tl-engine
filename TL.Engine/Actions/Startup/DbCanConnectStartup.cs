@@ -16,7 +16,7 @@ namespace TL.Engine.Actions.Startup
             {
                 return StartupActionResult.Good(description: Description);
             }
-            return StartupActionResult.Broken("Fail", Description);
+            return StartupActionResult.Broken("Отсутствует подключение к базе данных.");
         }
     }
 }

@@ -29,9 +29,6 @@ else if (!StartupService.IsReady)
         {
             <span> Ядро системы TL Engine запускается.  Пожалуйста, подождите.</span>
         }
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
 }
 else
@@ -53,9 +50,18 @@ else
     }
     else
     {
-        <strong>
-            Добро пожаловать в систему TL Engine!
-        </strong>
+        if (StartupService.IsOk)
+        {
+            <strong>
+                Добро пожаловать в систему TL Engine!
+            </strong>
+        }
+        else
+        {
+            <strong>
+                Произошла одна или несколько ошибок!
+            </strong>
+        }
     }
 </center>
 <br />
@@ -64,7 +70,7 @@ else
          aria-valuemin="0" aria-valuemax="100" style="width: @string.Format("{0:0.##}", StartupService.Progress)%">
     </div>
 </div>
-@if (User.IsInRole("sa"))
+@if (User.IsInRole("sa") || (StartupService.IsReady && !StartupService.IsOk))
 {
     <br />
     <div class="table-responsive">

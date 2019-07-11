@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using Microsoft.Extensions.Logging;
+using System;
 using TL.Linker.Data.Managers;
 using TL.Linker.Web.Areas.Linker.ViewModels.Get;
 
@@ -7,11 +8,14 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
 {
     public class GetController : __LinkerController__
     {
-        ILinkManager LinkManager { get; set; }
+        ILinkManager LinkManager { get; }
 
-        public GetController(ILinkManager linkManager)
+        ILogger Logger { get; }
+
+        public GetController(ILinkManager linkManager, ILogger<GetController> logger)
         {
             LinkManager = linkManager;
+            Logger = logger;
         }
 
         public IActionResult Index()
@@ -57,20 +61,19 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
             var link = LinkManager.Get(LinkManager.LinkParse(url));
             if (link == null)
             {
-                return View("Index", new IndexViewModelFactory().Create());
+                ;
+            }
+            else if (!link.IsActual)
+            {
+                link.IsDeleted = true;
+                LinkManager.Update(link);
+                Logger.TLogWarning($"Ссылка с идентефикатором {link.Identifier} ({LinkManager.LinkConvert(link.Identifier)}) устарела и удалена.");
             }
             else
             {
-                var prefixs = new[]
-                {
-                    "ftp",
-                    "http",
-                    "https",
-                };
-
                 var parts = link.Url.Split("://");
 
-                if (parts.Length > 1 && prefixs.Contains(parts[0]))
+                if (parts.Length > 1)
                 {
                     return Redirect(link.Url);
                 }
@@ -80,6 +83,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
                 }
 
             }
+            return View("Index", new IndexViewModelFactory().Create());
         }
     }
 }

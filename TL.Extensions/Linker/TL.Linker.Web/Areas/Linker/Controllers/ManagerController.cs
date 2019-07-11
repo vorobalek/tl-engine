@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using TL.Linker.Data.Entities.Core;
 using TL.Linker.Data.Managers;
 using TL.Linker.Web.Areas.Linker.ViewModels.Manager;
 
@@ -23,22 +24,32 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         [HttpGet("linker/manager/edit/{id}")]
         public IActionResult Edit(Guid id)
         {
-            var link = LinkManager.Get(id, loadDeleted: true);
-            var model = new EditViewModelFactory().Create(new LinkViewModelFactory().Create(LinkManager, link));
-            model.ReturnUrl = Request.Headers["Referer"].ToString();
-            return View(model);
+            if (LinkManager.Get(id, loadDeleted: true) is Link link)
+            {
+                var model = new EditViewModelFactory().Create(LinkManager, link);
+                model.ReturnUrl = "/linker/manager/"; // Request.Headers["Referer"].ToString();
+                return View(model);
+            }
+            return Redirect("/linker/manager/");
         }
 
         [HttpPost]
         public IActionResult Edit(EditViewModel model)
         {
-            var link = LinkManager.Get(model.InputModel.Id, loadDeleted: true);
-            link.Identifier = LinkManager.LinkParse(model.InputModel.Path);
-            link.Url = model.InputModel.OriginalPath;
-            LinkManager.Update(link);
-            var newModel = new EditViewModelFactory().Create(new LinkViewModelFactory().Create(LinkManager, link), "Линк успешно обновлён!");
-            newModel.ReturnUrl = model.ReturnUrl;
-            return View(newModel);
+            if (ModelState.IsValid)
+            {
+                var link = LinkManager.Get(model.Input.Id, loadDeleted: true);
+
+                link.Identifier = LinkManager.LinkParse(model.Input.Path);
+                link.Url = model.Input.OriginalPath;
+                link.LifetimeSeconds = (int)(DateTime.Now - link.CreationDate).TotalSeconds + model.Input.LifetimeSeconds;
+
+                LinkManager.Update(link);
+                var newModel = new EditViewModelFactory().Create(LinkManager, link, "Линк успешно обновлён!");
+                newModel.ReturnUrl = model.ReturnUrl;
+                return View(newModel);
+            }
+            return Redirect("/linker/manager/");
         }
 
         [HttpPost]

@@ -83,8 +83,6 @@ namespace TL.Engine.SDK.Services
                 IStartupActionResult actionResult;
                 try
                 {
-                    Logger.TLogInformation($"{action.GetType().GetFullName()} running...");
-                    Message = action.Description;
 #if DEBUG
                     CanMoveNext = SkipAll;
                     while (!CanMoveNext && !SkipAll)
@@ -92,6 +90,8 @@ namespace TL.Engine.SDK.Services
                         Thread.Sleep(100);
                     }
 #endif
+                    Logger.TLogInformation($"{action.GetType().GetFullName()} running...");
+                    Message = action.Description;
                     actionResult = action.Invoke();
                     Logger.TLogInformation($"{action.GetType().GetFullName()} finished...");
                 }

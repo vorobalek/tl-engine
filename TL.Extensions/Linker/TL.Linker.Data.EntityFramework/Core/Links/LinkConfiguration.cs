@@ -20,6 +20,10 @@ namespace TL.Linker.Data.EntityFramework.Core.Links
                 .IsUnique();
 
             builder
+                .Property(e => e.LifetimeSeconds)
+                .HasDefaultValue(int.MaxValue);
+
+            builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}.Links");
         }
     }

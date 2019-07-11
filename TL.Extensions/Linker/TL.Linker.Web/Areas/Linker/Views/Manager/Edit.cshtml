@@ -14,17 +14,22 @@
 <form asp-action="edit" asp-controller="manager" asp-area="linker" method="post">
     <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
     <div class="form-group">
-        <label asp-for="@Model.InputModel.Path">Ссылка</label>
-        <input asp-for="@Model.InputModel.Path" class="form-control" value="@Model.InputModel.Path" />
-        <span asp-validation-for="@Model.InputModel.Path" class="text-danger validation" />
+        <label asp-for="@Model.Input.Path">Ссылка</label>
+        <input asp-for="@Model.Input.Path" class="form-control" value="@Model.Input.Path" />
+        <span asp-validation-for="@Model.Input.Path" class="text-danger validation" />
     </div>
     <div class="form-group">
-        <label asp-for="@Model.InputModel.OriginalPath">Оригинал</label>
-        <input asp-for="@Model.InputModel.OriginalPath" class="form-control" value="@Model.InputModel.OriginalPath" />
-        <span asp-validation-for="@Model.InputModel.OriginalPath" class="text-danger validation" />
+        <label asp-for="@Model.Input.OriginalPath">Оригинал</label>
+        <input asp-for="@Model.Input.OriginalPath" class="form-control" value="@Model.Input.OriginalPath" />
+        <span asp-validation-for="@Model.Input.OriginalPath" class="text-danger validation" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Input.LifetimeSeconds">Время жизни в секундах (+ от текущего)</label>
+        <input asp-for="@Model.Input.LifetimeSeconds" class="form-control" value="@Model.Input.LifetimeSeconds" min="0" max="@int.MaxValue" />
+        <span asp-validation-for="@Model.Input.LifetimeSeconds" class="text-danger validation" />
     </div>
 
-    <input asp-for="@Model.InputModel.Id" type="hidden" class="invisible" value="@Model.InputModel.Id" />
+    <input asp-for="@Model.Input.Id" type="hidden" class="invisible" value="@Model.Input.Id" />
     <input asp-for="@Model.ReturnUrl" type="hidden" class="invisible" value="@Model.ReturnUrl" />
 
     <button type="submit" class="btn btn-success">Сохранить</button>

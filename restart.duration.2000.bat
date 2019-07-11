@@ -1,0 +1,1 @@
+call restart.bat "--startup-duration=2000"
