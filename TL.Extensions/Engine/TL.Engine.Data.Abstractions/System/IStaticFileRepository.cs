@@ -4,7 +4,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.System
 {
-    public interface IStaticFileRepository : IEntityComparableStoredRepository<StaticFile, Guid>
+    public interface IStaticFileRepository : IEntityComparableRepository<StaticFile, Guid>
     {
     }
 }

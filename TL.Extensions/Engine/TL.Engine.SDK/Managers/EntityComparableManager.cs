@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using TL.Engine.SDK.Entities;
+using TL.Engine.SDK.Repositories;
 using TL.Engine.SDK.Services;
 
 namespace TL.Engine.SDK.Managers
@@ -12,12 +13,12 @@ namespace TL.Engine.SDK.Managers
     /// <typeparam name="TEntity">Тип сущности</typeparam>
     /// <typeparam name="TKey">Тип первичного ключа сущности.</typeparam>
     /// <seealso cref="EntityManager{TEntity}" />
-    /// <seealso cref="IEntityComparableStoredManager{TEntity, TKey}" />
-    public abstract class EntityComparableStoredManager<TEntity, TKey> : EntityManager<TEntity>, IEntityComparableStoredManager<TEntity, TKey>
-        where TEntity : class, IEntityComparable<TKey>, IEntityStored
+    /// <seealso cref="IEntityComparableManager{TEntity, TKey}" />
+    public abstract class EntityComparableManager<TEntity, TKey> : EntityManager<TEntity>, IEntityComparableManager<TEntity, TKey>
+        where TEntity : class, IEntityComparable<TKey>
         where TKey : IComparable
     {
-        public EntityComparableStoredManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
+        public EntityComparableManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {
         }
 
@@ -31,7 +32,7 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity Get(TKey key, bool loadDeleted = false)
         {
-            return Get(e => e.Id.Equals(key), loadDeleted);
+            return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().Get(key);
         }
 
         /// <summary>
@@ -46,7 +47,12 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity GetOrCreate(TKey key, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false)
         {
-            return GetOrCreate(e => e.Id.Equals(key), loadDeleted, entity, cacheOnly);
+            TEntity existedEntity = Get(key, loadDeleted);
+            if (existedEntity == null)
+            {
+                return Create(entity, cacheOnly);
+            }
+            return existedEntity;
         }
 
         /// <summary>
@@ -60,7 +66,20 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity UpdateOrCreate(TKey key, TEntity entity = null, bool cacheOnly = false)
         {
-            return UpdateOrCreate(e => e.Id.Equals(key), entity, cacheOnly);
+            TEntity existedEntity = Get(key);
+            if (existedEntity == null)
+            {
+                return Create(entity, cacheOnly);
+            }
+            else
+            {
+                if (entity == null)
+                {
+                    entity = CreateEmpty(cacheOnly);
+                }
+                entity.Id = existedEntity.Id;
+                return Update(existedEntity, cacheOnly);
+            }
         }
 
         /// <summary>
@@ -100,7 +119,7 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity UpdateOrCreate(TEntity entity, bool cacheOnly = false)
         {
-            return UpdateOrCreate(e => e.Id.Equals(entity.Id), entity, cacheOnly);
+            return UpdateOrCreate(entity.Id, entity, cacheOnly);
         }
     }
 }

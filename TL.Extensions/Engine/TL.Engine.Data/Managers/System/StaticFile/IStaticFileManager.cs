@@ -4,7 +4,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Managers
 {
-    public interface IStaticFileManager : IEntityDuplicateComparableStoredManager<StaticFile, Guid>
+    public interface IStaticFileManager : IEntityDuplicateManager<StaticFile, Guid>
     {
     }
 }

@@ -5,7 +5,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.System.StaticFiles
 {
-    public class StaticFileRepository : EntityComparableStoredRepository<StaticFile, Guid>, IStaticFileRepository
+    public class StaticFileRepository : EntityComparableRepository<StaticFile, Guid>, IStaticFileRepository
     {
     }
 }

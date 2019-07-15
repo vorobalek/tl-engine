@@ -6,7 +6,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.Security.Users
 {
-    public class UserRepository : EntityComparableStoredRepository<User, Guid>, IUserRepository
+    public class UserRepository : EntityComparableRepository<User, Guid>, IUserRepository
     {
         public User GetByUsername(string username)
         {

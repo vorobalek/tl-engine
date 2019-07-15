@@ -5,7 +5,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Api.Data.EntityFramework.Security.Tokens
 {
-    public class TokenRepository : EntityComparableStoredRepository<Token, Guid>, ITokenRepository
+    public class TokenRepository : EntityComparableRepository<Token, Guid>, ITokenRepository
     {
     }
 }

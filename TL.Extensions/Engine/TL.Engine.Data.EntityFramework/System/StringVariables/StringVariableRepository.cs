@@ -8,7 +8,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.System.StringVariables
 {
-    public class StringVariableRepository : EntityComparableStoredRepository<StringVariable, Guid>, IStringVariableRepository
+    public class StringVariableRepository : EntityComparableRepository<StringVariable, Guid>, IStringVariableRepository
     {
         public IEnumerable<StringVariable> GetByAuthor(User user)
         {

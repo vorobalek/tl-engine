@@ -6,7 +6,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.Security.Roles
 {
-    public class RoleRepository : EntityComparableStoredRepository<Role, Guid>, IRoleRepository
+    public class RoleRepository : EntityComparableRepository<Role, Guid>, IRoleRepository
     {
         public Role GetByName(string name)
         {

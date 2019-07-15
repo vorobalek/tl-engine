@@ -4,7 +4,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.Managers
 {
-    public interface ITgBotManager : IEntityComparableStoredManager<TgBot, Guid>
+    public interface ITgBotManager : IEntityComparableManager<TgBot, Guid>
     {
         TgBot Get(string token, string typename);
 

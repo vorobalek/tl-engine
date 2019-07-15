@@ -9,7 +9,7 @@ using TL.Linker.Data.Entities.Core;
 
 namespace TL.Linker.Data.Managers
 {
-    internal class LinkManager : EntityComparableStoredManager<Link, Guid>, ILinkManager
+    internal class LinkManager : EntityComparableManager<Link, Guid>, ILinkManager
     {
         public const string NameOfMaskVariable = "LinkerMask";
 

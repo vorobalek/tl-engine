@@ -4,7 +4,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.Reports
 {
-    public interface IReportRepository : IEntityComparableStoredRepository<Report, Guid>
+    public interface IReportRepository : IEntityComparableRepository<Report, Guid>
     {
     }
 }

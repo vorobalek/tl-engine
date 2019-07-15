@@ -13,7 +13,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    internal class UserManager : EntityComparableStoredManager<User, Guid>, IUserManager
+    internal class UserManager : EntityComparableManager<User, Guid>, IUserManager
     {
         IRoleManager RoleManager { get; }
         IGroupManager GroupManager { get; }

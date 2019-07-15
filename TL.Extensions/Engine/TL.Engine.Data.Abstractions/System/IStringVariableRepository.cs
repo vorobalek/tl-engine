@@ -6,7 +6,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.System
 {
-    public interface IStringVariableRepository : IEntityComparableStoredRepository<StringVariable, Guid>
+    public interface IStringVariableRepository : IEntityComparableRepository<StringVariable, Guid>
     {
         IEnumerable<StringVariable> GetByName(string name);
 

@@ -11,13 +11,13 @@ namespace TL.Engine.SDK.Managers
     /// </summary>
     /// <typeparam name="TEntity">Тип сущности.</typeparam>
     /// <typeparam name="TKey">Тип первичного ключа сущности.</typeparam>
-    /// <seealso cref="EntityComparableStoredManager{TEntity, TKey}" />
-    /// <seealso cref="IEntityDuplicateComparableStoredManager{TEntity, TKey}" />
-    public abstract class EntityDuplicateComparableStoredManager<TEntity, TKey> : EntityComparableStoredManager<TEntity, TKey>, IEntityDuplicateComparableStoredManager<TEntity, TKey>
-        where TEntity : class, IEntityDuplicate<TKey>, IEntityComparable<TKey>, IEntityStored
+    /// <seealso cref="EntityComparableManager{TEntity, TKey}" />
+    /// <seealso cref="IEntityDuplicateManager{TEntity, TKey}" />
+    public abstract class EntityDuplicateManager<TEntity, TKey> : EntityComparableManager<TEntity, TKey>, IEntityDuplicateManager<TEntity, TKey>
+        where TEntity : class, IEntityDuplicate<TKey>, IEntityComparable<TKey>
         where TKey : struct, IComparable
     {
-        public EntityDuplicateComparableStoredManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
+        public EntityDuplicateManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {
         }
 
@@ -31,7 +31,15 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public TEntity GetOriginal(TKey key, bool loadDeleted = false)
         {
-            return GetOriginal(e => e.Id.Equals(key), loadDeleted);
+            var entity = Get(key, loadDeleted);
+            if (entity.OriginalId.HasValue)
+            {
+                return GetOriginal(entity.OriginalId.Value, loadDeleted);
+            }
+            else
+            {
+                return entity;
+            }
         }
 
         /// <summary>

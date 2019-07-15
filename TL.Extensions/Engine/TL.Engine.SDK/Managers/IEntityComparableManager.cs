@@ -8,8 +8,8 @@ namespace TL.Engine.SDK.Managers
     /// </summary>
     /// <typeparam name="TEntity">Тип сущности.</typeparam>
     /// <typeparam name="TKey">Тип первичного ключа сущности.</typeparam>
-    public interface IEntityComparableStoredManager<TEntity, TKey> : IEntityManager<TEntity>
-        where TEntity : class, IEntityComparable<TKey>, IEntityStored
+    public interface IEntityComparableManager<TEntity, TKey> : IEntityManager<TEntity>
+        where TEntity : class, IEntityComparable<TKey>
         where TKey : IComparable
     {
         /// <summary>

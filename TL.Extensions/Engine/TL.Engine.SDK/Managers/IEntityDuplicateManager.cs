@@ -8,9 +8,9 @@ namespace TL.Engine.SDK.Managers
     /// </summary>
     /// <typeparam name="TEntity">Тип сущности.</typeparam>
     /// <typeparam name="TKey">Тип первичного ключа сущности.</typeparam>
-    /// <seealso cref="IEntityComparableStoredManager{TEntity, TKey}" />
-    public interface IEntityDuplicateComparableStoredManager<TEntity, TKey> : IEntityComparableStoredManager<TEntity, TKey>
-        where TEntity : class, IEntityDuplicate<TKey>, IEntityComparable<TKey>, IEntityStored
+    /// <seealso cref="IEntityComparableManager{TEntity, TKey}" />
+    public interface IEntityDuplicateManager<TEntity, TKey> : IEntityComparableManager<TEntity, TKey>
+        where TEntity : class, IEntityDuplicate<TKey>, IEntityComparable<TKey>
         where TKey : struct, IComparable
     {
         /// <summary>

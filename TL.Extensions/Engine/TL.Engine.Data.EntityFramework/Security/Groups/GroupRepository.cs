@@ -6,7 +6,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.Security.Groups
 {
-    public class GroupRepository : EntityComparableStoredRepository<Group, Guid>, IGroupRepository
+    public class GroupRepository : EntityComparableRepository<Group, Guid>, IGroupRepository
     {
         public Group GetByName(string name)
         {

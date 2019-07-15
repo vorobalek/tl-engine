@@ -5,7 +5,7 @@ using TL.Linker.Data.Entities.Core;
 
 namespace TL.Linker.Data.EntityFramework.Core.Links
 {
-    public class LinkRepository : EntityComparableStoredRepository<Link, Guid>, ILinkRepository
+    public class LinkRepository : EntityComparableRepository<Link, Guid>, ILinkRepository
     {
     }
 }

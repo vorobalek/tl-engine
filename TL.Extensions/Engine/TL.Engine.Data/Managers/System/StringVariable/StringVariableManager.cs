@@ -8,7 +8,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    internal class StringVariableManager : EntityComparableStoredManager<StringVariable, Guid>, IStringVariableManager
+    internal class StringVariableManager : EntityComparableManager<StringVariable, Guid>, IStringVariableManager
     {
         public StringVariableManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

@@ -4,14 +4,13 @@ using TL.Engine.SDK.Entities;
 namespace TL.Engine.SDK.Repositories
 {
     /// <summary>
-    /// Абстрактная реализация репозитория элементарных сущностей <typeparamref name="TEntity"/> с первичным ключом <typeparamref name="TKey"/>.
+    /// Интерфейс репозитория элементарных сущностей <typeparamref name="TEntity"/> с первичным ключом <typeparamref name="TKey"/>.
     /// </summary>
     /// <typeparam name="TEntity">Тип сущности.</typeparam>
     /// <typeparam name="TKey">Тип первичного ключа.</typeparam>
-    /// <seealso cref="EntityRepository{TEntity}" />
-    /// <seealso cref="IEntityComparableStoredRepository{TEntity, TKey}" />
-    public abstract class EntityComparableStoredRepository<TEntity, TKey> : EntityRepository<TEntity>, IEntityComparableStoredRepository<TEntity, TKey>
-        where TEntity : class, IEntityComparable<TKey>, IEntityStored
+    /// <seealso cref="IEntityRepository{TEntity}" />
+    public interface IEntityComparableRepository<TEntity, TKey> : IEntityRepository<TEntity>
+        where TEntity : class, IEntityComparable<TKey>
         where TKey : IComparable
     {
         /// <summary>
@@ -21,9 +20,6 @@ namespace TL.Engine.SDK.Repositories
         /// <returns>
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
-        public TEntity Get(TKey key)
-        {
-            return Get(e => e.Id.Equals(key));
-        }
+        TEntity Get(TKey key);
     }
 }

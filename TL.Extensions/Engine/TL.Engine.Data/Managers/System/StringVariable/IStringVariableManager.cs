@@ -6,7 +6,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Managers
 {
-    public interface IStringVariableManager : IEntityComparableStoredManager<StringVariable, Guid>
+    public interface IStringVariableManager : IEntityComparableManager<StringVariable, Guid>
     {
         StringVariable Get(string name);
 

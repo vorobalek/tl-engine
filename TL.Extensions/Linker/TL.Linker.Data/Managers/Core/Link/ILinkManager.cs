@@ -5,7 +5,7 @@ using TL.Linker.Data.Entities.Core;
 
 namespace TL.Linker.Data.Managers
 {
-    public interface ILinkManager : IEntityComparableStoredManager<Link, Guid>
+    public interface ILinkManager : IEntityComparableManager<Link, Guid>
     {
         Link Get(ulong id);
 

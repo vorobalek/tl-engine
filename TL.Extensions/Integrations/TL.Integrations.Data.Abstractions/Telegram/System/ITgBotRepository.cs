@@ -5,7 +5,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.Abstractions.Telegram.System
 {
-    public interface ITgBotRepository : IEntityComparableStoredRepository<TgBot, Guid>
+    public interface ITgBotRepository : IEntityComparableRepository<TgBot, Guid>
     {
         IEnumerable<TgBot> GetByUsername(string username);
 

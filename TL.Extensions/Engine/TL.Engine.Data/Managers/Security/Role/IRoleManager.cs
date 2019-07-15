@@ -5,7 +5,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Managers
 {
-    public interface IRoleManager : IEntityComparableStoredManager<Role, Guid>
+    public interface IRoleManager : IEntityComparableManager<Role, Guid>
     {
     }
 }

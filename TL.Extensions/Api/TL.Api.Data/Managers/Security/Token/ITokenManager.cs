@@ -4,7 +4,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Api.Data.Managers
 {
-    public interface ITokenManager : IEntityComparableStoredManager<Token, Guid>
+    public interface ITokenManager : IEntityComparableManager<Token, Guid>
     {
     }
 }

@@ -7,7 +7,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    internal class StaticFileManager : EntityDuplicateComparableStoredManager<StaticFile, Guid>, IStaticFileManager
+    internal class StaticFileManager : EntityDuplicateManager<StaticFile, Guid>, IStaticFileManager
     {
         public StaticFileManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

@@ -4,7 +4,7 @@ using TL.Linker.Data.Entities.Core;
 
 namespace TL.Linker.Data.Abstractions.Core
 {
-    public interface ILinkRepository : IEntityComparableStoredRepository<Link, Guid>
+    public interface ILinkRepository : IEntityComparableRepository<Link, Guid>
     {
     }
 }

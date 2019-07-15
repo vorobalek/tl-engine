@@ -7,7 +7,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    internal class GroupManager : EntityComparableStoredManager<Group, Guid>, IGroupManager
+    internal class GroupManager : EntityComparableManager<Group, Guid>, IGroupManager
     {
         public GroupManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

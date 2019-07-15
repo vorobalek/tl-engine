@@ -4,7 +4,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.Security
 {
-    public interface IGroupRepository : IEntityComparableStoredRepository<Group, Guid>
+    public interface IGroupRepository : IEntityComparableRepository<Group, Guid>
     {
         Group GetByName(string name);
     }

@@ -7,7 +7,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
 {
-    public class TgBotRepository : EntityComparableStoredRepository<TgBot, Guid>, ITgBotRepository
+    public class TgBotRepository : EntityComparableRepository<TgBot, Guid>, ITgBotRepository
     {
         public TgBot GetByTokenAndType(string token, string type)
         {

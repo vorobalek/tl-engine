@@ -4,7 +4,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Managers
 {
-    public interface IReportManager : IEntityComparableStoredManager<Report, Guid>
+    public interface IReportManager : IEntityComparableManager<Report, Guid>
     {
     }
 }

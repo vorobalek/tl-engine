@@ -7,7 +7,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Api.Data.Managers
 {
-    internal class TokenLogManager : EntityComparableStoredManager<TokenLog, Guid>, ITokenLogManager
+    internal class TokenLogManager : EntityComparableManager<TokenLog, Guid>, ITokenLogManager
     {
         public TokenLogManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

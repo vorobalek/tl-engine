@@ -7,7 +7,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    internal class RoleManager : EntityComparableStoredManager<Role, Guid>, IRoleManager
+    internal class RoleManager : EntityComparableManager<Role, Guid>, IRoleManager
     {
         public RoleManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

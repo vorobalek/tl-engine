@@ -4,7 +4,7 @@ using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.Managers
 {
-    public interface ITgUserManager : IEntityComparableStoredManager<TgUser, Guid>
+    public interface ITgUserManager : IEntityComparableManager<TgUser, Guid>
     {
         TgUser Get(int id);
 

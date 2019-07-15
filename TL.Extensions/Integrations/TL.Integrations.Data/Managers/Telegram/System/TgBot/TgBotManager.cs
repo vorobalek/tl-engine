@@ -9,7 +9,7 @@ using TL.Integrations.SDK.Telegram.Services;
 
 namespace TL.Integrations.Data.Managers
 {
-    internal class TgBotManager : EntityComparableStoredManager<TgBot, Guid>, ITgBotManager
+    internal class TgBotManager : EntityComparableManager<TgBot, Guid>, ITgBotManager
     {
         public TgBotManager(ITelegramBotProviderService telegramBotProvider, IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

@@ -7,7 +7,7 @@ using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Data.Managers
 {
-    internal class ReportManager : EntityComparableStoredManager<Report, Guid>, IReportManager
+    internal class ReportManager : EntityComparableManager<Report, Guid>, IReportManager
     {
         public ReportManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

@@ -7,7 +7,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.Reports
 {
-    public class ReportRepository : EntityComparableStoredRepository<Report, Guid>, IReportRepository
+    public class ReportRepository : EntityComparableRepository<Report, Guid>, IReportRepository
     {
     }
 }

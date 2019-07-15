@@ -11,7 +11,7 @@ using TL.Integrations.Data.Extensions;
 
 namespace TL.Integrations.Data.Managers
 {
-    internal class TgUserManager : EntityComparableStoredManager<TgUser, Guid>,  ITgUserManager
+    internal class TgUserManager : EntityComparableManager<TgUser, Guid>,  ITgUserManager
     {
         public TgUserManager(IUserManager userManager, IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage) : base(activator, loggerFactory, storage)
         {

@@ -7,7 +7,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Managers
 {
-    public interface IUserManager : IEntityComparableStoredManager<User, Guid>
+    public interface IUserManager : IEntityComparableManager<User, Guid>
     {
         [PrivateApi(Description = "Получить пользователя по имени")]
         User Get(string username);

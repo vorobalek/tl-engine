@@ -4,7 +4,7 @@ using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Managers
 {
-    public interface IGroupManager : IEntityComparableStoredManager<Group, Guid>
+    public interface IGroupManager : IEntityComparableManager<Group, Guid>
     {
     }
 }

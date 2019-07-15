@@ -5,7 +5,7 @@ using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.Abstractions.Telegram.Security
 {
-    public interface ITgUserRepository : IEntityComparableStoredRepository<TgUser, Guid>
+    public interface ITgUserRepository : IEntityComparableRepository<TgUser, Guid>
     {
         IEnumerable<TgUser> GetByAccountId(Guid id);
 
