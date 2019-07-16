@@ -24,10 +24,10 @@ namespace TL.Registry.Data.Entities.Core
 
         public Guid RootId { get; set; }
 
-        public virtual RegistryFolder Root { get; set; }
+        public virtual Folder Root { get; set; }
 
-        public virtual IEnumerable<RegistryUserPermission> UserPermissions { get; set; }
+        public virtual IEnumerable<UserPermission> UserPermissions { get; set; }
 
-        public virtual IEnumerable<RegistryGroupPermission> GroupPermissions { get; set; }
+        public virtual IEnumerable<GroupPermission> GroupPermissions { get; set; }
     }
 }

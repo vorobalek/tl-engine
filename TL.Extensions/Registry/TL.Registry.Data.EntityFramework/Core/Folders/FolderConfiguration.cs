@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TL.Registry.Data.Entities.Core;
 
-namespace TL.Registry.Data.EntityFramework.Core.Registries
+namespace TL.Registry.Data.EntityFramework.Core.Folders
 {
-    internal class RegistryConfiguration : IEntityTypeConfiguration<Entities.Core.Registry>
+    internal class FolderConfiguration : IEntityTypeConfiguration<Folder>
     {
-        public void Configure(EntityTypeBuilder<Entities.Core.Registry> builder)
+        public void Configure(EntityTypeBuilder<Folder> builder)
         {
             builder
                 .HasKey(e => e.Id);
@@ -20,9 +21,20 @@ namespace TL.Registry.Data.EntityFramework.Core.Registries
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasOne(e => e.Root)
-                .WithMany(e => e.Registries)
+                .HasMany(e => e.Folders)
+                .WithOne(e => e.Parant)
+                .HasForeignKey(e => e.ParantId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasMany(e => e.Registries)
+                .WithOne(e => e.Root)
                 .HasForeignKey(e => e.RootId);
+
+            builder
+                .HasMany(e => e.Files)
+                .WithOne(e => e.Folder)
+                .HasForeignKey(e => e.FolderId);
 
             builder
                 .HasMany(e => e.UserPermissions)
@@ -35,7 +47,7 @@ namespace TL.Registry.Data.EntityFramework.Core.Registries
                 .HasForeignKey(e => e.ObjectId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Registries");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Folders");
         }
     }
 }
