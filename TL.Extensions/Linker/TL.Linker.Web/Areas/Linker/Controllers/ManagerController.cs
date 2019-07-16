@@ -24,7 +24,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         [HttpGet("linker/manager/edit/{id}")]
         public IActionResult Edit(Guid id)
         {
-            if (LinkManager.Get(id, loadDeleted: true) is Link link)
+            if (LinkManager.Get(id) is Link link)
             {
                 var model = new EditViewModelFactory().Create(LinkManager, link);
                 model.ReturnUrl = "/linker/manager/"; // Request.Headers["Referer"].ToString();
@@ -38,7 +38,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var link = LinkManager.Get(model.Input.Id, loadDeleted: true);
+                var link = LinkManager.Get(model.Input.Id);
 
                 link.Identifier = LinkManager.LinkParse(model.Input.Path);
                 link.Url = model.Input.OriginalPath;
@@ -63,7 +63,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid, loadDeleted: true);
+                var token = LinkManager.Get(guid);
                 if (token != null)
                 {
                     token.IsDeleted = false;
@@ -79,7 +79,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid, loadDeleted: true);
+                var token = LinkManager.Get(guid);
                 if (token != null)
                 {
                     LinkManager.Remove(token);
@@ -93,7 +93,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid, loadDeleted: true);
+                var token = LinkManager.Get(guid);
                 if (token != null)
                 {
                     LinkManager.Delete(token);

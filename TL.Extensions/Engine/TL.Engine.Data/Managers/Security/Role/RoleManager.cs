@@ -13,9 +13,9 @@ namespace TL.Engine.Data.Managers
         {
         }
 
-        public override Role Get(Guid key, bool loadDeleted = false)
+        public override Role Get(Guid key)
         {
-            return base.Get(key, loadDeleted);
+            return base.Get(key);
         }
     }
 }

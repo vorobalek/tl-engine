@@ -59,7 +59,7 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity GetOrCreate(TKey key, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false)
         {
-            TEntity existedEntity = Get(key, loadDeleted);
+            TEntity existedEntity = Get(key);
             if (existedEntity == null)
             {
                 return Create(entity, cacheOnly);
