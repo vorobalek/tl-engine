@@ -20,6 +20,8 @@ namespace TL.Registry.Data.Entities.Core
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public RegistryType Type { get; set; }
 
         public Guid RootId { get; set; }
