@@ -4,7 +4,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.System.TgBots
 {
-    public class TgBotConfiguration : IEntityTypeConfiguration<TgBot>
+    internal class TgBotConfiguration : IEntityTypeConfiguration<TgBot>
     {
         public void Configure(EntityTypeBuilder<TgBot> builder)
         {

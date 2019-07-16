@@ -4,7 +4,7 @@ using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgRoles
 {
-    public class TgRoleConfiguration : IEntityTypeConfiguration<TgRole>
+    internal class TgRoleConfiguration : IEntityTypeConfiguration<TgRole>
     {
         public void Configure(EntityTypeBuilder<TgRole> builder)
         {

@@ -5,7 +5,7 @@ using TL.Engine.Data.Entities.System;
 
 namespace TL.Engine.Data.EntityFramework.System.StringVariables
 {
-    public class StringVariableConfiguration : IEntityTypeConfiguration<StringVariable>
+    internal class StringVariableConfiguration : IEntityTypeConfiguration<StringVariable>
     {
         public void Configure(EntityTypeBuilder<StringVariable> builder)
         {

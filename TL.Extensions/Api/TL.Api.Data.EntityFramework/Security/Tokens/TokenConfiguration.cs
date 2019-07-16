@@ -4,7 +4,7 @@ using TL.Api.Data.Entities.Security;
 
 namespace TL.Api.Data.EntityFramework.Security.Tokens
 {
-    public class TokenConfiguration : IEntityTypeConfiguration<Token>
+    internal class TokenConfiguration : IEntityTypeConfiguration<Token>
     {
         public void Configure(EntityTypeBuilder<Token> builder)
         {

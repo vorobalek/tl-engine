@@ -4,7 +4,7 @@ using TL.Engine.Data.Entities.System;
 
 namespace TL.Engine.Data.EntityFramework.System.StaticFiles
 {
-    public class StaticFileConfiguration : IEntityTypeConfiguration<StaticFile>
+    internal class StaticFileConfiguration : IEntityTypeConfiguration<StaticFile>
     {
         public void Configure(EntityTypeBuilder<StaticFile> builder)
         {

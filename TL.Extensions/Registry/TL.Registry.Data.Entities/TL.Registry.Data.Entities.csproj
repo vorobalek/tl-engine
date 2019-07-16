@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Engine\TL.Engine.Data\TL.Engine.Data.csproj" />
     <ProjectReference Include="..\TL.Registry.SDK\TL.Registry.SDK.csproj" />
   </ItemGroup>
 

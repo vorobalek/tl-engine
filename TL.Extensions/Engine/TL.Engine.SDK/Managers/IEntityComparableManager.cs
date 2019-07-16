@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.SDK.Managers
@@ -16,11 +17,19 @@ namespace TL.Engine.SDK.Managers
         /// Получить экземпляр сущности типа <typeparamref name="TEntity"/> по первичному <typeparamref name="TKey"/> ключу
         /// </summary>
         /// <param name="key">Значение первичного ключа.</param>
-        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
         /// <returns>
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
-        TEntity Get(TKey key, bool loadDeleted = false);
+        TEntity Get(TKey key);
+
+        /// <summary>
+        /// Получить все экземпляры сущности типа <typeparamref name="TEntity"/> по первичному <typeparamref name="TKey"/> ключу
+        /// </summary>
+        /// <param name="keys">Значения первичного ключа.</param>
+        /// <returns>
+        /// Экземпляры отслеживаемой сущности.
+        /// </returns>
+        IEnumerable<TEntity> GetAll(params TKey[] keys);
 
         /// <summary>
         /// Получить экземпляр сущности типа <typeparamref name="TEntity" /> по первичному <typeparamref name="TKey"/> ключу или создать новый в хранилище.

@@ -5,7 +5,7 @@ using TL.Engine.Data.Entities.Security;
 
 namespace TL.Engine.Data.EntityFramework.Security.UsersGroups
 {
-    public class UserGroupConfiguration : IEntityTypeConfiguration<UserGroup>
+    internal class UserGroupConfiguration : IEntityTypeConfiguration<UserGroup>
     {
         public void Configure(EntityTypeBuilder<UserGroup> builder)
         {

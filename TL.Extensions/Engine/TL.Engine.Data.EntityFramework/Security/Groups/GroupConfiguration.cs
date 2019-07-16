@@ -4,7 +4,7 @@ using TL.Engine.Data.Entities.Security;
 
 namespace TL.Engine.Data.EntityFramework.Security.Groups
 {
-    public class GroupConfiguration : IEntityTypeConfiguration<Group>
+    internal class GroupConfiguration : IEntityTypeConfiguration<Group>
     {
         public void Configure(EntityTypeBuilder<Group> builder)
         {

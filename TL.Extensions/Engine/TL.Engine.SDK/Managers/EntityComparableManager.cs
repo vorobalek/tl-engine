@@ -1,6 +1,7 @@
 ﻿using ExtCore.Data.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Repositories;
 using TL.Engine.SDK.Services;
@@ -26,13 +27,24 @@ namespace TL.Engine.SDK.Managers
         /// Получить экземпляр сущности типа <typeparamref name="TEntity" /> по первичному <typeparamref name="TKey" /> ключу
         /// </summary>
         /// <param name="key">Значение первичного ключа.</param>
-        /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
         /// <returns>
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
-        public virtual TEntity Get(TKey key, bool loadDeleted = false)
+        public virtual TEntity Get(TKey key)
         {
             return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().Get(key);
+        }
+
+        /// <summary>
+        /// Получить все экземпляры сущности типа <typeparamref name="TEntity" /> по первичному <typeparamref name="TKey" /> ключу
+        /// </summary>
+        /// <param name="keys">Значения первичного ключа.</param>
+        /// <returns>
+        /// Экземпляры отслеживаемой сущности.
+        /// </returns>
+        public virtual IEnumerable<TEntity> GetAll(params TKey[] keys)
+        {
+            return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().GetAll(keys);
         }
 
         /// <summary>

@@ -4,7 +4,7 @@ using TL.Engine.Data.Entities.Security;
 
 namespace TL.Engine.Data.EntityFramework.Security.Users
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {

@@ -4,7 +4,7 @@ using TL.Engine.Data.Entities.Security;
 
 namespace TL.Engine.Data.EntityFramework.Security.Roles
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<Role>
+    internal class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {

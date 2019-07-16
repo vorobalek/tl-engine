@@ -4,7 +4,7 @@ using TL.Engine.Data.Entities.Reports;
 
 namespace TL.Engine.Data.EntityFramework.Reports
 {
-    public class ReportConfiguration : IEntityTypeConfiguration<Report>
+    internal class ReportConfiguration : IEntityTypeConfiguration<Report>
     {
         public void Configure(EntityTypeBuilder<Report> builder)
         {

@@ -4,7 +4,7 @@ using TL.Account.Data.Entities.Relationships;
 
 namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions
 {
-    public class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
+    internal class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
     {
         public void Configure(EntityTypeBuilder<Subscription> builder)
         {

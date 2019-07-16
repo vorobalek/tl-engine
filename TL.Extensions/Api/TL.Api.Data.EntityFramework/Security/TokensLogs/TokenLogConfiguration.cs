@@ -4,7 +4,7 @@ using TL.Api.Data.Entities.Security;
 
 namespace TL.Api.Data.EntityFramework.Security.TokensLogs
 {
-    public class TokenLogConfiguration : IEntityTypeConfiguration<TokenLog>
+    internal class TokenLogConfiguration : IEntityTypeConfiguration<TokenLog>
     {
         public void Configure(EntityTypeBuilder<TokenLog> builder)
         {

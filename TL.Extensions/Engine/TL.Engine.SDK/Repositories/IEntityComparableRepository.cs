@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.SDK.Repositories
@@ -21,5 +22,14 @@ namespace TL.Engine.SDK.Repositories
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
         TEntity Get(TKey key);
+
+        /// <summary>
+        /// Получить все экземпляры сущности типа <typeparamref name="TEntity" /> по первичному <typeparamref name="TKey" /> ключу
+        /// </summary>
+        /// <param name="keys">Значения первичного ключа.</param>
+        /// <returns>
+        /// Экземпляры отслеживаемой сущности.
+        /// </returns>
+        IEnumerable<TEntity> GetAll(params TKey[] keys);
     }
 }

@@ -4,7 +4,7 @@ using TL.Integrations.Data.Entities.Telegram.Relationships;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnections
 {
-    public class TgConnectionConfiguration : IEntityTypeConfiguration<TgConnection>
+    internal class TgConnectionConfiguration : IEntityTypeConfiguration<TgConnection>
     {
         public void Configure(EntityTypeBuilder<TgConnection> builder)
         {
