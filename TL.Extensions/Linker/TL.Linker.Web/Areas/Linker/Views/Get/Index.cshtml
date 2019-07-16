@@ -26,7 +26,7 @@
         Довольно часто при общении в интернете люди пересылают друг другу ссылки. Иногда эти ссылки бывают длинными. Совсем иногда — очень длинными. Но почти всегда — слишком длинными. 
         Для удобства работы с сервисом можно воспользоваться букмарклетом — перетащите вот эту ссылку 
         (
-        <a href="javascript:location.href='https://@Context.Request.Host.Value/linker/get/fromurl?url='+encodeURIComponent(location.href)">Link It↑</a>
+        <a href="javascript:location.href='@Context.Request.Scheme://@Context.Request.Host.Value/linker/get/fromurl?url='+encodeURIComponent(location.href)">Link It↑</a>
         ) на панель вашего браузера. 
         Нажимайте на эту закладку, когда хотите укоротить адрес просматриваемого вами сайта.
     </p>

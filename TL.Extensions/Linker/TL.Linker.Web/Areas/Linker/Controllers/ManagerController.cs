@@ -42,7 +42,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
 
                 link.Identifier = LinkManager.LinkParse(model.Input.Path);
                 link.Url = model.Input.OriginalPath;
-                link.LifetimeSeconds = (int)(DateTime.Now - link.CreationDate).TotalSeconds + model.Input.LifetimeSeconds;
+                link.LifetimeSeconds = (int)Math.Min((long)((DateTime.Now - link.CreationDate).TotalSeconds + model.Input.LifetimeSeconds), int.MaxValue);
 
                 LinkManager.Update(link);
                 var newModel = new EditViewModelFactory().Create(LinkManager, link, "Линк успешно обновлён!");
