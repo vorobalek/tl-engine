@@ -7,6 +7,6 @@ namespace TL.Engine
     {
         public override string Name => "TL.Engine";
 
-        protected override Version Version => new Version(1, 1, 0, 5);
+        protected override Version Version => new Version(1, 1, 0, 6);
     }
 }

@@ -12,6 +12,6 @@ namespace TL.Integrations.Data.EntityFramework
         public override string Description =>
                 $"Модуль провайдера баз данных. Промежуточный слой, описывающий структуры таблиц в базе данных для сущностей {Owner}.";
 
-        protected override Version Version => new Version(1, 1, 0, 5);
+        protected override Version Version => new Version(1, 1, 0, 6);
     }
 }

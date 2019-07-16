@@ -14,7 +14,7 @@ namespace TL.Engine.SDK.Modularity
         /// <summary>
         /// Минимальная версия модуля. Устанавливается только в абстрактном классе <see cref="BaseMetadata"/>.
         /// </summary>
-        private Version MinimalVersion => new Version(1, 1, 0, 5);
+        private Version MinimalVersion => new Version(1, 1, 0, 6);
 
         /// <summary>
         /// Имя текущей сборки модуля.

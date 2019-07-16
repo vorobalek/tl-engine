@@ -14,7 +14,7 @@ namespace TL.Linker.Web
         public override string Description =>
                 $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 
-        protected override Version Version => new Version(1, 1, 0, 5);
+        protected override Version Version => new Version(1, 1, 0, 6);
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
