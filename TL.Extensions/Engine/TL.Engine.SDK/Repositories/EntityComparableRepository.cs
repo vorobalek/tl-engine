@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.SDK.Repositories
@@ -24,6 +26,18 @@ namespace TL.Engine.SDK.Repositories
         public TEntity Get(TKey key)
         {
             return Load(dbSet.Find(key));
+        }
+
+        /// <summary>
+        /// Получить все экземпляры сущности типа <typeparamref name="TEntity" /> по первичному <typeparamref name="TKey" /> ключу
+        /// </summary>
+        /// <param name="keys">Значения первичного ключа.</param>
+        /// <returns>
+        /// Экземпляры отслеживаемой сущности.
+        /// </returns>
+        public IEnumerable<TEntity> GetAll(params TKey[] keys)
+        {
+            return keys.Select(k => Get(k));
         }
     }
 }
