@@ -20,14 +20,18 @@ namespace TL.Account.Data.Entities.Relationships
             new Subscription()
             {
                 FromId  = User.Sa.Id,
-                ToId = User.System.Id
+                ToId = User.System.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Subscription DefaultUserToSystem =>
             new Subscription()
             {
                 FromId = User.DefaultUser.Id,
-                ToId = User.System.Id
+                ToId = User.System.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
     }
 }

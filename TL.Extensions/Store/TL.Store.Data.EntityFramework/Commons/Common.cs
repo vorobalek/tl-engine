@@ -14,7 +14,9 @@ namespace TL.Store.Data.EntityFramework.Commons
                 Description = "Module Store Registry",
                 Type = Registry.Data.Entities.Core.RegistryType.Private,
                 OwnerId = User.System.Id,
-                RootId = StoreRegistryFolder.Id
+                RootId = StoreRegistryFolder.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Core.Folder StoreRegistryFolder =>
@@ -25,6 +27,8 @@ namespace TL.Store.Data.EntityFramework.Commons
                 OwnerId = User.System.Id,
                 
                 ParantId = Registry.Data.EntityFramework.Commons.Common.RootRegistryFolder.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         #region Permissions
@@ -36,7 +40,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = User.Sa.Id,
                 ObjectId = StoreRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.UserPermission StoreRegistrySystemUserPermission =>
@@ -44,7 +50,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = User.System.Id,
                 ObjectId = StoreRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.GroupPermission StoreRegistrySaGroupPermission =>
@@ -52,7 +60,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Group.Sa.Id,
                 ObjectId = StoreRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.GroupPermission StoreRegistrySystemGroupPermission =>
@@ -60,7 +70,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Group.System.Id,
                 ObjectId = StoreRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.RolePermission StoreRegistrySaRolePermission =>
@@ -68,7 +80,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Role.Sa.Id,
                 ObjectId = StoreRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.RolePermission StoreRegistrySystemRolePermission =>
@@ -76,7 +90,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Role.System.Id,
                 ObjectId = StoreRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         #endregion
@@ -88,7 +104,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = User.Sa.Id,
                 ObjectId = StoreRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.FolderUserPermission StoreRegistryFolderSystemUserPermission =>
@@ -96,7 +114,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = User.System.Id,
                 ObjectId = StoreRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.FolderGroupPermission StoreRegistryFolderSaGroupPermission =>
@@ -104,7 +124,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Group.Sa.Id,
                 ObjectId = StoreRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.FolderGroupPermission StoreRegistryFolderSystemGroupPermission =>
@@ -112,7 +134,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Group.System.Id,
                 ObjectId = StoreRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.FolderRolePermission StoreRegistryFolderSaRolePermission =>
@@ -120,7 +144,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Role.Sa.Id,
                 ObjectId = StoreRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Registry.Data.Entities.Security.FolderRolePermission StoreRegistryFolderSystemRolePermission =>
@@ -128,7 +154,9 @@ namespace TL.Store.Data.EntityFramework.Commons
             {
                 SubjectId = Role.System.Id,
                 ObjectId = StoreRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         #endregion

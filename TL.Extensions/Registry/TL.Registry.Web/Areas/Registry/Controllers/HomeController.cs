@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TL.Engine.Data.Extensions;
 using TL.Engine.Data.Managers;
 using TL.Registry.Data.Managers;
@@ -6,6 +7,7 @@ using TL.Registry.Web.Areas.Registry.ViewModels.Home;
 
 namespace TL.Registry.Web.Areas.Registry.Controllers
 {
+    [Authorize]
     public class HomeController : __RegistryController__
     {
         IUserManager UserManager { get; }

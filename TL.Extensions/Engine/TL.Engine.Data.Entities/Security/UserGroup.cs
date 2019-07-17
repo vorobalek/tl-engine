@@ -21,24 +21,32 @@ namespace TL.Engine.Data.Entities.Security
             {
                 UserId = User.Sa.Id,
                 GroupId = Group.All.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
 
             new UserGroup()
             {
                 UserId = User.Sa.Id,
                 GroupId = Group.Sa.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
 
             new UserGroup()
             {
                 UserId = User.Sa.Id,
                 GroupId = Group.DefaultUser.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
 
             new UserGroup()
             {
                 UserId = User.Sa.Id,
                 GroupId = Group.System.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
         };
 
@@ -48,12 +56,16 @@ namespace TL.Engine.Data.Entities.Security
             {
                 UserId = User.DefaultUser.Id,
                 GroupId = Group.All.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
 
             new UserGroup()
             {
                 UserId = User.DefaultUser.Id,
                 GroupId = Group.DefaultUser.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             }
         };
 
@@ -63,12 +75,16 @@ namespace TL.Engine.Data.Entities.Security
             {
                 UserId = User.System.Id,
                 GroupId = Group.All.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
 
             new UserGroup()
             {
                 UserId = User.System.Id,
-                GroupId = Group.System.Id
+                GroupId = Group.System.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             }
         };
     }

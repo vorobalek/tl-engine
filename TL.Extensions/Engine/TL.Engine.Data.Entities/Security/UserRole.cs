@@ -21,18 +21,24 @@ namespace TL.Engine.Data.Entities.Security
             {
                 UserId = User.Sa.Id,
                 RoleId = Role.Sa.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
 
             new UserRole()
             {
                 UserId = User.Sa.Id,
                 RoleId = Role.DefaultUser.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
 
             new UserRole()
             {
                 UserId = User.Sa.Id,
                 RoleId = Role.System.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             },
         };
 
@@ -42,6 +48,8 @@ namespace TL.Engine.Data.Entities.Security
             {
                 UserId = User.DefaultUser.Id,
                 RoleId = Role.DefaultUser.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             }
         };
 
@@ -50,7 +58,9 @@ namespace TL.Engine.Data.Entities.Security
             new UserRole()
             {
                 UserId = User.System.Id,
-                RoleId = Role.System.Id
+                RoleId = Role.System.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             }
         };
     }

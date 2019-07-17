@@ -38,27 +38,33 @@ namespace TL.Engine.Data.Entities.Security
         public static User Sa => 
             new User()
             {
-                Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
+                Id = Guid.Parse("998207b8-f18a-4508-a415-0fb6d16e1615"),
                 Username = "sa",
-                Description = "Супер-пользователь системы TL Engine"
+                Description = "Супер-пользователь системы TL Engine",
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static User DefaultUser =>
             new User()
             {
-                Id = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                Id = Guid.Parse("544c8d71-91ba-44f4-81c6-63fee3c50b9f"),
                 Username = "user",
                 Description = "Шаблонный пользователь системы TL Engine",
                 IsClosed = true,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static User System =>
             new User()
             {
-                Id = Guid.Parse("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+                Id = Guid.Parse("2c73ecab-ba81-4690-a96e-39986850a47a"),
                 Username = "system",
                 Description = "Автоматика системы TL Engine",
                 IsClosed = true,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
     }
 }

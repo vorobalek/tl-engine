@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TL.Engine.Migrations
 {
     [DbContext(typeof(StorageContext))]
-    [Migration("20190716232847_v1106-4-1")]
-    partial class v110641
+    [Migration("20190717124513_v1106-4")]
+    partial class v11064
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,20 +42,20 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            FromId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            ToId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 93, DateTimeKind.Utc).AddTicks(8402),
+                            FromId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            ToId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 93, DateTimeKind.Utc).AddTicks(8425),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Quiet = false
                         },
                         new
                         {
-                            FromId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            ToId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 94, DateTimeKind.Utc).AddTicks(368),
+                            FromId = new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"),
+                            ToId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 94, DateTimeKind.Utc).AddTicks(376),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Quiet = false
                         });
                 });
@@ -170,34 +170,34 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(4997),
+                            Id = new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(5014),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "sa"
                         },
                         new
                         {
-                            Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(5041),
+                            Id = new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(5042),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "all"
                         },
                         new
                         {
-                            Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(5050),
+                            Id = new Guid("92581db6-0e31-4669-a77d-1730f464b005"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(5051),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(5059),
+                            Id = new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 61, DateTimeKind.Utc).AddTicks(5060),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "system"
                         });
                 });
@@ -226,26 +226,26 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 59, DateTimeKind.Utc).AddTicks(983),
+                            Id = new Guid("f22de7e3-aebb-4bde-845b-6702a4a92682"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 59, DateTimeKind.Utc).AddTicks(1002),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "sa"
                         },
                         new
                         {
-                            Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 59, DateTimeKind.Utc).AddTicks(1025),
+                            Id = new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 59, DateTimeKind.Utc).AddTicks(1026),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 59, DateTimeKind.Utc).AddTicks(1034),
+                            Id = new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 59, DateTimeKind.Utc).AddTicks(1036),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "system"
                         });
                 });
@@ -286,42 +286,42 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 39, DateTimeKind.Utc).AddTicks(2413),
+                            Id = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Супер-пользователь системы TL Engine",
                             IsClosed = false,
                             IsDeleted = false,
                             LastActivity = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastLogon = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 39, DateTimeKind.Utc).AddTicks(2435),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "sa",
-                            WebTicket = new Guid("71b6f42d-e2a0-417e-96a1-c5d296f6da29")
+                            WebTicket = new Guid("1a347b5d-332f-439b-81a8-e367db56b7a2")
                         },
                         new
                         {
-                            Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 39, DateTimeKind.Utc).AddTicks(4239),
+                            Id = new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Шаблонный пользователь системы TL Engine",
                             IsClosed = true,
                             IsDeleted = false,
                             LastActivity = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastLogon = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 39, DateTimeKind.Utc).AddTicks(4248),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "user",
-                            WebTicket = new Guid("6d11210a-5e4c-4ea2-b5df-fa2fbd731d3a")
+                            WebTicket = new Guid("3a6ef419-ae3a-4aff-ac4e-bc5cd68fe10f")
                         },
                         new
                         {
-                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 39, DateTimeKind.Utc).AddTicks(4281),
+                            Id = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Автоматика системы TL Engine",
                             IsClosed = true,
                             IsDeleted = false,
                             LastActivity = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastLogon = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 39, DateTimeKind.Utc).AddTicks(4283),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "system",
-                            WebTicket = new Guid("535e4b0c-9854-4da9-852f-2c75a3170331")
+                            WebTicket = new Guid("a6cf22c9-90d8-46ec-bb75-d2fd2e4ec45f")
                         });
                 });
 
@@ -346,67 +346,67 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            GroupId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(610),
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            GroupId = new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(631)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            GroupId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(4536),
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            GroupId = new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(4544)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            GroupId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(6032),
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            GroupId = new Guid("92581db6-0e31-4669-a77d-1730f464b005"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(6033)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            GroupId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(7490),
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            GroupId = new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 55, DateTimeKind.Utc).AddTicks(7492)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            GroupId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(1661),
+                            UserId = new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"),
+                            GroupId = new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(1670)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            GroupId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(1724),
+                            UserId = new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"),
+                            GroupId = new Guid("92581db6-0e31-4669-a77d-1730f464b005"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(1726)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            GroupId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(5087),
+                            UserId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            GroupId = new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(5096)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            GroupId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(5146),
+                            UserId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            GroupId = new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 56, DateTimeKind.Utc).AddTicks(5147)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -431,43 +431,43 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            RoleId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 49, DateTimeKind.Utc).AddTicks(9280),
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            RoleId = new Guid("f22de7e3-aebb-4bde-845b-6702a4a92682"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 49, DateTimeKind.Utc).AddTicks(9301)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            RoleId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 50, DateTimeKind.Utc).AddTicks(3079),
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            RoleId = new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 50, DateTimeKind.Utc).AddTicks(3087)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            RoleId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 50, DateTimeKind.Utc).AddTicks(4613),
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            RoleId = new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 50, DateTimeKind.Utc).AddTicks(4614)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            RoleId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 50, DateTimeKind.Utc).AddTicks(7922),
+                            UserId = new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"),
+                            RoleId = new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 50, DateTimeKind.Utc).AddTicks(7930)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            UserId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            RoleId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 51, DateTimeKind.Utc).AddTicks(328),
+                            UserId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            RoleId = new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 51, DateTimeKind.Utc).AddTicks(337)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -514,7 +514,7 @@ namespace TL.Engine.Migrations
 
                     b.Property<Guid>("AuthorId")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"));
+                        .HasDefaultValue(new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"));
 
                     b.Property<DateTime>("CreationDate");
 
@@ -578,34 +578,34 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 131, DateTimeKind.Utc).AddTicks(9883),
+                            Id = new Guid("bc59f363-3d93-479c-97f6-8f9cc1fe3440"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 131, DateTimeKind.Utc).AddTicks(9907),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "sa"
                         },
                         new
                         {
-                            Id = new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 132, DateTimeKind.Utc).AddTicks(2367),
+                            Id = new Guid("3f83a69f-1fe3-4a10-b6a6-6ceb7e66367c"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 132, DateTimeKind.Utc).AddTicks(2378),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "admin"
                         },
                         new
                         {
-                            Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 132, DateTimeKind.Utc).AddTicks(3803),
+                            Id = new Guid("c6682671-0238-492c-a871-db76d512a280"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 132, DateTimeKind.Utc).AddTicks(3813),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 132, DateTimeKind.Utc).AddTicks(5319),
+                            Id = new Guid("0e7012ab-115a-48b2-9291-3bb97b3712e8"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 132, DateTimeKind.Utc).AddTicks(5327),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "system"
                         });
                 });
@@ -794,22 +794,22 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 218, DateTimeKind.Utc).AddTicks(1518),
+                            Id = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 218, DateTimeKind.Utc).AddTicks(1524),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "System Root Registry Folder",
-                            OwnerId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee")
+                            OwnerId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a")
                         },
                         new
                         {
                             Id = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(3786),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(3810),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Module Store Registry Folder",
-                            OwnerId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            ParantId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee")
+                            OwnerId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            ParantId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4")
                         });
                 });
 
@@ -847,25 +847,25 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 217, DateTimeKind.Utc).AddTicks(4771),
+                            Id = new Guid("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "System Root Registry",
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 217, DateTimeKind.Utc).AddTicks(4793),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "<Root>",
-                            OwnerId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            RootId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+                            OwnerId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            RootId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
                             Type = 1
                         },
                         new
                         {
                             Id = new Guid("b14abcc1-39a7-4420-ac70-2b18ed73e146"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 220, DateTimeKind.Utc).AddTicks(5322),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Module Store Registry",
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 220, DateTimeKind.Utc).AddTicks(5333),
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "M-Store",
-                            OwnerId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+                            OwnerId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
                             RootId = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
                             Type = 1
                         });
@@ -890,6 +890,27 @@ namespace TL.Engine.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Registry.FilesGroupPermissions");
+                });
+
+            modelBuilder.Entity("TL.Registry.Data.Entities.Security.FileRolePermission", b =>
+                {
+                    b.Property<Guid>("ObjectId");
+
+                    b.Property<Guid>("SubjectId");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("Mode");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.HasKey("ObjectId", "SubjectId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Registry.FilesRolePermissions");
                 });
 
             modelBuilder.Entity("TL.Registry.Data.Entities.Security.FileUserPermission", b =>
@@ -936,39 +957,80 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(7385),
+                            ObjectId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
+                            SubjectId = new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(7394)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(8493),
+                            ObjectId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
+                            SubjectId = new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(8501)
-                        },
-                        new
-                        {
-                            ObjectId = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(3102),
-                            IsDeleted = false,
-                            Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(3110)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             ObjectId = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(4219),
+                            SubjectId = new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(4226)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            ObjectId = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
+                            SubjectId = new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        });
+                });
+
+            modelBuilder.Entity("TL.Registry.Data.Entities.Security.FolderRolePermission", b =>
+                {
+                    b.Property<Guid>("ObjectId");
+
+                    b.Property<Guid>("SubjectId");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("Mode");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.HasKey("ObjectId", "SubjectId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Registry.FoldersRolePermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            ObjectId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
+                            SubjectId = new Guid("f22de7e3-aebb-4bde-845b-6702a4a92682"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            ObjectId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
+                            SubjectId = new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -995,39 +1057,39 @@ namespace TL.Engine.Migrations
                     b.HasData(
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(4142),
+                            ObjectId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
+                            SubjectId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(4150)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(5422),
+                            ObjectId = new Guid("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
+                            SubjectId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(5430)
-                        },
-                        new
-                        {
-                            ObjectId = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(828),
-                            IsDeleted = false,
-                            Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(835)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             ObjectId = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(1920),
+                            SubjectId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 230, DateTimeKind.Utc).AddTicks(1928)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            ObjectId = new Guid("ff44803e-e998-451f-8507-d1ecbfcbcf79"),
+                            SubjectId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -1049,44 +1111,85 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Registry.GroupPermissions");
+                    b.ToTable("Registry.RegistriesGroupPermissions");
 
                     b.HasData(
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(912),
+                            ObjectId = new Guid("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
+                            SubjectId = new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(921)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(2163),
+                            ObjectId = new Guid("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
+                            SubjectId = new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 219, DateTimeKind.Utc).AddTicks(2171)
-                        },
-                        new
-                        {
-                            ObjectId = new Guid("b14abcc1-39a7-4420-ac70-2b18ed73e146"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(8342),
-                            IsDeleted = false,
-                            Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(8349)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             ObjectId = new Guid("b14abcc1-39a7-4420-ac70-2b18ed73e146"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(9493),
+                            SubjectId = new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(9500)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            ObjectId = new Guid("b14abcc1-39a7-4420-ac70-2b18ed73e146"),
+                            SubjectId = new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        });
+                });
+
+            modelBuilder.Entity("TL.Registry.Data.Entities.Security.RolePermission", b =>
+                {
+                    b.Property<Guid>("ObjectId");
+
+                    b.Property<Guid>("SubjectId");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("Mode");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.HasKey("ObjectId", "SubjectId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Registry.RegistriesRolePermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            ObjectId = new Guid("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
+                            SubjectId = new Guid("f22de7e3-aebb-4bde-845b-6702a4a92682"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            ObjectId = new Guid("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
+                            SubjectId = new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -1108,44 +1211,44 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Registry.UserPermissions");
+                    b.ToTable("Registry.RegistriesUserPermissions");
 
                     b.HasData(
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 218, DateTimeKind.Utc).AddTicks(4503),
+                            ObjectId = new Guid("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
+                            SubjectId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 218, DateTimeKind.Utc).AddTicks(4512)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
-                            ObjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 218, DateTimeKind.Utc).AddTicks(8017),
+                            ObjectId = new Guid("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
+                            SubjectId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 218, DateTimeKind.Utc).AddTicks(8024)
-                        },
-                        new
-                        {
-                            ObjectId = new Guid("b14abcc1-39a7-4420-ac70-2b18ed73e146"),
-                            SubjectId = new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(5503),
-                            IsDeleted = false,
-                            Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(5510)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             ObjectId = new Guid("b14abcc1-39a7-4420-ac70-2b18ed73e146"),
-                            SubjectId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreationDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(6870),
+                            SubjectId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             Mode = 7,
-                            ModifiedDate = new DateTime(2019, 7, 16, 23, 28, 43, 229, DateTimeKind.Utc).AddTicks(6878)
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            ObjectId = new Guid("b14abcc1-39a7-4420-ac70-2b18ed73e146"),
+                            SubjectId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Mode = 7,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -1319,6 +1422,19 @@ namespace TL.Engine.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("TL.Registry.Data.Entities.Security.FileRolePermission", b =>
+                {
+                    b.HasOne("TL.Registry.Data.Entities.Core.File", "Object")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("ObjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TL.Engine.Data.Entities.Security.Role", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("TL.Registry.Data.Entities.Security.FileUserPermission", b =>
                 {
                     b.HasOne("TL.Registry.Data.Entities.Core.File", "Object")
@@ -1345,6 +1461,19 @@ namespace TL.Engine.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("TL.Registry.Data.Entities.Security.FolderRolePermission", b =>
+                {
+                    b.HasOne("TL.Registry.Data.Entities.Core.Folder", "Object")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("ObjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TL.Engine.Data.Entities.Security.Role", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("TL.Registry.Data.Entities.Security.FolderUserPermission", b =>
                 {
                     b.HasOne("TL.Registry.Data.Entities.Core.Folder", "Object")
@@ -1366,6 +1495,19 @@ namespace TL.Engine.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TL.Engine.Data.Entities.Security.Group", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("TL.Registry.Data.Entities.Security.RolePermission", b =>
+                {
+                    b.HasOne("TL.Registry.Data.Entities.Core.Registry", "Object")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("ObjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TL.Engine.Data.Entities.Security.Role", "Subject")
                         .WithMany()
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Restrict);

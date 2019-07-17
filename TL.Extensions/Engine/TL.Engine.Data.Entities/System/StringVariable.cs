@@ -20,7 +20,6 @@ namespace TL.Engine.Data.Entities.System
         {
             Name = name;
             Value = value;
-            AuthorId = User.System.Id;
         }
     }
 }

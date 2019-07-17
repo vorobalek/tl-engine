@@ -9,20 +9,24 @@ namespace TL.Registry.Data.EntityFramework.Commons
         public static Entities.Core.Registry RootRegistry =>
             new Entities.Core.Registry()
             {
-                Id = Guid.Parse("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+                Id = Guid.Parse("5b0c75cf-e2a5-4028-afb4-f265b29d1bec"),
                 Name = "<Root>",
                 Description = "System Root Registry",
                 Type = Entities.Core.RegistryType.Private,
                 OwnerId = User.System.Id,
-                RootId = RootRegistryFolder.Id
+                RootId = RootRegistryFolder.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Core.Folder RootRegistryFolder =>
             new Entities.Core.Folder()
             {
-                Id = Guid.Parse("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
+                Id = Guid.Parse("a0c645fe-6239-4f06-8511-aeb6da5186f4"),
                 Name = "System Root Registry Folder",
                 OwnerId = User.System.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         #region Permissions
@@ -34,7 +38,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = User.Sa.Id,
                 ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.UserPermission RootRegistrySystemUserPermission =>
@@ -42,7 +48,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = User.System.Id,
                 ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.GroupPermission RootRegistrySaGroupPermission =>
@@ -50,7 +58,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Group.Sa.Id,
                 ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.GroupPermission RootRegistrySystemGroupPermission =>
@@ -58,7 +68,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Group.System.Id,
                 ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.RolePermission RootRegistrySaRolePermission =>
@@ -66,7 +78,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Role.Sa.Id,
                 ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.RolePermission RootRegistrySystemRolePermission =>
@@ -74,7 +88,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Role.System.Id,
                 ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         #endregion
@@ -86,7 +102,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = User.Sa.Id,
                 ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.FolderUserPermission RootRegistryFolderSystemUserPermission =>
@@ -94,7 +112,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = User.System.Id,
                 ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.FolderGroupPermission RootRegistryFolderSaGroupPermission =>
@@ -102,7 +122,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Group.Sa.Id,
                 ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.FolderGroupPermission RootRegistryFolderSystemGroupPermission =>
@@ -110,7 +132,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Group.System.Id,
                 ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.FolderRolePermission RootRegistryFolderSaRolePermission =>
@@ -118,7 +142,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Role.Sa.Id,
                 ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         public static Entities.Security.FolderRolePermission RootRegistryFolderSystemRolePermission =>
@@ -126,7 +152,9 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 SubjectId = Role.System.Id,
                 ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All
+                Mode = AccessMode.All,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
             };
 
         #endregion
