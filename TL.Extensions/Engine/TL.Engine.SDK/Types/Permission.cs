@@ -4,7 +4,7 @@ using TL.Engine.SDK.Types.Enums;
 
 namespace TL.Engine.SDK.Types
 {
-    public abstract class Permission<TSubject, TSubjectKey, TObject, TObjectKey> : EntityStored, IPermission
+    public abstract class Permission<TSubject, TSubjectKey, TObject, TObjectKey> : EntityComparableStored<(TSubjectKey, TObjectKey)>, IPermission
         where TSubject : class, IEntityComparable<TSubjectKey>
         where TSubjectKey : IComparable
         where TObject : class, IEntityComparable<TObjectKey>

@@ -4,7 +4,7 @@ using TL.Engine.SDK.Entities;
 
 namespace TL.Account.Data.Entities.Relationships
 {
-    public class Subscription : EntityStored
+    public class Subscription : EntityComparableStored<(Guid, Guid)>
     {
         public Guid FromId { get; set; }
 

@@ -1,10 +1,11 @@
-﻿using TL.Engine.SDK.Repositories;
+﻿using System;
+using TL.Engine.SDK.Repositories;
 using TL.Registry.Data.Abstractions.Security;
 using TL.Registry.Data.Entities.Security;
 
 namespace TL.Registry.Data.EntityFramework.Security.GroupPermissions
 {
-    public class GroupPermissionRepository : EntityRepository<GroupPermission>, IGroupPermissionRepository
+    public class GroupPermissionRepository : EntityComparableRepository<GroupPermission, (Guid, Guid)>, IGroupPermissionRepository
     {
     }
 }

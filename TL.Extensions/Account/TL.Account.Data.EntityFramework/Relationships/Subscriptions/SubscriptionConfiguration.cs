@@ -9,6 +9,9 @@ namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions
         public void Configure(EntityTypeBuilder<Subscription> builder)
         {
             builder
+                .Ignore(e => e.Id);
+
+            builder
                 .HasKey(e => new { e.FromId, e.ToId });
 
             builder

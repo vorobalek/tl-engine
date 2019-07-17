@@ -15,7 +15,7 @@ namespace TL.Store.Web
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/store", "Store", 1000),
+            new LinkItem("/store", "Store", 100),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]

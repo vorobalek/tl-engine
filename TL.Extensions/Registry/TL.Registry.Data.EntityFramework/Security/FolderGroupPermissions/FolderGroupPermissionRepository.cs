@@ -1,10 +1,11 @@
-﻿using TL.Engine.SDK.Repositories;
+﻿using System;
+using TL.Engine.SDK.Repositories;
 using TL.Registry.Data.Abstractions.Security;
 using TL.Registry.Data.Entities.Security;
 
 namespace TL.Registry.Data.EntityFramework.Security.FolderGroupPermissions
 {
-    public class FolderGroupPermissionRepository : EntityRepository<FolderGroupPermission>, IFolderGroupPermissionRepository
+    public class FolderGroupPermissionRepository : EntityComparableRepository<FolderGroupPermission, (Guid, Guid)>, IFolderGroupPermissionRepository
     {
     }
 }

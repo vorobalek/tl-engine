@@ -8,7 +8,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.EntityFramework.Relationships.Subscriptions
 {
-    public class SubscriptionRepository : EntityRepository<Subscription>, ISubscriptionRepository
+    public class SubscriptionRepository : EntityComparableRepository<Subscription, (Guid, Guid)>, ISubscriptionRepository
     {
         public IEnumerable<Guid> Followers(User user)
         {

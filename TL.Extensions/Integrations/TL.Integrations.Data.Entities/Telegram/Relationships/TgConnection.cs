@@ -5,7 +5,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.Entities.Telegram.Relationships
 {
-    public class TgConnection : EntityStored
+    public class TgConnection : EntityComparableStored<(Guid, Guid)>
     {
         public Guid BotId { get; set; }
 

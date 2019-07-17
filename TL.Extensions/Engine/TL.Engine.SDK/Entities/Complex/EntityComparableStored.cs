@@ -8,7 +8,8 @@ namespace TL.Engine.SDK.Entities
     /// <typeparam name="TKey">Тип первичного ключа.</typeparam>
     /// <seealso cref="EntityStored" />
     /// <seealso cref="IEntityComparable{TKey}" />
-    public abstract class EntityComparableStored<TKey> : EntityStored, IEntityComparable<TKey> where TKey : IComparable
+    public abstract class EntityComparableStored<TKey> : EntityStored, IEntityComparable<TKey>
+        where TKey : IComparable
     {
         /// <summary>
         /// Первичный ключ.

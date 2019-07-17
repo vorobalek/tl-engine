@@ -9,6 +9,9 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnecti
         public void Configure(EntityTypeBuilder<TgConnection> builder)
         {
             builder
+                .Ignore(e => e.Id);
+
+            builder
                 .HasKey(e => new { e.BotId, e.UserId });
 
             builder

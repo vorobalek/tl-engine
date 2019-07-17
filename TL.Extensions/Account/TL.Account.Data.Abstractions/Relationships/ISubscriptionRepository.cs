@@ -6,7 +6,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Account.Data.Abstractions.Relationships
 {
-    public interface ISubscriptionRepository : IEntityRepository<Subscription>
+    public interface ISubscriptionRepository : IEntityComparableRepository<Subscription, (Guid, Guid)>
     {
         IEnumerable<Guid> Followers(User user);
 

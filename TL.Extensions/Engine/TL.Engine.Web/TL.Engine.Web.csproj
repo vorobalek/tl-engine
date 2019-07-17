@@ -30,7 +30,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\**;Styles\**;Scripts\**;Areas\Account\Views\**;Areas\Account\Styles\**;Areas\Account\Scripts\**" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\TL.Engine.Data\TL.Engine.Data.csproj" />
   </ItemGroup>

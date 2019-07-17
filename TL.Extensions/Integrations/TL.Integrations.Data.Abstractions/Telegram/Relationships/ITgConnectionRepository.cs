@@ -7,7 +7,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.Abstractions.Telegram.Relationships
 {
-    public interface ITgConnectionRepository : IEntityRepository<TgConnection>
+    public interface ITgConnectionRepository : IEntityComparableRepository<TgConnection, (Guid, Guid)>
     {
         IEnumerable<Guid> GetBots(TgUser user);
 

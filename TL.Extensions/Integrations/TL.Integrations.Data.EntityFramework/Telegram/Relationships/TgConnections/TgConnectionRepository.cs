@@ -9,7 +9,7 @@ using TL.Integrations.Data.Entities.Telegram.System;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Relationships.TgConnections
 {
-    public class TgConnectionRepository : EntityRepository<TgConnection>, ITgConnectionRepository
+    public class TgConnectionRepository : EntityComparableRepository<TgConnection, (Guid, Guid)>, ITgConnectionRepository
     {
         public IEnumerable<Guid> GetBots(TgUser user)
         {

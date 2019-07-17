@@ -9,6 +9,9 @@ namespace TL.Registry.Data.EntityFramework.Security.FolderUserPermissions
         public void Configure(EntityTypeBuilder<FolderUserPermission> builder)
         {
             builder
+                .Ignore(e => e.Id);
+
+            builder
                 .HasKey(e => new { e.ObjectId, e.SubjectId });
 
             builder
