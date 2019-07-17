@@ -10,6 +10,8 @@ namespace TL.Engine.SDK.Types
         where TObject : class, IEntityComparable<TObjectKey>
         where TObjectKey : IComparable
     {
+        public override (TSubjectKey, TObjectKey) Id { get => (SubjectId, ObjectId); set => (SubjectId, ObjectId) = value; }
+
         public Type SubjectType => typeof(TSubject);
         public Type ObjectType => typeof(TObject);
         public AccessMode Mode { get; set; }

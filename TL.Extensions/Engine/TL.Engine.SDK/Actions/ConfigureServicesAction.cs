@@ -14,7 +14,7 @@ namespace TL.Engine.SDK.Actions
             serviceCollection.AddSingleton<IStartupService, StartupService>();
             serviceCollection.AddSingleton<IEntityIndexerService, EntityIndexerService>();
             serviceCollection.AddSingleton<IStringIndexerService, StringIndexerService>();
-            serviceCollection.AddTransient<IActivatorService, ActivatorService>();
+            serviceCollection.AddSingleton<IActivatorService, ActivatorService>();
         }
     }
 }

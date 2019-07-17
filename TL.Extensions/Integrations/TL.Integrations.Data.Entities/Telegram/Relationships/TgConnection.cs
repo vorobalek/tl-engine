@@ -7,6 +7,8 @@ namespace TL.Integrations.Data.Entities.Telegram.Relationships
 {
     public class TgConnection : EntityComparableStored<(Guid, Guid)>
     {
+        public override (Guid, Guid) Id { get => (BotId, UserId); set => (BotId, UserId) = value; }
+
         public Guid BotId { get; set; }
 
         public virtual TgBot Bot { get; set; }

@@ -3,8 +3,10 @@ using TL.Engine.SDK.Entities;
 
 namespace TL.Engine.Data.Entities.Security
 {
-    public class UserRole : EntityStored
+    public class UserRole : EntityComparableStored<(Guid, Guid)>
     {
+        public override (Guid, Guid) Id { get => (UserId, RoleId); set => (UserId, RoleId) = value; }
+
         public Guid UserId { get; set; }
 
         public virtual User User { get; set; }

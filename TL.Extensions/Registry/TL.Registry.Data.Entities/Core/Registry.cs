@@ -31,5 +31,7 @@ namespace TL.Registry.Data.Entities.Core
         public virtual IEnumerable<UserPermission> UserPermissions { get; set; }
 
         public virtual IEnumerable<GroupPermission> GroupPermissions { get; set; }
+
+        public virtual IEnumerable<RolePermission> RolePermissions { get; set; }
     }
 }

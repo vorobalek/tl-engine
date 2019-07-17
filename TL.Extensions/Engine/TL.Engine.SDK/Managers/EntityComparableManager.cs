@@ -2,9 +2,13 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TL.Engine.SDK.Entities;
+using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Repositories;
 using TL.Engine.SDK.Services;
+using TL.Engine.SDK.Types;
+using TL.Engine.SDK.Types.Enums;
 
 namespace TL.Engine.SDK.Managers
 {
@@ -45,6 +49,28 @@ namespace TL.Engine.SDK.Managers
         public virtual IEnumerable<TEntity> GetAll(params TKey[] keys)
         {
             return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().GetAll(keys);
+        }
+
+        /// <summary>
+        /// Получить объекты сущности <typeparamref name="TEntity" /> к которым есть доступ у субъекта типа <typeparamref name="TSubject" />
+        /// </summary>
+        /// <typeparam name="TSubject">Тип сущности субъекта.</typeparam>
+        /// <typeparam name="TSubjectKey">Тип первичного ключа сущности субъекта.</typeparam>
+        /// <returns></returns>
+        public virtual IEnumerable<TEntity> GetAllowedFor<TSubject, TSubjectKey>(TSubject subject)
+            where TSubject : class, IEntityComparable<TSubjectKey>
+            where TSubjectKey : IComparable
+        {
+            var permissionType = Activator.GetInstance<Permission<TSubject, TSubjectKey, TEntity, TKey>>().GetType();
+            var permissionRawRepository = Storage.GetEntityRepository(Activator, permissionType);
+            var predicateGet = new Func<Permission<TSubject, TSubjectKey, TEntity, TKey>, bool>((permission) =>
+            {
+                return permission.SubjectId.Equals(subject.Id) && permission.Mode >= AccessMode.Read;
+            });
+            dynamic permissionRepository = permissionRawRepository;
+            var allowedEntityIds = permissionRepository.GetAll(predicateGet) as IEnumerable<Permission<TSubject, TSubjectKey, TEntity, TKey>>;
+            var result = GetAll(allowedEntityIds.Select(e => e.ObjectId).ToArray());
+            return result;
         }
 
         /// <summary>

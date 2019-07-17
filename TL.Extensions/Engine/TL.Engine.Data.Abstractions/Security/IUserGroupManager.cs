@@ -1,9 +1,10 @@
-﻿using TL.Engine.Data.Entities.Security;
+﻿using System;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Managers
 {
-    public interface IUserGroupManager : IEntityManager<UserGroup>
+    public interface IUserGroupManager : IEntityComparableManager<UserGroup, (Guid, Guid)>
     {
     }
 }

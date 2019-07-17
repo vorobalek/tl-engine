@@ -7,7 +7,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.Security.UsersRoles
 {
-    public class UserRoleRepository : EntityRepository<UserRole>, IUserRoleRepository
+    public class UserRoleRepository : EntityComparableRepository<UserRole, (Guid, Guid)>, IUserRoleRepository
     {
         public IEnumerable<UserRole> GetByUser(User user)
         {

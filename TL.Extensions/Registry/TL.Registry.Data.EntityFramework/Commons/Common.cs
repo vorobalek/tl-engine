@@ -25,6 +25,10 @@ namespace TL.Registry.Data.EntityFramework.Commons
                 OwnerId = User.System.Id,
             };
 
+        #region Permissions
+
+        #region RegistryPermissions
+
         public static Entities.Security.UserPermission RootRegistrySaUserPermission =>
             new Entities.Security.UserPermission()
             {
@@ -44,7 +48,7 @@ namespace TL.Registry.Data.EntityFramework.Commons
         public static Entities.Security.GroupPermission RootRegistrySaGroupPermission =>
             new Entities.Security.GroupPermission()
             {
-                SubjectId = User.Sa.Id,
+                SubjectId = Group.Sa.Id,
                 ObjectId = RootRegistry.Id,
                 Mode = AccessMode.All
             };
@@ -52,10 +56,30 @@ namespace TL.Registry.Data.EntityFramework.Commons
         public static Entities.Security.GroupPermission RootRegistrySystemGroupPermission =>
             new Entities.Security.GroupPermission()
             {
-                SubjectId = User.System.Id,
+                SubjectId = Group.System.Id,
                 ObjectId = RootRegistry.Id,
                 Mode = AccessMode.All
             };
+
+        public static Entities.Security.RolePermission RootRegistrySaRolePermission =>
+            new Entities.Security.RolePermission()
+            {
+                SubjectId = Role.Sa.Id,
+                ObjectId = RootRegistry.Id,
+                Mode = AccessMode.All
+            };
+
+        public static Entities.Security.RolePermission RootRegistrySystemRolePermission =>
+            new Entities.Security.RolePermission()
+            {
+                SubjectId = Role.System.Id,
+                ObjectId = RootRegistry.Id,
+                Mode = AccessMode.All
+            };
+
+        #endregion
+
+        #region RegistryFolderPermissions
 
         public static Entities.Security.FolderUserPermission RootRegistryFolderSaUserPermission =>
             new Entities.Security.FolderUserPermission()
@@ -76,7 +100,7 @@ namespace TL.Registry.Data.EntityFramework.Commons
         public static Entities.Security.FolderGroupPermission RootRegistryFolderSaGroupPermission =>
             new Entities.Security.FolderGroupPermission()
             {
-                SubjectId = User.Sa.Id,
+                SubjectId = Group.Sa.Id,
                 ObjectId = RootRegistryFolder.Id,
                 Mode = AccessMode.All
             };
@@ -84,9 +108,29 @@ namespace TL.Registry.Data.EntityFramework.Commons
         public static Entities.Security.FolderGroupPermission RootRegistryFolderSystemGroupPermission =>
             new Entities.Security.FolderGroupPermission()
             {
-                SubjectId = User.System.Id,
+                SubjectId = Group.System.Id,
                 ObjectId = RootRegistryFolder.Id,
                 Mode = AccessMode.All
             };
+
+        public static Entities.Security.FolderRolePermission RootRegistryFolderSaRolePermission =>
+            new Entities.Security.FolderRolePermission()
+            {
+                SubjectId = Role.Sa.Id,
+                ObjectId = RootRegistryFolder.Id,
+                Mode = AccessMode.All
+            };
+
+        public static Entities.Security.FolderRolePermission RootRegistryFolderSystemRolePermission =>
+            new Entities.Security.FolderRolePermission()
+            {
+                SubjectId = Role.System.Id,
+                ObjectId = RootRegistryFolder.Id,
+                Mode = AccessMode.All
+            };
+
+        #endregion
+
+        #endregion
     }
 }

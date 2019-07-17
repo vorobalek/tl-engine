@@ -26,5 +26,7 @@ namespace TL.Registry.Data.Entities.Core
         public virtual IEnumerable<FileUserPermission> UserPermissions { get; set; }
 
         public virtual IEnumerable<FileGroupPermission> GroupPermissions { get; set; }
+
+        public virtual IEnumerable<FileRolePermission> RolePermissions { get; set; }
     }
 }

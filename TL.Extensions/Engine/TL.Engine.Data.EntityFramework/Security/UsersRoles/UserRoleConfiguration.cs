@@ -10,6 +10,9 @@ namespace TL.Engine.Data.EntityFramework.Security.UsersRoles
         public void Configure(EntityTypeBuilder<UserRole> builder)
         {
             builder
+                .Ignore(e => e.Id);
+
+            builder
                .HasKey(e => new { e.UserId, e.RoleId });
 
             builder

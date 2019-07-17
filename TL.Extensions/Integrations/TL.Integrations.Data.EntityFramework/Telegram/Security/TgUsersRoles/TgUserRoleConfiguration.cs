@@ -9,6 +9,9 @@ namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsersRoles
         public void Configure(EntityTypeBuilder<TgUserRole> builder)
         {
             builder
+                .Ignore(e => e.Id);
+
+            builder
                .HasKey(e => new { e.UserId, e.RoleId });
 
             builder

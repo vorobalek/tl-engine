@@ -6,6 +6,8 @@ namespace TL.Account.Data.Entities.Relationships
 {
     public class Subscription : EntityComparableStored<(Guid, Guid)>
     {
+        public override (Guid, Guid) Id { get => (FromId, ToId); set => (FromId, ToId) = value; }
+
         public Guid FromId { get; set; }
 
         public virtual User From { get; set; }

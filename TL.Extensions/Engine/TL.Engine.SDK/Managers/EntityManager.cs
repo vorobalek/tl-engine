@@ -19,7 +19,7 @@ namespace TL.Engine.SDK.Managers
     public abstract class EntityManager<TEntity> : IEntityManager<TEntity>
         where TEntity : class, IEntity
     {
-        IActivatorService Activator { get; }
+        protected IActivatorService Activator { get; }
 
         public EntityManager(IActivatorService activator, ILoggerFactory loggerFactory, IStorage storage)
         {

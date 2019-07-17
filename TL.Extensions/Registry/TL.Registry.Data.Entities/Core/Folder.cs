@@ -27,5 +27,7 @@ namespace TL.Registry.Data.Entities.Core
         public virtual IEnumerable<FolderUserPermission> UserPermissions { get; set; }
 
         public virtual IEnumerable<FolderGroupPermission> GroupPermissions { get; set; }
+
+        public virtual IEnumerable<FolderRolePermission> RolePermissions { get; set; }
     }
 }

@@ -10,6 +10,9 @@ namespace TL.Engine.Data.EntityFramework.Security.UsersGroups
         public void Configure(EntityTypeBuilder<UserGroup> builder)
         {
             builder
+                .Ignore(e => e.Id);
+
+            builder
                .HasKey(e => new { e.UserId, e.GroupId });
 
             builder

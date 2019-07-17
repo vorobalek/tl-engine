@@ -7,7 +7,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.EntityFramework.Security.UsersGroups
 {
-    public class UserGroupRepository : EntityRepository<UserGroup>, IUserGroupRepository
+    public class UserGroupRepository : EntityComparableRepository<UserGroup, (Guid, Guid)>, IUserGroupRepository
     {
         public IEnumerable<UserGroup> GetByUser(User user)
         {

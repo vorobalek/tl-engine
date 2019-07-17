@@ -26,7 +26,13 @@ namespace TL.Registry.Data.EntityFramework.Commons
             modelbuilder.Entity<Entities.Security.GroupPermission>().HasData(new[]
             {
                 Common.RootRegistrySaGroupPermission,
-                Common.RootRegistrySystemGroupPermission
+                Common.RootRegistrySystemGroupPermission,
+            });
+
+            modelbuilder.Entity<Entities.Security.RolePermission>().HasData(new[]
+            {
+                Common.RootRegistrySaRolePermission,
+                Common.RootRegistrySystemRolePermission,
             });
 
             modelbuilder.Entity<Entities.Security.FolderUserPermission>().HasData(new[]
@@ -39,6 +45,12 @@ namespace TL.Registry.Data.EntityFramework.Commons
             {
                 Common.RootRegistryFolderSaGroupPermission,
                 Common.RootRegistryFolderSystemGroupPermission
+            });
+
+            modelbuilder.Entity<Entities.Security.FolderRolePermission>().HasData(new[]
+            {
+                Common.RootRegistryFolderSaRolePermission,
+                Common.RootRegistryFolderSystemRolePermission
             });
         }
     }

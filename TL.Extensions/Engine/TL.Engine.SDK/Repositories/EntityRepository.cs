@@ -14,6 +14,8 @@ namespace TL.Engine.SDK.Repositories
     /// <seealso cref="IEntityRepository{TEntity}" />
     public abstract class EntityRepository<TEntity> : RepositoryBase<TEntity>, IEntityRepository<TEntity> where TEntity : class, IEntity
     {
+        public Type EntityType => typeof(TEntity);
+
         public virtual TEntity Add(TEntity entity)
         {
             if (entity != null)

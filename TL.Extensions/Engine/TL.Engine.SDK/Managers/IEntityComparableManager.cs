@@ -32,6 +32,16 @@ namespace TL.Engine.SDK.Managers
         IEnumerable<TEntity> GetAll(params TKey[] keys);
 
         /// <summary>
+        /// Получить объекты сущности <typeparamref name="TEntity"/> к которым есть доступ у субъекта типа <typeparamref name="TSubject"/>
+        /// </summary>
+        /// <typeparam name="TSubject">Тип сущности субъекта.</typeparam>
+        /// <typeparam name="TSubjectKey">Тип первичного ключа сущности субъекта.</typeparam>
+        /// <returns></returns>
+        IEnumerable<TEntity> GetAllowedFor<TSubject, TSubjectKey>(TSubject subject)
+            where TSubject : class, IEntityComparable<TSubjectKey>
+            where TSubjectKey : IComparable;
+
+        /// <summary>
         /// Получить экземпляр сущности типа <typeparamref name="TEntity" /> по первичному <typeparamref name="TKey"/> ключу или создать новый в хранилище.
         /// </summary>
         /// <param name="key">Значение первичного ключа.</param>

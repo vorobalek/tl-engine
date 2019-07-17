@@ -27,6 +27,10 @@ namespace TL.Store.Data.EntityFramework.Commons
                 ParantId = Registry.Data.EntityFramework.Commons.Common.RootRegistryFolder.Id,
             };
 
+        #region Permissions
+
+        #region RegistryPermissions
+
         public static Registry.Data.Entities.Security.UserPermission StoreRegistrySaUserPermission =>
             new Registry.Data.Entities.Security.UserPermission()
             {
@@ -46,7 +50,7 @@ namespace TL.Store.Data.EntityFramework.Commons
         public static Registry.Data.Entities.Security.GroupPermission StoreRegistrySaGroupPermission =>
             new Registry.Data.Entities.Security.GroupPermission()
             {
-                SubjectId = User.Sa.Id,
+                SubjectId = Group.Sa.Id,
                 ObjectId = StoreRegistry.Id,
                 Mode = AccessMode.All
             };
@@ -54,10 +58,30 @@ namespace TL.Store.Data.EntityFramework.Commons
         public static Registry.Data.Entities.Security.GroupPermission StoreRegistrySystemGroupPermission =>
             new Registry.Data.Entities.Security.GroupPermission()
             {
-                SubjectId = User.System.Id,
+                SubjectId = Group.System.Id,
                 ObjectId = StoreRegistry.Id,
                 Mode = AccessMode.All
             };
+
+        public static Registry.Data.Entities.Security.RolePermission StoreRegistrySaRolePermission =>
+            new Registry.Data.Entities.Security.RolePermission()
+            {
+                SubjectId = Role.Sa.Id,
+                ObjectId = StoreRegistry.Id,
+                Mode = AccessMode.All
+            };
+
+        public static Registry.Data.Entities.Security.RolePermission StoreRegistrySystemRolePermission =>
+            new Registry.Data.Entities.Security.RolePermission()
+            {
+                SubjectId = Role.System.Id,
+                ObjectId = StoreRegistry.Id,
+                Mode = AccessMode.All
+            };
+
+        #endregion
+
+        #region RegistryFolderPermissions
 
         public static Registry.Data.Entities.Security.FolderUserPermission StoreRegistryFolderSaUserPermission =>
             new Registry.Data.Entities.Security.FolderUserPermission()
@@ -78,7 +102,7 @@ namespace TL.Store.Data.EntityFramework.Commons
         public static Registry.Data.Entities.Security.FolderGroupPermission StoreRegistryFolderSaGroupPermission =>
             new Registry.Data.Entities.Security.FolderGroupPermission()
             {
-                SubjectId = User.Sa.Id,
+                SubjectId = Group.Sa.Id,
                 ObjectId = StoreRegistryFolder.Id,
                 Mode = AccessMode.All
             };
@@ -86,9 +110,29 @@ namespace TL.Store.Data.EntityFramework.Commons
         public static Registry.Data.Entities.Security.FolderGroupPermission StoreRegistryFolderSystemGroupPermission =>
             new Registry.Data.Entities.Security.FolderGroupPermission()
             {
-                SubjectId = User.System.Id,
+                SubjectId = Group.System.Id,
                 ObjectId = StoreRegistryFolder.Id,
                 Mode = AccessMode.All
             };
+
+        public static Registry.Data.Entities.Security.FolderRolePermission StoreRegistryFolderSaRolePermission =>
+            new Registry.Data.Entities.Security.FolderRolePermission()
+            {
+                SubjectId = Role.Sa.Id,
+                ObjectId = StoreRegistryFolder.Id,
+                Mode = AccessMode.All
+            };
+
+        public static Registry.Data.Entities.Security.FolderRolePermission StoreRegistryFolderSystemRolePermission =>
+            new Registry.Data.Entities.Security.FolderRolePermission()
+            {
+                SubjectId = Role.System.Id,
+                ObjectId = StoreRegistryFolder.Id,
+                Mode = AccessMode.All
+            };
+
+        #endregion
+
+        #endregion
     }
 }

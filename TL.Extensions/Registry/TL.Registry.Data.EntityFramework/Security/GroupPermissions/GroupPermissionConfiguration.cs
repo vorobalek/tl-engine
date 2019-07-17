@@ -26,7 +26,7 @@ namespace TL.Registry.Data.EntityFramework.Security.GroupPermissions
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.GroupPermissions");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.RegistriesGroupPermissions");
         }
     }
 }

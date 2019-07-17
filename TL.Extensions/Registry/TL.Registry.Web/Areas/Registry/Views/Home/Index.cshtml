@@ -1,3 +1,37 @@
 ﻿@model TL.Registry.Web.Areas.Registry.ViewModels.Home.IndexViewModel
+@{
+    ViewData["Title"] = "Доступные репозитории";
+}
 
-<h1>Hello! There is Registry module!</h1>
+<h4>Доступные репозитории:</h4>
+<hr />
+<ul class="list-group">
+    @foreach (var registry in Model.Registries)
+    {
+        <li class="list-group-item">
+            <div class="row align-item-center">
+                <div class="col-auto">
+                    <img src="/Styles/images/pack/png/archive-1.png" alt="Logo" height="42px" width="42px" />
+                </div>
+                <div class="col-auto">
+                    <h5>
+                        <a href="/registry/@registry.Id.ToString()">
+                            @registry.Name
+                        </a>
+                    </h5>
+                </div>
+                <div class="col">
+                    <h6>
+                        @registry.Description
+                    </h6>
+                </div>
+                <div class="col-auto">
+                    Создан: @registry.CreationDate
+                </div>
+                <div class="col-auto">
+                    Последнее изменение: @registry.ModifiedDate
+                </div>
+            </div>
+        </li>
+    }
+</ul>

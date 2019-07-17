@@ -7,7 +7,7 @@ using TL.Integrations.Data.Entities.Telegram.Security;
 
 namespace TL.Integrations.Data.EntityFramework.Telegram.Security.TgUsersRoles
 {
-    public class TgUserRoleRepository : EntityRepository<TgUserRole>, ITgUserRoleRepository
+    public class TgUserRoleRepository : EntityComparableRepository<TgUserRole, (Guid, Guid)>, ITgUserRoleRepository
     {
         public IEnumerable<TgUserRole> GetByRole(TgRole role)
         {

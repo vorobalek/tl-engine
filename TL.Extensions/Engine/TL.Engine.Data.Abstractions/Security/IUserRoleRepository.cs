@@ -5,7 +5,7 @@ using TL.Engine.SDK.Repositories;
 
 namespace TL.Engine.Data.Abstractions.Security
 {
-    public interface IUserRoleRepository : IEntityRepository<UserRole>
+    public interface IUserRoleRepository : IEntityComparableRepository<UserRole, (Guid, Guid)>
     {
         IEnumerable<UserRole> GetByRole(Role role);
 
