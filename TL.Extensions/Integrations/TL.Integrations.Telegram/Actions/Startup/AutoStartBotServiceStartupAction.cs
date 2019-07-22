@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Linq;
 using TL.Engine.SDK.Actions;
-using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Services;
 using TL.Integrations.Data.Entities.Telegram.System;
 using TL.Integrations.Data.Managers;
 using TL.Integrations.SDK.Telegram.Bots;
@@ -17,15 +17,18 @@ namespace TL.Integrations.Telegram.Actions
 
         ILogger Logger { get; }
 
+        IStartupService Service { get; }
+
         public int Priority => 10000;
 
         public string Description => "Автозапуск ботов Telegram";
 
-        public AutoStartBotServiceStartupAction(ITelegramBotProviderService telegramBotProvider, ITgBotManager tgBotManager, ILogger<AutoStartBotServiceStartupAction> logger)
+        public AutoStartBotServiceStartupAction(ITelegramBotProviderService telegramBotProvider, ITgBotManager tgBotManager, ILogger<AutoStartBotServiceStartupAction> logger, IStartupService service)
         {
             TgBotManager = tgBotManager;
             TelegramBotProvider = telegramBotProvider;
             Logger = logger;
+            Service = service;
         }
 
         public IStartupActionResult Invoke()
@@ -45,12 +48,14 @@ namespace TL.Integrations.Telegram.Actions
                 if (f)
                 {
                     Logger.TLogWarning($"Успешный автоматический запуска бота @{tgBot.Username} на {tgBot.TypeName}");
+                    Service.InvokeCallback($"Успешный автоматический запуска бота @{tgBot.Username} на {tgBot.TypeName} ({i + 1} из {tgBots.Length})", (i + 1) / (double)tgBots.Length * 100);
 
                     tgBot.State = TgBotState.Run;
                 }
                 else
                 {
                     Logger.TLogWarning($"Отказ запуска бота @{tgBot.Username} на {tgBot.TypeName}");
+                    Service.InvokeCallback($"Отказ запуска бота @{tgBot.Username} на {tgBot.TypeName} ({i + 1} из {tgBots.Length})", (i + 1) / (double)tgBots.Length * 100);
                     ok = false;
                     tgBot.State = TgBotState.Stop;
                 }

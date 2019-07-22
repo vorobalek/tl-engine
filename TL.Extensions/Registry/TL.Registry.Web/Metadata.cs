@@ -24,10 +24,15 @@ namespace TL.Registry.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/registry", "Репозитории", "Файловые репозитории системы", 1000, new string[] { Role.DefaultUser.Name }, new[]
-            {
-                new LinkItem("/registry/files", "Все файлы", "Показать все файлы без привязки к репозиториям", 1000, new string[] { Role.Sa.Name })
-            }),
+            new LinkItem("/registry", "Репозитории", "Файловые репозитории системы", 1000, new string[] { Role.DefaultUser.Name }),
+        };
+
+        protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
+        {
+            new LinkItem("/registry/files", "Все файлы", "Показать все файлы без привязки к репозиториям", 1000),
+            new LinkItem("/registry/permissions", "Права доступа к репозиториям", "Управление правами доступа к репозиториям", 1000),
+            new LinkItem("/registry/folders/permissions", "Права доступа к каталогам репозиториев", "Управление правами доступа к каталогам репозиториев", 1000),
+            new LinkItem("/registry/files/permissions", "Права доступа к файлам репозиториев", "Управление правами доступа к файлам репозиториев", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

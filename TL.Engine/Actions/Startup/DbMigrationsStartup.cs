@@ -35,6 +35,7 @@ namespace TL.Engine.Actions.Startup
                 var message = $"Применение обновлений структуры БД: {string.Join("\r\n", migrations)}";
                 try
                 {
+                    StartupService.InvokeCallback(message, 50.0);
                     context.Database.Migrate();
                     return StartupActionResult.Good(description: message);
                 }

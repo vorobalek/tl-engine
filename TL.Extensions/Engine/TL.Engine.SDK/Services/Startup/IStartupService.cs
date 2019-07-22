@@ -64,6 +64,18 @@ namespace TL.Engine.SDK.Services
         string Message { get; }
 
         /// <summary>
+        /// Cообщение от активной на данный момент контрольной точки системы запуска.
+        /// </summary>
+        string CallbackMessage { get; }
+
+        /// <summary>
+        /// Метод обратного вызова от контролькой точки, к системе запуска.
+        /// </summary>
+        /// <param name="message">Устанавливает <see cref="CallbackMessage"/>.</param>
+        /// <param name="progress">Устанавливает <see cref="Progress"/> в диапазоне от 0 до 100, где 0 - начало текущей контрольной точки, а 100 - начало следующей.</param>
+        void InvokeCallback(string message, double progress);
+
+        /// <summary>
         /// Задает длительность перехода между точками <see cref="IStartupAction"/> в мс.
         /// </summary>
         /// <param name="duration">Время в мс.</param>

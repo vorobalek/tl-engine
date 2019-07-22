@@ -70,7 +70,7 @@ namespace TL.Engine.SDK.Modularity.Items
             Description = description;
             Position = position;
             Roles = roles;
-            Items = items;
+            Items = items ?? new List<LinkItem>();
         }
     }
 }

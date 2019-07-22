@@ -26,6 +26,11 @@ namespace TL.Store.Web
         {
         };
 
+        protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
+        {
+            new LinkItem("/store/settings", "Настройки магазина модулей", "Настройки модуля Store", 1000),
+        };
+
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
         {
         };

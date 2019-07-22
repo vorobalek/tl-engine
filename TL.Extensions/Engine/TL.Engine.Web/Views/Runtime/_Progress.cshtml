@@ -47,6 +47,12 @@ else
         <strong>
             @StartupService.Message
         </strong>
+        @if (!string.IsNullOrWhiteSpace(StartupService.CallbackMessage))
+        {
+            <h6>
+                @StartupService.CallbackMessage
+            </h6>
+        }
     }
     else
     {

@@ -27,7 +27,12 @@ namespace TL.Account.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/account/profile", "Публичная страница", int.MinValue + 10, new string[] { Role.DefaultUser.Name }),
+            new LinkItem("/account/profile", "Публичная страница", "Ваша персональная страница в системе", int.MinValue + 10, new string[] { Role.DefaultUser.Name }),
+        };
+
+        protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
+        {
+            new LinkItem("/account/relationships/", "Связи пользователей", "Визуализация связей между пользователями, настроки автоматических подписок", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

@@ -77,9 +77,13 @@ namespace TL.Engine.SDK.Services
                 {
                     Thread.Sleep(_duration);
                 }
+
                 var action = actions[number];
                 NextDescription = number < count - 1 ? actions[number + 1].Description : _defaultNextDescription;
-                Progress = number / (double)count * 100;
+                CallbackMessage = null;
+                _actionProgress = 0.0;
+                _nextProgress = (number + 1) / (double)count * 100;
+
                 IStartupActionResult actionResult;
                 try
                 {
@@ -104,7 +108,7 @@ namespace TL.Engine.SDK.Services
                 Log.Add(actionResult);
 
                 ++number;
-                Progress = number / (double)count * 100;
+                _progress = number / (double)count * 100;
 
                 if (!actionResult.IsFinal)
                 {
@@ -128,6 +132,17 @@ namespace TL.Engine.SDK.Services
         }
 
         /// <summary>
+        /// Метод обратного вызова от контролькой точки, к системе запуска.
+        /// </summary>
+        /// <param name="message">Устанавливает <see cref="CallbackMessage" />.</param>
+        /// <param name="progress">Устанавливает <see cref="Progress" /> в диапазоне от 0 до 100, где 0 - начало текущей контрольной точки, а 100 - начало следующей.</param>
+        public void InvokeCallback(string message, double progress)
+        {
+            CallbackMessage = message;
+            _actionProgress = progress;
+        }
+
+        /// <summary>
         /// Запуск прошёл успешно.
         /// </summary>
         public bool IsOk { get; private set; } = false;
@@ -137,14 +152,23 @@ namespace TL.Engine.SDK.Services
         /// </summary>
         public string RedirectUrl => Log.LastOrDefault()?.RedurectUrl ?? "/runtime";
 
+        private double _progress { get; set; } = 0.0;
+        private double _actionProgress { get; set; } = 0.0;
+        private double _nextProgress { get; set; } = 100.0;
+
         /// <summary>
         /// Прогрес запуска.
         /// </summary>
-        public double Progress { get; private set; } = 0.0;
+        public double Progress => (_nextProgress - _progress) * (_actionProgress / 100.0) + _progress;
 
         /// <summary>
         /// Сообщение системы запуска на текущий момент.
         /// </summary>
         public string Message { get; private set; }
+
+        /// <summary>
+        /// Cообщение от активной на данный момент контрольной точки системы запуска.
+        /// </summary>
+        public string CallbackMessage { get; private set; } = null;
     }
 }

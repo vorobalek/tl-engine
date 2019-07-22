@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ExtCore.Infrastructure;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
@@ -46,7 +48,24 @@ namespace TL.Engine.Web
             {
                 new LinkItem("/modules", "Модули", "Управление модулями системы, установка/обновление/удаление компонентов.", 1000),
                 new LinkItem("/runtime", "Диспетчер", "Лог запуска, управление нагрузкой, перезапуск сервера.", 1005),
-            })
+            }),
+            new LinkItem("/admin", "Администрирование", "Настроки системы.", int.MaxValue - 1, new string[] { Role.Sa.Name },
+                ExtensionManager
+                .GetInstances<BaseMetadataWeb>(useCaching: true)
+                .GroupBy(m => m.Owner)
+                .OrderBy(g => g.Key)
+                .SelectMany(g => g.Select(m => m))
+                .Select(m => m.GetAdminItems()
+                    .Select(it => new LinkItem(it.Url, it.Name, $"{(string.IsNullOrWhiteSpace(it.Description) ? "" : $"{it.Description} ")}({m.Owner})", it.Position, it.Roles, it.Items)))
+                .SelectMany(it => it)),
+        };
+
+        protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
+        {
+            new LinkItem("/admin/users", "Пользователи", "Управление учётными записями пользователей.", 1000),
+            new LinkItem("/admin/groups", "Группы", "Управление группами пользователей.", 1000),
+            new LinkItem("/admin/roles", "Роли", "Управление ролями пользователей в системе.", 1000),
+            new LinkItem("/admin/updating", "Автообновление системы", "Настройка времени автоматического обновления компонентов системы", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using TL.Engine.SDK.Actions;
+using TL.Engine.SDK.Services;
 using TL.Engine.Services;
 
 namespace TL.Engine.Actions.Startup
@@ -12,9 +13,12 @@ namespace TL.Engine.Actions.Startup
     {
         IStorage Storage { get; }
 
-        public DbExistStartup(IStorage storage)
+        IStartupService Service { get; }
+
+        public DbExistStartup(IStorage storage, IStartupService service)
         {
             Storage = storage;
+            Service = service;
         }
 
         public int Priority => 200;
@@ -32,6 +36,7 @@ namespace TL.Engine.Actions.Startup
             {
                 try
                 {
+                    Service.InvokeCallback("База данных не обнаружена. Попытка создать базу данных автоматически.", 50.0);
                     context.Database.Migrate();
                     return StartupActionResult.Good(description: "База данных создана автоматически согласно строке подключения.");
                 }

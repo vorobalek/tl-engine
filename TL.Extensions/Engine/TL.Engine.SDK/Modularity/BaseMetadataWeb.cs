@@ -31,13 +31,8 @@ namespace TL.Engine.SDK.Modularity
         /// </summary>
         protected virtual IEnumerable<LinkItem> AdminItems { get; } = new LinkItem[0];
 
-        protected IEnumerable<LinkItem> GetAdminItems() =>
-            ExtensionManager
-            .GetInstances<BaseMetadataWeb>(useCaching: true)
-            .Select(m => m.AdminItems
-                .OrderBy(it => it.Position)
-                .Select(it => new LinkItem(it.Url, it.Name, $"{it.Description} ({m.Owner})", it.Position, it.Roles, it.Items)))
-            .SelectMany(it => it);
+        public IEnumerable<LinkItem> GetAdminItems() =>
+            AdminItems.OrderBy(it => it.Position);
 
         /// <summary>
         /// Ссылки на таблицы стилей.

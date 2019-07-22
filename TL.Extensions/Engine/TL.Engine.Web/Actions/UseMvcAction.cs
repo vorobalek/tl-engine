@@ -25,7 +25,13 @@ namespace TL.Engine.Web.Actions
             routeBuilder.MapRoute(
                name: "Account",
                template: "account/{controller}/{action}/{id?}"
-           );
+            );
+
+            routeBuilder.MapRoute(
+               name: "Admin",
+               template: "admin/{controller}/{action}/{id?}",
+               defaults: new { area = "admin", controller = "home", action = "index" }
+            );
         }
     }
 }

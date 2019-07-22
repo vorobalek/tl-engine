@@ -14,7 +14,7 @@ namespace TL.Integrations.Web.Areas.Integrations.ViewModels.Telegram.Shared
 
         public TelegramBotsViewModel Create(ITgBotManager tgBotManager, ITelegramBotProviderService telegramBotProvider)
         {
-            var savedBots = tgBotManager.GetAll();
+            var savedBots = tgBotManager.GetAll(e => true);
             var activeBots = telegramBotProvider.GetOnline();
 
             Model = new TelegramBotsViewModel()
