@@ -32,7 +32,7 @@ namespace TL.Account.Web
 
         protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
         {
-            new LinkItem("/account/relationships/", "Связи пользователей", "Визуализация связей между пользователями, настроки автоматических подписок", 1000),
+            new LinkItem("/account/relationships/", "Связи пользователей", "Визуализация связей между пользователями, настройки автоматических подписок", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
