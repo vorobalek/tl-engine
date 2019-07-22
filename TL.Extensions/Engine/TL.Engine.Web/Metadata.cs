@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
@@ -40,12 +41,12 @@ namespace TL.Engine.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/welcome", "Добро пожаловать!", int.MinValue, new string[] { "user" }),
-            new LinkItem("Система", 2000, new[] { "sa" }, new[]
+            new LinkItem("/welcome", "Добро пожаловать!", int.MinValue, new string[] { Role.DefaultUser.Name }),
+            new LinkItem("Система", 2000, new[] { Role.Sa.Name }, new[]
             {
-                new LinkItem("/modules", "Управление модулями", 1000, new string[] { "sa" }),
-                new LinkItem("/runtime", "Диспетчер системы", "Лог запуска, управление нагрузкой, перезапуск сервера.", 1005, new string[] { "sa" }),
-                new LinkItem("/home/exception", "Проверить исключения", 1100, new string[] { "sa" })
+                new LinkItem("/modules", "Управление модулями", 1000, new string[] { Role.Sa.Name }),
+                new LinkItem("/runtime", "Диспетчер системы", "Лог запуска, управление нагрузкой, перезапуск сервера.", 1005, new string[] { Role.Sa.Name }),
+                new LinkItem("/home/exception", "Проверить исключения", 1100, new string[] { Role.Sa.Name })
             })
         };
 

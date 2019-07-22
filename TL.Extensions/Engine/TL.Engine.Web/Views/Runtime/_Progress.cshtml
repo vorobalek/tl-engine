@@ -70,7 +70,7 @@ else
          aria-valuemin="0" aria-valuemax="100" style="width: @string.Format("{0:0.##}", StartupService.Progress)%">
     </div>
 </div>
-@if (User.IsInRole("sa") || (StartupService.IsReady && !StartupService.IsOk))
+@if (User.IsInRole(TL.Engine.Data.Entities.Security.Role.Sa.Name) || (StartupService.IsReady && !StartupService.IsOk))
 {
     <br />
     <div class="table-responsive">

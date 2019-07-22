@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
@@ -23,9 +24,9 @@ namespace TL.Registry.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/registry", "Репозитории", "Файловые репозитории системы", 1000, new string[] { "user" }, new[]
+            new LinkItem("/registry", "Репозитории", "Файловые репозитории системы", 1000, new string[] { Role.DefaultUser.Name }, new[]
             {
-                new LinkItem("/registry/files", "Все файлы", "Показать все файлы без привязки к репозиториям", 1000, new string[] { "sa" })
+                new LinkItem("/registry/files", "Все файлы", "Показать все файлы без привязки к репозиториям", 1000, new string[] { Role.Sa.Name })
             }),
         };
 

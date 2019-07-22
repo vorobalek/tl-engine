@@ -17,7 +17,7 @@ namespace TL.Engine.Web.Controllers
 
         public IActionResult Index()
         {
-            if (!StartupService.IsOk || (User.Identity.IsAuthenticated && User.IsInRole("sa")))
+            if (!StartupService.IsOk || (User.Identity.IsAuthenticated && User.IsInRole(TL.Engine.Data.Entities.Security.Role.Sa.Name)))
             {
                 return View();
             }
@@ -34,7 +34,7 @@ namespace TL.Engine.Web.Controllers
         [HttpPost]
         public IActionResult MoveNext()
         {
-            if (!StartupService.IsReady || User.IsInRole("sa"))
+            if (!StartupService.IsReady || User.IsInRole(TL.Engine.Data.Entities.Security.Role.Sa.Name))
             {
                 StartupService.CanMoveNext = true;
                 return PartialView("_StatusMessage", $"Переходим к шагу: \"{StartupService.NextDescription}\"");
@@ -45,7 +45,7 @@ namespace TL.Engine.Web.Controllers
         [HttpPost]
         public IActionResult SkipAll()
         {
-            if (!StartupService.IsReady || User.IsInRole("sa"))
+            if (!StartupService.IsReady || User.IsInRole(TL.Engine.Data.Entities.Security.Role.Sa.Name))
             {
                 StartupService.SkipAll = true;
                 return PartialView("_StatusMessage", "Пропускаем отладку.");
@@ -56,7 +56,7 @@ namespace TL.Engine.Web.Controllers
         [HttpPost]
         public IActionResult StopSkipAll()
         {
-            if (!StartupService.IsReady || User.IsInRole("sa"))
+            if (!StartupService.IsReady || User.IsInRole(TL.Engine.Data.Entities.Security.Role.Sa.Name))
             {
                 StartupService.SkipAll = false;
                 return PartialView("_StatusMessage", "Возобновляем отладку.");

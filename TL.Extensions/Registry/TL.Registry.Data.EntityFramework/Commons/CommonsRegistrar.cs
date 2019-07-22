@@ -1,5 +1,6 @@
 ﻿using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using TL.Engine.Data.Entities.Security;
 
 namespace TL.Registry.Data.EntityFramework.Commons
 {
@@ -7,6 +8,17 @@ namespace TL.Registry.Data.EntityFramework.Commons
     {
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
+            modelbuilder.Entity<Role>().HasData(new[]
+            {
+                Common.RegistryCreator
+            });
+
+            modelbuilder.Entity<UserRole>().HasData(new[]
+            {
+                Common.SaRoleRegistryCreator,
+                Common.SystemRoleRegistryCreator
+            });
+
             modelbuilder.Entity<Entities.Core.Registry>().HasData(new[]
             {
                 Common.RootRegistry

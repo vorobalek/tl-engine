@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
@@ -26,7 +27,7 @@ namespace TL.Account.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/account/profile", "Публичная страница", int.MinValue + 10, new string[] { "user" }),
+            new LinkItem("/account/profile", "Публичная страница", int.MinValue + 10, new string[] { Role.DefaultUser.Name }),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

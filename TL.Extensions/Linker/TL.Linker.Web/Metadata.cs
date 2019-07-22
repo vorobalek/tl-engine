@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
@@ -20,7 +21,7 @@ namespace TL.Linker.Web
         {
             new LinkItem("/linker", "Линкер", 1000, items: new[]
             {
-                new LinkItem("/linker/manager", "Менеджер", "Управление активными ссылками, сохранёнными в системе.", 1000, new string[] { "sa" })
+                new LinkItem("/linker/manager", "Менеджер", "Управление активными ссылками, сохранёнными в системе.", 1000, new string[] { Role.Sa.Name })
             }),
         };
 

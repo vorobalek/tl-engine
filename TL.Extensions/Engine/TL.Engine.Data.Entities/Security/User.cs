@@ -21,9 +21,9 @@ namespace TL.Engine.Data.Entities.Security
 
         public Guid WebTicket { get; set; } = Guid.NewGuid();
 
-        public DateTime LastActivity { get; set; }
+        public DateTime LastActivity { get; set; } = DateTime.UnixEpoch;
 
-        public DateTime LastLogon { get; set; }
+        public DateTime LastLogon { get; set; } = DateTime.UnixEpoch;
 
         public virtual IEnumerable<UserRole> UserRoles { get; set; }
 

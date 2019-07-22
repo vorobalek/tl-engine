@@ -6,6 +6,43 @@ namespace TL.Registry.Data.EntityFramework.Commons
 {
     public class Common
     {
+        #region Roles
+
+        public static Role RegistryCreator =>
+            new Role()
+            {
+                Id = Guid.Parse("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"),
+                Name = "registry_creator",
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
+        #endregion
+
+        #region UserRoles
+
+        public static UserRole SaRoleRegistryCreator =>
+            new UserRole()
+            {
+                UserId = User.Sa.Id,
+                RoleId = RegistryCreator.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
+        public static UserRole SystemRoleRegistryCreator =>
+            new UserRole()
+            {
+                UserId = User.System.Id,
+                RoleId = RegistryCreator.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
+        #endregion
+
+        #region Registries
+
         public static Entities.Core.Registry RootRegistry =>
             new Entities.Core.Registry()
             {
@@ -156,6 +193,8 @@ namespace TL.Registry.Data.EntityFramework.Commons
                 CreationDate = DateTime.UnixEpoch,
                 ModifiedDate = DateTime.UnixEpoch
             };
+
+        #endregion
 
         #endregion
 

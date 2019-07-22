@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TL.Engine.Migrations
 {
     [DbContext(typeof(StorageContext))]
-    [Migration("20190717124513_v1106-4")]
+    [Migration("20190722080847_v1106-4")]
     partial class v11064
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -247,6 +247,14 @@ namespace TL.Engine.Migrations
                             IsDeleted = false,
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "system"
+                        },
+                        new
+                        {
+                            Id = new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "registry_creator"
                         });
                 });
 
@@ -291,11 +299,11 @@ namespace TL.Engine.Migrations
                             Description = "Супер-пользователь системы TL Engine",
                             IsClosed = false,
                             IsDeleted = false,
-                            LastActivity = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastLogon = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastActivity = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "sa",
-                            WebTicket = new Guid("1a347b5d-332f-439b-81a8-e367db56b7a2")
+                            WebTicket = new Guid("83dec367-b296-4734-9609-3c59cb7be6b6")
                         },
                         new
                         {
@@ -304,11 +312,11 @@ namespace TL.Engine.Migrations
                             Description = "Шаблонный пользователь системы TL Engine",
                             IsClosed = true,
                             IsDeleted = false,
-                            LastActivity = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastLogon = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastActivity = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "user",
-                            WebTicket = new Guid("3a6ef419-ae3a-4aff-ac4e-bc5cd68fe10f")
+                            WebTicket = new Guid("ca74fd68-aefb-4139-b7ec-0039901aa0eb")
                         },
                         new
                         {
@@ -317,11 +325,11 @@ namespace TL.Engine.Migrations
                             Description = "Автоматика системы TL Engine",
                             IsClosed = true,
                             IsDeleted = false,
-                            LastActivity = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastLogon = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastActivity = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "system",
-                            WebTicket = new Guid("a6cf22c9-90d8-46ec-bb75-d2fd2e4ec45f")
+                            WebTicket = new Guid("9ece7698-85c5-480c-a429-a524040d0a2e")
                         });
                 });
 
@@ -465,6 +473,22 @@ namespace TL.Engine.Migrations
                         {
                             UserId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
                             RoleId = new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            UserId = new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"),
+                            RoleId = new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"),
+                            CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            UserId = new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"),
+                            RoleId = new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"),
                             CreationDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)

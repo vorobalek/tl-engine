@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
@@ -26,7 +27,7 @@ namespace TL.Integrations.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("Внешние интеграции", 1010, new[] { "sa" }, new []
+            new LinkItem("Внешние интеграции", 1010, new[] { Role.Sa.Name }, new []
             {
                 new LinkItem("/integrations/telegram", "Интеграция с Telegram", 1000)
             }),

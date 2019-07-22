@@ -537,7 +537,8 @@ namespace TL.Engine.Migrations
                 {
                     { new Guid("f22de7e3-aebb-4bde-845b-6702a4a92682"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "sa" },
                     { new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "user" },
-                    { new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "system" }
+                    { new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "system" },
+                    { new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "registry_creator" }
                 });
 
             migrationBuilder.InsertData(
@@ -545,9 +546,9 @@ namespace TL.Engine.Migrations
                 columns: new[] { "Id", "CreationDate", "Description", "IsClosed", "IsDeleted", "LastActivity", "LastLogon", "ModifiedDate", "PasswordHash", "Username", "WebTicket" },
                 values: new object[,]
                 {
-                    { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Супер-пользователь системы TL Engine", false, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "sa", new Guid("1a347b5d-332f-439b-81a8-e367db56b7a2") },
-                    { new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Шаблонный пользователь системы TL Engine", true, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "user", new Guid("3a6ef419-ae3a-4aff-ac4e-bc5cd68fe10f") },
-                    { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Автоматика системы TL Engine", true, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "system", new Guid("a6cf22c9-90d8-46ec-bb75-d2fd2e4ec45f") }
+                    { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Супер-пользователь системы TL Engine", false, false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "sa", new Guid("83dec367-b296-4734-9609-3c59cb7be6b6") },
+                    { new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Шаблонный пользователь системы TL Engine", true, false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "user", new Guid("ca74fd68-aefb-4139-b7ec-0039901aa0eb") },
+                    { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Автоматика системы TL Engine", true, false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "system", new Guid("9ece7698-85c5-480c-a429-a524040d0a2e") }
                 });
 
             migrationBuilder.InsertData(
@@ -569,14 +570,14 @@ namespace TL.Engine.Migrations
                 columns: new[] { "UserId", "GroupId", "CreationDate", "IsDeleted", "ModifiedDate" },
                 values: new object[,]
                 {
-                    { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
-                    { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("92581db6-0e31-4669-a77d-1730f464b005"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"), new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"), new Guid("92581db6-0e31-4669-a77d-1730f464b005"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new Guid("81d73ef6-da15-43ab-8f6d-d9663d9e2822"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
-                    { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) }
+                    { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new Guid("17e61588-323e-49ea-8edf-d77a059d70eb"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("046b7820-848e-4aa4-8569-6d2e94c909b3"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
@@ -587,8 +588,10 @@ namespace TL.Engine.Migrations
                     { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("f22de7e3-aebb-4bde-845b-6702a4a92682"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
                     { new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"), new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
-                    { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) }
+                    { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new Guid("6b68805b-1245-4f47-b2e9-5d3adc687798"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"), new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), false, new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
@@ -914,6 +917,11 @@ namespace TL.Engine.Migrations
             migrationBuilder.DeleteData(
                 table: "_.UsersRoles",
                 keyColumns: new[] { "UserId", "RoleId" },
+                keyValues: new object[] { new Guid("2c73ecab-ba81-4690-a96e-39986850a47a"), new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965") });
+
+            migrationBuilder.DeleteData(
+                table: "_.UsersRoles",
+                keyColumns: new[] { "UserId", "RoleId" },
                 keyValues: new object[] { new Guid("544c8d71-91ba-44f4-81c6-63fee3c50b9f"), new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89") });
 
             migrationBuilder.DeleteData(
@@ -925,6 +933,11 @@ namespace TL.Engine.Migrations
                 table: "_.UsersRoles",
                 keyColumns: new[] { "UserId", "RoleId" },
                 keyValues: new object[] { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89") });
+
+            migrationBuilder.DeleteData(
+                table: "_.UsersRoles",
+                keyColumns: new[] { "UserId", "RoleId" },
+                keyValues: new object[] { new Guid("998207b8-f18a-4508-a415-0fb6d16e1615"), new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965") });
 
             migrationBuilder.DeleteData(
                 table: "_.UsersRoles",
@@ -960,6 +973,11 @@ namespace TL.Engine.Migrations
                 table: "_.Roles",
                 keyColumn: "Id",
                 keyValue: new Guid("9a2814f7-b6c9-481d-882b-f5f5be4a5a89"));
+
+            migrationBuilder.DeleteData(
+                table: "_.Roles",
+                keyColumn: "Id",
+                keyValue: new Guid("d90ae8ad-3d22-4a60-8342-b85b2c9b7965"));
 
             migrationBuilder.DeleteData(
                 table: "_.Roles",

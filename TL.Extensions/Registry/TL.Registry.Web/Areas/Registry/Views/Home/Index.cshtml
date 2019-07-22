@@ -3,35 +3,67 @@
     ViewData["Title"] = "Доступные репозитории";
 }
 
-<h4>Доступные репозитории:</h4>
-<hr />
-<ul class="list-group">
-    @foreach (var registry in Model.Registries)
-    {
-        <li class="list-group-item">
-            <div class="row align-item-center">
-                <div class="col-auto">
-                    <img src="/Styles/images/pack/png/archive-1.png" alt="Logo" height="42px" width="42px" />
+@if (Model.Registries.Any())
+{
+    <h4>Доступные репозитории:</h4>
+    <hr />
+    <ul class="list-group">
+        @if (User.IsInRole(TL.Registry.Data.EntityFramework.Commons.Common.RegistryCreator.Name))
+        {
+            <li class="list-group-item">
+                <div class="row align-item-center">
+                    <div class="col-auto">
+                        <img src="/Styles/images/pack/png/add-2.png" alt="Logo" height="42px" width="42px" />
+                    </div>
+                    <div class="col-auto">
+                        <h5>
+                            <a href="/registry/create">
+                                Создать
+                            </a>
+                        </h5>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <h5>
-                        <a href="/registry/@registry.Id.ToString()">
-                            @registry.Name
-                        </a>
-                    </h5>
+            </li>
+        }
+        @foreach (var registry in Model.Registries)
+        {
+            <li class="list-group-item">
+                <div class="row align-item-center">
+                    <div class="col-auto">
+                        <img src="/Styles/images/pack/png/archive-1.png" alt="Logo" height="42px" width="42px" />
+                    </div>
+                    <div class="col-auto">
+                        <h5>
+                            <a href="/registry/@registry.Id.ToString()">
+                                @registry.Name
+                            </a>
+                        </h5>
+                    </div>
+                    <div class="col">
+                        <h6>
+                            @registry.Description
+                        </h6>
+                    </div>
+                    <div class="col-auto">
+                        Создан: @registry.CreationDate
+                    </div>
+                    <div class="col-auto">
+                        Последнее изменение: @registry.ModifiedDate
+                    </div>
                 </div>
-                <div class="col">
-                    <h6>
-                        @registry.Description
-                    </h6>
-                </div>
-                <div class="col-auto">
-                    Создан: @registry.CreationDate
-                </div>
-                <div class="col-auto">
-                    Последнее изменение: @registry.ModifiedDate
-                </div>
-            </div>
-        </li>
-    }
-</ul>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <div class="row h-100 justify-content-center align-items-center">
+        <h5>
+            Нет доступных репозиториев.
+            @if (User.IsInRole(TL.Registry.Data.EntityFramework.Commons.Common.RegistryCreator.Name))
+            {
+                <span>Вы можете <a href="/registry/create">создать свой первый репозиторий.</a></span>
+            }
+        </h5>
+    </div>
+}
