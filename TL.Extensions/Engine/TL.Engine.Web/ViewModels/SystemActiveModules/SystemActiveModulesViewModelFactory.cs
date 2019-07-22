@@ -26,7 +26,11 @@ namespace TL.Engine.Web.ViewModels.SystemActiveModules
             return new SystemActiveModulesViewModel()
             {
                 Modules = modules,
-                Extensions = ExtensionManager.GetInstances<BaseMetadata>().Where(m => m.Owner == "").OrderBy(it => it.Name).ToList()
+                Extensions = ExtensionManager
+                    .GetInstances<BaseMetadata>(useCaching: true)
+                    .Where(m => m.Owner == "")
+                    .OrderBy(it => it.Name)
+                    .ToList()
             };
         }
     }

@@ -17,7 +17,7 @@ namespace TL.Integrations.SDK.Telegram.Handlers
         {
             Methods = new List<IHandlerMethodBase>();
             ExtensionManager
-                .GetInstances<IHandlerMethodBase>()
+                .GetInstances<IHandlerMethodBase>(useCaching: true)
                 .Where(m => !m.IsTerminated && m.HandlerType == GetType() && m.BotType == botType)
                 .ToList()
                 .ForEach(m =>

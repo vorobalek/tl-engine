@@ -12,7 +12,7 @@ namespace TL.Engine.Web.ViewModels.Shared
         {
             List<ScriptItem> scripts = new List<ScriptItem>();
 
-            foreach (var extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>())
+            foreach (var extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>(useCaching: true))
             {
                 scripts.AddRange(extensionMetadata.ScriptItems);
             }

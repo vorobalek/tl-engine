@@ -274,5 +274,25 @@ namespace TL.Engine.SDK.Services
         {
             return ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, type);
         }
+
+        /// <summary>
+        /// Создать экземпляр типа <typeparamref name="T" />.
+        /// </summary>
+        /// <typeparam name="T">Целевой тип</typeparam>
+        /// <returns></returns>
+        public T CreateInstance<T>()
+        {
+            return ActivatorUtilities.CreateInstance<T>(ServiceProvider);
+        }
+
+        /// <summary>
+        /// Создать экземпляр типа <typeparamref name="T" />.
+        /// </summary>
+        /// <param name="type">Целевой тип</param>
+        /// <returns></returns>
+        public object CreateInstance(Type type)
+        {
+            return ActivatorUtilities.CreateInstance(ServiceProvider, type);
+        }
     }
 }

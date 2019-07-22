@@ -12,7 +12,7 @@ namespace TL.Engine.Web
 
         public override string Owner => "TL.Engine";
 
-        public override string Description => 
+        public override string Description =>
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
 
         public override string Authors => "Alexey Vorobev";
@@ -42,11 +42,10 @@ namespace TL.Engine.Web
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
             new LinkItem("/welcome", "Добро пожаловать!", int.MinValue, new string[] { Role.DefaultUser.Name }),
-            new LinkItem("Система", 2000, new[] { Role.Sa.Name }, new[]
+            new LinkItem("Ядро", int.MaxValue, new string[] { Role.Sa.Name }, new[]
             {
-                new LinkItem("/modules", "Управление модулями", 1000, new string[] { Role.Sa.Name }),
-                new LinkItem("/runtime", "Диспетчер системы", "Лог запуска, управление нагрузкой, перезапуск сервера.", 1005, new string[] { Role.Sa.Name }),
-                new LinkItem("/home/exception", "Проверить исключения", 1100, new string[] { Role.Sa.Name })
+                new LinkItem("/modules", "Модули", "Управление модулями системы, установка/обновление/удаление компонентов.", 1000),
+                new LinkItem("/runtime", "Диспетчер", "Лог запуска, управление нагрузкой, перезапуск сервера.", 1005),
             })
         };
 

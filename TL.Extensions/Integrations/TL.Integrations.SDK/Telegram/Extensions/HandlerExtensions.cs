@@ -10,7 +10,7 @@ namespace TL.Integrations.SDK.Telegram.Extensions
         public static IHandlerBase ImportBaseMethods<T>(this IHandlerBase handler) where T : IBaseBot
         {
             ExtensionManager
-                 .GetInstances<IHandlerMethodBase>()
+                 .GetInstances<IHandlerMethodBase>(useCaching: true)
                  .Where(m => !m.IsTerminated && m.HandlerType == handler.GetType() && m.BotType == typeof(T))
                  .ToList()
                  .ForEach(m =>

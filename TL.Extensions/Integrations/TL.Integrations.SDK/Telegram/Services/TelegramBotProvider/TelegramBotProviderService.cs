@@ -26,7 +26,7 @@ namespace TL.Integrations.SDK.Telegram.Services
         public IEnumerable<Type> GetBotTypes()
         {
             return ExtensionManager
-                .GetImplementations<IBaseBot>()
+                .GetImplementations<IBaseBot>(useCaching: true)
                 .Where(t => !t.IsAbstract);
         }
 
@@ -34,7 +34,7 @@ namespace TL.Integrations.SDK.Telegram.Services
 
         public bool Start(string token, string typeName, out IBaseBot bot, string name = null, bool skipUpdates = false)
         {
-            var botType = ExtensionManager.GetImplementations<IBaseBot>().Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == typeName);
+            var botType = ExtensionManager.GetImplementations<IBaseBot>(useCaching: true).Where(t => !t.IsAbstract).FirstOrDefault(t => t.Name == typeName);
             return Start(token, botType, out bot, name, skipUpdates);
         }
 

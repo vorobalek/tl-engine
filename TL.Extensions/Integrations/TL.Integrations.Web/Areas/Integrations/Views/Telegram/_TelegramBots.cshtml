@@ -6,7 +6,7 @@
 @using TL.Integrations.Data.Entities.Telegram.System;
 @{
     var types = ExtCore.Infrastructure.ExtensionManager
-                .GetImplementations<IBaseBot>()
+                .GetImplementations<IBaseBot>(useCaching: true)
                 .Where(t => !t.IsAbstract);
 }
 

@@ -1,12 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using TL.Engine.Web.Models;
 
 namespace TL.Engine.Web.Controllers
 {
+    [Route("/denied")]
     public class DeniedController : Controller
     {
-        public IActionResult Index()
+        ILogger Logger { get; }
+
+        public DeniedController(ILogger<ErrorController> logger)
         {
-            return RedirectToAction("index", "error", new { code = 403 });
+            Logger = logger;
+        }
+
+        public IActionResult Index(string returnUrl = null)
+        {
+            Logger.LogInformation($"Access Denied: {returnUrl ?? "not instance"}");
+            return View(new ErrorViewModel
+            {
+                RequestId = null,
+                ReturnUrl = Request.Headers["Referer"].ToString(),
+                StatusCode = 403
+            });
         }
     }
 }

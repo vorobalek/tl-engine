@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ExtCore.Infrastructure;
+using System.Collections.Generic;
+using System.Linq;
 using TL.Engine.SDK.Modularity.Items;
 
 namespace TL.Engine.SDK.Modularity
@@ -23,6 +25,19 @@ namespace TL.Engine.SDK.Modularity
         /// Элементы боковой панели.
         /// </summary>
         public abstract IEnumerable<LinkItem> SidebarItems { get; }
+
+        /// <summary>
+        /// Элементы панели администрирования.
+        /// </summary>
+        protected virtual IEnumerable<LinkItem> AdminItems { get; } = new LinkItem[0];
+
+        protected IEnumerable<LinkItem> GetAdminItems() =>
+            ExtensionManager
+            .GetInstances<BaseMetadataWeb>(useCaching: true)
+            .Select(m => m.AdminItems
+                .OrderBy(it => it.Position)
+                .Select(it => new LinkItem(it.Url, it.Name, $"{it.Description} ({m.Owner})", it.Position, it.Roles, it.Items)))
+            .SelectMany(it => it);
 
         /// <summary>
         /// Ссылки на таблицы стилей.

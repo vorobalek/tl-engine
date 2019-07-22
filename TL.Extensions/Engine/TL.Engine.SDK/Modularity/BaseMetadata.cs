@@ -50,7 +50,7 @@ namespace TL.Engine.SDK.Modularity
         /// Сборки подмодулей.
         /// </summary>
         public virtual IEnumerable<BaseMetadata> SubModules =>
-            ExtensionManager.GetInstances<BaseMetadata>()
+            ExtensionManager.GetInstances<BaseMetadata>(useCaching: true)
                 .Where(m => m.Owner == Name)
                 .OrderBy(sm => sm.Name);
 

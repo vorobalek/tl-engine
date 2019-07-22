@@ -152,5 +152,19 @@ namespace TL.Engine.SDK.Services
         /// <param name="type">Целевой тип</param>
         /// <returns></returns>
         object GetServiceOrCreateInstance(Type type);
+
+        /// <summary>
+        /// Создать экземпляр типа <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Целевой тип</typeparam>
+        /// <returns></returns>
+        T CreateInstance<T>();
+
+        /// <summary>
+        /// Создать экземпляр типа <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="type">Целевой тип</param>
+        /// <returns></returns>
+        object CreateInstance(Type type);
     }
 }

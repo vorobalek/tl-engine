@@ -12,7 +12,7 @@ namespace TL.Engine.Web.ViewModels.Shared
         {
             List<StyleItem> styles = new List<StyleItem>();
 
-            foreach (BaseMetadataWeb extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>())
+            foreach (var extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>(useCaching: true))
             {
                 styles.AddRange(extensionMetadata.StyleItems);
             }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
 
@@ -19,10 +18,7 @@ namespace TL.Linker.Web
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/linker", "Линкер", 1000, items: new[]
-            {
-                new LinkItem("/linker/manager", "Менеджер", "Управление активными ссылками, сохранёнными в системе.", 1000, new string[] { Role.Sa.Name })
-            }),
+            new LinkItem("/linker", "Линкер", 1000),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
@@ -32,6 +28,11 @@ namespace TL.Linker.Web
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
         };
+
+        protected override IEnumerable<LinkItem> AdminItems => new[]
+            {
+                new LinkItem("/linker/manager", "Менеджер ссылок", "Управление активными ссылками, сохранёнными в системе.", 1000)
+            };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
         {

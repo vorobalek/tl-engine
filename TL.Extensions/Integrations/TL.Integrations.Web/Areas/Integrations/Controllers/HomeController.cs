@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TL.Integrations.Web.Areas.Integrations.ViewModels.Home;
 
 namespace TL.Integrations.Web.Areas.Integrations.Controllers
 {
@@ -7,7 +6,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
     {
         public IActionResult Index()
         {
-            return View(new IndexViewModelFactory().Create());
+            return Redirect("/integrations/telegram");
         }
     }
 }
