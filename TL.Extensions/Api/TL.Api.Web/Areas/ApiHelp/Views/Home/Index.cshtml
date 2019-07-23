@@ -11,7 +11,7 @@
     <h2>Методы и объекты</h2>
     <p>
         Для доступа к данным вы просто посылаете запрос по адресу:
-        <pre><kbd>https://<code id="host1"></code>/api/{methodName}</kbd></pre>
+        <pre><kbd>@Context.Request.Scheme://<code id="host1"></code>/api/{methodName}</kbd></pre>
         Параметры запроса зависят от метода.
         Вместе с описанием каждого
         <a href="/apihelp/methods"><b>метода</b></a> можно увидеть пример запроса.
@@ -33,14 +33,14 @@
     <h3>Пример удачного выполнения запроса</h3>
     <p>
         Запрос:
-        <pre><kbd>GET https://<code id="host2"></code><code id="sampleGoodRequest"></code></kbd></pre>
+        <pre><kbd>GET @Context.Request.Scheme://<code id="host2"></code><code id="sampleGoodRequest"></code></kbd></pre>
         Ответ:
         <pre class="alert-success"><code id="sampleGoodResponse"></code></pre>
     </p>
     <h3>Пример неудачного выполнения запроса</h3>
     <p>
         Запрос:
-        <pre><kbd>GET https://<code id="host3"></code><code id="sampleBadRequest"></code></kbd></pre>
+        <pre><kbd>GET @Context.Request.Scheme://<code id="host3"></code><code id="sampleBadRequest"></code></kbd></pre>
         Ответ:
         <pre class="alert-danger"><code id="sampleBadResponse"></code></pre>
     </p>
@@ -57,13 +57,13 @@
     <h3>Пример работы с функциями</h3>
     <p>
         Запрос:
-        <pre><kbd>GET https://<code id="host4"></code><code id="sampleFunctionRequest1"></code></kbd></pre>
+        <pre><kbd>GET @Context.Request.Scheme://<code id="host4"></code><code id="sampleFunctionRequest1"></code></kbd></pre>
         Ответ:
         <pre class="alert-success"><code id="sampleFunctionResponse1"></code></pre>
     </p>
     <p>
         Запрос:
-        <pre><kbd>GET https://<code id="host5"></code><code id="sampleFunctionRequest2"></code></kbd></pre>
+        <pre><kbd>GET @Context.Request.Scheme://<code id="host5"></code><code id="sampleFunctionRequest2"></code></kbd></pre>
         Ответ:
         <pre class="alert-success"><code id="sampleFunctionResponse2"></code></pre>
     </p>
