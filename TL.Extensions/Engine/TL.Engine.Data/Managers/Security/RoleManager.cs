@@ -19,7 +19,7 @@ namespace TL.Engine.Data.Managers
         public IEnumerable<Role> GetByUser(User user)
         {
             var userGroups = Storage.GetRepository<IUserRoleRepository>().GetByUser(user);
-            return userGroups.Select(ur => Get(ur.RoleId));
+            return userGroups.Select(ur => GetByKey(ur.RoleId));
         }
     }
 }

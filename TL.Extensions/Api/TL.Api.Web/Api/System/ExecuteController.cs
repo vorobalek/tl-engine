@@ -95,7 +95,7 @@ namespace TL.Api.Web.Api.System
             }
             else
             {
-                existToken = TokenManager.Get(guidToken);
+                existToken = TokenManager.GetByKey(guidToken);
                 if (existToken == null)
                 {
                     return this.JsonResponse(false, error_code: StatusCodes.Status403Forbidden);
@@ -104,7 +104,7 @@ namespace TL.Api.Web.Api.System
 
             if (!Guid.TryParse(User.Claims.FirstOrDefault(e => e.Type == nameof(TlUser.Id))?.Value ?? "", out Guid userId))
             {
-                existUser = UserManager.Get(userId);
+                existUser = UserManager.GetByKey(userId);
             }
 
             var tokenLog = new TokenLog()

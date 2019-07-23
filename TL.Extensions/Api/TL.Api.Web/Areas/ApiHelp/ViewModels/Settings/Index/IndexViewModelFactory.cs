@@ -13,7 +13,7 @@ namespace TL.Api.Web.Areas.ApiHelp.ViewModels.Settings
             {
                 if (tokens[i].OwnerId.HasValue)
                 {
-                    tokens[i].Owner = userManager.Get(tokens[i].OwnerId.Value);
+                    tokens[i].Owner = userManager.GetByKey(tokens[i].OwnerId.Value);
                 }
             }
 

@@ -10,7 +10,7 @@ namespace TL.Engine.SDK.Extensions
 {
     public static class StorageExtensions
     {
-        public static object GetEntityRepository<TEntity>(this IStorage storage, IActivatorService activator)
+        public static IRepository GetEntityRepository<TEntity>(this IStorage storage, IActivatorService activator)
             where TEntity : IEntity
         {
             var entityType = activator.GetImplementations<TEntity>().Where(t => !t.GetTypeInfo().IsAbstract).FirstOrDefault();
@@ -20,7 +20,7 @@ namespace TL.Engine.SDK.Extensions
             return repository;
         }
 
-        public static object GetEntityRepository(this IStorage storage, IActivatorService activator, Type entityType)
+        public static IRepository GetEntityRepository(this IStorage storage, IActivatorService activator, Type entityType)
         {
             var repositories = activator.GetInstances<IRepository>().Where(rep => rep.EntityType.IsAssignableFrom(entityType));
             var repository = repositories.FirstOrDefault();

@@ -614,5 +614,15 @@ namespace TL.Engine.SDK.Managers
         {
             return GetAll(loadDeleted);
         }
+
+        /// <summary>
+        /// Получить количество сущностей удовлетворяющих предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <returns>Количество подходящих сущностей</returns>
+        public long Count(Func<TEntity, bool> predicate = null)
+        {
+            return Storage.GetRepository<IEntityRepository<TEntity>>().Count(predicate);
+        }
     }
 }

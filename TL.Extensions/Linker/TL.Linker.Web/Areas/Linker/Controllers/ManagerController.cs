@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ExtCore.Data.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using TL.Linker.Data.Entities.Core;
@@ -11,23 +12,28 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
     public class ManagerController : __LinkerController__
     {
         ILinkManager LinkManager { get; }
-        public ManagerController(ILinkManager linkManager)
+        public ManagerController(ILinkManager linkManager, IStorage storage)
         {
             LinkManager = linkManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string page, string per)
         {
-            return View();
+            var count = LinkManager.Count();
+            if (int.TryParse(page, out int int_page) && int.TryParse(per, out int int_perPage))
+            {
+                return View(new IndexViewModelFactory().Create(count, int_page, int_perPage));
+            }
+            return View(new IndexViewModelFactory().Create(count, 1, 10));
         }
 
         [HttpGet("linker/manager/edit/{id}")]
         public IActionResult Edit(Guid id)
         {
-            if (LinkManager.Get(id) is Link link)
+            if (LinkManager.GetByKey(id) is Link link)
             {
                 var model = new EditViewModelFactory().Create(LinkManager, link);
-                model.ReturnUrl = "/linker/manager/"; // Request.Headers["Referer"].ToString();
+                model.ReturnUrl = Url.Content(Request.Headers["Referer"].ToString());
                 return View(model);
             }
             return Redirect("/linker/manager/");
@@ -38,7 +44,7 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var link = LinkManager.Get(model.Input.Id);
+                var link = LinkManager.GetByKey(model.Input.Id);
 
                 link.Identifier = LinkManager.LinkParse(model.Input.Path);
                 link.Url = model.Input.OriginalPath;
@@ -53,17 +59,17 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetAll(string orderBy, string desc)
+        public IActionResult GetAll(string orderBy, string desc, int page, int per)
         {
-            return PartialView("_Links", new IndexViewModelFactory().Create(LinkManager, orderBy, desc));
+            return PartialView("_Links", new LinksViewModelFactory().Create(LinkManager, orderBy, desc, page, per));
         }
 
         [HttpPost]
-        public IActionResult Restore(IndexViewModel model)
+        public IActionResult Restore(LinksViewModel model)
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid);
+                var token = LinkManager.GetByKey(guid);
                 if (token != null)
                 {
                     token.IsDeleted = false;
@@ -75,11 +81,11 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Remove(IndexViewModel model)
+        public IActionResult Remove(LinksViewModel model)
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid);
+                var token = LinkManager.GetByKey(guid);
                 if (token != null)
                 {
                     LinkManager.Remove(token);
@@ -89,11 +95,11 @@ namespace TL.Linker.Web.Areas.Linker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(IndexViewModel model)
+        public IActionResult Delete(LinksViewModel model)
         {
             var guid = model.BindModel.LinkId;
             {
-                var token = LinkManager.Get(guid);
+                var token = LinkManager.GetByKey(guid);
                 if (token != null)
                 {
                     LinkManager.Delete(token);

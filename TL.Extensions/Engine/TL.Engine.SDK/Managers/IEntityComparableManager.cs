@@ -20,7 +20,7 @@ namespace TL.Engine.SDK.Managers
         /// <returns>
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
-        TEntity Get(TKey key);
+        TEntity GetByKey(TKey key);
 
         /// <summary>
         /// Получить все экземпляры сущности типа <typeparamref name="TEntity"/> по первичному <typeparamref name="TKey"/> ключу
@@ -29,7 +29,7 @@ namespace TL.Engine.SDK.Managers
         /// <returns>
         /// Экземпляры отслеживаемой сущности.
         /// </returns>
-        IEnumerable<TEntity> GetAll(params TKey[] keys);
+        IEnumerable<TEntity> GetByKeyAll(params TKey[] keys);
 
         /// <summary>
         /// Получить объекты сущности <typeparamref name="TEntity"/> к которым есть доступ у субъекта типа <typeparamref name="TSubject"/>

@@ -26,7 +26,7 @@ namespace TL.Engine.Actions.Startup
             var userRoles = UserRoleManager.GetAll(ur => ur.RoleId == Role.Sa.Id);
             if (userRoles.Count() > 0)
             {
-                var users = userRoles.Select(ur => UserManager.Get(ur.UserId));
+                var users = userRoles.Select(ur => UserManager.GetByKey(ur.UserId));
                 if (users.Count() > 0)
                 {
                     return StartupActionResult.Good(description: Description);

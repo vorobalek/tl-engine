@@ -48,7 +48,7 @@ namespace TL.Api.Web.Areas.ApiHelp.Controllers
         {
             var guid = model.BindModel.TokenId;
             {
-                var token = TokenManager.Get(guid);
+                var token = TokenManager.GetByKey(guid);
                 if (token != null)
                 {
                     token.IsDeleted = false;
@@ -64,7 +64,7 @@ namespace TL.Api.Web.Areas.ApiHelp.Controllers
         {
             var guid = model.BindModel.TokenId;
             {
-                var token = TokenManager.Get(guid);
+                var token = TokenManager.GetByKey(guid);
                 if (token != null)
                 {
                     TokenManager.Remove(token);
@@ -78,7 +78,7 @@ namespace TL.Api.Web.Areas.ApiHelp.Controllers
         {
             var guid = model.BindModel.TokenId;
             {
-                var token = TokenManager.Get(guid);
+                var token = TokenManager.GetByKey(guid);
                 if (token != null)
                 {
                     TokenManager.Delete(token);

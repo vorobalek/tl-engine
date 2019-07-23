@@ -139,5 +139,22 @@ namespace TL.Engine.SDK.Repositories
 
             return entity;
         }
+
+        /// <summary>
+        /// Получить количество сущностей удовлетворяющих предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <returns>
+        /// Количество подходящих сущностей
+        /// </returns>
+        public long Count(Func<TEntity, bool> predicate = null)
+        {
+            if (predicate == null)
+            {
+                return dbSet.LongCount();
+            }
+
+            return dbSet.LongCount(predicate);
+        }
     }
 }

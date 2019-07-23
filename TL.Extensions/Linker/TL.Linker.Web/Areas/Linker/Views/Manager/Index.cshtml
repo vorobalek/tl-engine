@@ -1,5 +1,49 @@
-﻿@{
+﻿@model TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel
+@{
     ViewData["Title"] = "Менеджер ссылок";
+}
+
+<h3>Все доступные ссылки TL Engine Linker</h3>
+<br />
+@if (Model.Pages > 1)
+{
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if (Model.Current > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/linker/manager?page=@(Model.Current - 1)&per=@(Model.PerPage)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            @if (Model.Current > 2)
+            {
+                <li class="page-item"><a class="page-link" href="/linker/manager?page=@(Model.Current - 2)&per=@(Model.PerPage)">@(Model.Current - 2)</a></li>
+            }
+            @if (Model.Current > 1)
+            {
+                <li class="page-item"><a class="page-link" href="/linker/manager?page=@(Model.Current - 1)&per=@(Model.PerPage)">@(Model.Current - 1)</a></li>
+            }
+            <li class="page-item active"><a class="page-link" href="#">@Model.Current</a></li>
+            @if (Model.Current + 1 <= Model.Pages)
+            {
+                <li class="page-item"><a class="page-link" href="/linker/manager?page=@(Model.Current + 1)&per=@(Model.PerPage)">@(Model.Current + 1)</a></li>
+            }
+            @if (Model.Current + 2 <= Model.Pages)
+            {
+                <li class="page-item"><a class="page-link" href="/linker/manager?page=@(Model.Current + 2)&per=@(Model.PerPage)">@(Model.Current + 2)</a></li>
+            }
+            @if (Model.Current < Model.Pages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/linker/manager?page=@(Model.Current + 1)&per=@(Model.PerPage)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 }
 <div id="links"></div>
 @section Scripts {
@@ -7,7 +51,7 @@
 
         update = function (orderBy, desc) {
             $.ajax({
-                url: '/linker/manager/getall?orderBy='+orderBy+'&desc='+desc,
+                url: '/linker/manager/getall?orderBy='+orderBy+'&desc='+desc+'&page=@Model.Current'+'&per=@Model.PerPage',
                 type: 'post',
                 success: function (result) {
                     $(document).find('#links').html(result);
@@ -16,7 +60,7 @@
         }
 
         $(document).ready(function () {
-            update('@nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.OriginalPath)', 'False');
+            update('@nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.ModifiedDate)', 'True');
         })
 
     </script>

@@ -47,7 +47,7 @@ namespace TL.Integrations.Telegram.Extensions
                         }
                     }
 
-                    return serviceProvider.GetService<IUserManager>().Get(tgUser.UserId.Value);
+                    return serviceProvider.GetService<IUserManager>().GetByKey(tgUser.UserId.Value);
                 }
             }
             catch { }

@@ -14,7 +14,7 @@ namespace TL.Engine.Data.Extensions
             var id = claims?.Claims?.FirstOrDefault(c => c.Type == nameof(User.Id))?.Value;
             if (!string.IsNullOrWhiteSpace(id) && Guid.TryParse(id, out Guid uid))
             {
-                return userManager.Get(uid);
+                return userManager.GetByKey(uid);
             }
             return null;
         }

@@ -43,7 +43,7 @@ namespace TL.Engine.Web.Middleware
                             {
                                 if (Guid.TryParse(claimUserId.Value, out Guid userId))
                                 {
-                                    if (userManager.Get(userId) is User user && !user.IsClosed)
+                                    if (userManager.GetByKey(userId) is User user && !user.IsClosed)
                                     {
                                         if (stringVariableManager.Get(UpdateActivityEnableVariable) is StringVariable updateActivity && updateActivity.Value == true.ToString())
                                         {

@@ -1,4 +1,4 @@
-﻿@model TL.Linker.Web.Areas.Linker.ViewModels.Manager.IndexViewModel
+﻿@model TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinksViewModel
 @{
     var maxLength = 30;
     var pathName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.Path);
@@ -8,8 +8,6 @@
     var isDeletedName = nameof(TL.Linker.Web.Areas.Linker.ViewModels.Manager.LinkViewModel.IsDeleted);
 }
 <div class="table-responsive">
-    <h3>Все доступные ссылки TL Engine Linker</h3>
-    <br />
     <table class="table table-bordered table-hover table-responsive-stack">
         <thead class="thead-light">
             <tr>

@@ -34,7 +34,7 @@ namespace TL.Engine.SDK.Managers
         /// <returns>
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
-        public virtual TEntity Get(TKey key)
+        public virtual TEntity GetByKey(TKey key)
         {
             return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().Get(key);
         }
@@ -46,7 +46,7 @@ namespace TL.Engine.SDK.Managers
         /// <returns>
         /// Экземпляры отслеживаемой сущности.
         /// </returns>
-        public virtual IEnumerable<TEntity> GetAll(params TKey[] keys)
+        public virtual IEnumerable<TEntity> GetByKeyAll(params TKey[] keys)
         {
             return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().GetAll(keys);
         }
@@ -69,7 +69,7 @@ namespace TL.Engine.SDK.Managers
             });
             dynamic permissionRepository = permissionRawRepository;
             var allowedEntityIds = permissionRepository.GetAll(predicateGet) as IEnumerable<Permission<TSubject, TSubjectKey, TEntity, TKey>>;
-            var result = GetAll(allowedEntityIds.Select(e => e.ObjectId).ToArray());
+            var result = GetByKeyAll(allowedEntityIds.Select(e => e.ObjectId).ToArray());
             return result;
         }
 
@@ -85,7 +85,7 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity GetOrCreate(TKey key, bool loadDeleted = false, TEntity entity = null, bool cacheOnly = false)
         {
-            TEntity existedEntity = Get(key);
+            TEntity existedEntity = GetByKey(key);
             if (existedEntity == null)
             {
                 return Create(entity, cacheOnly);
@@ -104,7 +104,7 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity UpdateOrCreate(TKey key, TEntity entity = null, bool cacheOnly = false)
         {
-            TEntity existedEntity = Get(key);
+            TEntity existedEntity = GetByKey(key);
             if (existedEntity == null)
             {
                 return Create(entity, cacheOnly);

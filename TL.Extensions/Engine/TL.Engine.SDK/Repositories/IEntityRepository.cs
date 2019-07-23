@@ -70,5 +70,12 @@ namespace TL.Engine.SDK.Repositories
         /// <param name="entity">Сущность.</param>
         /// <returns>Экземпляр отслеживаемой сущности.</returns>
         TEntity Load(TEntity entity);
+
+        /// <summary>
+        /// Получить количество сущностей удовлетворяющих предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <returns>Количество подходящих сущностей</returns>
+        long Count(Func<TEntity, bool> predicate = null);
     }
 }

@@ -30,7 +30,7 @@ namespace TL.Engine.Data.Extensions
             var roles = storage.GetRepository<IUserRoleRepository>().GetByUser(user);
             foreach (var userRole in roles)
             {
-                var role = roleManager.Get(userRole.RoleId);
+                var role = roleManager.GetByKey(userRole.RoleId);
                 claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.Name));
             }
 

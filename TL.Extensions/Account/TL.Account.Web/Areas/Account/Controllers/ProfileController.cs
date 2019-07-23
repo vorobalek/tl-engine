@@ -39,7 +39,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
             string message = "";
             if (Guid.TryParse(User.Claims.FirstOrDefault(e => e.Type == nameof(TlUser.Id))?.Value ?? "", out Guid userId))
             {
-                var user = UserManager.Get(userId);
+                var user = UserManager.GetByKey(userId);
                 if (user != null)
                 {
                     var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);
@@ -72,7 +72,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
             string message = "";
             if (Guid.TryParse(User.Claims.FirstOrDefault(e => e.Type == nameof(TlUser.Id))?.Value ?? "", out Guid userId))
             {
-                var user = UserManager.Get(userId);
+                var user = UserManager.GetByKey(userId);
                 if (user != null)
                 {
                     var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);

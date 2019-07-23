@@ -43,7 +43,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
             string message;
             if (Guid.TryParse(id, out Guid guid))
             {
-                var savedBot = TgBotManager.Get(guid);
+                var savedBot = TgBotManager.GetByKey(guid);
                 if (savedBot != null)
                 {
                     bool f = TelegramBotProvider.DelayedStart(ServiceProvider, savedBot.Token, savedBot.TypeName, out IBaseBot bot, savedBot.NativeName, savedBot.SkipUpdates, savedBot.AutoStart);

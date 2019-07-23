@@ -31,7 +31,7 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public TEntity GetOriginal(TKey key, bool loadDeleted = false)
         {
-            var entity = Get(key);
+            var entity = GetByKey(key);
             if (entity.OriginalId.HasValue)
             {
                 return GetOriginal(entity.OriginalId.Value, loadDeleted);
