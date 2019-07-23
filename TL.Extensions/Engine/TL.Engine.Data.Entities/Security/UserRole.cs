@@ -40,6 +40,30 @@ namespace TL.Engine.Data.Entities.Security
                 CreationDate = DateTime.UnixEpoch,
                 ModifiedDate = DateTime.UnixEpoch
             },
+
+            new UserRole()
+            {
+                UserId = User.Sa.Id,
+                RoleId = Role.UserCreator.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            },
+
+            new UserRole()
+            {
+                UserId = User.Sa.Id,
+                RoleId = Role.RoleCreator.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            },
+
+            new UserRole()
+            {
+                UserId = User.Sa.Id,
+                RoleId = Role.GroupCreator.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            },
         };
 
         public static UserRole[] DefaultUser => new[]

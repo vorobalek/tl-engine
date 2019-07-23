@@ -17,27 +17,65 @@ namespace TL.Registry.Data.EntityFramework.Commons
                 ModifiedDate = DateTime.UnixEpoch
             };
 
+        public static Role RegistryFolderCreator =>
+            new Role()
+            {
+                Id = Guid.Parse("49b185ee-070d-4831-a614-fe9d6bf509d4"),
+                Name = "registry_folder_creator",
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
+        public static Role RegistryFileCreator =>
+            new Role()
+            {
+                Id = Guid.Parse("dbd2c97b-db84-4fc3-a3ca-ad0c3953ca35"),
+                Name = "registry_file_creator",
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
         #endregion
 
         #region UserRoles
 
-        public static UserRole SaRoleRegistryCreator =>
+        public static UserRole[] SaCommonRoles => new[]
+        {
             new UserRole()
             {
                 UserId = User.Sa.Id,
                 RoleId = RegistryCreator.Id,
                 CreationDate = DateTime.UnixEpoch,
                 ModifiedDate = DateTime.UnixEpoch
-            };
+            },
 
-        public static UserRole SystemRoleRegistryCreator =>
+            new UserRole()
+            {
+                UserId = User.Sa.Id,
+                RoleId = RegistryFolderCreator.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            },
+
+            new UserRole()
+            {
+                UserId = User.Sa.Id,
+                RoleId = RegistryFileCreator.Id,
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            }
+        };
+
+        public static UserRole[] SystemCommonRoles => new[]
+        {
             new UserRole()
             {
                 UserId = User.System.Id,
                 RoleId = RegistryCreator.Id,
                 CreationDate = DateTime.UnixEpoch,
                 ModifiedDate = DateTime.UnixEpoch
-            };
+            }
+        };
 
         #endregion
 

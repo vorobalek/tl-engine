@@ -26,6 +26,33 @@ namespace TL.Engine.Data.Entities.Security
                 ModifiedDate = DateTime.UnixEpoch
             };
 
+        public static Role UserCreator =>
+            new Role()
+            {
+                Id = Guid.Parse("59fe43ef-245b-4222-bfba-6b1c9e92c726"),
+                Name = "user_creator",
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
+        public static Role RoleCreator =>
+            new Role()
+            {
+                Id = Guid.Parse("abaadf2c-137b-433a-87c8-33b437526bd4"),
+                Name = "role_creator",
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
+        public static Role GroupCreator =>
+            new Role()
+            {
+                Id = Guid.Parse("eaf895bc-9c09-47e3-b539-d8b389323416"),
+                Name = "group_creator",
+                CreationDate = DateTime.UnixEpoch,
+                ModifiedDate = DateTime.UnixEpoch
+            };
+
         public static Role DefaultUser =>
            new Role()
            {

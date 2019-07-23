@@ -65,7 +65,7 @@ namespace TL.Engine.Web
             new LinkItem("/admin/users", "Пользователи", "Управление учётными записями пользователей.", 1000),
             new LinkItem("/admin/groups", "Группы", "Управление группами пользователей.", 1000),
             new LinkItem("/admin/roles", "Роли", "Управление ролями пользователей в системе.", 1000),
-            new LinkItem("/admin/updating", "Автообновление системы", "Настройка времени автоматического обновления компонентов системы", 1000),
+            new LinkItem("/admin/updating", "Обновления", "Настройка времени автоматического обновления компонентов системы", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

@@ -29,6 +29,9 @@ namespace TL.Engine.Data.EntityFramework.Security.Roles
                     Role.Sa,
                     Role.DefaultUser,
                     Role.System,
+                    Role.UserCreator,
+                    Role.RoleCreator,
+                    Role.GroupCreator,
                 });
         }
     }
