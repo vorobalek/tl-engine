@@ -38,6 +38,30 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
         }
 
         [HttpPost]
+        public IActionResult RemoveSaved(string id)
+        {
+            string message;
+            if (Guid.TryParse(id, out Guid guid))
+            {
+                var savedBot = TgBotManager.GetByKey(guid);
+                if (savedBot != null)
+                {
+                    TgBotManager.Remove(savedBot);
+                    message = "Бот уничтожен";
+                }
+                else
+                {
+                    message = "Не удалось обнаружить бота";
+                }
+            }
+            else
+            {
+                message = "Не удалось разобрать идентефикатор бота";
+            }
+            return PartialView("_StatusMessage", message);
+        }
+
+        [HttpPost]
         public IActionResult StartSaved(string id)
         {
             string message;

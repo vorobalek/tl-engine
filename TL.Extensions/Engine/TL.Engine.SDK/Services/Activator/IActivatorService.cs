@@ -16,7 +16,7 @@ namespace TL.Engine.SDK.Services
         /// </summary>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        Type GetImplementation(Type targetType, bool useCaching = false);
+        Type GetImplementation(Type targetType, bool useCaching = true);
 
         /// <summary>
         /// Получить реализацию типа <paramref name="targetType"/>, удовлетворяющую предикату.
@@ -24,14 +24,14 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        Type GetImplementation(Type targetType, Func<Assembly, bool> predicate, bool useCaching = false);
+        Type GetImplementation(Type targetType, Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить все реализации типа <paramref name="targetType"/>.
         /// </summary>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<Type> GetImplementations(Type targetType, bool useCaching = false);
+        IEnumerable<Type> GetImplementations(Type targetType, bool useCaching = true);
 
         /// <summary>
         /// Получить все реализации типа <paramref name="targetType"/>, удовлетворяющие предикату.
@@ -39,14 +39,14 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<Type> GetImplementations(Type targetType, Func<Assembly, bool> predicate, bool useCaching = false);
+        IEnumerable<Type> GetImplementations(Type targetType, Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить экземпляр типа <paramref name="targetType"/>.
         /// </summary>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        object GetInstance(Type targetType, bool useCaching = false);
+        object GetInstance(Type targetType, bool useCaching = true);
 
         /// <summary>
         /// Получить экземпляр типа <paramref name="targetType"/>, удовлетворяющую предикату.
@@ -54,14 +54,14 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        object GetInstance(Type targetType, Func<Assembly, bool> predicate, bool useCaching = false);
+        object GetInstance(Type targetType, Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить все экземпляры типа <paramref name="targetType"/>.
         /// </summary>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<object> GetInstances(Type targetType, bool useCaching = false);
+        IEnumerable<object> GetInstances(Type targetType, bool useCaching = true);
 
         /// <summary>
         /// Получить все экземпляры типа <paramref name="targetType"/>, удовлетворяющие предикату.
@@ -69,7 +69,7 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<object> GetInstances(Type targetType, Func<Assembly, bool> predicate, bool useCaching = false);
+        IEnumerable<object> GetInstances(Type targetType, Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить реализацию типа <typeparamref name="T"/>.
@@ -77,7 +77,7 @@ namespace TL.Engine.SDK.Services
         /// <typeparam name="T">Целевой тип</typeparam>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        Type GetImplementation<T>(bool useCaching = false);
+        Type GetImplementation<T>(bool useCaching = true);
 
         /// <summary>
         /// Получить реализацию типа <typeparamref name="T"/>, удовлетворяющую предикату.
@@ -86,7 +86,7 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        Type GetImplementation<T>(Func<Assembly, bool> predicate, bool useCaching = false);
+        Type GetImplementation<T>(Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить все реализации типа <typeparamref name="T"/>.
@@ -94,7 +94,7 @@ namespace TL.Engine.SDK.Services
         /// <typeparam name="T">Целевой тип</typeparam>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<Type> GetImplementations<T>(bool useCaching = false);
+        IEnumerable<Type> GetImplementations<T>(bool useCaching = true);
 
         /// <summary>
         /// Получить все реализации типа <typeparamref name="T"/>, удовлетворяющие предикату.
@@ -103,7 +103,7 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<Type> GetImplementations<T>(Func<Assembly, bool> predicate, bool useCaching = false);
+        IEnumerable<Type> GetImplementations<T>(Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить экземпляр типа <typeparamref name="T"/>.
@@ -111,7 +111,7 @@ namespace TL.Engine.SDK.Services
         /// <typeparam name="T">Целевой тип</typeparam>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        T GetInstance<T>(bool useCaching = false);
+        T GetInstance<T>(bool useCaching = true);
 
         /// <summary>
         /// Получить экземпляр типа <typeparamref name="T"/>, удовлетворяющую предикату.
@@ -120,7 +120,7 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        T GetInstance<T>(Func<Assembly, bool> predicate, bool useCaching = false);
+        T GetInstance<T>(Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить все экземпляры типа <typeparamref name="T"/>.
@@ -128,7 +128,7 @@ namespace TL.Engine.SDK.Services
         /// <typeparam name="T">Целевой тип</typeparam>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<T> GetInstances<T>(bool useCaching = false);
+        IEnumerable<T> GetInstances<T>(bool useCaching = true);
 
         /// <summary>
         /// Получить все экземпляры типа <typeparamref name="T"/>, удовлетворяющие предикату.
@@ -137,7 +137,7 @@ namespace TL.Engine.SDK.Services
         /// <param name="predicate">Предикат-функция.</param>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
         /// <returns></returns>
-        IEnumerable<T> GetInstances<T>(Func<Assembly, bool> predicate, bool useCaching = false);
+        IEnumerable<T> GetInstances<T>(Func<Assembly, bool> predicate, bool useCaching = true);
 
         /// <summary>
         /// Получить сервис или создать экземпляр типа <typeparamref name="T"/>.

@@ -1,18 +1,18 @@
-﻿using ExtCore.Infrastructure;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Modularity;
 using TL.Engine.SDK.Modularity.Items;
+using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Web.ViewModels.Shared
 {
     public class StylesViewModelFactory
     {
-        public StylesViewModel Create()
+        public StylesViewModel Create(IActivatorService activator)
         {
             List<StyleItem> styles = new List<StyleItem>();
 
-            foreach (var extensionMetadata in ExtensionManager.GetInstances<BaseMetadataWeb>(useCaching: true))
+            foreach (var extensionMetadata in activator.GetInstances<BaseMetadataWeb>(useCaching: true))
             {
                 styles.AddRange(extensionMetadata.StyleItems);
             }

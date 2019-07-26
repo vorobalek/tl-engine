@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Bots;
 
 namespace TL.Integrations.SDK.Telegram.Services
@@ -11,21 +12,21 @@ namespace TL.Integrations.SDK.Telegram.Services
     {
         ILogger Logger { get; }
 
-        IServiceProvider ServiceProvider { get; }
+        IActivatorService Activator { get; }
 
         private List<IBaseBot> OnlineBots { get; } = new List<IBaseBot>();
 
         private List<string> CandidateBots { get; } = new List<string>();
 
-        public TelegramBotProviderService(ILogger<TelegramBotProviderService> logger, IServiceProvider serviceProvider)
+        public TelegramBotProviderService(ILogger<TelegramBotProviderService> logger, IActivatorService activator)
         {
             Logger = logger;
-            ServiceProvider = serviceProvider;
+            Activator = activator;
         }
 
         public IEnumerable<Type> GetBotTypes()
         {
-            return ExtensionManager
+            return Activator
                 .GetImplementations<IBaseBot>(useCaching: true)
                 .Where(t => !t.IsAbstract);
         }
@@ -45,7 +46,8 @@ namespace TL.Integrations.SDK.Telegram.Services
                 throw new ArgumentNullException(nameof(type));
             }
 
-            bot = Activator.CreateInstance(type, ServiceProvider, token, name, skipUpdates) as IBaseBot;
+            bot = Activator.CreateInstance(type) as IBaseBot;
+            bot.Configure(token, name, skipUpdates);
             return Start(bot);
         }
 

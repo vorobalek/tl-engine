@@ -4,8 +4,9 @@
 @using TL.Integrations.SDK.Telegram.Attributes;
 @using TL.Integrations.SDK.Telegram.Bots;
 @using TL.Integrations.Data.Entities.Telegram.System;
+@inject TL.Engine.SDK.Services.IActivatorService Activator;
 @{
-    var types = ExtCore.Infrastructure.ExtensionManager
+    var types = Activator
                 .GetImplementations<IBaseBot>(useCaching: true)
                 .Where(t => !t.IsAbstract);
 }
@@ -38,7 +39,7 @@
                         <td style="flex-basis: 15%">@bot.RequestsSummaryCount</td>
                         <td style="flex-basis: 15%">@bot.PerformanceMs</td>
                         <td style="flex-basis: 15%">
-                            <button class="btn btn-danger" onclick="kill('@bot.Username')">@(tgBot == null ? "Остановить" : tgBot.State.DisplayName())</button>
+                            <button class="btn-sm btn-warning" onclick="kill('@bot.Username')">@(tgBot == null ? "Остановить" : tgBot.State.DisplayName())</button>
                         </td>
                     </tr>
                     ++i;
@@ -53,11 +54,11 @@
             <tr>
                 <th style="flex-basis: 5%">#</th>
                 <th style="flex-basis: 15%">Имя</th>
-                <th style="flex-basis: 15%">Тип</th>
+                <th style="flex-basis: 10%">Тип</th>
                 <th style="flex-basis: 15%">Автозапуск</th>
                 <th style="flex-basis: 15%">Тихий запуск</th>
-                <th style="flex-basis: 20%">Последний запуск</th>
-                <th style="flex-basis: 15%">Состояние</th>
+                <th style="flex-basis: 15%">Последний запуск</th>
+                <th style="flex-basis: 25%">Состояние</th>
             </tr>
         </thead>
         <tbody>
@@ -80,21 +81,30 @@
                         {
                             lineLastStartupDate = "не запускался прежде";
                         }
-                    <tr>
-                        <td style="flex-basis: 5%">@i</td>
-                        <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
-                        <td style="flex-basis: 15%">@((types.FirstOrDefault(t => t.Name == bot.TypeName)?.GetCustomAttribute(typeof(BotAttribute)) as BotAttribute)?.Name ?? bot.TypeName)</td>
-                        <td style="flex-basis: 15%">@(bot.AutoStart ? "Да" : "Нет")</td>
-                        <td style="flex-basis: 15%">@(bot.SkipUpdates ? "Да" : "Нет")</td>
-                        <td style="flex-basis: 20%">@lineLastStartupDate</td>
-                        <td style="flex-basis: 15%">
-                            <button class="btn btn-success" onclick="startSaved('@bot.Id.ToString()')">@bot.State.DisplayName()</button>
-                        </td>
-                    </tr>
-                            ++i;
-                        }
+                        <tr>
+                            <td style="flex-basis: 5%">@i</td>
+                            <td style="flex-basis: 15%"><a href="https://t.me/@bot.Username" target="_blank">@@@bot.Username</a></td>
+                            <td style="flex-basis: 10%">@((types.FirstOrDefault(t => t.Name == bot.TypeName)?.GetCustomAttribute(typeof(BotAttribute)) as BotAttribute)?.Name ?? bot.TypeName)</td>
+                            <td style="flex-basis: 15%">@(bot.AutoStart ? "Да" : "Нет")</td>
+                            <td style="flex-basis: 15%">@(bot.SkipUpdates ? "Да" : "Нет")</td>
+                            <td style="flex-basis: 15%">@lineLastStartupDate</td>
+                            <td style="flex-basis: 25%">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn-sm btn-success" onclick="startSaved('@bot.Id.ToString()')">@bot.State.DisplayName()</button>
+                                        </div>
+                                        <div class="col">
+                                            <button class="btn-sm btn-danger" onclick="removeSaved('@bot.Id.ToString()')">Удалить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        ++i;
                     }
                 }
+            }
         </tbody>
     </table>
 </div>

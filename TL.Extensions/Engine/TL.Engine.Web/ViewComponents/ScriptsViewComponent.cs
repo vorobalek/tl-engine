@@ -1,13 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TL.Engine.SDK.Services;
+using TL.Engine.SDK.ViewComponents;
 using TL.Engine.Web.ViewModels.Shared;
 
 namespace TL.Engine.Web.ViewComponents
 {
-    public class ScriptsViewComponent : ViewComponent
+    public class ScriptsViewComponent : ActivatorViewComponent
     {
+        public ScriptsViewComponent(IActivatorService activator) : base(activator)
+        {
+        }
+
         public IViewComponentResult Invoke()
         {
-            return this.View(new ScriptsViewModelFactory().Create());
+            return View(new ScriptsViewModelFactory().Create(Activator));
         }
     }
 }

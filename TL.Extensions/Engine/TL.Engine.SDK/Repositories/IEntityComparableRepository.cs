@@ -21,7 +21,7 @@ namespace TL.Engine.SDK.Repositories
         /// <returns>
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
-        TEntity Get(TKey key);
+        TEntity GetByKey(TKey key);
 
         /// <summary>
         /// Получить все экземпляры сущности типа <typeparamref name="TEntity" /> по первичному <typeparamref name="TKey" /> ключу
@@ -30,6 +30,6 @@ namespace TL.Engine.SDK.Repositories
         /// <returns>
         /// Экземпляры отслеживаемой сущности.
         /// </returns>
-        IEnumerable<TEntity> GetAll(params TKey[] keys);
+        IEnumerable<TEntity> GetByKeys(params TKey[] keys);
     }
 }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Extensions;
 using TL.Integrations.SDK.Telegram.Handlers;
 using TgMessage = TL.Integrations.SDK.Telegram.Messages.Message;
@@ -10,6 +11,10 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 {
     public class HelpNotImplementated : Help
     {
+        public HelpNotImplementated(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override bool IsPrivate => true;
 
         public override string Command => "";
@@ -24,6 +29,10 @@ namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 
     public class NotImplementated : BaseBotMessageHCommandMethod
     {
+        public NotImplementated(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override bool IsPrivate => true;
 
         public override string Command => "";

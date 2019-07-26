@@ -1,7 +1,7 @@
-﻿using ExtCore.Infrastructure;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Modularity;
+using TL.Engine.SDK.Services;
 using TL.Engine.Web.ViewModels.Shared;
 
 namespace TL.Engine.Web.Areas.Admin.ViewModels.Home
@@ -10,10 +10,10 @@ namespace TL.Engine.Web.Areas.Admin.ViewModels.Home
     {
         public IDictionary<string, List<LinkViewModel>> Sections { get; }
 
-        public IndexViewModel()
+        public IndexViewModel(IActivatorService activator)
         {
             Sections = new Dictionary<string, List<LinkViewModel>>();
-            var modules = ExtensionManager.GetInstances<BaseMetadataWeb>();
+            var modules = activator.GetInstances<BaseMetadataWeb>();
             foreach (var module in modules)
             {
                 var items = module.GetAdminItems()?

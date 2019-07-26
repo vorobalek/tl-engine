@@ -2,18 +2,27 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Bots;
 
 namespace TL.Integrations.SDK.Telegram.Handlers
 {
     public abstract class HandlerMethodBase : IHandlerMethodBase
     {
+        protected IActivatorService Activator { get; }
+
+        public HandlerMethodBase(IActivatorService activator)
+        {
+            Activator = activator;
+        }
+
         public virtual IBaseBot Bot => Handler?.Bot;
         public virtual IHandlerBase Handler { get; set; }
 
-        public HandlerMethodBase(Type handlerType)
+        public virtual IHandlerMethodBase Configure(Type handlerType)
         {
             HandlerType = handlerType;
+            return this;
         }
 
         public virtual int Priority => 1000;
@@ -40,7 +49,7 @@ namespace TL.Integrations.SDK.Telegram.Handlers
         }
 
         public abstract Type BotType { get; }
-        public Type HandlerType { get; }
+        public Type HandlerType { get; private set; }
 
         public abstract UpdateType UpdateType { get; }
 

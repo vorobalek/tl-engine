@@ -8,6 +8,8 @@ namespace TL.Integrations.SDK.Telegram.Handlers
 {
     public interface IHandlerMethodBase
     {
+        IHandlerMethodBase Configure(Type handlerType);
+
         IBaseBot Bot { get; }
         IHandlerBase Handler { get; set; }
 

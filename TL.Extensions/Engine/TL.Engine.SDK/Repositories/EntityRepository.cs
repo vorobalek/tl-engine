@@ -130,12 +130,12 @@ namespace TL.Engine.SDK.Repositories
         /// </returns>
         public virtual TEntity Load(TEntity entity)
         {
-            try
-            {
-                storageContext.Entry(entity).References.ToList().ForEach(prop => prop.Load());
-                storageContext.Entry(entity).Collections.ToList().ForEach(prop => prop.Load());
-            }
-            catch { }
+            //try
+            //{
+            //    storageContext.Entry(entity).References.ToList().ForEach(prop => prop.Load());
+            //    storageContext.Entry(entity).Collections.ToList().ForEach(prop => prop.Load());
+            //}
+            //catch { }
 
             return entity;
         }

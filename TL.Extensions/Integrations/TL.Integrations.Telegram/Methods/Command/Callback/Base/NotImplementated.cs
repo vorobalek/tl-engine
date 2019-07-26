@@ -2,12 +2,17 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 {
     public class NotImplementated : BaseBotCallbackHCommandMethod
     {
+        public NotImplementated(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override bool IsPrivate => true;
 
         public override string Command => "";

@@ -11,7 +11,7 @@ namespace TL.Integrations.SDK.Telegram.Bots
 {
     public abstract class BaseBot : IBaseBot
     {
-        public BaseBot(string token, string name = null, bool skipUpdates = false, int retryPeriod = 5000, int cancelTimeout = 5000)
+        public virtual void Configure(string token, string name = null, bool skipUpdates = false, int retryPeriod = 5000, int cancelTimeout = 5000)
         {
             Token = token;
             NativeName = name;
@@ -24,11 +24,11 @@ namespace TL.Integrations.SDK.Telegram.Bots
             TgClient.OnReceiveError += TgClient_OnReceiveError;
         }
 
-        public virtual string Token { get; }
+        public virtual string Token { get; private set; }
 
         public virtual string Username { get; protected set; }
 
-        public virtual string NativeName { get; }
+        public virtual string NativeName { get; private set; }
 
         public bool IsOnline { get; protected set; }
 
@@ -130,7 +130,7 @@ namespace TL.Integrations.SDK.Telegram.Bots
 
         protected ConcurrentQueue<IMessage> MessagesQueue { get; set; }
 
-        protected TelegramBotClient TgClient { get; }
+        protected TelegramBotClient TgClient { get; private set; }
 
         private DateTime StartTime { get; set; }
 

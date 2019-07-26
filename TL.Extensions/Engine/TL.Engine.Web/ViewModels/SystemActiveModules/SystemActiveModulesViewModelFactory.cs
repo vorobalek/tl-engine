@@ -1,16 +1,16 @@
-﻿using ExtCore.Infrastructure;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TL.Engine.SDK.Modularity;
+using TL.Engine.SDK.Services;
 
 namespace TL.Engine.Web.ViewModels.SystemActiveModules
 {
     public class SystemActiveModulesViewModelFactory
     {
-        public SystemActiveModulesViewModel Create(IHostingEnvironment environment, IConfiguration configuration)
+        public SystemActiveModulesViewModel Create(IHostingEnvironment environment, IConfiguration configuration, IActivatorService activator)
         {
             var modules = new List<string>();
 
@@ -26,7 +26,7 @@ namespace TL.Engine.Web.ViewModels.SystemActiveModules
             return new SystemActiveModulesViewModel()
             {
                 Modules = modules,
-                Extensions = ExtensionManager
+                Extensions = activator
                     .GetInstances<BaseMetadata>(useCaching: true)
                     .Where(m => m.Owner == "")
                     .OrderBy(it => it.Name)

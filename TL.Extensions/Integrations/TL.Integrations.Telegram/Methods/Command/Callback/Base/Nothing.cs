@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Handlers;
 using TlMessage = TL.Integrations.SDK.Telegram.Messages.Message;
 
@@ -8,6 +9,10 @@ namespace TL.Integrations.Telegram.Methods.Command.Callback.Base
 {
     public class Nothing : BaseBotCallbackHCommandMethod
     {
+        public Nothing(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override string Command => "nothing";
 
         public override string Description => "";

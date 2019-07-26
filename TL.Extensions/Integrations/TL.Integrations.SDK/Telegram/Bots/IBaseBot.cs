@@ -6,6 +6,8 @@ namespace TL.Integrations.SDK.Telegram.Bots
 {
     public interface IBaseBot
     {
+        void Configure(string token, string name = null, bool skipUpdates = false, int retryPeriod = 5000, int cancelTimeout = 5000);
+
         string Token { get; }
 
         string Username { get; }

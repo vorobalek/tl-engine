@@ -1,11 +1,12 @@
-﻿using TL.Integrations.SDK.Telegram.Bots;
+﻿using TL.Engine.SDK.Services;
+using TL.Integrations.SDK.Telegram.Bots;
 using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Handlers
 {
     public class HCommand : Handler
     {
-        public HCommand(IBaseBot bot) : base(bot)
+        public HCommand(IActivatorService activator) : base(activator)
         {
         }
     }

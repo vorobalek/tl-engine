@@ -1,7 +1,6 @@
 ﻿using ExtCore.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,27 +13,26 @@ using TL.Api.SDK.Attributes.Http;
 using TL.Api.SDK.Extensions;
 using TL.Engine.Data.Managers;
 using TL.Engine.SDK.Attributes.Api.Executable;
-
+using TL.Engine.SDK.Services;
 using TlUser = TL.Engine.Data.Entities.Security.User;
 
 namespace TL.Api.Web.Api.System
 {
     public class ExecuteController : _SystemApiController
     {
-        IServiceProvider ServiceProvider { get; set; }
-
+        IActivatorService Activator { get; }
         ITokenManager TokenManager { get; set; }
 
         ITokenLogManager TokenLogManager { get; set; }
 
         IUserManager UserManager { get; set; }
 
-        public ExecuteController(IServiceProvider serviceProvider, ITokenManager tokenManager, ITokenLogManager tokenLogManager, IUserManager userManager)
+        public ExecuteController(ITokenManager tokenManager, ITokenLogManager tokenLogManager, IUserManager userManager, IActivatorService activator)
         {
-            ServiceProvider = serviceProvider;
             TokenManager = tokenManager;
             TokenLogManager = tokenLogManager;
             UserManager = userManager;
+            Activator = activator;
         }
 
         public override string Command => "system.Execute";
@@ -54,14 +52,14 @@ namespace TL.Api.Web.Api.System
             var type = m[0];
             var func = m[1];
 
-            var existType = ExtensionManager.Assemblies.SelectMany(a => a.GetTypes()).FirstOrDefault(t => t.FullName == type);
+            var existType = Activator.Assemblies.SelectMany(a => a.GetTypes()).FirstOrDefault(t => t.FullName == type);
 
             if (existType == null)
             {
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
-            var instance = ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, existType);
+            var instance = Activator.GetServiceOrCreateInstance(existType);
 
             var existMethod = existType.GetMethods().Where(mt => mt.GetCustomAttributes<PublicApiAttribute>(true).Count() > 0 && mt.Name == func).FirstOrDefault();
 
@@ -128,7 +126,7 @@ namespace TL.Api.Web.Api.System
             var type = m[0];
             var func = m[1];
 
-            var existType = ExtensionManager.Assemblies.SelectMany(a => a.GetTypes()).FirstOrDefault(t => t.FullName == type);
+            var existType = Activator.Assemblies.SelectMany(a => a.GetTypes()).FirstOrDefault(t => t.FullName == type);
 
             if (existType == null)
             {
@@ -137,7 +135,7 @@ namespace TL.Api.Web.Api.System
                 return this.JsonResponse(false, error_code: StatusCodes.Status404NotFound);
             }
 
-            var instance = ActivatorUtilities.GetServiceOrCreateInstance(ServiceProvider, existType);
+            var instance = Activator.GetServiceOrCreateInstance(existType);
 
             var existMethod = existType.GetMethods().Where(mt => mt.GetCustomAttributes<PrivateApiAttribute>(true).Count() > 0 && mt.Name == func).FirstOrDefault();
 

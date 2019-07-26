@@ -2,12 +2,17 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message
 {
     public abstract class MessageHCommandMethod : HCommandMethod
     {
+        public MessageHCommandMethod(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override UpdateType UpdateType => UpdateType.Message;
 
         public override bool IsRelevantMethod(Update update, params object[] args)

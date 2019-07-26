@@ -2,12 +2,17 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Callback
 {
     public abstract class CallbackHCommandMethod : HCommandMethod
     {
+        public CallbackHCommandMethod(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override UpdateType UpdateType => UpdateType.CallbackQuery;
 
         public override bool IsRelevantMethod(Update update, params object[] args)

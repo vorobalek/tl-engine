@@ -1,11 +1,16 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Callback.Default
 {
     public class Main : DefaultBotCallbackHCommandMethod
     {
+        public Main(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override string Command => "main";
 
         public override string Description => "";

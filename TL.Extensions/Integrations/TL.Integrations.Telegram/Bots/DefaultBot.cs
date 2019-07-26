@@ -3,17 +3,14 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using TL.Integrations.SDK.Telegram.Messages;
 using TL.Integrations.SDK.Telegram.Attributes;
+using TL.Engine.SDK.Services;
 
 namespace TL.Integrations.Telegram.Bots
 {
     [Bot("Демо")]
     public class DefaultBot : BaseBot
     {
-        public DefaultBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : this(serviceProvider, token, null, skipUpdates)
-        {
-        }
-
-        public DefaultBot(IServiceProvider serviceProvider, string token, string name = null, bool skipUpdates = false) : base(serviceProvider, token, name, skipUpdates)
+        public DefaultBot(IServiceProvider serviceProvider, IActivatorService activator) : base(serviceProvider, activator)
         {
         }
 

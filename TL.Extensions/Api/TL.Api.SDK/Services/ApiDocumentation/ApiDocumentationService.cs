@@ -149,7 +149,7 @@ namespace TL.Api.SDK.Services.ApiDocumentation
         {
             var typePublicApiAttribute = typeof(PublicApiAttribute);
             var typePrivateApiAttribute = typeof(PrivateApiAttribute);
-            Functions = ExtensionManager.Assemblies
+            Functions = Activator.Assemblies
                 .SelectMany(a => a.GetTypes())
                 .SelectMany(t => t.GetMethods())
                 .Where(m => m.GetCustomAttributes(typePrivateApiAttribute, true).Length > 0)

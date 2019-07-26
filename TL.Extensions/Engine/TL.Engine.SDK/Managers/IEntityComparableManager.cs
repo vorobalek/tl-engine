@@ -29,7 +29,7 @@ namespace TL.Engine.SDK.Managers
         /// <returns>
         /// Экземпляры отслеживаемой сущности.
         /// </returns>
-        IEnumerable<TEntity> GetByKeyAll(params TKey[] keys);
+        IEnumerable<TEntity> GetByKeys(params TKey[] keys);
 
         /// <summary>
         /// Получить объекты сущности <typeparamref name="TEntity"/> к которым есть доступ у субъекта типа <typeparamref name="TSubject"/>

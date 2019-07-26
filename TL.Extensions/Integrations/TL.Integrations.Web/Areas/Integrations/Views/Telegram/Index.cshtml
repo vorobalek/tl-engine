@@ -49,6 +49,11 @@
             $(document).find('#form-bots')[0].reset();
         }
 
+        removeSaved = function (guid) {
+            server_alert('/integrations/telegram/removesaved?id=' + guid);
+            $(document).find('#form-bots')[0].reset();
+        }
+
         kill = function (username) {
             server_alert('/integrations/telegram/kill?username=' + username);
         }

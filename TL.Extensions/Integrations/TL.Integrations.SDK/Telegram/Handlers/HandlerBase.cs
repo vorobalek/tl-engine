@@ -1,9 +1,9 @@
-﻿using ExtCore.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Bots;
 using TL.Integrations.SDK.Telegram.Extensions;
 
@@ -11,12 +11,19 @@ namespace TL.Integrations.SDK.Telegram.Handlers
 {
     public abstract class HandlerBase : IHandlerBase
     {
+        protected IActivatorService Activator { get; }
+
         public virtual IBaseBot Bot { get; protected set; }
 
-        public HandlerBase(Type botType)
+        public HandlerBase(IActivatorService activator)
+        {
+            Activator = activator;
+        }
+
+        public virtual IHandlerBase Configure(Type botType)
         {
             Methods = new List<IHandlerMethodBase>();
-            ExtensionManager
+            Activator
                 .GetInstances<IHandlerMethodBase>(useCaching: true)
                 .Where(m => !m.IsTerminated && m.HandlerType == GetType() && m.BotType == botType)
                 .ToList()
@@ -25,6 +32,7 @@ namespace TL.Integrations.SDK.Telegram.Handlers
                     m.Handler = this;
                     Methods.Add(m);
                 });
+            return this;
         }
 
         public List<IHandlerMethodBase> Methods { get; private set; }

@@ -8,7 +8,7 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using TL.Engine.Data.Managers;
-using TL.Engine.SDK.Extensions;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Extensions;
 using TL.Integrations.SDK.Telegram.Handlers;
 using TL.Integrations.SDK.Telegram.Messages;
@@ -21,28 +21,34 @@ namespace TL.Integrations.Telegram.Bots
     {
         public virtual IHandlerBase CommandHandler { get; protected set; }
 
-        protected virtual ILogger Logger { get; }
+        protected virtual ILogger Logger { get; private set; }
 
-        protected virtual IServiceProvider ServiceProvider { get; }
+        protected virtual IServiceProvider ServiceProvider { get; private set; }
 
-        protected virtual IUserManager UserManager { get; }
+        protected virtual IUserManager UserManager { get; private set; }
 
-        public BaseBot(IServiceProvider serviceProvider, string token, bool skipUpdates) : this(serviceProvider, token, null, skipUpdates)
-        {
-        }
+        protected virtual IActivatorService Activator { get; private set; }
 
-        public BaseBot(IServiceProvider serviceProvider, string token, string name = null, bool skipUpdates = false) : base(token, name, skipUpdates)
+        public BaseBot(IServiceProvider serviceProvider, IActivatorService activator)
         {
             ServiceProvider = serviceProvider;
+            Activator = activator;
+        }
 
+        public override void Configure(string token, string name = null, bool skipUpdates = false, int retryPeriod = 5000, int cancelTimeout = 5000)
+        {
             Logger = ServiceProvider.GetService<ILoggerFactory>().CreateLogger(GetType());
             Logger.TLogWarning($"Логгер для бота {name} сконфигурирован.");
 
             UserManager = ServiceProvider.GetService<IUserManager>();
             Logger.TLogWarning($"UserManager для бота {name} сконфигурирован.");
 
-            CommandHandler = new HCommand(this).ImportBaseMethods<BaseBot>();
+            CommandHandler = Activator.CreateInstance<HCommand>()
+                .Configure(this)
+                .ImportBaseMethods<BaseBot>(Activator);
             Logger.TLogWarning($"Бот {name} сконфигурирован.");
+
+            base.Configure(token, name, skipUpdates, retryPeriod, cancelTimeout);
         }
 
         public override async Task<bool> StartAsync()
@@ -101,7 +107,7 @@ namespace TL.Integrations.Telegram.Bots
 
             var user = e.Update.GetOrCreateUser(this, ServiceProvider);
 
-            var hresult = CommandHandler.ExecuteAsync(e.Update, ServiceProvider, user).Result;
+            var hresult = CommandHandler.ExecuteAsync(e.Update, user).Result;
             if (hresult.IsOk)
             {
                 Logger.TLogWarning($"Успешно обработано обновление {e.Update.GetGenericTypeString()} от {e.Update.GetSenderChatId()}");

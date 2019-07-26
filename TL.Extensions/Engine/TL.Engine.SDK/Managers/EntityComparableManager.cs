@@ -36,7 +36,7 @@ namespace TL.Engine.SDK.Managers
         /// </returns>
         public virtual TEntity GetByKey(TKey key)
         {
-            return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().Get(key);
+            return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().GetByKey(key);
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace TL.Engine.SDK.Managers
         /// <returns>
         /// Экземпляры отслеживаемой сущности.
         /// </returns>
-        public virtual IEnumerable<TEntity> GetByKeyAll(params TKey[] keys)
+        public virtual IEnumerable<TEntity> GetByKeys(params TKey[] keys)
         {
-            return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().GetAll(keys);
+            return Storage.GetRepository<IEntityComparableRepository<TEntity, TKey>>().GetByKeys(keys);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace TL.Engine.SDK.Managers
             });
             dynamic permissionRepository = permissionRawRepository;
             var allowedEntityIds = permissionRepository.GetAll(predicateGet) as IEnumerable<Permission<TSubject, TSubjectKey, TEntity, TKey>>;
-            var result = GetByKeyAll(allowedEntityIds.Select(e => e.ObjectId).ToArray());
+            var result = GetByKeys(allowedEntityIds.Select(e => e.ObjectId).ToArray());
             return result;
         }
 

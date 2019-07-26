@@ -23,7 +23,7 @@ namespace TL.Engine.SDK.Repositories
         /// <returns>
         /// Экземпляр отслеживаемой сущности.
         /// </returns>
-        public TEntity Get(TKey key)
+        public TEntity GetByKey(TKey key)
         {
             return Load(dbSet.Find(key));
         }
@@ -35,9 +35,9 @@ namespace TL.Engine.SDK.Repositories
         /// <returns>
         /// Экземпляры отслеживаемой сущности.
         /// </returns>
-        public IEnumerable<TEntity> GetAll(params TKey[] keys)
+        public IEnumerable<TEntity> GetByKeys(params TKey[] keys)
         {
-            return keys.Select(k => Get(k));
+            return keys.Select(k => GetByKey(k));
         }
     }
 }

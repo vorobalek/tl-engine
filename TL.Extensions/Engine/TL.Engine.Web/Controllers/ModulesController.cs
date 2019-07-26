@@ -1,39 +1,37 @@
-﻿using ExtCore.Infrastructure;
-using ExtCore.WebApplication;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Reflection;
+using TL.Engine.SDK.Controllers;
+using TL.Engine.SDK.Services;
 using TL.Engine.Web.ViewModels.SystemActiveModules;
 
 namespace TL.Engine.Web.Controllers
 {
     [Authorize(Roles = "sa")]
-    public class ModulesController : Controller
+    public class ModulesController : BaseController
     {
         IHostingEnvironment Environment { get; set; }
 
         IConfiguration Configuration { get; set; }
 
-        IServiceProvider ServiceProvider { get; set; }
+        IActivatorService Activator { get; }
 
-        public ModulesController(IHostingEnvironment environment, IConfiguration configuration, IServiceProvider serviceProvider)
+        public ModulesController(IHostingEnvironment environment, IConfiguration configuration, IActivatorService activator)
         {
             Environment = environment;
             Configuration = configuration;
-            ServiceProvider = serviceProvider;
+            Activator = activator;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new SystemActiveModulesViewModelFactory().Create(Environment, Configuration));
+            return View(new SystemActiveModulesViewModelFactory().Create(Environment, Configuration, Activator));
         }
 
         [HttpPost]
@@ -67,7 +65,7 @@ namespace TL.Engine.Web.Controllers
             {
                 ModelState.AddModelError("package_file", "Файл имел неверное расширение. Требуется .tle");
             }
-            return View(new SystemActiveModulesViewModelFactory().Create(Environment, Configuration));
+            return View(new SystemActiveModulesViewModelFactory().Create(Environment, Configuration, Activator));
         }
 
         [HttpPost]

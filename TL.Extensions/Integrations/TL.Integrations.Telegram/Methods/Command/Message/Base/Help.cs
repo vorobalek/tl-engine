@@ -1,12 +1,17 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using TL.Engine.SDK.Services;
 using TL.Integrations.SDK.Telegram.Handlers;
 
 namespace TL.Integrations.Telegram.Methods.Command.Message.Base
 {
     public class Help : BaseBotMessageHCommandMethod
     {
+        public Help(IActivatorService activator) : base(activator)
+        {
+        }
+
         public override string Command => "/help";
 
         public override string Description => "Вывести все доступные команды с описанием";
