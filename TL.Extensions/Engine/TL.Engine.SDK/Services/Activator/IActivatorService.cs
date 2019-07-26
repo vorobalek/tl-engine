@@ -12,6 +12,70 @@ namespace TL.Engine.SDK.Services
         IEnumerable<Assembly> Assemblies { get; }
 
         /// <summary>
+        /// Получить наследника типа <paramref name="targetType"/>
+        /// </summary>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        Type GetInheritor(Type targetType, bool useCaching = true);
+
+        /// <summary>
+        /// Получить наследника типа <paramref name="targetType"/>, удовлетворяющую предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        Type GetInheritor(Type targetType, Func<Assembly, bool> predicate, bool useCaching = true);
+
+        /// <summary>
+        /// Получить всех наследников типа <paramref name="targetType"/>.
+        /// </summary>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        IEnumerable<Type> GetInheritors(Type targetType, bool useCaching = true);
+
+        /// <summary>
+        /// Получить всех наследников типа <paramref name="targetType"/>, удовлетворяющие предикату.
+        /// </summary>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        IEnumerable<Type> GetInheritors(Type targetType, Func<Assembly, bool> predicate, bool useCaching = true);
+
+        /// <summary>
+        /// Получить наследника типа <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Целевой тип</typeparam>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        Type GetInheritor<T>(bool useCaching = true);
+
+        /// <summary>
+        /// Получить наследника типа <typeparamref name="T"/>, удовлетворяющую предикату.
+        /// </summary>
+        /// <typeparam name="T">Целевой тип</typeparam>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        Type GetInheritor<T>(Func<Assembly, bool> predicate, bool useCaching = true);
+
+        /// <summary>
+        /// Получить всех наследников типа <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Целевой тип</typeparam>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        IEnumerable<Type> GetInheritors<T>(bool useCaching = true);
+
+        /// <summary>
+        /// Получить всех наследников типа <typeparamref name="T"/>, удовлетворяющие предикату.
+        /// </summary>
+        /// <typeparam name="T">Целевой тип</typeparam>
+        /// <param name="predicate">Предикат-функция.</param>
+        /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
+        /// <returns></returns>
+        IEnumerable<Type> GetInheritors<T>(Func<Assembly, bool> predicate, bool useCaching = true);
+
+        /// <summary>
         /// Получить реализацию типа <paramref name="targetType"/>
         /// </summary>
         /// <param name="useCaching">Если <c>true</c> будет использован локальный кэш.</param>
@@ -152,6 +216,20 @@ namespace TL.Engine.SDK.Services
         /// <param name="type">Целевой тип</param>
         /// <returns></returns>
         object GetServiceOrCreateInstance(Type type);
+
+        /// <summary>
+        /// Получить сервис типа <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Целевой тип</typeparam>
+        /// <returns></returns>
+        T GetService<T>();
+
+        /// <summary>
+        /// Получить сервис типа <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="type">Целевой тип</param>
+        /// <returns></returns>
+        object GetService(Type type);
 
         /// <summary>
         /// Создать экземпляр типа <typeparamref name="T"/>.

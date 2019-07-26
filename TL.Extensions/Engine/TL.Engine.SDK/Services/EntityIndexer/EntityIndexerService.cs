@@ -102,13 +102,12 @@ namespace TL.Engine.SDK.Services
                     {
                         Logger.TLogInformation($"Indexing {entityType} running...");
                         var managerType = Activator
-                                .GetImplementations<IEntityManager>()
-                                .FirstOrDefault(rt => !rt.IsAbstract
-                                && Activator.GetServiceOrCreateInstance(rt) is IEntityManager manager
+                                .GetInheritors<IEntityManager>()
+                                .FirstOrDefault(it => Activator.GetService(it) is IEntityManager manager
                                 && manager.TargetType == entityType);
                         if (managerType != null)
                         {
-                            if (Activator.GetServiceOrCreateInstance(managerType.GetInterfaces().Last()) is IEntityManager managerInstance)
+                            if (Activator.GetServiceOrCreateInstance(managerType) is IEntityManager managerInstance)
                             {
                                 var entities = managerInstance.GetAll(loadDeleted: true);
                                 foreach (var entity in entities)
@@ -116,6 +115,10 @@ namespace TL.Engine.SDK.Services
                                     Add(entity);
                                 }
                             }
+                        }
+                        else
+                        {
+                            Logger.TLogError($"A manager of entity type {entityType.GetFullName()} does not exist.");
                         }
                         Logger.TLogInformation($"Indexing {entityType} finished...");
                     }
