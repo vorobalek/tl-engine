@@ -58,7 +58,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
             {
                 message = "Не удалось разобрать идентефикатор бота";
             }
-            return PartialView("_StatusMessage", message);
+            return PartialView($"_StatusMessage", message);
         }
 
         [HttpPost]
@@ -89,7 +89,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
             {
                 message = "Не удалось разобрать идентефикатор бота";
             }
-            return PartialView("_StatusMessage", message);
+            return PartialView($"_StatusMessage", message);
         }
 
         [HttpPost]
@@ -120,7 +120,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
             {
                 message = "Одно или несколько полей были заполнены неверно";
             }
-            return PartialView("_StatusMessage", message);
+            return PartialView($"_StatusMessage", message);
         }
 
         [HttpPost]
@@ -153,7 +153,7 @@ namespace TL.Integrations.Web.Areas.Integrations.Controllers
                     message = $"Не удалось остановить бота @{username}";
                 }
             }
-            return PartialView("_StatusMessage", message);
+            return PartialView($"_StatusMessage", message);
         }
     }
 }

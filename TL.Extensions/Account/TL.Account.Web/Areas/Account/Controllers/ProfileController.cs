@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TL.Account.Data.Abstractions.Relationships;
 using TL.Account.Data.Extensions;
@@ -45,10 +46,10 @@ namespace TL.Account.Web.Areas.Account.Controllers
                     var item = SubscriptionManager.Get(e => e.FromId == user.Id && e.ToId == id);
                     if (item == null)
                     {
-                        var subsription = SubscriptionManager.CreateEmpty(cacheOnly: true);
-                        subsription.FromId = user.Id;
-                        subsription.ToId = id;
-                        SubscriptionManager.Create(subsription);
+                        var subscription = SubscriptionManager.CreateEmpty(cacheOnly: true);
+                        subscription.FromId = user.Id;
+                        subscription.ToId = id;
+                        SubscriptionManager.Create(subscription);
 
                         message = $"Вы успешно подписались на этого пользователя";
                     }
@@ -62,7 +63,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                     message = $"Вашей учетной записи не существует";
                 }
             }
-            return PartialView("_StatusMessage", message);
+            return PartialView($"_StatusMessage", message);
         }
 
         [Authorize]
@@ -91,7 +92,7 @@ namespace TL.Account.Web.Areas.Account.Controllers
                     message = $"Вашей учетной записи не существует";
                 }
             }
-            return PartialView("_StatusMessage", message);
+            return PartialView($"_StatusMessage", message);
         }
 
         [HttpGet("[area]/[controller]/{username}")]
@@ -104,17 +105,19 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 return View(null);
             }
 
-            var user_followers = user.GetFollowersUids(Storage);
-            var user_subscriptions = user.GetSubscriptionsUids(Storage);
+            var userFollowers = user.GetFollowersUids(Storage);
+            var userSubscriptions = user.GetSubscriptionsUids(Storage);
             var requester = UserManager.GetByClaims(User);
 
             bool isF = false,
                 isS = false;
 
+            var userSubscriptionsList = userSubscriptions.ToList();
+            var userFollowersList = userFollowers.ToList();
             if (requester != null)
             {
-                isF = user_subscriptions.Contains(requester.Id);
-                isS = user_followers.Contains(requester.Id);
+                isF = userSubscriptionsList.Contains(requester.Id);
+                isS = userFollowersList.Contains(requester.Id);
             }
 
             return View(new ProfileViewModel()
@@ -122,8 +125,8 @@ namespace TL.Account.Web.Areas.Account.Controllers
                 Id = user.Id,
                 Username = user.Username,
                 Description = user.Description,
-                FollowersCount = user_followers.Count(),
-                SubscriptionsCount = user_subscriptions.Count(),
+                FollowersCount = userFollowersList.Count(),
+                SubscriptionsCount = userSubscriptionsList.Count(),
                 IsFollower = isF,
                 IsSubscription = isS
             });
