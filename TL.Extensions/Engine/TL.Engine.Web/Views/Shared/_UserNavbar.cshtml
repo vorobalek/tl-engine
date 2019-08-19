@@ -15,7 +15,7 @@
                 <img src="~/Styles/images/pack/png/locked-6.png" alt="User Logo" width="auto" height="32px" class="rounded-circle" />
             }
         </button>
-        <div class="dropdown-menu shadow-sm rounded border" aria-labelledby="navbarDropdown" style="width:200px;">
+        <div class="dropdown-menu shadow-sm rounded border" aria-labelledby="navbarDropdown" style="width:auto;">
             @if (User.Identity.IsAuthenticated)
             {
                 var name = User.Identity.Name.Length > 17 ? $"{User.Identity.Name.Substring(0, 17)}..." : User.Identity.Name;
@@ -29,6 +29,7 @@
                         </div>
                     </div>
                 </a>
+                <div class="dropdown-divider"></div>
             }
 
             @foreach (var item in this.Model.Items)

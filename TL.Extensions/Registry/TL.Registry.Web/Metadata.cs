@@ -29,10 +29,10 @@ namespace TL.Registry.Web
 
         protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
         {
-            new LinkItem("/registry/files", "Все файлы", "Показать все файлы без привязки к репозиториям", 1000),
-            new LinkItem("/registry/permissions", "Права доступа к репозиториям", "Управление правами доступа к репозиториям", 1000),
-            new LinkItem("/registry/folders/permissions", "Права доступа к каталогам репозиториев", "Управление правами доступа к каталогам репозиториев", 1000),
-            new LinkItem("/registry/files/permissions", "Права доступа к файлам репозиториев", "Управление правами доступа к файлам репозиториев", 1000),
+            new NotAvailableLinkItem("/registry/files", "Все файлы", "Показать все файлы без привязки к репозиториям", 1000),
+            new NotAvailableLinkItem("/registry/permissions", "Права доступа к репозиториям", "Управление правами доступа к репозиториям", 1000),
+            new NotAvailableLinkItem("/registry/folders/permissions", "Права доступа к каталогам репозиториев", "Управление правами доступа к каталогам репозиториев", 1000),
+            new NotAvailableLinkItem("/registry/files/permissions", "Права доступа к файлам репозиториев", "Управление правами доступа к файлам репозиториев", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]

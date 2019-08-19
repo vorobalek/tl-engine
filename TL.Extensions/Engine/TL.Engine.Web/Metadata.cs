@@ -10,9 +10,9 @@ namespace TL.Engine.Web
 {
     public class Metadata : BaseMetadataWeb
     {
-        public override string Name => "TL.Engine.Web";
+        public override string Name => "Core.Web";
 
-        public override string Owner => "TL.Engine";
+        public override string Owner => "Core";
 
         public override string Description =>
             $"Модуль веб-оболочки. Реализует логику представлений, моделей и обработку сущностей {Owner}.";
@@ -43,7 +43,6 @@ namespace TL.Engine.Web
 
         public override IEnumerable<LinkItem> SidebarItems => new LinkItem[]
         {
-            new LinkItem("/welcome", "Добро пожаловать!", int.MinValue, new string[] { Role.DefaultUser.Name }),
             new LinkItem("Ядро", int.MaxValue, new string[] { Role.Sa.Name }, new[]
             {
                 new LinkItem("/modules", "Модули", "Управление модулями системы, установка/обновление/удаление компонентов.", 1000),
@@ -56,16 +55,27 @@ namespace TL.Engine.Web
                 .OrderBy(g => g.Key)
                 .SelectMany(g => g.Select(m => m))
                 .Select(m => m.GetAdminItems()
-                    .Select(it => new LinkItem(it.Url, it.Name, $"{(string.IsNullOrWhiteSpace(it.Description) ? "" : $"{it.Description} ")}({m.Owner})", it.Position, it.Roles, it.Items)))
+                    .Select(it =>
+                    {
+                        if (it is NotAvailableLinkItem)
+                        {
+                            return new NotAvailableLinkItem(it.Url, it.Name, $"{(string.IsNullOrWhiteSpace(it.Description) ? "" : $"{it.Description} ")}({m.Owner})", it.Position, it.Roles, it.Items);
+                        }
+                        else
+                        {
+                            return new LinkItem(it.Url, it.Name, $"{(string.IsNullOrWhiteSpace(it.Description) ? "" : $"{it.Description} ")}({m.Owner})", it.Position, it.Roles, it.Items);
+                        }
+                    }))
                 .SelectMany(it => it)),
         };
 
         protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
         {
-            new LinkItem("/admin/users", "Пользователи", "Управление учётными записями пользователей.", 1000),
-            new LinkItem("/admin/groups", "Группы", "Управление группами пользователей.", 1000),
-            new LinkItem("/admin/roles", "Роли", "Управление ролями пользователей в системе.", 1000),
-            new LinkItem("/admin/updating", "Обновления", "Настройка времени автоматического обновления компонентов системы", 1000),
+            new NotAvailableLinkItem("/admin/users", "Пользователи", "Управление учётными записями пользователей.", 1000),
+            new NotAvailableLinkItem("/admin/groups", "Группы", "Управление группами пользователей.", 1000),
+            new NotAvailableLinkItem("/admin/roles", "Роли", "Управление ролями пользователей в системе.", 1000),
+            new NotAvailableLinkItem("/admin/updating", "Обновления", "Настройка времени автоматического обновления компонентов системы.", 1000),
+            new NotAvailableLinkItem("/admin/reports", "Отчёты об ошибках", "Просмотреть отчёты об ошибках, отправленных пользователями..", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
@@ -77,6 +87,8 @@ namespace TL.Engine.Web
 
         public override IEnumerable<LinkItem> UserNavbarItems => new LinkItem[]
         {
+            new LinkItem("/welcome", "Добро пожаловать!", "Приветственная страница системы TL Engine.", int.MinValue, new string[] { Role.DefaultUser.Name }),
+            new NotAvailableLinkItem("/settings", "Настройки", "Ваши личные настройки системы TL Engine.", 1000, new string[] { Role.DefaultUser.Name }),
         };
     }
 }

@@ -1,5 +1,15 @@
 ﻿@model TL.Engine.Web.ViewModels.Shared.LinkViewModel
 
-<a class="dropdown-item" href="@Url.Content(Model.Url)" data-toggle="tooltip" data-placement="left" title="@Model.Description">
-    @Model.Name
-</a>
+@if (Model.IsAvailable)
+{
+    <a class="dropdown-item" href="@Url.Content(Model.Url)" data-toggle="tooltip" data-placement="left" title="@Model.Description">
+        @Model.Name
+    </a>
+}
+else
+{
+    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="left" title="(Пока недоступно) @Model.Description">
+        @Model.Name
+        <span class="badge badge-pill badge-danger">Скоро</span>
+    </a>
+}

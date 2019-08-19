@@ -13,9 +13,19 @@
                 <nav class="list-group nav flex-column nav-pills h6 list-group">
                     @foreach (var item in Model.Sections[sectionName])
                     {
-                        <a class="nav-link list-group-item" href="@Url.Content(item.Url)" data-toggle="tooltip" data-placement="right" title="@item.Description">
-                            @item.Name
-                        </a>
+                        @if (item.IsAvailable)
+                        {
+                            <a class="nav-link list-group-item" href="@Url.Content(item.Url)" data-toggle="tooltip" data-placement="right" title="@item.Description">
+                                @item.Name
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="nav-link list-group-item" href="#" data-toggle="tooltip" data-placement="right" title="(Пока недоступно) @item.Description">
+                                @item.Name
+                                <span class="badge badge-pill badge-danger">Скоро</span>
+                            </a>
+                        }
                     }
                 </nav>
             </div>

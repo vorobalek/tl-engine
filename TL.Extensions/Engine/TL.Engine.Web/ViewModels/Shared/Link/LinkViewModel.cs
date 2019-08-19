@@ -9,5 +9,6 @@ namespace TL.Engine.Web.ViewModels.Shared
         public string Description { get; set; }
         public IEnumerable<LinkViewModel> Items { get; set; }
         public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
+        public bool IsAvailable { get; set; }
     }
 }

@@ -53,6 +53,8 @@ namespace TL.Engine.SDK.Modularity.Items
         /// </summary>
         public IEnumerable<string> Roles { get; set; }
 
+        public virtual bool IsAvailable => true;
+
         public LinkItem(string url, string name, int position, IEnumerable<string> roles = null, IEnumerable<LinkItem> items = null)
             : this(url, name, null, position, roles, items)
         {

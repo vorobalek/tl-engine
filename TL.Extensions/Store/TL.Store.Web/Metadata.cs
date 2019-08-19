@@ -15,7 +15,7 @@ namespace TL.Store.Web
 
         public override IEnumerable<LinkItem> NavbarItems => new LinkItem[]
         {
-            new LinkItem("/store", "Store", 100),
+            new NotAvailableLinkItem("/store", "Store", "Магазин модулей.", 100),
         };
 
         public override IEnumerable<ScriptItem> ScriptItems => new ScriptItem[]
@@ -28,7 +28,7 @@ namespace TL.Store.Web
 
         protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
         {
-            new LinkItem("/store/settings", "Настройки магазина модулей", "Настройки модуля Store", 1000),
+            new NotAvailableLinkItem("/store/settings", "Настройки магазина модулей", "Настройки модуля Store", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
