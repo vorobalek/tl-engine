@@ -75,7 +75,8 @@ namespace TL.Engine.Web
             new NotAvailableLinkItem("/admin/groups", "Группы", "Управление группами пользователей.", 1000),
             new NotAvailableLinkItem("/admin/roles", "Роли", "Управление ролями пользователей в системе.", 1000),
             new NotAvailableLinkItem("/admin/updating", "Обновления", "Настройка времени автоматического обновления компонентов системы.", 1000),
-            new NotAvailableLinkItem("/admin/reports", "Отчёты об ошибках", "Просмотреть отчёты об ошибках, отправленных пользователями..", 1000),
+            new NotAvailableLinkItem("/admin/reports", "Отчёты об ошибках", "Просмотреть отчёты об ошибках, отправленных пользователями.", 1000),
+            new NotAvailableLinkItem("/saas", "Режим SaaS", "Этот режим позволяет превратить ваш сервер TL Engine в систему по оказанию услуг облачного развертывания серверов TL Engine.", 1000),
         };
 
         public override IEnumerable<StyleItem> StyleItems => new StyleItem[]
