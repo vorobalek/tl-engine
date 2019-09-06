@@ -21,7 +21,7 @@ namespace TL.Integrations.Telegram.Actions
 
         public int Priority => 10000;
 
-        public string Description => "Автозапуск ботов Telegram";
+        public string Description => "Автозапуск ботов Telegram.";
 
         public AutoStartBotServiceStartupAction(ITelegramBotProviderService telegramBotProvider, ITgBotManager tgBotManager, ILogger<AutoStartBotServiceStartupAction> logger, IStartupService service)
         {

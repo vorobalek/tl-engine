@@ -14,7 +14,7 @@ namespace TL.Engine.Web.Actions
 
         public int Priority => 1000;
 
-        public string Description => "Проверка системных переменных ядра";
+        public string Description => "Проверка системных переменных ядра.";
 
         public CheckEngineSystemStringVaribaleStartupAction(IStringVariableManager stringVariableManager, IStartupService service)
         {
@@ -35,6 +35,7 @@ namespace TL.Engine.Web.Actions
                 Service.InvokeCallback($"Восстановление {CheckActivityMiddleware.UpdateActivityEnableVariable}", 100);
                 StringVariableManager.Create(new StringVariable(CheckActivityMiddleware.UpdateActivityEnableVariable, false.ToString()));
             }
+
             return StartupActionResult.Good(description: Description);
         }
     }

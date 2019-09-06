@@ -15,7 +15,7 @@ namespace TL.Linker.Data.Actions
 
         public int Priority => 10000;
 
-        public string Description => "Проверка системных переменных модуля Linker";
+        public string Description => "Проверка системных переменных модуля Linker.";
 
         public CheckLinkerSystemVariableStarupAction(IStringVariableManager stringVariableManager, IStartupService service)
         {

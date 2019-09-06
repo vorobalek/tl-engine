@@ -23,7 +23,7 @@ namespace TL.Engine.Actions.Startup
 
         public int Priority => 200;
 
-        public string Description => $"Проверка существования БД";
+        public string Description => $"Проверка существования БД.";
 
         public IStartupActionResult Invoke()
         {
