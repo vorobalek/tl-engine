@@ -98,7 +98,7 @@ namespace TL.Engine.SDK.Extensions
 
         public static T FromByteArray<T>(this byte[] data)
         {
-            if (data == null) return default;
+            if (data == null) return default(T);
             BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream(data))
             {
