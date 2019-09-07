@@ -37,44 +37,44 @@ namespace TL.Store.Data.EntityFramework.Commons
         #region RegistryPermissions
 
         public static Permission StoreRegistrySaUserPermission =>
-            Permission.Generic<User, Guid, Registry.Data.Entities.Core.Registry, Guid>((User.Sa.Id, StoreRegistry.Id), AccessMode.All);
+            Permission.Generic((User.Sa.Id, StoreRegistry.Id), AccessMode.All);
 
         public static Permission StoreRegistrySystemUserPermission =>
-            Permission.Generic<User, Guid, Registry.Data.Entities.Core.Registry, Guid>((User.System.Id, StoreRegistry.Id), AccessMode.All);
+            Permission.Generic((User.System.Id, StoreRegistry.Id), AccessMode.All);
 
         public static Permission StoreRegistrySaGroupPermission =>
-            Permission.Generic<Group, Guid, Registry.Data.Entities.Core.Registry, Guid>((Group.Sa.Id, StoreRegistry.Id), AccessMode.All);
+            Permission.Generic((Group.Sa.Id, StoreRegistry.Id), AccessMode.All);
 
         public static Permission StoreRegistrySystemGroupPermission =>
-            Permission.Generic<Group, Guid, Registry.Data.Entities.Core.Registry, Guid>((Group.System.Id, StoreRegistry.Id), AccessMode.All);
+            Permission.Generic((Group.System.Id, StoreRegistry.Id), AccessMode.All);
 
         public static Permission StoreRegistrySaRolePermission =>
-            Permission.Generic<Role, Guid, Registry.Data.Entities.Core.Registry, Guid>((Role.Sa.Id, StoreRegistry.Id), AccessMode.All);
+            Permission.Generic((Role.Sa.Id, StoreRegistry.Id), AccessMode.All);
 
         public static Permission StoreRegistrySystemRolePermission =>
-            Permission.Generic<Role, Guid, Registry.Data.Entities.Core.Registry, Guid>((Role.System.Id, StoreRegistry.Id), AccessMode.All);
+            Permission.Generic((Role.System.Id, StoreRegistry.Id), AccessMode.All);
 
         #endregion
 
         #region RegistryFolderPermissions
 
         public static Permission StoreRegistryFolderSaUserPermission =>
-            Permission.Generic<User, Guid, Registry.Data.Entities.Core.Folder, Guid>((User.Sa.Id, StoreRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((User.Sa.Id, StoreRegistryFolder.Id), AccessMode.All);
 
         public static Permission StoreRegistryFolderSystemUserPermission =>
-            Permission.Generic<User, Guid, Registry.Data.Entities.Core.Folder, Guid>((User.System.Id, StoreRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((User.System.Id, StoreRegistryFolder.Id), AccessMode.All);
 
         public static Permission StoreRegistryFolderSaGroupPermission =>
-            Permission.Generic<Group, Guid, Registry.Data.Entities.Core.Folder, Guid>((Group.Sa.Id, StoreRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Group.Sa.Id, StoreRegistryFolder.Id), AccessMode.All);
 
         public static Permission StoreRegistryFolderSystemGroupPermission =>
-            Permission.Generic<Group, Guid, Registry.Data.Entities.Core.Folder, Guid>((Group.System.Id, StoreRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Group.System.Id, StoreRegistryFolder.Id), AccessMode.All);
 
         public static Permission StoreRegistryFolderSaRolePermission =>
-            Permission.Generic<Role, Guid, Registry.Data.Entities.Core.Folder, Guid>((Role.Sa.Id, StoreRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Role.Sa.Id, StoreRegistryFolder.Id), AccessMode.All);
 
         public static Permission StoreRegistryFolderSystemRolePermission =>
-            Permission.Generic<Role, Guid, Registry.Data.Entities.Core.Folder, Guid>((Role.System.Id, StoreRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Role.System.Id, StoreRegistryFolder.Id), AccessMode.All);
 
         #endregion
 

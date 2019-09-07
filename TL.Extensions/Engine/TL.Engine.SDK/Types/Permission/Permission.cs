@@ -17,19 +17,15 @@ namespace TL.Engine.SDK.Types
         public virtual byte[] SubjectId { get; set; }
         public virtual byte[] ObjectId { get; set; }
 
-        public static Permission Generic<TSubject, TSubjectKey, TObject, TObjectKey>((TSubjectKey, TObjectKey) id, AccessMode mode)
-            where TSubject : IEntityComparable<TSubjectKey>
+        public static Permission Generic<TSubjectKey, TObjectKey>((TSubjectKey, TObjectKey) id, AccessMode mode)
             where TSubjectKey : IComparable
-            where TObject : IEntityComparable<TObjectKey>
             where TObjectKey : IComparable
         {
-            return Generic<TSubject, TSubjectKey, TObject, TObjectKey>(id, mode, DateTime.UnixEpoch, DateTime.UnixEpoch);
+            return Generic<TSubjectKey, TObjectKey>(id, mode, DateTime.UnixEpoch, DateTime.UnixEpoch);
         }
 
-        public static Permission Generic<TSubject, TSubjectKey, TObject, TObjectKey>((TSubjectKey, TObjectKey) id, AccessMode mode, DateTime creationDate, DateTime modifiedDate)
-            where TSubject : IEntityComparable<TSubjectKey>
+        public static Permission Generic<TSubjectKey, TObjectKey>((TSubjectKey, TObjectKey) id, AccessMode mode, DateTime creationDate, DateTime modifiedDate)
             where TSubjectKey : IComparable
-            where TObject : IEntityComparable<TObjectKey>
             where TObjectKey : IComparable
         {
             return new Permission()

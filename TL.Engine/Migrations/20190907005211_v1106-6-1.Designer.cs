@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TL.Engine.Migrations
 {
     [DbContext(typeof(StorageContext))]
-    [Migration("20190907000035_v1106-6-1")]
+    [Migration("20190907005211_v1106-6-1")]
     partial class v110661
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -343,7 +343,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "sa",
-                            WebTicket = new Guid("ec2d67a4-1b41-4590-b75b-70c0fbe5e382")
+                            WebTicket = new Guid("258e4316-b782-4df5-a3ea-fb39297f3715")
                         },
                         new
                         {
@@ -356,7 +356,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "user",
-                            WebTicket = new Guid("c420a6fb-e40d-41a1-b157-f414a1b61779")
+                            WebTicket = new Guid("6431c010-1aa0-4f90-acf5-9ab75611ea0d")
                         },
                         new
                         {
@@ -369,7 +369,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "system",
-                            WebTicket = new Guid("6a51bd6d-3aa3-4bc2-aa5d-46ad66b4e9ca")
+                            WebTicket = new Guid("5d2c3ae8-316e-46f3-87ae-514c43289eb2")
                         });
                 });
 

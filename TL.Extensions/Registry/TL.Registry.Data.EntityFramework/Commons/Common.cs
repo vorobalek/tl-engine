@@ -111,44 +111,44 @@ namespace TL.Registry.Data.EntityFramework.Commons
         #region RegistryPermissions
 
         public static Permission RootRegistrySaUserPermission =>
-            Permission.Generic<User, Guid, Entities.Core.Registry, Guid>((User.Sa.Id, RootRegistry.Id), AccessMode.All);
+            Permission.Generic((User.Sa.Id, RootRegistry.Id), AccessMode.All);
 
         public static Permission RootRegistrySystemUserPermission =>
-            Permission.Generic<User, Guid, Entities.Core.Registry, Guid>((User.System.Id, RootRegistry.Id), AccessMode.All);
+            Permission.Generic((User.System.Id, RootRegistry.Id), AccessMode.All);
 
         public static Permission RootRegistrySaGroupPermission =>
-            Permission.Generic<Group, Guid, Entities.Core.Registry, Guid>((Group.Sa.Id, RootRegistry.Id), AccessMode.All);
+            Permission.Generic((Group.Sa.Id, RootRegistry.Id), AccessMode.All);
 
         public static Permission RootRegistrySystemGroupPermission =>
-            Permission.Generic<Group, Guid, Entities.Core.Registry, Guid>((Group.System.Id, RootRegistry.Id), AccessMode.All);
+            Permission.Generic((Group.System.Id, RootRegistry.Id), AccessMode.All);
 
         public static Permission RootRegistrySaRolePermission =>
-            Permission.Generic<Role, Guid, Entities.Core.Registry, Guid>((Role.Sa.Id, RootRegistry.Id), AccessMode.All);
+            Permission.Generic((Role.Sa.Id, RootRegistry.Id), AccessMode.All);
 
         public static Permission RootRegistrySystemRolePermission =>
-            Permission.Generic<Role, Guid, Entities.Core.Registry, Guid>((Role.System.Id, RootRegistry.Id), AccessMode.All);
+            Permission.Generic((Role.System.Id, RootRegistry.Id), AccessMode.All);
 
         #endregion
 
         #region RegistryFolderPermissions
 
         public static Permission RootRegistryFolderSaUserPermission =>
-            Permission.Generic<User, Guid, Folder, Guid>((User.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((User.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
 
         public static Permission RootRegistryFolderSystemUserPermission =>
-            Permission.Generic<User, Guid, Folder, Guid>((User.System.Id, RootRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((User.System.Id, RootRegistryFolder.Id), AccessMode.All);
 
         public static Permission RootRegistryFolderSaGroupPermission =>
-            Permission.Generic<Group, Guid, Folder, Guid>((Group.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Group.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
 
         public static Permission RootRegistryFolderSystemGroupPermission =>
-            Permission.Generic<Group, Guid, Folder, Guid>((Group.System.Id, RootRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Group.System.Id, RootRegistryFolder.Id), AccessMode.All);
 
         public static Permission RootRegistryFolderSaRolePermission =>
-            Permission.Generic<Role, Guid, Folder, Guid>((Role.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Role.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
 
         public static Permission RootRegistryFolderSystemRolePermission =>
-            Permission.Generic<Role, Guid, Folder, Guid>((Role.System.Id, RootRegistryFolder.Id), AccessMode.All);
+            Permission.Generic((Role.System.Id, RootRegistryFolder.Id), AccessMode.All);
 
         #endregion
 
