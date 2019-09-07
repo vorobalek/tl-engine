@@ -37,16 +37,6 @@ namespace TL.Registry.Data.EntityFramework.Core.Folders
                 .HasForeignKey(e => e.FolderId);
 
             builder
-                .HasMany(e => e.UserPermissions)
-                .WithOne(e => e.Object)
-                .HasForeignKey(e => e.ObjectId);
-
-            builder
-                .HasMany(e => e.GroupPermissions)
-                .WithOne(e => e.Object)
-                .HasForeignKey(e => e.ObjectId);
-
-            builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}.Folders");
         }
     }

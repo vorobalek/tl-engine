@@ -1,5 +1,6 @@
 ﻿using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using TL.Engine.SDK.Types;
 
 namespace TL.Store.Data.EntityFramework.Commons
 {
@@ -17,26 +18,14 @@ namespace TL.Store.Data.EntityFramework.Commons
                 Common.StoreRegistryFolder
             });
 
-            modelbuilder.Entity<Registry.Data.Entities.Security.UserPermission>().HasData(new[]
+            modelbuilder.Entity<Permission>().HasData(new Permission[]
             {
                 Common.StoreRegistrySaUserPermission,
-                Common.StoreRegistrySystemUserPermission
-            });
-
-            modelbuilder.Entity<Registry.Data.Entities.Security.GroupPermission>().HasData(new[]
-            {
+                Common.StoreRegistrySystemUserPermission,
                 Common.StoreRegistrySaGroupPermission,
-                Common.StoreRegistrySystemGroupPermission
-            });
-
-            modelbuilder.Entity<Registry.Data.Entities.Security.FolderUserPermission>().HasData(new[]
-            {
+                Common.StoreRegistrySystemGroupPermission,
                 Common.StoreRegistryFolderSaUserPermission,
-                Common.StoreRegistryFolderSystemUserPermission
-            });
-
-            modelbuilder.Entity<Registry.Data.Entities.Security.FolderGroupPermission>().HasData(new[]
-            {
+                Common.StoreRegistryFolderSystemUserPermission,
                 Common.StoreRegistryFolderSaGroupPermission,
                 Common.StoreRegistryFolderSystemGroupPermission
             });

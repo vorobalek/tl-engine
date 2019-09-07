@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using TL.Engine.Data.Managers;
+using TL.Engine.SDK.Managers;
 
 namespace TL.Engine.Data.Actions
 {
@@ -19,6 +20,7 @@ namespace TL.Engine.Data.Actions
             serviceCollection.AddScoped<IReportManager, ReportManager>();
             serviceCollection.AddScoped<IUserRoleManager, UserRoleManager>();
             serviceCollection.AddScoped<IUserGroupManager, UserGroupManager>();
+            serviceCollection.AddScoped<IPermissionManager, PermissionManager>();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using TL.Engine.Data.Entities.Security;
+using TL.Engine.SDK.Types;
 using TL.Engine.SDK.Types.Enums;
+using TL.Registry.Data.Entities.Core;
 
 namespace TL.Registry.Data.EntityFramework.Commons
 {
@@ -108,129 +110,45 @@ namespace TL.Registry.Data.EntityFramework.Commons
 
         #region RegistryPermissions
 
-        public static Entities.Security.UserPermission RootRegistrySaUserPermission =>
-            new Entities.Security.UserPermission()
-            {
-                SubjectId = User.Sa.Id,
-                ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistrySaUserPermission =>
+            Permission.Generic<User, Guid, Entities.Core.Registry, Guid>((User.Sa.Id, RootRegistry.Id), AccessMode.All);
 
-        public static Entities.Security.UserPermission RootRegistrySystemUserPermission =>
-            new Entities.Security.UserPermission()
-            {
-                SubjectId = User.System.Id,
-                ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistrySystemUserPermission =>
+            Permission.Generic<User, Guid, Entities.Core.Registry, Guid>((User.System.Id, RootRegistry.Id), AccessMode.All);
 
-        public static Entities.Security.GroupPermission RootRegistrySaGroupPermission =>
-            new Entities.Security.GroupPermission()
-            {
-                SubjectId = Group.Sa.Id,
-                ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistrySaGroupPermission =>
+            Permission.Generic<Group, Guid, Entities.Core.Registry, Guid>((Group.Sa.Id, RootRegistry.Id), AccessMode.All);
 
-        public static Entities.Security.GroupPermission RootRegistrySystemGroupPermission =>
-            new Entities.Security.GroupPermission()
-            {
-                SubjectId = Group.System.Id,
-                ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistrySystemGroupPermission =>
+            Permission.Generic<Group, Guid, Entities.Core.Registry, Guid>((Group.System.Id, RootRegistry.Id), AccessMode.All);
 
-        public static Entities.Security.RolePermission RootRegistrySaRolePermission =>
-            new Entities.Security.RolePermission()
-            {
-                SubjectId = Role.Sa.Id,
-                ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistrySaRolePermission =>
+            Permission.Generic<Role, Guid, Entities.Core.Registry, Guid>((Role.Sa.Id, RootRegistry.Id), AccessMode.All);
 
-        public static Entities.Security.RolePermission RootRegistrySystemRolePermission =>
-            new Entities.Security.RolePermission()
-            {
-                SubjectId = Role.System.Id,
-                ObjectId = RootRegistry.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistrySystemRolePermission =>
+            Permission.Generic<Role, Guid, Entities.Core.Registry, Guid>((Role.System.Id, RootRegistry.Id), AccessMode.All);
 
         #endregion
 
         #region RegistryFolderPermissions
 
-        public static Entities.Security.FolderUserPermission RootRegistryFolderSaUserPermission =>
-            new Entities.Security.FolderUserPermission()
-            {
-                SubjectId = User.Sa.Id,
-                ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistryFolderSaUserPermission =>
+            Permission.Generic<User, Guid, Folder, Guid>((User.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
 
-        public static Entities.Security.FolderUserPermission RootRegistryFolderSystemUserPermission =>
-            new Entities.Security.FolderUserPermission()
-            {
-                SubjectId = User.System.Id,
-                ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistryFolderSystemUserPermission =>
+            Permission.Generic<User, Guid, Folder, Guid>((User.System.Id, RootRegistryFolder.Id), AccessMode.All);
 
-        public static Entities.Security.FolderGroupPermission RootRegistryFolderSaGroupPermission =>
-            new Entities.Security.FolderGroupPermission()
-            {
-                SubjectId = Group.Sa.Id,
-                ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistryFolderSaGroupPermission =>
+            Permission.Generic<Group, Guid, Folder, Guid>((Group.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
 
-        public static Entities.Security.FolderGroupPermission RootRegistryFolderSystemGroupPermission =>
-            new Entities.Security.FolderGroupPermission()
-            {
-                SubjectId = Group.System.Id,
-                ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistryFolderSystemGroupPermission =>
+            Permission.Generic<Group, Guid, Folder, Guid>((Group.System.Id, RootRegistryFolder.Id), AccessMode.All);
 
-        public static Entities.Security.FolderRolePermission RootRegistryFolderSaRolePermission =>
-            new Entities.Security.FolderRolePermission()
-            {
-                SubjectId = Role.Sa.Id,
-                ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistryFolderSaRolePermission =>
+            Permission.Generic<Role, Guid, Folder, Guid>((Role.Sa.Id, RootRegistryFolder.Id), AccessMode.All);
 
-        public static Entities.Security.FolderRolePermission RootRegistryFolderSystemRolePermission =>
-            new Entities.Security.FolderRolePermission()
-            {
-                SubjectId = Role.System.Id,
-                ObjectId = RootRegistryFolder.Id,
-                Mode = AccessMode.All,
-                CreationDate = DateTime.UnixEpoch,
-                ModifiedDate = DateTime.UnixEpoch
-            };
+        public static Permission RootRegistryFolderSystemRolePermission =>
+            Permission.Generic<Role, Guid, Folder, Guid>((Role.System.Id, RootRegistryFolder.Id), AccessMode.All);
 
         #endregion
 

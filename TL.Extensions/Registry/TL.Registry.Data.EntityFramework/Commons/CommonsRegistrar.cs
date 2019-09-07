@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using TL.Engine.Data.Entities.Security;
+using TL.Engine.SDK.Types;
 
 namespace TL.Registry.Data.EntityFramework.Commons
 {
@@ -30,38 +31,18 @@ namespace TL.Registry.Data.EntityFramework.Commons
                 Common.RootRegistryFolder
             });
 
-            modelbuilder.Entity<Entities.Security.UserPermission>().HasData(new[]
+            modelbuilder.Entity<Permission>().HasData(new Permission[]
             {
                 Common.RootRegistrySaUserPermission,
-                Common.RootRegistrySystemUserPermission
-            });
-
-            modelbuilder.Entity<Entities.Security.GroupPermission>().HasData(new[]
-            {
+                Common.RootRegistrySystemUserPermission,
                 Common.RootRegistrySaGroupPermission,
                 Common.RootRegistrySystemGroupPermission,
-            });
-
-            modelbuilder.Entity<Entities.Security.RolePermission>().HasData(new[]
-            {
                 Common.RootRegistrySaRolePermission,
                 Common.RootRegistrySystemRolePermission,
-            });
-
-            modelbuilder.Entity<Entities.Security.FolderUserPermission>().HasData(new[]
-            {
                 Common.RootRegistryFolderSaUserPermission,
-                Common.RootRegistryFolderSystemUserPermission
-            });
-
-            modelbuilder.Entity<Entities.Security.FolderGroupPermission>().HasData(new[]
-            {
+                Common.RootRegistryFolderSystemUserPermission,
                 Common.RootRegistryFolderSaGroupPermission,
-                Common.RootRegistryFolderSystemGroupPermission
-            });
-
-            modelbuilder.Entity<Entities.Security.FolderRolePermission>().HasData(new[]
-            {
+                Common.RootRegistryFolderSystemGroupPermission,
                 Common.RootRegistryFolderSaRolePermission,
                 Common.RootRegistryFolderSystemRolePermission
             });

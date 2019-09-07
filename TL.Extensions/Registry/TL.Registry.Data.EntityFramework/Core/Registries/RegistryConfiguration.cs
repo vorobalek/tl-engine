@@ -25,21 +25,6 @@ namespace TL.Registry.Data.EntityFramework.Core.Registries
                 .HasForeignKey(e => e.RootId);
 
             builder
-                .HasMany(e => e.UserPermissions)
-                .WithOne(e => e.Object)
-                .HasForeignKey(e => e.ObjectId);
-
-            builder
-                .HasMany(e => e.GroupPermissions)
-                .WithOne(e => e.Object)
-                .HasForeignKey(e => e.ObjectId);
-
-            builder
-                .HasMany(e => e.RolePermissions)
-                .WithOne(e => e.Object)
-                .HasForeignKey(e => e.ObjectId);
-
-            builder
                 .ToTable($"{EF_REGISTRATIONS.PREFIX}.Registries");
         }
     }

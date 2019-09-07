@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.Data.Entities.System;
 using TL.Engine.SDK.Entities;
-using TL.Registry.Data.Entities.Security;
 
 namespace TL.Registry.Data.Entities.Core
 {
@@ -22,11 +20,5 @@ namespace TL.Registry.Data.Entities.Core
         public Guid? FolderId { get; set; }
 
         public virtual Folder Folder { get; set; }
-
-        public virtual IEnumerable<FileUserPermission> UserPermissions { get; set; }
-
-        public virtual IEnumerable<FileGroupPermission> GroupPermissions { get; set; }
-
-        public virtual IEnumerable<FileRolePermission> RolePermissions { get; set; }
     }
 }

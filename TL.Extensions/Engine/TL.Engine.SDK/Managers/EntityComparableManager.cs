@@ -7,7 +7,6 @@ using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Repositories;
 using TL.Engine.SDK.Services;
-using TL.Engine.SDK.Types;
 using TL.Engine.SDK.Types.Enums;
 
 namespace TL.Engine.SDK.Managers
@@ -61,15 +60,9 @@ namespace TL.Engine.SDK.Managers
             where TSubject : class, IEntityComparable<TSubjectKey>
             where TSubjectKey : IComparable
         {
-            var permissionType = Activator.GetInstance<Permission<TSubject, TSubjectKey, TEntity, TKey>>().GetType();
-            var permissionRawRepository = Storage.GetEntityRepository(Activator, permissionType);
-            var predicateGet = new Func<Permission<TSubject, TSubjectKey, TEntity, TKey>, bool>((permission) =>
-            {
-                return permission.SubjectId.Equals(subject.Id) && permission.Mode >= AccessMode.Read;
-            });
-            dynamic permissionRepository = permissionRawRepository;
-            var allowedEntityIds = permissionRepository.GetAll(predicateGet) as IEnumerable<Permission<TSubject, TSubjectKey, TEntity, TKey>>;
-            var result = GetByKeys(allowedEntityIds.Select(e => e.ObjectId).ToArray());
+            var permissionManager = Activator.GetServiceOrCreateInstance<IPermissionManager>();
+            var permissions = permissionManager.GetAll<TSubject, TSubjectKey>(subject);
+            var result = GetByKeys(permissions.Select(e => e.ObjectId.FromByteArray<TKey>()).ToArray());
             return result;
         }
 

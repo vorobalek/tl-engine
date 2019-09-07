@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TL.Engine.Data.Entities.Security;
 using TL.Engine.SDK.Entities;
-using TL.Registry.Data.Entities.Security;
 
 namespace TL.Registry.Data.Entities.Core
 {
@@ -27,11 +26,5 @@ namespace TL.Registry.Data.Entities.Core
         public Guid RootId { get; set; }
 
         public virtual Folder Root { get; set; }
-
-        public virtual IEnumerable<UserPermission> UserPermissions { get; set; }
-
-        public virtual IEnumerable<GroupPermission> GroupPermissions { get; set; }
-
-        public virtual IEnumerable<RolePermission> RolePermissions { get; set; }
     }
 }

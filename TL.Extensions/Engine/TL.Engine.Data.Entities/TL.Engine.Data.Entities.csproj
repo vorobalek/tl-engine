@@ -30,8 +30,4 @@
     <ProjectReference Include="..\TL.Engine.SDK\TL.Engine.SDK.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Security\Permissins\" />
-  </ItemGroup>
-
 </Project>

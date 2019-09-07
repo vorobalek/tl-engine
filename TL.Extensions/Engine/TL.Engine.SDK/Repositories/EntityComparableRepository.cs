@@ -37,7 +37,7 @@ namespace TL.Engine.SDK.Repositories
         /// </returns>
         public IEnumerable<TEntity> GetByKeys(params TKey[] keys)
         {
-            return keys.Select(k => GetByKey(k));
+            return keys.Select(k => GetByKey(k)).Where(k => k != null);
         }
     }
 }

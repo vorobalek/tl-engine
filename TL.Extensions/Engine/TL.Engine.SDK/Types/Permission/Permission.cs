@@ -1,31 +1,44 @@
 ﻿using System;
 using TL.Engine.SDK.Entities;
+using TL.Engine.SDK.Extensions;
 using TL.Engine.SDK.Types.Enums;
 
 namespace TL.Engine.SDK.Types
 {
-    public abstract class Permission<TSubject, TSubjectKey, TObject, TObjectKey> : EntityComparableStored<(TSubjectKey, TObjectKey)>, IPermission
-        where TSubject : class, IEntityComparable<TSubjectKey>
-        where TSubjectKey : IComparable
-        where TObject : class, IEntityComparable<TObjectKey>
-        where TObjectKey : IComparable
+    public class Permission : EntityComparableStored<(byte[], byte[])>
     {
-        public override (TSubjectKey, TObjectKey) Id { get => (SubjectId, ObjectId); set => (SubjectId, ObjectId) = value; }
+        public override (byte[], byte[]) Id
+        {
+            get => (SubjectId, ObjectId);
+            set => (SubjectId, ObjectId) = value;
+        }
 
-        public Type SubjectType => typeof(TSubject);
-        public Type ObjectType => typeof(TObject);
         public AccessMode Mode { get; set; }
-        public TSubjectKey SubjectId { get; set; }
-        public TObjectKey ObjectId { get; set; }
+        public virtual byte[] SubjectId { get; set; }
+        public virtual byte[] ObjectId { get; set; }
 
-        /// <summary>
-        /// Сущность, которая имеет привелегии для доступа к объекту.
-        /// </summary>
-        public virtual TSubject Subject { get; set; }
+        public static Permission Generic<TSubject, TSubjectKey, TObject, TObjectKey>((TSubjectKey, TObjectKey) id, AccessMode mode)
+            where TSubject : IEntityComparable<TSubjectKey>
+            where TSubjectKey : IComparable
+            where TObject : IEntityComparable<TObjectKey>
+            where TObjectKey : IComparable
+        {
+            return Generic<TSubject, TSubjectKey, TObject, TObjectKey>(id, mode, DateTime.UnixEpoch, DateTime.UnixEpoch);
+        }
 
-        /// <summary>
-        /// Объект, для которого устанавливаются правила доступа от сущностей субъекта.
-        /// </summary>
-        public virtual TObject Object { get; set; }
+        public static Permission Generic<TSubject, TSubjectKey, TObject, TObjectKey>((TSubjectKey, TObjectKey) id, AccessMode mode, DateTime creationDate, DateTime modifiedDate)
+            where TSubject : IEntityComparable<TSubjectKey>
+            where TSubjectKey : IComparable
+            where TObject : IEntityComparable<TObjectKey>
+            where TObjectKey : IComparable
+        {
+            return new Permission()
+            {
+                Id = (id.Item1.ToByteArray(), id.Item2.ToByteArray()),
+                Mode = mode,
+                CreationDate = creationDate,
+                ModifiedDate = modifiedDate,
+            };
+        }
     }
 }
