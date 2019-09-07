@@ -1,0 +1,55 @@
+﻿@model TL.Engine.Web.Areas.Admin.ViewModels.Users.IndexViewModel
+@{
+    ViewData["Title"] = "Пользователи";
+}
+<h4>Пользователи</h4>
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Внимание!</strong> @Model.Message
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<br />
+<ul class="nav nav-tabs" id="usersTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create" aria-selected="true">Создать</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="active-tab" data-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="false">Активные</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="disabled-tab" data-toggle="tab" href="#disabled" role="tab" aria-controls="disabled" aria-selected="false">Отключенные</a>
+    </li>
+</ul>
+<div class="tab-content" id="usersTabContent">
+    <div class="tab-pane fade show active" id="create" role="tabpanel" aria-labelledby="create-tab">
+        <form asp-action="create" asp-controller="users" asp-area="admin" asp-antiforgery="true" method="post">
+            <div class="text-danger validation" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label asp-for="@Model.CreateUserModel.Username">Логин</label>
+                <input asp-for="@Model.CreateUserModel.Username" class="form-control" placeholder="Логин" required />
+                <span asp-validation-for="@Model.CreateUserModel.Username" class="text-danger validation" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CreateUserModel.Description">Комментарий (опционально)</label>
+                <input asp-for="@Model.CreateUserModel.Description" class="form-control" placeholder="Пользователь системы TL Engine" />
+                <span asp-validation-for="@Model.CreateUserModel.Description" class="text-danger validation" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CreateUserModel.Password">Пароль</label>
+                <input asp-for="@Model.CreateUserModel.Password" class="form-control" placeholder="Задайте пароль, это обязательно." required />
+                <span asp-validation-for="@Model.CreateUserModel.Password" class="text-danger validation" />
+            </div>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="active" role="tabpanel" aria-labelledby="active-tab">
+        ...
+    </div>
+    <div class="tab-pane fade" id="disabled" role="tabpanel" aria-labelledby="disabled-tab">
+        ...
+    </div>
+</div>

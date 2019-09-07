@@ -72,7 +72,7 @@ namespace TL.Engine.Web
         protected override IEnumerable<LinkItem> AdminItems => new LinkItem[]
         {
             new NotAvailableLinkItem("/welcome/edit", "Настроить страницу приветствия", "Страницу приветствия можно заполнить самостоятельно, используя HTML разметку.", 1000),
-            new NotAvailableLinkItem("/admin/users", "Пользователи", "Управление учётными записями пользователей.", 1000),
+            new LinkItem("/admin/users", "Пользователи", "Управление учётными записями пользователей.", 1000),
             new NotAvailableLinkItem("/admin/groups", "Группы", "Управление группами пользователей.", 1000),
             new NotAvailableLinkItem("/admin/roles", "Роли", "Управление ролями пользователей в системе.", 1000),
             new NotAvailableLinkItem("/admin/updating", "Обновления", "Настройка времени автоматического обновления компонентов системы.", 1000),
