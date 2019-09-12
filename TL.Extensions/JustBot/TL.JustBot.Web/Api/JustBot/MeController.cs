@@ -47,7 +47,7 @@ namespace TL.JustBot.Web.Api.JustBot
             PersonManager.Update(person);
 
             result.Token = person.Token;
-            result.CreateionDate = person.CreationDate;
+            result.CreationDate = person.CreationDate;
             result.ModifiedDate = person.ModifiedDate;
 
             return result;
