@@ -263,3 +263,4 @@ __pycache__/
 .last_migration_version
 /TL.Extensions/Engine/TL.Engine.Web/bundleconfig.json
 /BOX
+/global.json
