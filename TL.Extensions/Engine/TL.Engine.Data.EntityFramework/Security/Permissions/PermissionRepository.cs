@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using TL.Engine.SDK.Entities;
 using TL.Engine.SDK.Extensions;
@@ -16,16 +17,18 @@ namespace TL.Engine.Data.EntityFramework.Security.Permissions
             where TObject : IEntityComparable<TObjectKey>
             where TObjectKey : IComparable
         {
-            var result = dbSet.Find((subject.Id.ToByteArray(), @object.Id.ToByteArray()));
-            if ((result.IsDeleted && loadDeleted) || (!result.IsDeleted)) return result;
-            else return null;
+            return GetAll($"select * from [_.Permissions] where SubjectId = @subjectId and ObjectId = @objectId{(loadDeleted ? "" : " and IsDeleted = 0")}", 
+                new SqlParameter("@subjectId", subject.Id.ToByteArray()),
+                new SqlParameter("@objectId", @object.Id.ToByteArray()))
+                .FirstOrDefault();
         }
 
         public IEnumerable<Permission> GetAll<TSubject, TSubjectKey>(TSubject subject, bool loadDeleted = false)
             where TSubject : IEntityComparable<TSubjectKey>
             where TSubjectKey : IComparable
         {
-            return base.GetAll(e => e.SubjectId.SequenceEqual(subject.Id.ToByteArray()), loadDeleted);
+            return GetAll($"select * from [_.Permissions] where SubjectId = @subjectId{(loadDeleted ? "" : " and IsDeleted = 0")}", 
+                new SqlParameter("@subjectId", subject.Id.ToByteArray()));
         }
     }
 }

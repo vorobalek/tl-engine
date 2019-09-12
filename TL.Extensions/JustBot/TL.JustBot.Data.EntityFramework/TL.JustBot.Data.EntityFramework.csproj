@@ -6,30 +6,28 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\..\TL.Engine\Extensions\Engine</OutputPath>
+    <OutputPath>..\..\..\TL.Engine\Extensions\JustBot</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutputPath>..\..\..\TL.Engine\Extensions\Engine</OutputPath>
+    <OutputPath>..\..\..\TL.Engine\Extensions\JustBot</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\..\TL.Engine\Extensions\Engine</OutputPath>
+    <OutputPath>..\..\..\TL.Engine\Extensions\JustBot</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutputPath>..\..\..\TL.Engine\Extensions\Engine</OutputPath>
+    <OutputPath>..\..\..\TL.Engine\Extensions\JustBot</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExtCore.Data.Abstractions" Version="4.1.0" />
-    <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="4.1.0" />
     <PackageReference Include="ExtCore.Data.EntityFramework" Version="4.1.0" />
-    <PackageReference Include="ExtCore.Infrastructure" Version="4.1.0" />
-    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.6" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TL.JustBot.Data.Abstractions\TL.JustBot.Data.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

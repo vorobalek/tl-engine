@@ -4,14 +4,16 @@ using ExtCore.Data.EntityFramework.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace TL.Engine.Migrations
 {
     [DbContext(typeof(StorageContext))]
-    partial class StorageContextModelSnapshot : ModelSnapshot
+    [Migration("20190912094829_v1106-7-1")]
+    partial class v110671
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -341,7 +343,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "sa",
-                            WebTicket = new Guid("d747c6eb-a55c-4138-a64e-177cbcb65d9c")
+                            WebTicket = new Guid("de20e5f5-7f06-4d80-960d-7a44ef48915c")
                         },
                         new
                         {
@@ -354,7 +356,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "user",
-                            WebTicket = new Guid("87142f1b-16a6-46fb-8f2e-cd12f054ed9c")
+                            WebTicket = new Guid("9e7d9c19-5b87-4783-b612-be07be455b39")
                         },
                         new
                         {
@@ -367,7 +369,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "system",
-                            WebTicket = new Guid("defca097-f6b7-4a58-9687-77d874609002")
+                            WebTicket = new Guid("76656e80-32fd-4bc1-a1fc-1a05370517c4")
                         });
                 });
 
@@ -1000,28 +1002,6 @@ namespace TL.Engine.Migrations
                     b.ToTable("Integrations.TgBots");
                 });
 
-            modelBuilder.Entity("TL.JustBot.Data.Entities.Common.History", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("AuthorId");
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<string>("Text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("JustBot.History");
-                });
-
             modelBuilder.Entity("TL.JustBot.Data.Entities.Security.Person", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1329,14 +1309,6 @@ namespace TL.Engine.Migrations
                     b.HasOne("TL.Integrations.Data.Entities.Telegram.Security.TgUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TL.JustBot.Data.Entities.Common.History", b =>
-                {
-                    b.HasOne("TL.JustBot.Data.Entities.Security.Person", "Author")
-                        .WithMany("History")
-                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

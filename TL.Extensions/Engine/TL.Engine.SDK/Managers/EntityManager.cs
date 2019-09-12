@@ -1,4 +1,5 @@
 ﻿using ExtCore.Data.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -623,6 +624,16 @@ namespace TL.Engine.SDK.Managers
         public long Count(Func<TEntity, bool> predicate = null)
         {
             return Storage.GetRepository<IEntityRepository<TEntity>>().Count(predicate);
+        }
+
+        public IEnumerable<TEntity> GetAll(RawSqlString sqlQuery, params object[] parameters)
+        {
+            return Storage.GetRepository<IEntityRepository<TEntity>>().GetAll(sqlQuery, parameters);
+        }
+
+        IEnumerable<object> IEntityManager.GetAll(RawSqlString sqlQuery, params object[] parameters)
+        {
+            return GetAll(sqlQuery, parameters).Select(e => e as object);
         }
     }
 }

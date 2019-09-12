@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using TL.Engine.SDK.Entities;
 
@@ -20,6 +21,12 @@ namespace TL.Engine.SDK.Managers
         /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
         /// <returns>Коллекция экземпляров отслеживаемых сущностей.</returns>
         IEnumerable<object> GetAll(bool loadDeleted = false);
+
+        /// <summary>
+        /// Получить все сущности типа <see cref="TargetType"/> загруженных из Sql запроса
+        /// </summary>
+        /// <returns>Коллекция экземпляров отслеживаемых сущностей.</returns>
+        IEnumerable<object> GetAll(RawSqlString sqlQuery, params object[] parameters);
     }
 
     /// <summary>
@@ -58,6 +65,12 @@ namespace TL.Engine.SDK.Managers
         /// <param name="loadDeleted">Если <c>true</c>, будут загружены также удалённые сущности.</param>
         /// <returns>Коллекция экземпляров отслеживаемых сущностей.</returns>
         new IEnumerable<TEntity> GetAll(bool loadDeleted = false);
+
+        /// <summary>
+        /// Получить все сущности типа <see cref="TEntity"/> загруженных из Sql запроса
+        /// </summary>
+        /// <returns>Коллекция экземпляров отслеживаемых сущностей.</returns>
+        new IEnumerable<TEntity> GetAll(RawSqlString sqlQuery, params object[] parameters);
 
         /// <summary>
         /// Получить все сущности типа <typeparamref name="TEntity"/>, удовлетворяющие предикату.

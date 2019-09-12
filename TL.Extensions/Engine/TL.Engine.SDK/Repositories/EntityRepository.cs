@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TL.Engine.SDK.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace TL.Engine.SDK.Repositories
 {
@@ -155,6 +156,11 @@ namespace TL.Engine.SDK.Repositories
             }
 
             return dbSet.LongCount(predicate);
+        }
+
+        public IEnumerable<TEntity> GetAll(RawSqlString sqlQuery, params object[] parameters)
+        {
+            return dbSet.FromSql(sqlQuery, parameters).Select(e => Load(e));
         }
     }
 }
