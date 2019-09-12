@@ -30,7 +30,7 @@ namespace TL.JustBot.Web.Api.JustBot
         {
             if (PersonManager.Get(p => p.Token == token) is Person person)
             {
-                var history = HistoryManager.GetAll(h => h.AuthorId == person.Id);
+                var history = HistoryManager.GetAll(h => h.AuthorId == person.Id).ToList();
                 HistoryManager.Create(new History()
                 {
                     AuthorId = person.Id,
