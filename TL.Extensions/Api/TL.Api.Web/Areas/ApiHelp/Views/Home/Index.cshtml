@@ -5,7 +5,7 @@
 <div class="col">
     <h1>Введение</h1>
     <p>
-        С помощью <strong>TL Engine API</strong> вы можете получить доступ к нашим данным в удобном машинно-читаемом формате JSON.
+        С помощью <strong>TL Engine API</strong> вы можете получить доступ к нашим данным в удобном машинно-читаемом формате <a href="/apihelp/objects#JsonApiResponseFormat"><b>JSON</b></a>.
     </p>
     <hr />
     <h2>Методы и объекты</h2>
@@ -28,7 +28,7 @@
         <code>description</code>. Так же возвращается поле
         <code>errorСode</code>, чтобы помочь вам обрабатывать ошибки. Также мы всегда стараемся (если это возможно) возвращать поле
         <code>requestTime</code>, которое содержит объект
-        <a href="https://docs.microsoft.com/ru-ru/dotnet/api/system.timespan?view=netcore-2.2">TimeSpan</a> - продолжительность обработки вашего запроса сервером.
+        <a href="https://docs.microsoft.com/ru-ru/dotnet/api/system.timespan">TimeSpan</a> - продолжительность обработки вашего запроса сервером.
     </p>
     <h3>Пример удачного выполнения запроса</h3>
     <p>
@@ -70,7 +70,7 @@
 </div>
 
 @section Scripts {
-    <script>
+    <script type="text/javascript">
         var sampleGoodUri = '/api/system.Me';
         var sampleBadUri = '/api/system.Bad';
         var sampleFunctionUri1 = '/api/system.Execute/TL.Linker.Data.Managers.ILinkManager:LinkConvert?number=387070645064022132'
