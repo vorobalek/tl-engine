@@ -26,7 +26,7 @@ namespace TL.Engine.Data.EntityFramework.Security.Users
                 .HasForeignKey(e => e.UserId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Users");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.users");
 
             builder
                 .HasData(new[]

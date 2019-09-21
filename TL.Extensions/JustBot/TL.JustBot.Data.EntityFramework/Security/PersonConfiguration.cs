@@ -16,7 +16,7 @@ namespace TL.JustBot.Data.EntityFramework.Security
                 .IsUnique();
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Person");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.person");
         }
     }
 }

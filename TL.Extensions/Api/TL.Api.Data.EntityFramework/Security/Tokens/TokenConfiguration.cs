@@ -17,7 +17,7 @@ namespace TL.Api.Data.EntityFramework.Security.Tokens
                 .HasForeignKey(e => e.OwnerId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Tokens");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.tokens");
         }
     }
 }

@@ -37,7 +37,7 @@ namespace TL.Registry.Data.EntityFramework.Core.Folders
                 .HasForeignKey(e => e.FolderId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Folders");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.folders");
         }
     }
 }

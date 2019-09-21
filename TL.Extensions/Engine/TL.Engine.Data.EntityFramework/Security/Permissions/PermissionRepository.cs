@@ -17,7 +17,7 @@ namespace TL.Engine.Data.EntityFramework.Security.Permissions
             where TObject : IEntityComparable<TObjectKey>
             where TObjectKey : IComparable
         {
-            return GetAll($"select * from [_.Permissions] where SubjectId = @subjectId and ObjectId = @objectId{(loadDeleted ? "" : " and IsDeleted = 0")}", 
+            return GetAll($"select * from [core.permissions] where SubjectId = @subjectId and ObjectId = @objectId{(loadDeleted ? "" : " and IsDeleted = 0")}", 
                 new SqlParameter("@subjectId", subject.Id.ToByteArray()),
                 new SqlParameter("@objectId", @object.Id.ToByteArray()))
                 .FirstOrDefault();
@@ -27,7 +27,7 @@ namespace TL.Engine.Data.EntityFramework.Security.Permissions
             where TSubject : IEntityComparable<TSubjectKey>
             where TSubjectKey : IComparable
         {
-            return GetAll($"select * from [_.Permissions] where SubjectId = @subjectId{(loadDeleted ? "" : " and IsDeleted = 0")}", 
+            return GetAll($"select * from [core.permissions] where SubjectId = @subjectId{(loadDeleted ? "" : " and IsDeleted = 0")}", 
                 new SqlParameter("@subjectId", subject.Id.ToByteArray()));
         }
     }

@@ -24,7 +24,7 @@ namespace TL.Linker.Data.EntityFramework.Core.Links
                 .HasDefaultValue(int.MaxValue);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Links");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.links");
         }
     }
 }

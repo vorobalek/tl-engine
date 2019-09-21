@@ -22,7 +22,7 @@ namespace TL.Engine.Data.EntityFramework.System.StaticFiles
                 .HasForeignKey(e => e.AuthorId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.StaticFiles");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.static.files");
         }
     }
 }

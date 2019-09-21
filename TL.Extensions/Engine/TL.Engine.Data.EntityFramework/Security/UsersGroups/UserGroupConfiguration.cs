@@ -16,7 +16,7 @@ namespace TL.Engine.Data.EntityFramework.Security.UsersGroups
                .HasKey(e => new { e.UserId, e.GroupId });
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.UsersGroups");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.users.groups");
 
             builder
                 .HasOne(e => e.Group)

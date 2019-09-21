@@ -25,7 +25,7 @@ namespace TL.Registry.Data.EntityFramework.Core.Files
                 .HasForeignKey(e => e.FolderId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Files");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.files");
         }
     }
 }

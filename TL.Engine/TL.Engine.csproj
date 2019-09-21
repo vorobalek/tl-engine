@@ -25,33 +25,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190716223052_v1106-4.cs" />
-    <Compile Remove="Migrations\20190716223052_v1106-4.Designer.cs" />
-    <Compile Remove="Migrations\20190716232847_v1106-4-1.cs" />
-    <Compile Remove="Migrations\20190716232847_v1106-4-1.Designer.cs" />
-    <Compile Remove="Migrations\20190717065004_v1106-4-2.cs" />
-    <Compile Remove="Migrations\20190717065004_v1106-4-2.Designer.cs" />
-    <Compile Remove="Migrations\20190717083409_v1106-4-3.cs" />
-    <Compile Remove="Migrations\20190717083409_v1106-4-3.Designer.cs" />
-    <Compile Remove="Migrations\20190717123157_v1106-4.cs" />
-    <Compile Remove="Migrations\20190717123157_v1106-4.Designer.cs" />
-    <Compile Remove="Migrations\20190717124204_v1106-4.cs" />
-    <Compile Remove="Migrations\20190717124204_v1106-4.Designer.cs" />
-    <Compile Remove="Migrations\20190717124513_v1106-4.cs" />
-    <Compile Remove="Migrations\20190717124513_v1106-4.Designer.cs" />
-    <Compile Remove="Migrations\20190722080016_v1106-4.cs" />
-    <Compile Remove="Migrations\20190722080016_v1106-4.Designer.cs" />
-    <Compile Remove="Migrations\20190723123408_v1106-5-1.cs" />
-    <Compile Remove="Migrations\20190723123408_v1106-5-1.Designer.cs" />
-    <Compile Remove="Migrations\20190723132632_v1106-5-1.cs" />
-    <Compile Remove="Migrations\20190723132632_v1106-5-1.Designer.cs" />
-    <Compile Remove="Migrations\20190907000035_v1106-6-1.cs" />
-    <Compile Remove="Migrations\20190907000035_v1106-6-1.Designer.cs" />
-    <Compile Remove="Migrations\20190912091006_v1106-7-1.cs" />
-    <Compile Remove="Migrations\20190912091006_v1106-7-1.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ExtCore.Data" Version="4.1.0" />
     <PackageReference Include="ExtCore.Data.EntityFramework" Version="4.1.0" />
     <PackageReference Include="ExtCore.Data.EntityFramework.SqlServer" Version="4.1.0" />

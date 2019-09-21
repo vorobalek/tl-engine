@@ -27,7 +27,7 @@ namespace TL.Engine.Data.EntityFramework.Reports
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Reports");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.reports");
         }
     }
 }

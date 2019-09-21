@@ -25,7 +25,7 @@ namespace TL.Registry.Data.EntityFramework.Core.Registries
                 .HasForeignKey(e => e.RootId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Registries");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.registries");
         }
     }
 }

@@ -22,7 +22,7 @@ namespace TL.Api.Data.EntityFramework.Security.TokensLogs
                 .HasForeignKey(e => e.TokenId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.TokensLogs");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.tokens.logs");
         }
     }
 }

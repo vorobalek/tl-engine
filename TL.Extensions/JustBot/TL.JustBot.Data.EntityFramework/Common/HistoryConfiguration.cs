@@ -17,7 +17,7 @@ namespace TL.JustBot.Data.EntityFramework.Common
                 .HasForeignKey(e => e.AuthorId);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.History");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.history");
         }
     }
 }

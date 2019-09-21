@@ -35,7 +35,7 @@ namespace TL.Engine.Migrations
 
                     b.HasKey("FromId", "ToId");
 
-                    b.ToTable("Account.Subscriptions");
+                    b.ToTable("account.subscriptions");
 
                     b.HasData(
                         new
@@ -75,7 +75,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Api.Tokens");
+                    b.ToTable("api.tokens");
                 });
 
             modelBuilder.Entity("TL.Api.Data.Entities.Security.TokenLog", b =>
@@ -105,7 +105,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Api.TokensLogs");
+                    b.ToTable("api.tokens.logs");
                 });
 
             modelBuilder.Entity("TL.Engine.Data.Entities.Reports.Report", b =>
@@ -141,7 +141,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("_.Reports");
+                    b.ToTable("core.reports");
                 });
 
             modelBuilder.Entity("TL.Engine.Data.Entities.Security.Group", b =>
@@ -163,7 +163,7 @@ namespace TL.Engine.Migrations
                         .IsUnique()
                         .HasFilter("[Name] IS NOT NULL");
 
-                    b.ToTable("_.Groups");
+                    b.ToTable("core.groups");
 
                     b.HasData(
                         new
@@ -219,7 +219,7 @@ namespace TL.Engine.Migrations
                         .IsUnique()
                         .HasFilter("[Name] IS NOT NULL");
 
-                    b.ToTable("_.Roles");
+                    b.ToTable("core.roles");
 
                     b.HasData(
                         new
@@ -327,7 +327,7 @@ namespace TL.Engine.Migrations
                         .IsUnique()
                         .HasFilter("[Username] IS NOT NULL");
 
-                    b.ToTable("_.Users");
+                    b.ToTable("core.users");
 
                     b.HasData(
                         new
@@ -341,7 +341,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "sa",
-                            WebTicket = new Guid("d747c6eb-a55c-4138-a64e-177cbcb65d9c")
+                            WebTicket = new Guid("138c3a38-faab-460e-9e99-717458bf50a2")
                         },
                         new
                         {
@@ -354,7 +354,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "user",
-                            WebTicket = new Guid("87142f1b-16a6-46fb-8f2e-cd12f054ed9c")
+                            WebTicket = new Guid("d5467afd-2222-4b95-a41a-66f8ee032ee8")
                         },
                         new
                         {
@@ -367,7 +367,7 @@ namespace TL.Engine.Migrations
                             LastLogon = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ModifiedDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Username = "system",
-                            WebTicket = new Guid("defca097-f6b7-4a58-9687-77d874609002")
+                            WebTicket = new Guid("0eea538e-82c5-4728-b2e6-a33640128f7c")
                         });
                 });
 
@@ -387,7 +387,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("_.UsersGroups");
+                    b.ToTable("core.users.groups");
 
                     b.HasData(
                         new
@@ -472,7 +472,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("_.UsersRoles");
+                    b.ToTable("core.users.roles");
 
                     b.HasData(
                         new
@@ -606,7 +606,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("OriginalId");
 
-                    b.ToTable("_.StaticFiles");
+                    b.ToTable("core.static.files");
                 });
 
             modelBuilder.Entity("TL.Engine.Data.Entities.System.StringVariable", b =>
@@ -634,7 +634,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("Name");
 
-                    b.ToTable("_.StringVariables");
+                    b.ToTable("core.string.variables");
                 });
 
             modelBuilder.Entity("TL.Engine.SDK.Types.Permission", b =>
@@ -653,7 +653,7 @@ namespace TL.Engine.Migrations
 
                     b.HasKey("SubjectId", "ObjectId");
 
-                    b.ToTable("_.Permissions");
+                    b.ToTable("core.permissions");
 
                     b.HasData(
                         new
@@ -854,7 +854,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Integrations.TgConnections");
+                    b.ToTable("integrations.tg.connections");
                 });
 
             modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Security.TgRole", b =>
@@ -876,7 +876,7 @@ namespace TL.Engine.Migrations
                         .IsUnique()
                         .HasFilter("[Name] IS NOT NULL");
 
-                    b.ToTable("Integrations.TgRoles");
+                    b.ToTable("integrations.tg.roles");
 
                     b.HasData(
                         new
@@ -938,7 +938,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Integrations.TgUsers");
+                    b.ToTable("integrations.tg.users");
                 });
 
             modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.Security.TgUserRole", b =>
@@ -957,7 +957,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Integrations.TgUsersRoles");
+                    b.ToTable("integrations.tg.users.roles");
                 });
 
             modelBuilder.Entity("TL.Integrations.Data.Entities.Telegram.System.TgBot", b =>
@@ -997,7 +997,7 @@ namespace TL.Engine.Migrations
                         .IsUnique()
                         .HasFilter("[Token] IS NOT NULL AND [TypeName] IS NOT NULL");
 
-                    b.ToTable("Integrations.TgBots");
+                    b.ToTable("integrations.tg.bots");
                 });
 
             modelBuilder.Entity("TL.JustBot.Data.Entities.Common.History", b =>
@@ -1019,7 +1019,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("JustBot.History");
+                    b.ToTable("justbot.history");
                 });
 
             modelBuilder.Entity("TL.JustBot.Data.Entities.Security.Person", b =>
@@ -1041,7 +1041,7 @@ namespace TL.Engine.Migrations
                         .IsUnique()
                         .HasFilter("[Token] IS NOT NULL");
 
-                    b.ToTable("JustBot.Person");
+                    b.ToTable("justbot.person");
                 });
 
             modelBuilder.Entity("TL.Linker.Data.Entities.Core.Link", b =>
@@ -1073,7 +1073,7 @@ namespace TL.Engine.Migrations
                         .IsUnique()
                         .HasFilter("[Url] IS NOT NULL");
 
-                    b.ToTable("Linker.Links");
+                    b.ToTable("linker.links");
                 });
 
             modelBuilder.Entity("TL.Registry.Data.Entities.Core.File", b =>
@@ -1108,7 +1108,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Registry.Files");
+                    b.ToTable("registry.files");
                 });
 
             modelBuilder.Entity("TL.Registry.Data.Entities.Core.Folder", b =>
@@ -1136,7 +1136,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("ParantId");
 
-                    b.ToTable("Registry.Folders");
+                    b.ToTable("registry.folders");
 
                     b.HasData(
                         new
@@ -1189,7 +1189,7 @@ namespace TL.Engine.Migrations
 
                     b.HasIndex("RootId");
 
-                    b.ToTable("Registry.Registries");
+                    b.ToTable("registry.registries");
 
                     b.HasData(
                         new

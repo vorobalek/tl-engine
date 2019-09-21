@@ -15,7 +15,7 @@ namespace TL.Engine.Data.EntityFramework.Security.Permissions
                 .Ignore(e => e.Id);
 
             builder
-                .ToTable($"{EF_REGISTRATIONS.PREFIX}.Permissions");
+                .ToTable($"{EF_REGISTRATIONS.PREFIX}.permissions");
         }
     }
 }
