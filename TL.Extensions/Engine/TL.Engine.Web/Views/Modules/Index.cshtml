@@ -1,5 +1,6 @@
 ﻿@model TL.Engine.Web.ViewModels.SystemActiveModules.SystemActiveModulesViewModel
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Модули";
 
     var waitModules = Model.Modules.Where(it => !Model.Extensions.Select(e => e.Name.Substring(3)).Contains(it));

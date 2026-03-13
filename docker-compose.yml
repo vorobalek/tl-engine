@@ -1,0 +1,43 @@
+name: tl-engine
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    platform: linux/amd64
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: TlEngine12345!
+    ports:
+      - "14333:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$${MSSQL_SA_PASSWORD}\" -C -Q \"SELECT 1\" >/dev/null 2>&1"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 15s
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:5000
+      ConnectionStrings__Default: Server=sqlserver;Database=tl.engine;User Id=sa;Password=TlEngine12345!;MultipleActiveResultSets=true;TrustServerCertificate=True
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+volumes:
+  sqlserver-data:
